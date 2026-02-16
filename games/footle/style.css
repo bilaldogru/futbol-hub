@@ -1,0 +1,22 @@
+body { font-family: 'Montserrat', sans-serif; background-color: #121212; overflow-x: hidden; }
+.pitch-gradient { background: radial-gradient(circle at center, #2d5a27 0%, #1a1a1a 100%); }
+
+/* Renkler */
+.correct { background-color: #22c55e !important; border-color: #16a34a !important; }
+.partial { background-color: #eab308 !important; border-color: #ca8a04 !important; }
+.wrong { background-color: #374151 !important; border-color: #1f2937 !important; }
+
+/* Flip Animasyonu */
+.flip-card { perspective: 1000px; opacity: 0; }
+.flip-inner { position: relative; width: 100%; height: 100%; text-align: center; transition: transform 0.6s; transform-style: preserve-3d; }
+.flipped .flip-inner { transform: rotateX(180deg); }
+.flip-front, .flip-back { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; display: flex; align-items: center; justify-content: center; border-radius: 0.75rem; border: 2px solid #374151; }
+.flip-front { background-color: #1f2937; }
+.flip-back { transform: rotateX(180deg); color: white; }
+
+/* Modal Animasyonu */
+@keyframes modalShow {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+.modal-animate { animation: modalShow 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }

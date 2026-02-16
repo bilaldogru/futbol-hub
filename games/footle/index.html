@@ -6,29 +6,7 @@
     <title>FOOTLE | Futbol Wordle</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
-    <style>
-        body { font-family: 'Montserrat', sans-serif; background-color: #121212; overflow-x: hidden; }
-        .pitch-gradient { background: radial-gradient(circle at center, #2d5a27 0%, #1a1a1a 100%); }
-        
-        .correct { background-color: #22c55e !important; border-color: #16a34a !important; }
-        .partial { background-color: #eab308 !important; border-color: #ca8a04 !important; }
-        .wrong { background-color: #374151 !important; border-color: #1f2937 !important; }
-
-        /* Flip Animasyonu */
-        .flip-card { perspective: 1000px; opacity: 0; }
-        .flip-inner { position: relative; width: 100%; height: 100%; text-align: center; transition: transform 0.6s; transform-style: preserve-3d; }
-        .flipped .flip-inner { transform: rotateX(180deg); }
-        .flip-front, .flip-back { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; display: flex; align-items: center; justify-content: center; border-radius: 0.75rem; border: 2px solid #374151; }
-        .flip-front { background-color: #1f2937; }
-        .flip-back { transform: rotateX(180deg); color: white; }
-
-        /* Modal Animasyonu */
-        @keyframes modalShow {
-            from { transform: scale(0.8); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
-        }
-        .modal-animate { animation: modalShow 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body class="text-white min-h-screen flex flex-col items-center pitch-gradient">
 
@@ -37,15 +15,11 @@
             <div id="modalEmoji" class="text-6xl mb-4"></div>
             <h2 id="modalTitle" class="text-3xl font-black mb-2 tracking-tighter"></h2>
             <p id="modalDescription" class="text-gray-400 mb-6"></p>
-            
             <div class="bg-gray-800 p-4 rounded-2xl mb-6 border border-gray-700">
                 <p class="text-xs text-gray-500 uppercase mb-1">Doğru Oyuncu</p>
                 <span id="targetPlayerName" class="text-xl font-bold"></span>
             </div>
-
-            <button onclick="location.reload()" class="w-full bg-white text-black font-black py-4 rounded-xl transition-all active:scale-95">
-                TEKRAR DENE
-            </button>
+            <button onclick="location.reload()" class="w-full bg-white text-black font-black py-4 rounded-xl transition-all active:scale-95">TEKRAR DENE</button>
         </div>
     </div>
 
@@ -54,7 +28,7 @@
             HAK: <span id="hakGosterge">5</span>/5
         </div>
         <h1 class="text-3xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-yellow-300">FOOTLE</h1>
-        <button class="text-2xl" title="İstatistikler">📊</button>
+        <button class="text-2xl">📊</button>
     </header>
 
     <main class="flex-grow flex flex-col items-center justify-start mt-8 w-full max-w-xl px-4 pb-48">
@@ -67,127 +41,11 @@
     <footer class="fixed bottom-0 w-full max-w-xl p-6 bg-gradient-to-t from-black via-black to-transparent z-40">
         <div class="relative">
             <div id="autocomplete-list" class="absolute bottom-full left-0 w-full bg-gray-800 border border-gray-700 rounded-t-xl overflow-hidden hidden shadow-2xl mb-1"></div>
-            <input type="text" id="playerInput" placeholder="Futbolcu ara..." 
-                   class="w-full bg-gray-900 border-2 border-green-500 rounded-2xl py-4 px-6 focus:outline-none focus:ring-4 focus:ring-green-500/20 text-lg disabled:opacity-50">
-            <button id="submitBtn" onclick="tahminYap()" 
-                    class="absolute right-3 top-1/2 -translate-y-1/2 bg-green-500 p-3 rounded-xl hover:bg-green-400 transition-all disabled:bg-gray-700">
-                ⚽
-            </button>
+            <input type="text" id="playerInput" placeholder="Futbolcu ara..." class="w-full bg-gray-900 border-2 border-green-500 rounded-2xl py-4 px-6 focus:outline-none focus:ring-4 focus:ring-green-500/20 text-lg">
+            <button id="submitBtn" class="absolute right-3 top-1/2 -translate-y-1/2 bg-green-500 p-3 rounded-xl hover:bg-green-400">⚽</button>
         </div>
     </footer>
 
-    <script>
-        const oyuncular = [
-            { isim: "Mauro Icardi", uyruk: "🇦🇷", lig: "Süper Lig", takim: "GS", pozisyon: "ATT", yas: 31 },
-            { isim: "Edin Dzeko", uyruk: "🇧🇦", lig: "Süper Lig", takim: "FB", pozisyon: "ATT", yas: 37 },
-            { isim: "Arda Guler", uyruk: "🇹🇷", lig: "La Liga", takim: "RMA", pozisyon: "MID", yas: 19 },
-            { isim: "Hakan Calhanoglu", uyruk: "🇹🇷", lig: "Serie A", takim: "INT", pozisyon: "MID", yas: 30 },
-            { isim: "Victor Osimhen", uyruk: "🇳🇬", lig: "Süper Lig", takim: "GS", pozisyon: "ATT", yas: 25 },
-            { isim: "Kerem Akturkoglu", uyruk: "🇹🇷", lig: "Süper Lig", takim: "GS", pozisyon: "MID", yas: 25 }
-        ];
-
-        const hedefOyuncu = oyuncular[Math.floor(Math.random() * oyuncular.length)];
-        let oyunBitti = false;
-        let denemeSayisi = 0;
-        const maxHak = 5;
-
-        const input = document.getElementById('playerInput');
-        const autocompleteList = document.getElementById('autocomplete-list');
-        const hakGosterge = document.getElementById('hakGosterge');
-
-        // Autocomplete
-        input.addEventListener('input', function() {
-            const val = this.value.trim().toLowerCase();
-            autocompleteList.innerHTML = '';
-            if (!val || oyunBitti) { autocompleteList.classList.add('hidden'); return; }
-            const matches = oyuncular.filter(o => o.isim.toLowerCase().includes(val)).slice(0, 5);
-            if (matches.length > 0) {
-                autocompleteList.classList.remove('hidden');
-                matches.forEach(m => {
-                    const item = document.createElement('div');
-                    item.className = "p-4 hover:bg-green-600 cursor-pointer border-b border-gray-700 last:border-0";
-                    item.innerText = m.isim;
-                    item.onclick = () => { input.value = m.isim; autocompleteList.classList.add('hidden'); tahminYap(); };
-                    autocompleteList.appendChild(item);
-                });
-            } else { autocompleteList.classList.add('hidden'); }
-        });
-
-        function tahminYap() {
-            if (oyunBitti) return;
-            const isim = input.value.trim().toLowerCase();
-            const tahmin = oyuncular.find(o => o.isim.toLowerCase() === isim);
-            if (!tahmin) { alert("Lütfen listeden geçerli bir oyuncu seçin!"); return; }
-
-            denemeSayisi++;
-            hakGosterge.innerText = maxHak - denemeSayisi;
-            input.value = "";
-            autocompleteList.classList.add('hidden');
-            satirEkle(tahmin);
-
-            if (tahmin.isim === hedefOyuncu.isim) {
-                bitir(true);
-            } else if (denemeSayisi >= maxHak) {
-                bitir(false);
-            }
-        }
-
-        function bitir(kazandi) {
-            oyunBitti = true;
-            input.disabled = true;
-            document.getElementById('submitBtn').disabled = true;
-
-            const modal = document.getElementById('endModal');
-            const content = document.getElementById('modalContent');
-            const emoji = document.getElementById('modalEmoji');
-            const title = document.getElementById('modalTitle');
-            const desc = document.getElementById('modalDescription');
-            const targetName = document.getElementById('targetPlayerName');
-
-            targetName.innerText = hedefOyuncu.isim.toUpperCase();
-
-            if (kazandi) {
-                content.classList.add('border-green-500', 'shadow-[0_0_50px_rgba(34,197,94,0.3)]');
-                emoji.innerText = "🏆";
-                title.innerText = "GOOOOOL!";
-                desc.innerText = `Harika! Oyuncuyu ${denemeSayisi}. denemede buldun.`;
-            } else {
-                content.classList.add('border-red-500', 'shadow-[0_0_50px_rgba(239,68,68,0.3)]');
-                emoji.innerText = "🟥";
-                title.innerText = "MAÇ BİTTİ!";
-                desc.innerText = "Maalesef tüm haklarını tükettin.";
-            }
-
-            setTimeout(() => {
-                modal.classList.remove('hidden');
-            }, 1800);
-        }
-
-        function satirEkle(tahmin) {
-            const board = document.getElementById('gameBoard');
-            const row = document.createElement('div');
-            row.className = "grid grid-cols-5 gap-2 h-16";
-            const kriterler = [
-                { val: tahmin.uyruk, target: hedefOyuncu.uyruk, type: 'text' },
-                { val: tahmin.lig, target: hedefOyuncu.lig, type: 'text' },
-                { val: tahmin.takim, target: hedefOyuncu.takim, type: 'text' },
-                { val: tahmin.pozisyon, target: hedefOyuncu.pozisyon, type: 'text' },
-                { val: tahmin.yas, target: hedefOyuncu.yas, type: 'number' }
-            ];
-            kriterler.forEach((k, i) => {
-                const card = document.createElement('div');
-                card.className = "flip-card h-full w-full";
-                let renk = k.val === k.target ? "correct" : (k.type === 'number' ? "partial" : "wrong");
-                let icerik = k.type === 'number' && k.val !== k.target ? `${k.val} ${k.val < k.target ? '↑' : '↓'}` : k.val;
-                card.innerHTML = `<div class="flip-inner h-full w-full"><div class="flip-front"></div><div class="flip-back ${renk} font-bold text-[10px] sm:text-[11px]">${icerik}</div></div>`;
-                row.appendChild(card);
-                setTimeout(() => { card.classList.add('flipped'); card.style.opacity = "1"; }, i * 200);
-            });
-            board.appendChild(row);
-            row.scrollIntoView({ behavior: 'smooth' });
-        }
-
-        input.addEventListener('keypress', (e) => { if (e.key === 'Enter') tahminYap(); });
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
