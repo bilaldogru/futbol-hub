@@ -7,6 +7,30 @@
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        .score-display {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 8px 15px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            margin-right: 15px;
+            color: #fbbf24; /* Altın sarısı */
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: transform 0.3s ease;
+        }
+        .score-display:hover {
+            transform: scale(1.05);
+            background: rgba(255, 255, 255, 0.2);
+        }
+        .score-display i {
+            font-size: 1.2rem;
+        }
+    </style>
 </head>
 <body>
 
@@ -19,8 +43,16 @@
             <a href="#">Liderlik Tablosu</a>
             <a href="#">Hakkımızda</a>
         </div>
-        <div class="user-profile">
-            <i class="fa-solid fa-user-circle"></i> Giriş Yap
+        
+        <div style="display: flex; align-items: center;">
+            <div class="score-display">
+                <i class="fa-solid fa-trophy"></i>
+                <span id="global-score">0</span> Puan
+            </div>
+
+            <div class="user-profile">
+                <i class="fa-solid fa-user-circle"></i> Giriş Yap
+            </div>
         </div>
     </nav>
 
@@ -63,24 +95,31 @@
                 </div>
             </div>
 
-                    <div class="game-card">
-            <div class="card-image squad-bg">
-                <span class="badge" style="background-color: #eab308; color: black;">YENİ</span>
-            </div>
-            <div class="card-info">
-                <h3>Footle (Wordle)</h3>
-                <p>Gizli futbolcuyu bulmak için 5 hakkın var. İpuçlarını takip et!</p>
-                <div class="card-stats">
-                    <span><i class="fa-solid fa-brain"></i> Zeka</span>
-                    <span><i class="fa-solid fa-star"></i> 5.0</span>
+            <div class="game-card">
+                <div class="card-image squad-bg">
+                    <span class="badge" style="background-color: #eab308; color: black;">YENİ</span>
                 </div>
-                <a href="games/footle/index.html" class="play-btn">OYNA <i class="fa-solid fa-arrow-right"></i></a>
+                <div class="card-info">
+                    <h3>Footle (Wordle)</h3>
+                    <p>Gizli futbolcuyu bulmak için 5 hakkın var. İpuçlarını takip et!</p>
+                    <div class="card-stats">
+                        <span><i class="fa-solid fa-brain"></i> Zeka</span>
+                        <span><i class="fa-solid fa-star"></i> 5.0</span>
+                    </div>
+                    <a href="games/footle/index.html" class="play-btn">OYNA <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
             </div>
-        </div>
 
             <div class="game-card locked">
                 <div class="card-image tactics-bg">
                     <span class="badge coming-soon">YAKINDA</span>
+                </div>
+                <div class="card-info">
+                   <h3>Taktik Tahtası</h3>
+                   <p>Yakında eklenecek...</p>
+                   <button class="play-btn disabled">BEKLEMEDE</button>
+                </div>
+            </div>
 
         </div>
     </section>
@@ -88,6 +127,19 @@
     <footer>
         <p>&copy; 2026 FutbolHub </p>
     </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // localStorage'dan puanı çek, yoksa 0 ata
+            const currentScore = localStorage.getItem('futbolHub_totalScore') || 0;
+            
+            // HTML elementini güncelle
+            const scoreElement = document.getElementById('global-score');
+            if(scoreElement) {
+                scoreElement.innerText = currentScore;
+            }
+        });
+    </script>
 
 </body>
 </html>
