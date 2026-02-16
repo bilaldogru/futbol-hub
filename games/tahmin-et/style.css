@@ -284,3 +284,41 @@ button:hover { background: #444; }
 
 /* Gizleme sınıfı (JS ile kontrol edilecek) */
 .display-none { display: none !important; }
+
+/* --- GERİ DÖN BUTONU --- */
+.back-home-btn {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.5); /* Soluk beyaz */
+    font-size: 1.1rem;
+    font-weight: bold;
+    z-index: 2000; /* Her şeyin üstünde */
+    transition: all 0.3s ease;
+    padding: 10px 15px;
+    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.3); /* Hafif siyah zemin */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.back-home-btn:hover {
+    color: var(--matte-green); /* Üstüne gelince yeşil olsun */
+    border-color: var(--matte-green);
+    background: rgba(0, 0, 0, 0.6);
+    transform: translateX(5px); /* Hafif sağa kaysın */
+}
+
+.back-home-btn i {
+    font-size: 1.2rem;
+}
+
+/* Mobilde sadece ok görünsün, yazı yer kaplamasın */
+@media (max-width: 600px) {
+    .btn-text {
+        display: none;
+    }
+}
