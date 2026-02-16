@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Futbolcu Arena - Günlük Meydan Okuma</title>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="bg-overlay"></div>
+
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <h2>GÜNLÜK MEYDAN OKUMA</h2>
+            <p>Bugünün 10 futbolcusunu tahmin et, listeye adını yazdır!</p>
+            <input type="text" id="username-input" placeholder="Adın veya Nickname..." maxlength="15">
+            <button onclick="startDailyChallenge()">BAŞLA</button>
+        </div>
+    </div>
+
+    <div class="main-layout blurred" id="game-wrapper">
+        
+        <div class="game-section">
+            <div class="game-container">
+                <header>
+                    <div class="header-top">
+                        <h1>FUTBOLCU ARENA</h1>
+                        <div class="question-counter">SORU: <span id="q-count">1</span>/10</div>
+                    </div>
+                    
+                    <div class="stats">
+                        <div class="score-box current">
+                            <span class="label">BU SORU</span>
+                            <span id="current-score" class="value">100</span>
+                        </div>
+                        <div class="score-box total">
+                            <span class="label">TOPLAM PUAN</span>
+                            <span id="total-score" class="value">0</span>
+                        </div>
+                    </div>
+                </header>
+
+                <div class="hangman-container" id="hangman-area"></div>
+
+                <div class="clues-wrapper">
+                    <h3>İPUÇLARI</h3>
+                    <div class="clues-container" id="clues-area"></div>
+                </div>
+
+                <div class="input-area">
+                    <input type="text" id="guess-input" placeholder="Futbolcunun adı..." autocomplete="off">
+                    <button onclick="makeGuess()">TAHMİN ET</button>
+                </div>
+
+                <div id="message-area" class="message hidden"></div>
+                
+                <button id="next-btn" class="hidden action-btn" onclick="nextQuestion()">SIRADAKİ SORU ▶</button>
+            </div>
+        </div>
+
+        <div class="sidebar">
+            <div class="leaderboard-box">
+                <h2>🏆 LİDERLİK TABLOSU</h2>
+                <p class="date-label" id="date-display">16.02.2026</p>
+                
+                <ul id="leaderboard-list">
+                    </ul>
+
+                <div class="daily-info">
+                    <p>Her gün 00:00'da yenilenir.</p>
+                    <p>Herkese aynı 10 futbolcu sorulur.</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,286 @@
+/* --- MATTE & TEXT-ONLY THEME --- */
+
+:root {
+    --bg-dark: #121212;
+    --bg-panel: rgba(25, 25, 30, 0.95);
+    
+    /* MAT RENKLER */
+    --matte-green: #66bb6a; /* Göz yormayan başarı yeşili */
+    --matte-red: #ef5350;   /* Yumuşak hata kırmızısı */
+    --matte-blue: #42a5f5;  /* Bilgi mavisi */
+    --text-color: #eeeeee;
+    --line-color: #555555;  /* Boş harf çizgisi */
+    
+    --font-stack: 'Rajdhani', sans-serif;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-color);
+    font-family: var(--font-stack);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    overflow-x: hidden;
+}
+
+/* ARKA PLAN DESENİ */
+.bg-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-color: #0f0f0f;
+    /* Çok hafif, mat bir doku */
+    background-image: radial-gradient(#222 1px, transparent 1px);
+    background-size: 20px 20px;
+    z-index: -1;
+}
+
+.game-container {
+    background-color: var(--bg-panel);
+    padding: 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+    width: 90%;
+    max-width: 500px;
+    text-align: center;
+    border: 1px solid #333;
+}
+
+header h1 {
+    margin: 0 0 30px 0;
+    font-size: 1.8rem;
+    letter-spacing: 1px;
+    color: var(--text-color);
+    text-transform: uppercase;
+}
+
+/* SKOR TABLOSU */
+.stats {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 40px;
+    border-bottom: 1px solid #333;
+    padding-bottom: 20px;
+}
+
+.score-box {
+    display: flex;
+    flex-direction: column;
+}
+
+.score-box .label { font-size: 0.8rem; color: #888; margin-bottom: 5px; text-transform: uppercase; }
+.score-box .value { font-size: 1.6rem; font-weight: 700; }
+.score-box.current .value { color: var(--matte-red); }
+.score-box.total .value { color: var(--matte-green); }
+
+/* --- ADAM ASMACA (DÜZ YAZI STİLİ) --- */
+.hangman-container {
+    display: flex;
+    flex-direction: column; /* Alt alta satırlar */
+    align-items: center;
+    gap: 15px; /* İsim ve Soyisim arası boşluk */
+    margin-bottom: 40px;
+}
+
+.hangman-row {
+    display: flex;
+    justify-content: center;
+    gap: 10px; /* Harfler arası boşluk */
+}
+
+/* Harf Kutusu DEĞİL, Harf Çizgisi */
+.letter-box {
+    width: 30px;
+    height: 40px;
+    background: transparent; /* Arka plan yok */
+    border: none; /* Kutu çizgisi yok */
+    border-bottom: 3px solid var(--line-color); /* Sadece alt çizgi */
+    display: flex;
+    justify-content: center;
+    align-items: flex-end; /* Harfi çizgiye oturt */
+    font-size: 28px;
+    font-weight: 700;
+    color: transparent; /* Başlangıçta harf görünmez */
+    transition: all 0.3s ease;
+    padding-bottom: 5px;
+    cursor: default;
+    user-select: none;
+}
+
+/* Harf Açıldığında */
+.letter-box:not(.empty) {
+    color: var(--text-color); /* Harf beyazlaşır */
+    border-bottom-color: var(--text-color); /* Çizgi de beyazlaşır */
+}
+
+/* Yeşil (Doğru Bilinince) */
+.letter-box.solved {
+    color: var(--matte-green) !important;
+    border-bottom-color: var(--matte-green) !important;
+}
+
+/* --- İPUÇLARI --- */
+.clues-wrapper h3 {
+    text-align: left;
+    margin-bottom: 15px;
+    font-size: 1rem;
+    color: #666;
+    text-transform: uppercase;
+}
+
+.clues-container { margin-bottom: 30px; }
+
+.clue-card {
+    background: transparent;
+    padding: 10px 0;
+    border-bottom: 1px solid #333;
+    text-align: left;
+    font-size: 1rem;
+    color: #888;
+    
+    /* GÜNCELLENEN KISIM: DAHA GİZLİ VE BULANIK */
+    opacity: 0.1;           /* Neredeyse görünmez */
+    filter: blur(12px);     /* Yazı tamamen okunamaz, sadece leke gibi */
+    
+    transition: all 0.5s ease;
+    user-select: none; /* Kopya çekilmesin diye seçilemez yapıyoruz */
+}
+
+/* Aktif olunca netleşsin */
+.clue-card.active {
+    opacity: 1;
+    filter: blur(0);
+    color: var(--text-color);
+}
+.clue-card strong { color: var(--matte-blue); margin-right: 10px;}
+
+/* --- INPUT VE BUTONLAR --- */
+.input-area { display: flex; gap: 10px; margin-top: 20px; }
+
+input {
+    flex: 1; padding: 12px;
+    background: transparent;
+    border: none; border-bottom: 2px solid #555;
+    color: white; font-size: 1.1rem;
+    outline: none; font-family: var(--font-stack);
+}
+input:focus { border-bottom-color: var(--matte-blue); }
+
+button {
+    padding: 10px 25px;
+    background: #333;
+    color: white; border: none; border-radius: 4px;
+    cursor: pointer; font-weight: bold;
+    transition: background 0.3s;
+}
+button:hover { background: #444; }
+
+.action-btn {
+    width: 100%; margin-top: 20px;
+    background: var(--matte-green);
+    color: #121212; /* Yeşil üstüne siyah yazı okunur */
+}
+
+/* MESAJLAR */
+.message { margin-top: 20px; font-weight: bold; }
+.success { color: var(--matte-green); }
+.fail { color: var(--matte-red); }
+.hidden { display: none; }
+
+/* --- LAYOUT & SIDEBAR EKLENTİLERİ --- */
+
+/* Mevcut CSS kodlarının üzerine/yerine bunları ekle/değiştir */
+
+/* Ekranı Kaplayan Grid Yapısı */
+.main-layout {
+    display: flex;
+    gap: 30px;
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    align-items: flex-start;
+    padding-top: 50px;
+    transition: filter 0.3s;
+}
+
+/* Modal açıkken arkası bulanık olsun */
+.blurred { filter: blur(8px); pointer-events: none; }
+
+/* SOL TARAF (Oyun) */
+.game-section { flex: 2; display: flex; justify-content: center; }
+
+/* SAĞ TARAF (Sidebar) */
+.sidebar {
+    flex: 1;
+    min-width: 300px;
+    position: sticky;
+    top: 20px;
+}
+
+.leaderboard-box {
+    background: var(--bg-panel);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.leaderboard-box h2 {
+    color: var(--matte-green);
+    margin: 0 0 5px 0;
+    text-align: center;
+    border-bottom: 2px solid #333;
+    padding-bottom: 10px;
+}
+
+.date-label {
+    text-align: center; color: #666; font-size: 0.9rem; margin-bottom: 20px;
+}
+
+#leaderboard-list {
+    list-style: none; padding: 0; margin: 0;
+}
+
+#leaderboard-list li {
+    display: flex; justify-content: space-between;
+    padding: 12px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    font-size: 1.1rem;
+}
+#leaderboard-list li:first-child { color: gold; font-weight: bold; font-size: 1.2rem; }
+#leaderboard-list li:nth-child(2) { color: silver; }
+#leaderboard-list li:nth-child(3) { color: #cd7f32; }
+
+.daily-info {
+    margin-top: 20px; font-size: 0.8rem; color: #555; text-align: center;
+}
+
+/* SORU SAYACI */
+.header-top {
+    display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;
+}
+.question-counter {
+    background: #333; padding: 5px 10px; border-radius: 5px; font-weight: bold; color: var(--matte-blue);
+}
+
+/* GİRİŞ MODALI */
+.modal {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.8); z-index: 1000;
+    display: flex; justify-content: center; align-items: center;
+}
+.modal-content {
+    background: #1a1a24; padding: 40px; border-radius: 15px; text-align: center;
+    border: 2px solid var(--matte-green); width: 90%; max-width: 400px;
+}
+.modal h2 { color: var(--matte-green); margin-top: 0; }
+.modal input { width: 80%; margin: 20px 0; text-align: center; }
+
+/* Mevcut .game-container genişliğini %100 yap (flex içinde düzgün dursun) */
+.game-container { width: 100%; max-width: 100%; }
+
+/* Gizleme sınıfı (JS ile kontrol edilecek) */
+.display-none { display: none !important; }
