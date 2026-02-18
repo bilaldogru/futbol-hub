@@ -4,7 +4,7 @@ let dailyPlayers = [];
 let targetPlayer = {};
 let questionIndex = 0;
 let maxQuestions = 10;
-let username = "Misafir"; // Varsayılan
+let username = "Misafir"; 
 let timerInterval;
 let seconds = 0;
 let currentScore = 100;
@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
     fetch('../../oyuncular.json') 
         .then(response => response.json())
         .then(data => {
-        allPlayers = data;
+            allPlayers = data;
             console.log("Oyuncu verileri yüklendi.");
         })
         .catch(err => console.error("JSON Hatası:", err));
@@ -175,10 +175,11 @@ function finishDailyChallenge() {
     }
 }
 
+// ⚠️ DEĞİŞİKLİK 1: .name -> .isim YAPILDI
 function renderHangman() {
     const container = document.getElementById('hangman-area');
     container.innerHTML = '';
-    const cleanFullName = normalizeInput(targetPlayer.name);
+    const cleanFullName = normalizeInput(targetPlayer.isim); // BURASI DEĞİŞTİ
     const nameParts = cleanFullName.split(' ');
     let globalCounter = 0;
 
@@ -199,16 +200,18 @@ function renderHangman() {
     });
 }
 
+// ⚠️ DEĞİŞİKLİK 2: TÜRKÇE ANAHTARLAR EKLENDİ
 function renderClues() {
     const container = document.getElementById('clues-area');
     container.innerHTML = '';
-    // İpucu listesi (JSON yapısına göre düzenlendi)
+    
+    // JSON dosyasındaki Türkçe anahtarları kullanıyoruz artık:
     const clues = [
-        { t: "Lig", v: targetPlayer.league },
-        { t: "Uyruk", v: targetPlayer.nationality },
-        { t: "Yaş", v: targetPlayer.age },
-        { t: "Takım", v: targetPlayer.team },
-        { t: "Pozisyon", v: targetPlayer.position } 
+        { t: "Lig", v: targetPlayer.lig },        // league -> lig
+        { t: "Uyruk", v: targetPlayer.uyruk },    // nationality -> uyruk
+        { t: "Yaş", v: targetPlayer.yas },        // age -> yas
+        { t: "Takım", v: targetPlayer.takim },    // team -> takim
+        { t: "Pozisyon", v: targetPlayer.pozisyon } // position -> pozisyon
     ];
     
     clues.forEach((clue, index) => {
@@ -267,6 +270,7 @@ function decreaseScore(amount) {
     document.getElementById('current-score').innerText = currentScore;
 }
 
+// ⚠️ DEĞİŞİKLİK 3: .name -> .isim YAPILDI
 function makeGuess() {
     if (isGameOver) return;
     const input = document.getElementById('guess-input');
@@ -276,7 +280,7 @@ function makeGuess() {
     if (cleanGuess.length === 0) return;
 
     // TAM AD KONTROLÜ
-    const correctFullName = normalizeInput(targetPlayer.name);
+    const correctFullName = normalizeInput(targetPlayer.isim); // BURASI DEĞİŞTİ
 
     if (cleanGuess === correctFullName) {
         endGame(true);
@@ -296,6 +300,7 @@ function makeGuess() {
     }
 }
 
+// ⚠️ DEĞİŞİKLİK 4: .name -> .isim YAPILDI
 function endGame(isWin) {
     isGameOver = true;
     clearInterval(timerInterval);
@@ -304,7 +309,7 @@ function endGame(isWin) {
     const input = document.getElementById('guess-input');
 
     if (isWin) {
-        msgArea.innerHTML = `DOĞRU! <strong>${targetPlayer.name}</strong> +${currentScore} P`;
+        msgArea.innerHTML = `DOĞRU! <strong>${targetPlayer.isim}</strong> +${currentScore} P`; // BURASI DEĞİŞTİ
         msgArea.className = "message success";
         totalScore += currentScore;
         document.getElementById('total-score').innerText = totalScore;
@@ -316,7 +321,7 @@ function endGame(isWin) {
             box.style.color = "white";
         });
     } else {
-        msgArea.innerHTML = `SÜRE BİTTİ! Cevap: ${targetPlayer.name}`;
+        msgArea.innerHTML = `SÜRE BİTTİ! Cevap: ${targetPlayer.isim}`; // BURASI DEĞİŞTİ
         msgArea.className = "message fail";
         document.querySelectorAll('.letter-box').forEach(box => box.classList.remove('empty'));
     }
