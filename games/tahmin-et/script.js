@@ -333,12 +333,20 @@ function endGame(isWin) {
     const nextBtn = document.getElementById('next-btn');
 
     if (isWin) {
-        msgArea.innerHTML = `DOĞRU! <strong>${targetPlayer.name}</strong> <br> +${currentScore} Puan`;
-        msgArea.className = "message success";
+        // --- BURASI GÜNCELLENDİ ---
         
-        // Puanı toplam puana ekle
+        // 1. Bu oturumdaki (Daily Challenge) skoru artır
         totalScore += currentScore;
         document.getElementById('total-score').innerText = totalScore;
+        
+        // 2. ANA MENÜ PUANINA (Global Score) ANINDA EKLE
+        // Her doğru cevapta localStorage güncellenir.
+        addGlobalScore(currentScore);
+
+        // --------------------------
+
+        msgArea.innerHTML = `DOĞRU! <strong>${targetPlayer.name}</strong> <br> +${currentScore} Puan`;
+        msgArea.className = "message success";
         
         // Tüm harfleri aç ve YEŞİL (solved) yap
         document.querySelectorAll('.letter-box').forEach(box => {
@@ -353,7 +361,7 @@ function endGame(isWin) {
         msgArea.innerHTML = `SÜRE BİTTİ! Doğru Cevap: <strong>${targetPlayer.name}</strong>`;
         msgArea.className = "message fail";
         
-        // Sadece harfleri görünür yap (Yeşil yapma)
+        // Sadece harfleri görünür yap
         document.querySelectorAll('.letter-box').forEach(box => box.classList.remove('empty'));
     }
 
@@ -432,4 +440,14 @@ function normalizeInput(text) {
         .replace(/[^a-zA-Z0-9 ]/g, "") // Harf ve rakam dışındaki her şeyi (virgül, nokta) sil
         .trim()
         .toUpperCase(); // Hepsini BÜYÜK HARF yap (Görsel uyum için)
+}
+
+// --- PUAN SİSTEMİ ENTEGRASYONU (GÜNCELLENMİŞ) ---
+function addGlobalScore(points) {
+    let currentScore = parseInt(localStorage.getItem('futbolHub_totalScore')) || 0;
+    currentScore += points;
+    localStorage.setItem('futbolHub_totalScore', currentScore);
+    
+    // Alert yerine sadece konsola yazıyoruz, oyun bölünmesin diye.
+    console.log(`${points} puan eklendi. Ana Hub Toplamı: ${currentScore}`);
 }

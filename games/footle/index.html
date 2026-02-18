@@ -17,17 +17,34 @@
     </a>
 
     <div id="endModal" class="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 backdrop-blur-md hidden px-4">
-        <div id="modalContent" class="bg-gray-900 border-2 p-8 rounded-3xl max-w-sm w-full text-center modal-animate shadow-2xl">
+        <div id="modalContent" class="bg-gray-900 border-2 p-8 rounded-3xl max-w-sm w-full text-center modal-animate shadow-2xl relative">
+            
             <div id="modalEmoji" class="text-6xl mb-4"></div>
             <h2 id="modalTitle"></h2>
-            <p id="modalDescription" class="text-gray-400 mb-6"></p>
+            <p id="modalDescription" class="text-gray-400 mb-4"></p>
+            
+            <div id="resultStats" class="hidden mb-6 p-4 bg-green-500/10 rounded-xl border border-green-500/30">
+                <div class="text-green-400 font-bold text-2xl tracking-tight">
+                    +<span id="gainedScore">0</span> PUAN
+                </div>
+                <div class="text-gray-400 text-xs font-semibold mt-1">
+                    TOPLAM: <span id="newTotalScore">0</span>
+                </div>
+            </div>
+
             <div class="bg-gray-800 p-4 rounded-2xl mb-6 border border-gray-700">
                 <p class="text-xs text-gray-500 uppercase mb-1">Doğru Oyuncu</p>
                 <span id="targetPlayerName" class="text-xl font-bold text-white"></span>
             </div>
-            <button onclick="location.reload()" class="w-full bg-white text-black font-black py-4 rounded-xl transition-all active:scale-95 hover:bg-gray-200">
+            
+            <button onclick="location.reload()" class="w-full bg-white text-black font-black py-4 rounded-xl transition-all active:scale-95 hover:bg-gray-200 shadow-lg shadow-white/10">
                 TEKRAR DENE
             </button>
+
+            <a href="../../index.html" class="block mt-4 py-2 text-gray-500 hover:text-white transition-colors text-sm font-bold tracking-wide">
+                <i class="fa-solid fa-house mr-1"></i> ANA SAYFAYA DÖN
+            </a>
+
         </div>
     </div>
 

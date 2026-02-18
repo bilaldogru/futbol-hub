@@ -12,7 +12,7 @@ body {
     background: radial-gradient(circle at center, #1a4d1a 0%, #0a0a0a 100%); 
 }
 
-/* Tahmin Renkleri (Tailwind harici özel tanımlar) */
+/* Tahmin Renkleri */
 .correct { background-color: #22c55e !important; border-color: #16a34a !important; text-shadow: 0 0 10px rgba(34,197,94,0.5); }
 .partial { background-color: #eab308 !important; border-color: #ca8a04 !important; color: black !important; }
 .wrong { background-color: #374151 !important; border-color: #1f2937 !important; }
@@ -41,15 +41,9 @@ body {
 }
 .modal-animate { animation: modalShow 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
 
-/* Geri Dön Butonu (Özel) */
+/* Geri Dön Butonu (Modern Glassmorphism) */
 .back-home-btn {
-    position: absolute; top: 1rem; left: 1rem;
-    color: #9ca3af; text-decoration: none; font-size: 1.5rem;
-    z-index: 60; transition: color 0.3s;
-}
-.back-home-btn:hover { color: white; }
-.back-home-btn {
-    position: fixed; /* Sayfa kaysa da orada kalsın */
+    position: fixed;
     top: 15px;
     left: 15px;
     display: flex;
@@ -64,12 +58,12 @@ body {
     background: rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(10px); /* Buzlu cam efekti */
     border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 50px; /* Yuvarlak modern buton */
+    border-radius: 50px;
     transition: all 0.3s ease;
 }
 
 .back-home-btn:hover {
-    background: rgba(34, 197, 94, 0.2); /* Üstüne gelince hafif yeşil parlasın */
+    background: rgba(34, 197, 94, 0.2);
     border-color: #22c55e;
     color: #22c55e;
     transform: translateX(3px);
