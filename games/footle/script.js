@@ -1,29 +1,38 @@
-// games/footle/script.js
-
-// OYUNCU VERİTABANI
-const oyuncular = [
-    { isim: "Mauro Icardi", uyruk: "🇦🇷", lig: "Süper Lig", takim: "GS", pozisyon: "ATT", yas: 31 },
-    { isim: "Edin Dzeko", uyruk: "🇧🇦", lig: "Süper Lig", takim: "FB", pozisyon: "ATT", yas: 37 },
-    { isim: "Arda Guler", uyruk: "🇹🇷", lig: "La Liga", takim: "RMA", pozisyon: "MID", yas: 19 },
-    { isim: "Hakan Calhanoglu", uyruk: "🇹🇷", lig: "Serie A", takim: "INT", pozisyon: "MID", yas: 30 },
-    { isim: "Victor Osimhen", uyruk: "🇳🇬", lig: "Süper Lig", takim: "GS", pozisyon: "ATT", yas: 25 },
-    { isim: "Kerem Akturkoglu", uyruk: "🇹🇷", lig: "Premier L.", takim: "BJK", pozisyon: "MID", yas: 25 },
-    { isim: "Ciro Immobile", uyruk: "🇮🇹", lig: "Süper Lig", takim: "BJK", pozisyon: "ATT", yas: 34 },
-    { isim: "Fred", uyruk: "🇧🇷", lig: "Süper Lig", takim: "FB", pozisyon: "MID", yas: 31 }
-];
-
-// GÜNLÜK HEDEF SEÇİMİ
-const hedefOyuncu = oyuncular[Math.floor(Math.random() * oyuncular.length)];
+// Global Değişkenler
+let oyuncular = [];
+let hedefOyuncu = {};
 let oyunBitti = false;
 let denemeSayisi = 0;
 const maxHak = 5;
 
-// DOM ELEMENTLERİ
+// DOM Elementleri
 const input = document.getElementById('playerInput');
 const autocompleteList = document.getElementById('autocomplete-list');
 const submitBtn = document.getElementById('submitBtn');
 const hakGosterge = document.getElementById('hakGosterge');
 
+// SAYFA YÜKLENİNCE VERİLERİ ÇEK
+document.addEventListener('DOMContentLoaded', () => {
+    // JSON dosyası 2 klasör yukarıda (../../oyuncular.json)
+    fetch('../../oyuncular.json')
+        .then(response => response.json())
+        .then(data => {
+            oyuncular = data;
+            oyunuBaslat(); // Veri gelince oyunu başlat
+        })
+        .catch(err => {
+            console.error("Veri çekme hatası:", err);
+            alert("Oyuncu listesi yüklenemedi!");
+        });
+});
+
+function oyunuBaslat() {
+    // Rastgele bir oyuncu seç
+    hedefOyuncu = oyuncular[Math.floor(Math.random() * oyuncular.length)];
+    console.log("Hedef (Kopya):", hedefOyuncu.isim); // Test için
+    
+    // Geri kalan event listener'lar ve oyun mantığı burada devreye girer
+}
 console.log("Hedef (Kopya):", hedefOyuncu.isim);
 
 // AUTOCOMPLETE

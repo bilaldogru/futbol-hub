@@ -7,7 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+
     <style>
     #user-info { display: none; align-items: center; gap: 10px; }
     #user-info img { width: 32px; height: 32px; border-radius: 50%; }
@@ -31,10 +31,12 @@
         <i class="fa-solid fa-user-circle"></i> Giriş Yap
     </div>
     <div id="user-info">
-        <img id="user-pic" src="" alt="Avatar">
-        <span id="user-name"></span>
-        <span id="logout-btn">(Çıkış)</span>
-    </div>
+    <span id="user-total-score" class="score-badge">0 P</span>
+    
+    <img id="user-pic" src="" alt="Avatar">
+    <span id="user-name"></span>
+    <span id="logout-btn">(Çıkış)</span>
+</div>
 </div>
     </nav>
 
@@ -190,21 +192,21 @@
     </footer>
 
     <script type="module">
-  // Firebase Kütüphaneleri
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
   import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-  import { getFirestore, collection, query, orderBy, limit, getDocs } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+  // "where" KOMUTUNU EKLEDİK DİKKAT! 👇
+  import { getFirestore, collection, query, orderBy, limit, getDocs, where } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
   // --- BURAYI KENDİ BİLGİLERİNLE DOLDUR ---
-  const firebaseConfig = { 
-    apiKey: "AIzaSyD62cMqFmtT_LYOQdyLEib3TlP2sDXVHUY",
+ const firebaseConfig = 
+  {
+     apiKey: "AIzaSyD62cMqFmtT_LYOQdyLEib3TlP2sDXVHUY",
     authDomain: "futbol-hub0.firebaseapp.com", 
     projectId: "futbol-hub0", storageBucket: "futbol-hub0.firebasestorage.app", 
     messagingSenderId: "995690857981", appId: "1:995690857981:web:01f199920e1c131cd04594", 
     measurementId: "G-7JT28VLCTE" 
-};
+    };
 
-  // Başlatma
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
   const db = getFirestore(app);
@@ -216,100 +218,107 @@
   const userName = document.getElementById('user-name');
   const userPic = document.getElementById('user-pic');
   const logoutBtn = document.getElementById('logout-btn');
+  const scoreBadge = document.getElementById('user-total-score'); // YENİ ELEMENT
 
-  // GİRİŞ YAPMA
+  // GİRİŞ
   loginBtn.addEventListener('click', () => {
-    signInWithPopup(auth, provider)
-      .then((result) => {
-        console.log("Giriş Başarılı:", result.user.displayName);
-      }).catch((error) => {
-        console.error("Hata:", error);
-      });
+    signInWithPopup(auth, provider).catch((error) => console.error("Hata:", error));
   });
 
-  // ÇIKIŞ YAPMA
+  // ÇIKIŞ
   logoutBtn.addEventListener('click', () => {
-    signOut(auth).then(() => {
-      console.log("Çıkış yapıldı");
-      location.reload();
-    });
+    signOut(auth).then(() => location.reload());
   });
 
-  // DURUM KONTROLÜ (Sayfa açılınca giriş yapmış mı?)
-  onAuthStateChanged(auth, (user) => {
+  // KULLANICI DURUMU DEĞİŞİNCE
+  onAuthStateChanged(auth, async (user) => {
     if (user) {
-      // Giriş yapmış
+      // 1. Arayüzü Güncelle
       loginBtn.style.display = 'none';
       userInfo.style.display = 'flex';
-      userName.textContent = user.displayName.split(" ")[0]; // Sadece ilk isim
+      userName.textContent = user.displayName.split(" ")[0];
       userPic.src = user.photoURL;
       
-      // Kullanıcı bilgisini LocalStorage'a da atalım (Oyun sayfaları kullansın diye)
+      // 2. LocalStorage'a Kaydet
       localStorage.setItem('firebaseUser', JSON.stringify({
-        uid: user.uid,
-        name: user.displayName,
-        photo: user.photoURL,
-        email: user.email
+        uid: user.uid, name: user.displayName, photo: user.photoURL, email: user.email
       }));
+
+      // 3. PUANI VERİTABANINDAN ÇEK (YENİ KISIM) 🚀
+      await fetchUserScore(user.email);
+
     } else {
-      // Giriş yapmamış
       loginBtn.style.display = 'block';
       userInfo.style.display = 'none';
+      scoreBadge.style.display = 'none';
       localStorage.removeItem('firebaseUser');
     }
   });
 
-  // --- LİDERLİK TABLOSUNU ÇEK ---
-  async function fetchLeaderboard() {
-    const q = query(collection(db, "scores"), orderBy("score", "desc"), limit(5));
-    const querySnapshot = await getDocs(q);
-    
-    const wrapper = document.querySelector('.leaderboard-wrapper');
-    const list = document.querySelector('.leaderboard-list');
-    
-    // Temizle (Statik verileri sil)
-    wrapper.innerHTML = '';
-    list.innerHTML = '';
+  // KULLANICININ TOPLAM PUANINI GETİREN FONKSİYON
+  async function fetchUserScore(email) {
+    try {
+        const q = query(collection(db, "scores"), where("email", "==", email));
+        const querySnapshot = await getDocs(q);
 
-    let rank = 1;
-    const medals = ['gold', 'silver', 'bronze'];
-    const emojis = ['👑', '⚽', '🧤'];
-
-    querySnapshot.forEach((doc) => {
-      const data = doc.data();
-      
-      if (rank <= 3) {
-        // Podyum (İlk 3)
-        const html = `
-        <div class="podium-card ${medals[rank-1]}">
-            <div class="rank-badge">${rank}</div>
-            <div class="avatar"><img src="${data.photo}" style="width:50px; border-radius:50%"></div>
-            <h3 style="font-size:1rem">${data.name.split(' ')[0]}</h3>
-            <p class="score">${data.score} P</p>
-            <span class="game-tag">${data.game}</span>
-        </div>`;
-        wrapper.innerHTML += html;
-      } else {
-        // Liste (4 ve 5)
-        const html = `
-        <div class="list-item">
-            <span class="rank">${rank}</span>
-            <span class="name"><img src="${data.photo}" style="width:20px; border-radius:50%; vertical-align:middle; margin-right:10px"> ${data.name}</span>
-            <span class="points">${data.score} P</span>
-        </div>`;
-        list.innerHTML += html;
-      }
-      rank++;
-    });
-
-    if(rank === 1) {
-      wrapper.innerHTML = '<p style="color:white">Henüz skor yok. İlk sen ol!</p>';
+        if (!querySnapshot.empty) {
+            // Kayıt varsa puanı göster
+            const data = querySnapshot.docs[0].data();
+            scoreBadge.innerText = `${data.score} P`;
+            scoreBadge.style.display = 'inline-block';
+        } else {
+            // Kayıt yoksa 0 P göster
+            scoreBadge.innerText = "0 P";
+            scoreBadge.style.display = 'inline-block';
+        }
+    } catch (e) {
+        console.error("Puan çekilemedi:", e);
     }
   }
 
-  // Tabloyu yükle
+  // LİDERLİK TABLOSUNU ÇEK
+  async function fetchLeaderboard() {
+    try {
+        const q = query(collection(db, "scores"), orderBy("score", "desc"), limit(5));
+        const querySnapshot = await getDocs(q);
+        
+        const wrapper = document.querySelector('.leaderboard-wrapper');
+        const list = document.querySelector('.leaderboard-list');
+        
+        wrapper.innerHTML = '';
+        list.innerHTML = '';
+
+        let rank = 1;
+        const medals = ['gold', 'silver', 'bronze'];
+
+        querySnapshot.forEach((doc) => {
+          const data = doc.data();
+          if (rank <= 3) {
+            wrapper.innerHTML += `
+            <div class="podium-card ${medals[rank-1]}">
+                <div class="rank-badge">${rank}</div>
+                <div class="avatar"><img src="${data.photo}" style="width:50px; border-radius:50%"></div>
+                <h3>${data.name.split(' ')[0]}</h3>
+                <p class="score">${data.score} P</p>
+                <span class="game-tag">${data.lastGame || 'Oyun'}</span>
+            </div>`;
+          } else {
+            list.innerHTML += `
+            <div class="list-item">
+                <span class="rank">${rank}</span>
+                <span class="name"><img src="${data.photo}" style="width:20px; border-radius:50%; margin-right:10px"> ${data.name}</span>
+                <span class="points">${data.score} P</span>
+            </div>`;
+          }
+          rank++;
+        });
+    } catch(e) { console.log("Tablo hatası:", e); }
+  }
+  
   fetchLeaderboard();
 </script>
 
 </body>
+
 </html>
+
