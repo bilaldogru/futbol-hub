@@ -7,6 +7,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+    #user-info { display: none; align-items: center; gap: 10px; }
+    #user-info img { width: 32px; height: 32px; border-radius: 50%; }
+    #login-btn { cursor: pointer; }
+    #logout-btn { color: #ff4444; cursor: pointer; font-size: 0.9rem; margin-left: 10px; }
+    </style>
 </head>
 <body>
 
@@ -14,14 +21,21 @@
 
     <nav class="navbar">
         <div class="logo">⚽ FUTBOL<span>HUB</span></div>
-        <div class="nav-links">
-            <a href="#" class="active">Oyunlar</a>
-            <a href="#">Liderlik Tablosu</a>
-            <a href="#">Hakkımızda</a>
+       <div class="nav-links">
+         <a href="#games-grid" class="active">Oyunlar</a>
+         <a href="#leaderboard">Liderlik Tablosu</a>
+         <a href="#about">Hakkımızda</a>
         </div>
         <div class="user-profile">
-            <i class="fa-solid fa-user-circle"></i> Giriş Yap
-        </div>
+    <div id="login-btn">
+        <i class="fa-solid fa-user-circle"></i> Giriş Yap
+    </div>
+    <div id="user-info">
+        <img id="user-pic" src="" alt="Avatar">
+        <span id="user-name"></span>
+        <span id="logout-btn">(Çıkış)</span>
+    </div>
+</div>
     </nav>
 
     <header class="hero">
@@ -85,9 +99,210 @@
         </div>
     </section>
 
+    <section id="leaderboard" class="leaderboard-section">
+        <div class="container">
+            <h2 class="section-title">🏆 HAFTANIN KRALLARI</h2>
+            <p class="section-desc">Bu hafta en çok puanı toplayan ve futbol bilgisini kanıtlayan efsaneler.</p>
+            
+            <div class="leaderboard-wrapper">
+                <div class="podium-card gold">
+                    <div class="rank-badge">1</div>
+                    <div class="avatar">👑</div>
+                    <h3>Emre Belözoğlu</h3>
+                    <p class="score">2450 P</p>
+                    <span class="game-tag">Footle Ustası</span>
+                </div>
+
+                <div class="podium-card silver">
+                    <div class="rank-badge">2</div>
+                    <div class="avatar">⚽</div>
+                    <h3>Alex de Souza</h3>
+                    <p class="score">2100 P</p>
+                    <span class="game-tag">Tahminci</span>
+                </div>
+
+                <div class="podium-card bronze">
+                    <div class="rank-badge">3</div>
+                    <div class="avatar">🧤</div>
+                    <h3>Fernando Muslera</h3>
+                    <p class="score">1980 P</p>
+                    <span class="game-tag">Kadrocu</span>
+                </div>
+            </div>
+
+            <div class="leaderboard-list">
+                <div class="list-item">
+                    <span class="rank">4</span>
+                    <span class="name">Gheorghe Hagi</span>
+                    <span class="points">1850 P</span>
+                </div>
+                <div class="list-item">
+                    <span class="rank">5</span>
+                    <span class="name">Sergen Yalçın</span>
+                    <span class="points">1720 P</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="about-section">
+        <div class="container about-container">
+            <div class="about-text">
+                <h2 class="section-title">HAKKIMIZDA</h2>
+                <p>
+                    Biz, futbol tutkusunu kodlarla birleştiren iki mühendis adayıyız. 
+                    <strong>FutbolHub</strong>, sıradan bilgi yarışmalarından sıkılanlar için tasarlandı.
+                </p>
+                <p>
+                    Amacımız, sadece bir oyun sitesi değil, futbolseverlerin taktik zekasını
+                    konuşturabileceği interaktif bir stadyum inşa etmek.
+                </p>
+                <div class="features">
+                    <div class="feature-box">
+                        <i class="fa-solid fa-code"></i>
+                        <span>Açık Kaynak</span>
+                    </div>
+                    <div class="feature-box">
+                        <i class="fa-solid fa-users"></i>
+                        <span>Topluluk Odaklı</span>
+                    </div>
+                    <div class="feature-box">
+                        <i class="fa-solid fa-mobile-screen"></i>
+                        <span>Mobil Uyumlu</span>
+                    </div>
+                </div>
+            </div>
+            <div class="about-image">
+                <img src="https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?q=80&w=1000" alt="Kodlama ve Futbol">
+            </div>
+        </div>
+    </section>
+    
     <footer>
         <p>&copy; 2026 FutbolHub </p>
     </footer>
+
+    <script type="module">
+  // Firebase Kütüphaneleri
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+  import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+  import { getFirestore, collection, query, orderBy, limit, getDocs } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+  // --- BURAYI KENDİ BİLGİLERİNLE DOLDUR ---
+  const firebaseConfig = { 
+    apiKey: "AIzaSyD62cMqFmtT_LYOQdyLEib3TlP2sDXVHUY",
+    authDomain: "futbol-hub0.firebaseapp.com", 
+    projectId: "futbol-hub0", storageBucket: "futbol-hub0.firebasestorage.app", 
+    messagingSenderId: "995690857981", appId: "1:995690857981:web:01f199920e1c131cd04594", 
+    measurementId: "G-7JT28VLCTE" 
+};
+
+  // Başlatma
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+  const provider = new GoogleAuthProvider();
+
+  // HTML Elementleri
+  const loginBtn = document.getElementById('login-btn');
+  const userInfo = document.getElementById('user-info');
+  const userName = document.getElementById('user-name');
+  const userPic = document.getElementById('user-pic');
+  const logoutBtn = document.getElementById('logout-btn');
+
+  // GİRİŞ YAPMA
+  loginBtn.addEventListener('click', () => {
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        console.log("Giriş Başarılı:", result.user.displayName);
+      }).catch((error) => {
+        console.error("Hata:", error);
+      });
+  });
+
+  // ÇIKIŞ YAPMA
+  logoutBtn.addEventListener('click', () => {
+    signOut(auth).then(() => {
+      console.log("Çıkış yapıldı");
+      location.reload();
+    });
+  });
+
+  // DURUM KONTROLÜ (Sayfa açılınca giriş yapmış mı?)
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      // Giriş yapmış
+      loginBtn.style.display = 'none';
+      userInfo.style.display = 'flex';
+      userName.textContent = user.displayName.split(" ")[0]; // Sadece ilk isim
+      userPic.src = user.photoURL;
+      
+      // Kullanıcı bilgisini LocalStorage'a da atalım (Oyun sayfaları kullansın diye)
+      localStorage.setItem('firebaseUser', JSON.stringify({
+        uid: user.uid,
+        name: user.displayName,
+        photo: user.photoURL,
+        email: user.email
+      }));
+    } else {
+      // Giriş yapmamış
+      loginBtn.style.display = 'block';
+      userInfo.style.display = 'none';
+      localStorage.removeItem('firebaseUser');
+    }
+  });
+
+  // --- LİDERLİK TABLOSUNU ÇEK ---
+  async function fetchLeaderboard() {
+    const q = query(collection(db, "scores"), orderBy("score", "desc"), limit(5));
+    const querySnapshot = await getDocs(q);
+    
+    const wrapper = document.querySelector('.leaderboard-wrapper');
+    const list = document.querySelector('.leaderboard-list');
+    
+    // Temizle (Statik verileri sil)
+    wrapper.innerHTML = '';
+    list.innerHTML = '';
+
+    let rank = 1;
+    const medals = ['gold', 'silver', 'bronze'];
+    const emojis = ['👑', '⚽', '🧤'];
+
+    querySnapshot.forEach((doc) => {
+      const data = doc.data();
+      
+      if (rank <= 3) {
+        // Podyum (İlk 3)
+        const html = `
+        <div class="podium-card ${medals[rank-1]}">
+            <div class="rank-badge">${rank}</div>
+            <div class="avatar"><img src="${data.photo}" style="width:50px; border-radius:50%"></div>
+            <h3 style="font-size:1rem">${data.name.split(' ')[0]}</h3>
+            <p class="score">${data.score} P</p>
+            <span class="game-tag">${data.game}</span>
+        </div>`;
+        wrapper.innerHTML += html;
+      } else {
+        // Liste (4 ve 5)
+        const html = `
+        <div class="list-item">
+            <span class="rank">${rank}</span>
+            <span class="name"><img src="${data.photo}" style="width:20px; border-radius:50%; vertical-align:middle; margin-right:10px"> ${data.name}</span>
+            <span class="points">${data.score} P</span>
+        </div>`;
+        list.innerHTML += html;
+      }
+      rank++;
+    });
+
+    if(rank === 1) {
+      wrapper.innerHTML = '<p style="color:white">Henüz skor yok. İlk sen ol!</p>';
+    }
+  }
+
+  // Tabloyu yükle
+  fetchLeaderboard();
+</script>
 
 </body>
 </html>

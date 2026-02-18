@@ -294,43 +294,37 @@ function makeGuess() {
     if (isGameOver) return;
     const input = document.getElementById('guess-input');
     
-    // Kullanıcının girdisini temizle (joão -> JOAO)
-    const guess = normalizeInput(input.value);
+    // Kullanıcının girdisini temizle (Karakterleri düzeltir ve büyütür)
+    const rawGuess = input.value;
+    const cleanGuess = normalizeInput(rawGuess);
     
-    if (guess.length === 0) return;
+    if (cleanGuess.length === 0) return;
 
-    // Hedef ismi temizle (João Félix -> JOAO FELIX)
-    const correctFullName = normalizeInput(targetPlayer.name);
+    // Hedef oyuncunun tam ismini temizle
+    const cleanTargetName = normalizeInput(targetPlayer.name);
     
-    let isCorrect = false;
-
-    // 1. TAM EŞLEŞME
-    if (guess === correctFullName) {
-        isCorrect = true;
-    } 
-    // 2. PARÇA EŞLEŞME
-    else {
-        const targetWords = correctFullName.split(" ");
-        const guessWords = guess.split(" ");
-        
-        // Yazılan tüm kelimeler ismin içinde var mı?
-        const allWordsFound = guessWords.every(word => targetWords.includes(word));
-
-        if (allWordsFound) {
-            isCorrect = true;
-        }
-    }
-
-    if (isCorrect) {
+    // SADECE TAM AD EŞLEŞMESİ KONTROLÜ
+    // Artık parçalara bölüp (split) kelime kontrolü yapmıyoruz.
+    if (cleanGuess === cleanTargetName) {
         endGame(true);
     } else {
+        // YANLIŞ CEVAP EFEKTİ
         input.style.borderBottomColor = "var(--matte-red)";
+        
+        // Titreme animasyonu
+        input.animate([
+            { transform: 'translateX(0px)' },
+            { transform: 'translateX(5px)' },
+            { transform: 'translateX(-5px)' },
+            { transform: 'translateX(0px)' }
+        ], { duration: 200 });
+
         setTimeout(() => input.style.borderBottomColor = "#555", 1000);
-        decreaseScore(10);
+        
+        decreaseScore(10); // Yanlış tahmin cezası
         input.value = '';
     }
 }
-
 function endGame(isWin) {
     isGameOver = true;
     clearInterval(timerInterval);
@@ -350,6 +344,9 @@ function endGame(isWin) {
         document.querySelectorAll('.letter-box').forEach(box => {
             box.classList.remove('empty');
             box.classList.add('solved');
+            if(window.saveScoreToFirebase) {
+        window.saveScoreToFirebase(totalScore, "Bilmece"); 
+            }
         });
         
     } else {

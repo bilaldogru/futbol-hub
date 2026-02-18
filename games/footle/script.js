@@ -164,6 +164,15 @@ function bitir(kazandi) {
         title.className = "text-3xl font-black mb-2 tracking-tighter text-red-500";
     }
 
+    const puan = (maxHak - denemeSayisi + 1) * 100; 
+    
+    if(window.saveScoreToFirebase) {
+        // 2 saniye bekle sonra kaydet (heyecan olsun)
+        setTimeout(() => {
+            window.saveScoreToFirebase(puan, "Footle");
+        }, 1000);
+    }
+
     modal.classList.remove('hidden');
 }
 

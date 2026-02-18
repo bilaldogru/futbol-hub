@@ -62,5 +62,48 @@
     </footer>
 
     <script src="script.js"></script>
+
+    <script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+  import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+  // --- BURAYA KENDİ CONFIG BİLGİLERİNİ YAPIŞTIR ---
+  const firebaseConfig = {
+    apiKey: "AIzaSyD62cMqFmtT_LYOQdyLEib3TlP2sDXVHUY",
+    authDomain: "futbol-hub0.firebaseapp.com", 
+    projectId: "futbol-hub0", storageBucket: "futbol-hub0.firebasestorage.app", 
+    messagingSenderId: "995690857981", appId: "1:995690857981:web:01f199920e1c131cd04594", 
+    measurementId: "G-7JT28VLCTE" 
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  // Global Kayıt Fonksiyonu
+  window.saveScoreToFirebase = async (score, gameName) => {
+    const userStr = localStorage.getItem('firebaseUser');
+    if (!userStr) {
+      alert("Skorunu kaydetmek için Ana Sayfadan GİRİŞ YAPMALISIN!");
+      return;
+    }
+    const user = JSON.parse(userStr);
+
+    try {
+      await addDoc(collection(db, "scores"), {
+        name: user.name,
+        email: user.email,
+        photo: user.photo,
+        score: score,
+        game: gameName,
+        date: new Date()
+      });
+      alert("Tebrikler! Puanın Liderlik Tablosuna Yazıldı 🏆");
+    } catch (e) {
+      console.error("Hata:", e);
+      alert("Skor kaydedilemedi. İnternetini kontrol et.");
+    }
+  };
+</script>
+
 </body>
 </html>
