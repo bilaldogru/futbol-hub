@@ -7,13 +7,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <style>
-    #user-info { display: none; align-items: center; gap: 10px; }
-    #user-info img { width: 32px; height: 32px; border-radius: 50%; }
-    #login-btn { cursor: pointer; }
-    #logout-btn { color: #ff4444; cursor: pointer; font-size: 0.9rem; margin-left: 10px; }
-    </style>
 </head>
 <body>
 
@@ -21,23 +14,30 @@
 
     <nav class="navbar">
         <div class="logo">⚽ FUTBOL<span>HUB</span></div>
-       <div class="nav-links">
-         <a href="#games-grid" class="active">Oyunlar</a>
-         <a href="#leaderboard">Liderlik Tablosu</a>
-         <a href="#about">Hakkımızda</a>
+        
+        <div class="nav-links">
+            <a href="#games-grid" class="active">Oyunlar</a>
+            <a href="#leaderboard">Liderlik Tablosu</a>
+            <a href="#about">Hakkımızda</a>
         </div>
+        
         <div class="user-profile">
-    <div id="login-btn">
-        <i class="fa-solid fa-user-circle"></i> Giriş Yap
-    </div>
-    <div id="user-info">
-    <span id="user-total-score" class="score-badge">0 P</span>
-    
-    <img id="user-pic" src="" alt="Avatar">
-    <span id="user-name"></span>
-    <span id="logout-btn">(Çıkış)</span>
-</div>
-</div>
+            <div id="login-btn">
+                <i class="fa-solid fa-user-circle"></i> Giriş Yap
+            </div>
+            
+            <div id="user-info">
+                <span id="user-total-score" class="score-badge">0 P</span>
+                
+                <button id="shop-btn" onclick="openShop()">
+                    <i class="fa-solid fa-cart-shopping"></i> MAĞAZA
+                </button>
+
+                <img id="user-pic" src="" alt="Avatar">
+                <span id="user-name"></span>
+                <span id="logout-btn"><i class="fa-solid fa-right-from-bracket"></i></span>
+            </div>
+        </div>
     </nav>
 
     <header class="hero">
@@ -68,6 +68,15 @@
                 </div>
             </div>
 
+            <div class="game-card" onclick="location.href='games/footle/index.html'">
+                <img src="https://images.unsplash.com/photo-1551958219-acbc608c6377?q=80&w=600&h=400&auto=format&fit=crop" style="width:100%; height:200px; object-fit:cover;" alt="Footle">
+                 <div class="card-content" style="padding:15px;">
+                    <h3>Footle</h3>
+                    <p>Günün gizli futbolcusunu özellikleri ile bul!</p>
+                    <div class="play-btn">OYNA</div>
+                 </div>
+            </div>
+
             <div class="game-card locked">
                 <div class="card-image squad-bg">
                     <span class="badge coming-soon">YAKINDA</span>
@@ -76,21 +85,6 @@
                     <h3>Kadro Mühendisi</h3>
                     <p>Verilen bütçeyle en iyi 11'i kur, puanları topla.</p>
                     <button class="play-btn disabled">BEKLEMEDE</button>
-                </div>
-            </div>
-
-            <div class="game-card">
-                <div class="card-image squad-bg">
-                    <span class="badge" style="background-color: #eab308; color: black;">YENİ</span>
-                </div>
-                <div class="card-info">
-                    <h3>Footle (Wordle)</h3>
-                    <p>Gizli futbolcuyu bulmak için 5 hakkın var. İpuçlarını takip et!</p>
-                    <div class="card-stats">
-                        <span><i class="fa-solid fa-brain"></i> Zeka</span>
-                        <span><i class="fa-solid fa-star"></i> 5.0</span>
-                    </div>
-                    <a href="games/footle/index.html" class="play-btn">OYNA <i class="fa-solid fa-arrow-right"></i></a>
                 </div>
             </div>
 
@@ -114,45 +108,44 @@
             <p class="section-desc">Bu hafta en çok puanı toplayan ve futbol bilgisini kanıtlayan efsaneler.</p>
             
             <div class="leaderboard-wrapper">
-                <div class="podium-card gold">
-                    <div class="rank-badge">1</div>
-                    <div class="avatar">👑</div>
-                    <h3>Emre Belözoğlu</h3>
-                    <p class="score">2450 P</p>
-                    <span class="game-tag">Footle Ustası</span>
-                </div>
-
-                <div class="podium-card silver">
-                    <div class="rank-badge">2</div>
-                    <div class="avatar">⚽</div>
-                    <h3>Alex de Souza</h3>
-                    <p class="score">2100 P</p>
-                    <span class="game-tag">Tahminci</span>
-                </div>
-
-                <div class="podium-card bronze">
-                    <div class="rank-badge">3</div>
-                    <div class="avatar">🧤</div>
-                    <h3>Fernando Muslera</h3>
-                    <p class="score">1980 P</p>
-                    <span class="game-tag">Kadrocu</span>
-                </div>
+                <p style="text-align:center; color:#888;">Yükleniyor...</p>
             </div>
 
             <div class="leaderboard-list">
-                <div class="list-item">
-                    <span class="rank">4</span>
-                    <span class="name">Gheorghe Hagi</span>
-                    <span class="points">1850 P</span>
                 </div>
-                <div class="list-item">
-                    <span class="rank">5</span>
-                    <span class="name">Sergen Yalçın</span>
-                    <span class="points">1720 P</span>
+        </div>
+    </section>
+
+    <div id="shop-modal" class="modal">
+        <div class="modal-content shop-content">
+            <span class="close-btn" onclick="closeShop()">&times;</span>
+            <h2 style="font-size: 2.2rem; margin-bottom: 5px; color: white;">PAKET AÇILIMI</h2>
+            <p style="color: #aaa; margin-bottom: 20px;">Şansına güveniyor musun?</p>
+            
+            <div class="ball-container">
+                <div class="ball-card" onclick="buyPack('bronze')">
+                    <div class="ball ball-bronze"></div>
+                    <h3>Bronz Top</h3>
+                    <p style="font-size: 0.8rem; color:#ccc;">%10 Yıldız Şansı</p>
+                    <div class="price-tag">500 P</div>
+                </div>
+
+                <div class="ball-card" onclick="buyPack('silver')">
+                    <div class="ball ball-silver"></div>
+                    <h3>Gümüş Top</h3>
+                    <p style="font-size: 0.8rem; color:#ccc;">%35 Yıldız Şansı</p>
+                    <div class="price-tag">1000 P</div>
+                </div>
+
+                <div class="ball-card" onclick="buyPack('gold')">
+                    <div class="ball ball-gold"></div>
+                    <h3>Altın Top</h3>
+                    <p style="font-size: 0.8rem; color:#ccc;">%80 Yıldız Şansı</p>
+                    <div class="price-tag">2500 P</div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
 
     <section id="about" class="about-section">
         <div class="container about-container">
@@ -162,10 +155,6 @@
                     Biz, futbol tutkusunu kodlarla birleştiren iki mühendis adayıyız. 
                     <strong>FutbolHub</strong>, sıradan bilgi yarışmalarından sıkılanlar için tasarlandı.
                 </p>
-                <p>
-                    Amacımız, sadece bir oyun sitesi değil, futbolseverlerin taktik zekasını
-                    konuşturabileceği interaktif bir stadyum inşa etmek.
-                </p>
                 <div class="features">
                     <div class="feature-box">
                         <i class="fa-solid fa-code"></i>
@@ -174,10 +163,6 @@
                     <div class="feature-box">
                         <i class="fa-solid fa-users"></i>
                         <span>Topluluk Odaklı</span>
-                    </div>
-                    <div class="feature-box">
-                        <i class="fa-solid fa-mobile-screen"></i>
-                        <span>Mobil Uyumlu</span>
                     </div>
                 </div>
             </div>
@@ -192,133 +177,137 @@
     </footer>
 
     <script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-  import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-  // "where" KOMUTUNU EKLEDİK DİKKAT! 👇
-  import { getFirestore, collection, query, orderBy, limit, getDocs, where } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+      import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+      import { getFirestore, collection, query, orderBy, limit, getDocs, where } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-  // --- BURAYI KENDİ BİLGİLERİNLE DOLDUR ---
- const firebaseConfig = 
-  {
-     apiKey: "AIzaSyD62cMqFmtT_LYOQdyLEib3TlP2sDXVHUY",
-    authDomain: "futbol-hub0.firebaseapp.com", 
-    projectId: "futbol-hub0", storageBucket: "futbol-hub0.firebasestorage.app", 
-    messagingSenderId: "995690857981", appId: "1:995690857981:web:01f199920e1c131cd04594", 
-    measurementId: "G-7JT28VLCTE" 
-    };
+      const firebaseConfig = {
+        apiKey: "AIzaSyD62cMqFmtT_LYOQdyLEib3TlP2sDXVHUY",
+        authDomain: "futbol-hub0.firebaseapp.com", 
+        projectId: "futbol-hub0", 
+        storageBucket: "futbol-hub0.firebasestorage.app", 
+        messagingSenderId: "995690857981", 
+        appId: "1:995690857981:web:01f199920e1c131cd04594", 
+        measurementId: "G-7JT28VLCTE" 
+      };
 
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
-  const db = getFirestore(app);
-  const provider = new GoogleAuthProvider();
+      const app = initializeApp(firebaseConfig);
+      const auth = getAuth(app);
+      const db = getFirestore(app);
+      const provider = new GoogleAuthProvider();
 
-  // HTML Elementleri
-  const loginBtn = document.getElementById('login-btn');
-  const userInfo = document.getElementById('user-info');
-  const userName = document.getElementById('user-name');
-  const userPic = document.getElementById('user-pic');
-  const logoutBtn = document.getElementById('logout-btn');
-  const scoreBadge = document.getElementById('user-total-score'); // YENİ ELEMENT
-
-  // GİRİŞ
-  loginBtn.addEventListener('click', () => {
-    signInWithPopup(auth, provider).catch((error) => console.error("Hata:", error));
-  });
-
-  // ÇIKIŞ
-  logoutBtn.addEventListener('click', () => {
-    signOut(auth).then(() => location.reload());
-  });
-
-  // KULLANICI DURUMU DEĞİŞİNCE
-  onAuthStateChanged(auth, async (user) => {
-    if (user) {
-      // 1. Arayüzü Güncelle
-      loginBtn.style.display = 'none';
-      userInfo.style.display = 'flex';
-      userName.textContent = user.displayName.split(" ")[0];
-      userPic.src = user.photoURL;
+      const loginBtn = document.getElementById('login-btn');
+      const userInfo = document.getElementById('user-info');
+      const userName = document.getElementById('user-name');
+      const userPic = document.getElementById('user-pic');
+      const logoutBtn = document.getElementById('logout-btn');
+      const scoreBadge = document.getElementById('user-total-score');
       
-      // 2. LocalStorage'a Kaydet
-      localStorage.setItem('firebaseUser', JSON.stringify({
-        uid: user.uid, name: user.displayName, photo: user.photoURL, email: user.email
-      }));
+      window.openShop = () => {
+          document.getElementById('shop-modal').style.display = 'flex'; 
+      };
+      
+      window.closeShop = () => {
+          document.getElementById('shop-modal').style.display = 'none';
+      };
 
-      // 3. PUANI VERİTABANINDAN ÇEK (YENİ KISIM) 🚀
-      await fetchUserScore(user.email);
-
-    } else {
-      loginBtn.style.display = 'block';
-      userInfo.style.display = 'none';
-      scoreBadge.style.display = 'none';
-      localStorage.removeItem('firebaseUser');
-    }
-  });
-
-  // KULLANICININ TOPLAM PUANINI GETİREN FONKSİYON
-  async function fetchUserScore(email) {
-    try {
-        const q = query(collection(db, "scores"), where("email", "==", email));
-        const querySnapshot = await getDocs(q);
-
-        if (!querySnapshot.empty) {
-            // Kayıt varsa puanı göster
-            const data = querySnapshot.docs[0].data();
-            scoreBadge.innerText = `${data.score} P`;
-            scoreBadge.style.display = 'inline-block';
-        } else {
-            // Kayıt yoksa 0 P göster
-            scoreBadge.innerText = "0 P";
-            scoreBadge.style.display = 'inline-block';
-        }
-    } catch (e) {
-        console.error("Puan çekilemedi:", e);
-    }
-  }
-
-  // LİDERLİK TABLOSUNU ÇEK
-  async function fetchLeaderboard() {
-    try {
-        const q = query(collection(db, "scores"), orderBy("score", "desc"), limit(5));
-        const querySnapshot = await getDocs(q);
-        
-        const wrapper = document.querySelector('.leaderboard-wrapper');
-        const list = document.querySelector('.leaderboard-list');
-        
-        wrapper.innerHTML = '';
-        list.innerHTML = '';
-
-        let rank = 1;
-        const medals = ['gold', 'silver', 'bronze'];
-
-        querySnapshot.forEach((doc) => {
-          const data = doc.data();
-          if (rank <= 3) {
-            wrapper.innerHTML += `
-            <div class="podium-card ${medals[rank-1]}">
-                <div class="rank-badge">${rank}</div>
-                <div class="avatar"><img src="${data.photo}" style="width:50px; border-radius:50%"></div>
-                <h3>${data.name.split(' ')[0]}</h3>
-                <p class="score">${data.score} P</p>
-                <span class="game-tag">${data.lastGame || 'Oyun'}</span>
-            </div>`;
-          } else {
-            list.innerHTML += `
-            <div class="list-item">
-                <span class="rank">${rank}</span>
-                <span class="name"><img src="${data.photo}" style="width:20px; border-radius:50%; margin-right:10px"> ${data.name}</span>
-                <span class="points">${data.score} P</span>
-            </div>`;
+      window.onclick = function(event) {
+          const modal = document.getElementById('shop-modal');
+          if (event.target == modal) {
+              modal.style.display = "none";
           }
-          rank++;
-        });
-    } catch(e) { console.log("Tablo hatası:", e); }
-  }
-  
-  fetchLeaderboard();
-</script>
+      }
+
+      window.buyPack = (type) => {
+          let packName = type === 'bronze' ? 'Bronz' : type === 'silver' ? 'Gümüş' : 'Altın';
+          alert(packName + " Top açılıyor... ⚽ (Şansına güven!)");
+      };
+
+      loginBtn.addEventListener('click', () => {
+        signInWithPopup(auth, provider).catch((error) => console.error("Hata:", error));
+      });
+
+      logoutBtn.addEventListener('click', () => {
+        signOut(auth).then(() => location.reload());
+      });
+
+      onAuthStateChanged(auth, async (user) => {
+        if (user) {
+          loginBtn.style.display = 'none';
+          userInfo.style.display = 'flex';
+          userName.textContent = user.displayName.split(" ")[0];
+          userPic.src = user.photoURL;
+          
+          localStorage.setItem('firebaseUser', JSON.stringify({
+            uid: user.uid, name: user.displayName, photo: user.photoURL, email: user.email
+          }));
+
+          await fetchUserScore(user.email);
+        } else {
+          loginBtn.style.display = 'block';
+          userInfo.style.display = 'none';
+          scoreBadge.style.display = 'none';
+          localStorage.removeItem('firebaseUser');
+        }
+      });
+
+      async function fetchUserScore(email) {
+        try {
+            const q = query(collection(db, "scores"), where("email", "==", email));
+            const querySnapshot = await getDocs(q);
+
+            if (!querySnapshot.empty) {
+                const data = querySnapshot.docs[0].data();
+                scoreBadge.innerText = `${data.score} P`;
+                scoreBadge.style.display = 'inline-block';
+            } else {
+                scoreBadge.innerText = "0 P";
+                scoreBadge.style.display = 'inline-block';
+            }
+        } catch (e) {
+            console.error("Puan çekilemedi:", e);
+        }
+      }
+
+      async function fetchLeaderboard() {
+        try {
+            const q = query(collection(db, "scores"), orderBy("score", "desc"), limit(5));
+            const querySnapshot = await getDocs(q);
+            
+            const wrapper = document.querySelector('.leaderboard-wrapper');
+            const list = document.querySelector('.leaderboard-list');
+            
+            wrapper.innerHTML = '';
+            list.innerHTML = '';
+
+            let rank = 1;
+            const medals = ['gold', 'silver', 'bronze'];
+
+            querySnapshot.forEach((doc) => {
+              const data = doc.data();
+              if (rank <= 3) {
+                wrapper.innerHTML += `
+                <div class="podium-card ${medals[rank-1]}">
+                    <div class="rank-badge">${rank}</div>
+                    <div class="avatar"><img src="${data.photo}" style="width:50px; border-radius:50%"></div>
+                    <h3>${data.name.split(' ')[0]}</h3>
+                    <p class="score">${data.score} P</p>
+                </div>`;
+              } else {
+                list.innerHTML += `
+                <div class="list-item">
+                    <span class="rank">${rank}</span>
+                    <span class="name"><img src="${data.photo}" style="width:20px; border-radius:50%; margin-right:10px"> ${data.name}</span>
+                    <span class="points">${data.score} P</span>
+                </div>`;
+              }
+              rank++;
+            });
+        } catch(e) { console.log("Tablo hatası:", e); }
+      }
+      
+      fetchLeaderboard();
+    </script>
 
 </body>
-
 </html>
-

@@ -5,32 +5,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Futbolcu Arena - Günlük Meydan Okuma</title>
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
-    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <link rel="stylesheet" href="style.css">
-</head>
+    <link rel="stylesheet" href="../../style.css"> <link rel="stylesheet" href="style.css"> </head>
 <body>
 
     <a href="../../index.html" class="back-home-btn">
         <i class="fa-solid fa-arrow-left"></i> <span class="btn-text">ANA MENÜ</span>
     </a>
-    <div class="bg-overlay"></div>
-<body>
-
+    
     <div class="bg-overlay"></div>
 
-    <div id="login-modal" class="modal">
-        <div class="modal-content">
-            <h2>GÜNLÜK MEYDAN OKUMA</h2>
-            <p>Bugünün 10 futbolcusunu tahmin et, listeye adını yazdır!</p>
-            <input type="text" id="username-input" placeholder="Adın veya Nickname..." maxlength="15">
-            <button onclick="startDailyChallenge()">BAŞLA</button>
+    <div id="difficulty-modal" class="modal" style="display:flex;">
+        <div class="modal-content" style="text-align:center; max-width: 500px; padding: 40px; border: 2px solid var(--primary-green); border-radius: 15px; background: #1a1a24;">
+            <h2 style="font-size: 2.5rem; color: var(--primary-green); margin-bottom: 10px;">ZORLUK SEÇİMİ</h2>
+            <p style="color: #ccc; margin-bottom: 30px;">Her zorluk seviyesini günde sadece 1 kez oynayabilirsin!</p>
+            
+            <div style="display:flex; flex-direction:column; gap:15px;">
+                <button id="btn-kolay" class="diff-btn easy" onclick="startGame('kolay')">
+                    KOLAY  <br><small>1 Soru = 100 Puan</small>
+                </button>
+                <button id="btn-orta" class="diff-btn medium" onclick="startGame('orta')">
+                    ORTA  <br><small>1 Soru = 150 Puan</small>
+                </button>
+                <button id="btn-zor" class="diff-btn hard" onclick="startGame('zor')">
+                    ZOR <br><small>1 Soru = 250 Puan</small>
+                </button>
+            </div>
         </div>
     </div>
 
     <div class="main-layout blurred" id="game-wrapper">
-        
         <div class="game-section">
             <div class="game-container">
                 <header>
@@ -59,7 +63,7 @@
                 </div>
 
                 <div class="input-area">
-                    <input type="text" id="guess-input" placeholder="Futbolcunun adı..." autocomplete="off">
+                    <input type="text" id="guess-input" placeholder="Futbolcunun adını veya soyadını yaz..." autocomplete="off">
                     <button onclick="makeGuess()">TAHMİN ET</button>
                 </div>
 
@@ -68,88 +72,73 @@
                 <button id="next-btn" class="hidden action-btn" onclick="nextQuestion()">SIRADAKİ SORU ▶</button>
             </div>
         </div>
-
-        <div class="sidebar">
-            <div class="leaderboard-box">
-                <h2>🏆 LİDERLİK TABLOSU</h2>
-                <p class="date-label" id="date-display">16.02.2026</p>
-                
-                <ul id="leaderboard-list">
-                    </ul>
-
-                <div class="daily-info">
-                    <p>Her gün 00:00'da yenilenir.</p>
-                    <p>Herkese aynı 10 futbolcu sorulur.</p>
-                </div>
-            </div>
-        </div>
-
     </div>
 
     <script src="script.js"></script>
 
     <script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-  import { getFirestore, collection, addDoc, query, where, getDocs, updateDoc, doc, increment } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+      import { getFirestore, collection, addDoc, query, where, getDocs, updateDoc, doc, increment } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-  // --- API KEYLERİNİ BURAYA YAPIŞTIR ---
-  const firebaseConfig = 
-  {
-     apiKey: "AIzaSyD62cMqFmtT_LYOQdyLEib3TlP2sDXVHUY",
-    authDomain: "futbol-hub0.firebaseapp.com", 
-    projectId: "futbol-hub0", storageBucket: "futbol-hub0.firebasestorage.app", 
-    messagingSenderId: "995690857981", appId: "1:995690857981:web:01f199920e1c131cd04594", 
-    measurementId: "G-7JT28VLCTE" 
-    };
+      // --- SENİN API BİLGİLERİN ---
+      const firebaseConfig = {
+        apiKey: "AIzaSyD62cMqFmtT_LYOQdyLEib3TlP2sDXVHUY",
+        authDomain: "futbol-hub0.firebaseapp.com", 
+        projectId: "futbol-hub0", 
+        storageBucket: "futbol-hub0.firebasestorage.app", 
+        messagingSenderId: "995690857981", 
+        appId: "1:995690857981:web:01f199920e1c131cd04594", 
+        measurementId: "G-7JT28VLCTE" 
+      };
 
-  const app = initializeApp(firebaseConfig);
-  const db = getFirestore(app);
+      const app = initializeApp(firebaseConfig);
+      const db = getFirestore(app);
 
-  window.saveScoreToFirebase = async (newScore, gameName) => {
-    // 1. Kullanıcı Giriş Yapmış mı?
-    const userStr = localStorage.getItem('firebaseUser');
-    if (!userStr) {
-      alert("Puanını biriktirmek için ANA SAYFADAN giriş yapmalısın!");
-      return;
-    }
-    const user = JSON.parse(userStr);
+      window.saveScoreToFirebase = async (newScore, gameName) => {
+        // 1. Kullanıcı Giriş Yapmış mı?
+        const userStr = localStorage.getItem('firebaseUser');
+        if (!userStr) {
+          alert("Puanını biriktirmek için ANA SAYFADAN giriş yapmalısın!");
+          return;
+        }
+        const user = JSON.parse(userStr);
 
-    try {
-      // 2. Bu kullanıcı daha önce puan almış mı kontrol et
-      const scoresRef = collection(db, "scores");
-      const q = query(scoresRef, where("email", "==", user.email));
-      const querySnapshot = await getDocs(q);
+        try {
+          // 2. Bu kullanıcı daha önce puan almış mı kontrol et
+          const scoresRef = collection(db, "scores");
+          const q = query(scoresRef, where("email", "==", user.email));
+          const querySnapshot = await getDocs(q);
 
-      if (!querySnapshot.empty) {
-        // --- VARSA: PUANI GÜNCELLE (ÜSTÜNE EKLE) ---
-        const existingDoc = querySnapshot.docs[0]; // Kullanıcının belgesini bul
-        const userDocRef = doc(db, "scores", existingDoc.id);
+          if (!querySnapshot.empty) {
+            // --- VARSA: PUANI GÜNCELLE (ÜSTÜNE EKLE) ---
+            const existingDoc = querySnapshot.docs[0]; 
+            const userDocRef = doc(db, "scores", existingDoc.id);
 
-        await updateDoc(userDocRef, {
-          score: increment(newScore), // Eski puanın üstüne ekler
-          lastGame: gameName,
-          lastPlayedDate: new Date()
-        });
-        alert(`Tebrikler! Toplam puanına +${newScore} eklendi. 🚀`);
+            await updateDoc(userDocRef, {
+              score: increment(newScore), // Eski puanın üstüne ekler
+              lastGame: gameName,
+              lastPlayedDate: new Date()
+            });
+            alert(`Tebrikler! Toplam puanına +${newScore} eklendi. 🚀`);
 
-      } else {
-        // --- YOKSA: YENİ KAYIT OLUŞTUR ---
-        await addDoc(scoresRef, {
-          name: user.name,
-          email: user.email,
-          photo: user.photo,
-          score: newScore,
-          lastGame: gameName,
-          lastPlayedDate: new Date()
-        });
-        alert(`İlk puanın kaydedildi: ${newScore} Puan! 🏆`);
-      }
+          } else {
+            // --- YOKSA: YENİ KAYIT OLUŞTUR ---
+            await addDoc(scoresRef, {
+              name: user.name,
+              email: user.email,
+              photo: user.photo,
+              score: newScore,
+              lastGame: gameName,
+              lastPlayedDate: new Date()
+            });
+            alert(`İlk puanın kaydedildi: ${newScore} Puan! 🏆`);
+          }
 
-    } catch (e) {
-      console.error("Hata:", e);
-      alert("Bir hata oluştu, puan kaydedilemedi.");
-    }
-  };
-</script>
+        } catch (e) {
+          console.error("Hata:", e);
+          alert("Bir hata oluştu, puan kaydedilemedi.");
+        }
+      };
+    </script>
 </body>
 </html>

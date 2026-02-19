@@ -322,3 +322,28 @@ button:hover { background: #444; }
         display: none;
     }
 }
+
+/* ZORLUK BUTONLARI */
+.diff-btn {
+    padding: 15px 20px;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    color: white;
+    transition: transform 0.2s, filter 0.2s;
+    font-family: 'Rajdhani', sans-serif;
+}
+.diff-btn.easy { background: linear-gradient(45deg, #4CAF50, #2E7D32); }
+.diff-btn.medium { background: linear-gradient(45deg, #FF9800, #F57C00); }
+.diff-btn.hard { background: linear-gradient(45deg, #F44336, #C62828); }
+
+.diff-btn:hover:not(:disabled) { transform: scale(1.05); filter: brightness(1.2); }
+.diff-btn:disabled { 
+    background: #444; 
+    color: #888; 
+    cursor: not-allowed; 
+    transform: none; 
+}
+.diff-btn small { font-size: 0.8rem; font-weight: normal; opacity: 0.8; display: block; margin-top: 5px; }

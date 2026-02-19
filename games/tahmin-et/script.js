@@ -7,13 +7,15 @@ let maxQuestions = 10;
 let username = "Misafir"; 
 let timerInterval;
 let seconds = 0;
+let baseScore = 100; // Zorluğa göre (Kolay 100, Orta 150, Zor 250)
 let currentScore = 100;
 let totalScore = 0;
 let revealedIndices = [];
 let globalLetterIndexMap = [];
 let isGameOver = false;
+let currentDifficulty = "";
 
-// --- 1. BAŞLANGIÇ VE OTO-GİRİŞ ---
+// --- 1. BAŞLANGIÇ VE KONTROLLER ---
 document.addEventListener('DOMContentLoaded', () => {
     // Tarih Gösterimi
     const dateStr = new Date().toLocaleDateString('tr-TR');
@@ -21,16 +23,22 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('date-display').innerText = dateStr;
     }
 
-    // Kullanıcı Kontrolü (OTOMATİK GİRİŞ)
-    checkUserAndStart();
+    // Kullanıcı Kontrolü (Google ismini çeker)
+    const userStr = localStorage.getItem('firebaseUser');
+    if (!userStr) {
+        alert("Bu oyunu oynamak ve puan kazanmak için Ana Sayfadan GİRİŞ yapmalısın!");
+        window.location.href = "../../index.html"; 
+        return;
+    }
+    username = JSON.parse(userStr).name; 
 
-    // Verileri Yükle
-    loadLeaderboard();
+    // Oyuncuları JSON'dan Yükle
     fetch('../../oyuncular.json') 
         .then(response => response.json())
         .then(data => {
             allPlayers = data;
             console.log("Oyuncu verileri yüklendi.");
+            checkPlayedDifficulties(); // Günlük hakları kontrol et (Butonları kapatır)
         })
         .catch(err => console.error("JSON Hatası:", err));
 
@@ -40,40 +48,48 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// KULLANICIYI TANI VE OYUNU BAŞLAT
-function checkUserAndStart() {
-    const userStr = localStorage.getItem('firebaseUser');
+// GÜNLÜK HAK KONTROLÜ (Bugün oynanan zorlukların butonunu kilitler)
+function checkPlayedDifficulties() {
+    const today = new Date().toLocaleDateString('tr-TR');
+    const played = JSON.parse(localStorage.getItem('playedBilmece')) || {};
     
-    // Eğer giriş yapılmamışsa ana sayfaya at (veya misafir oynat)
-    if (!userStr) {
-        alert("Bu oyunu oynamak ve puan kazanmak için Ana Sayfadan GİRİŞ yapmalısın!");
-        window.location.href = "../../index.html"; // Ana menüye postala
-        return;
+    if(played[today]) {
+        if(played[today].includes('kolay')) document.getElementById('btn-kolay').disabled = true;
+        if(played[today].includes('orta')) document.getElementById('btn-orta').disabled = true;
+        if(played[today].includes('zor')) document.getElementById('btn-zor').disabled = true;
     }
+}
 
-    // Giriş yapılmışsa bilgileri al
-    const user = JSON.parse(userStr);
-    username = user.name; // Google ismini al
+// OYUNU ZORLUĞA GÖRE BAŞLAT (Butonlara basınca burası çalışır)
+window.startGame = function(difficulty) {
+    currentDifficulty = difficulty;
     
-    // Modalı gizle ve oyunu başlat
-    const loginModal = document.getElementById('login-modal');
-    if(loginModal) loginModal.style.display = 'none'; // Kutuyu yok et
-    
+    // Zorluk ekranını kapat, oyunu aç
+    document.getElementById('difficulty-modal').style.display = 'none';
     document.getElementById('game-wrapper').classList.remove('blurred');
     
-    // Verilerin yüklenmesini azıcık bekle sonra başlat
-    setTimeout(() => {
-        if(allPlayers.length > 0) {
-            prepareDailyQuestions();
-            loadQuestion();
-        } else {
-            // Eğer JSON geç yüklenirse 1 sn sonra tekrar dene
-            setTimeout(() => {
-                prepareDailyQuestions();
-                loadQuestion();
-            }, 1000);
-        }
-    }, 500);
+    let pool = [];
+
+    // OYUNCULARI JSON'DAKİ "zorluk" DEĞERİNE GÖRE FİLTRELE
+    if(difficulty === 'kolay') {
+        baseScore = 100;
+        pool = allPlayers.filter(p => p.zorluk === "kolay");
+    } else if (difficulty === 'orta') {
+        baseScore = 150;
+        pool = allPlayers.filter(p => p.zorluk === "orta");
+    } else {
+        baseScore = 250;
+        pool = allPlayers.filter(p => p.zorluk === "zor");
+    }
+
+    // Güvenlik: Eğer JSON'a zorluk eklemeyi unuttuysan oyun çökmesin diye tüm havuzu alır
+    if(pool.length < maxQuestions) {
+        console.warn("DİKKAT: JSON dosyasında bu zorlukta yeterli oyuncu yok! Tüm oyuncular alınıyor.");
+        pool = allPlayers;
+    }
+
+    prepareDailyQuestions(pool);
+    loadQuestion();
 }
 
 // KARAKTER TEMİZLEYİCİ
@@ -91,21 +107,19 @@ function normalizeInput(text) {
         .trim().toUpperCase();
 }
 
-function prepareDailyQuestions() {
+function prepareDailyQuestions(pool) {
     const today = new Date();
-    // Her gün aynı sorular gelsin diye tarih bazlı "seed" (tohum) oluşturuyoruz
-    const seed = today.getFullYear() * 10000 + (today.getMonth() + 1) * 100 + today.getDate();
+    // Tohum (Seed) ayarı: Aynı gün kolay ve zor girince aynı sorular çıkmasın diye
+    const diffOffset = currentDifficulty === 'kolay' ? 1 : currentDifficulty === 'orta' ? 2 : 3;
+    const seed = today.getFullYear() * 10000 + (today.getMonth() + 1) * 100 + today.getDate() + diffOffset;
     
-    // Listeyi karıştır ama her gün aynı şekilde karıştır
-    const shuffled = seededShuffle([...allPlayers], seed);
-    
+    const shuffled = seededShuffle([...pool], seed);
     dailyPlayers = shuffled.slice(0, maxQuestions);
     questionIndex = 0;
     totalScore = 0;
     document.getElementById('total-score').innerText = "0";
 }
 
-// Rastgelelik Algoritması (Seed tabanlı)
 function seededShuffle(array, seed) {
     let m = array.length, t, i;
     const random = () => { var x = Math.sin(seed++) * 10000; return x - Math.floor(x); };
@@ -126,7 +140,7 @@ function loadQuestion() {
     
     clearInterval(timerInterval);
     seconds = 0;
-    currentScore = 100;
+    currentScore = baseScore; // Puan seçilen zorluğa göre başlar
     revealedIndices = [];
     globalLetterIndexMap = [];
     isGameOver = false;
@@ -139,26 +153,33 @@ function loadQuestion() {
     input.value = ''; 
     input.disabled = false; 
     input.focus();
-    input.style.borderBottomColor = "#555"; // Rengi sıfırla
+    input.style.borderBottomColor = "#555"; 
 
     renderHangman();
     renderClues();
     timerInterval = setInterval(gameLoop, 1000);
 }
 
-function nextQuestion() {
+// SONRAKİ SORUYA GEÇ
+window.nextQuestion = function() {
     questionIndex++;
     loadQuestion();
 }
 
 function finishDailyChallenge() {
+    // OYNANDI OLARAK KAYDET (Bugün bir daha bu zorluğa giremez)
+    const today = new Date().toLocaleDateString('tr-TR');
+    let played = JSON.parse(localStorage.getItem('playedBilmece')) || {};
+    if(!played[today]) played[today] = [];
+    played[today].push(currentDifficulty);
+    localStorage.setItem('playedBilmece', JSON.stringify(played));
+
     const gameContainer = document.querySelector('.game-container');
     
-    // Oyun bitti ekranı
     gameContainer.innerHTML = `
         <div style="text-align:center; padding: 40px;">
             <h1 style="color:var(--matte-green); font-size: 3rem;">GÖREV TAMAMLANDI!</h1>
-            <p style="color:#aaa; margin-top:10px;">Günün Toplam Puanı</p>
+            <p style="color:#aaa; margin-top:10px;">${currentDifficulty.toUpperCase()} Zorluk Puanı</p>
             <div style="font-size: 5rem; font-weight:bold; color: white; text-shadow: 0 0 20px rgba(255,255,255,0.2); margin: 20px 0;">
                 ${totalScore}
             </div>
@@ -167,19 +188,16 @@ function finishDailyChallenge() {
             <button onclick="location.href='../../index.html'" class="action-btn" style="background:#444;">ANA MENÜYE DÖN</button>
         </div>`;
     
-    // PUANI KAYDET (Global Firebase Fonksiyonu)
+    // PUANI FIREBASE'E KAYDET
     if(window.saveScoreToFirebase) {
-        window.saveScoreToFirebase(totalScore, "Bilmece");
-    } else {
-        saveScoreToLocal(username, totalScore);
+        window.saveScoreToFirebase(totalScore, `Bilmece (${currentDifficulty.toUpperCase()})`);
     }
 }
 
-// ⚠️ DEĞİŞİKLİK 1: .name -> .isim YAPILDI
 function renderHangman() {
     const container = document.getElementById('hangman-area');
     container.innerHTML = '';
-    const cleanFullName = normalizeInput(targetPlayer.isim); // BURASI DEĞİŞTİ
+    const cleanFullName = normalizeInput(targetPlayer.isim);
     const nameParts = cleanFullName.split(' ');
     let globalCounter = 0;
 
@@ -200,18 +218,16 @@ function renderHangman() {
     });
 }
 
-// ⚠️ DEĞİŞİKLİK 2: TÜRKÇE ANAHTARLAR EKLENDİ
 function renderClues() {
     const container = document.getElementById('clues-area');
     container.innerHTML = '';
     
-    // JSON dosyasındaki Türkçe anahtarları kullanıyoruz artık:
     const clues = [
-        { t: "Lig", v: targetPlayer.lig },        // league -> lig
-        { t: "Uyruk", v: targetPlayer.uyruk },    // nationality -> uyruk
-        { t: "Yaş", v: targetPlayer.yas },        // age -> yas
-        { t: "Takım", v: targetPlayer.takim },    // team -> takim
-        { t: "Pozisyon", v: targetPlayer.pozisyon } // position -> pozisyon
+        { t: "Lig", v: targetPlayer.lig },
+        { t: "Uyruk", v: targetPlayer.uyruk },
+        { t: "Yaş", v: targetPlayer.yas },
+        { t: "Takım", v: targetPlayer.takim },
+        { t: "Pozisyon", v: targetPlayer.pozisyon } 
     ];
     
     clues.forEach((clue, index) => {
@@ -227,16 +243,14 @@ function gameLoop() {
     if (isGameOver) return;
     seconds++;
     
-    // İpuçları (3 saniyede bir açılır)
     if (seconds <= 15 && seconds % 3 === 0) {
         revealClueCard((seconds / 3) - 1);
-        decreaseScore(5);
+        decreaseScore(Math.floor(baseScore * 0.05)); // Puan kaybı zorlukla orantılı
     }
     
-    // Harfler (15. saniyeden sonra açılmaya başlar)
     if (seconds > 15 && seconds % 2 === 0) {
         revealRandomLetter();
-        decreaseScore(8);
+        decreaseScore(Math.floor(baseScore * 0.08)); 
     }
     
     if (currentScore <= 0) endGame(false);
@@ -258,7 +272,6 @@ function revealRandomLetter() {
         const charBox = document.getElementById(`char-${randomIndex}`);
         if(charBox) {
             charBox.classList.remove('empty');
-            // Otomatik açılan harfleri biraz soluk yapalım
             charBox.style.color = "#aaa"; 
         }
     }
@@ -270,7 +283,7 @@ function decreaseScore(amount) {
     document.getElementById('current-score').innerText = currentScore;
 }
 
-// ⚠️ DEĞİŞİKLİK 3: .name -> .isim YAPILDI
+// İSİM, SOYİSİM VEYA TAM İSİM KONTROLÜ
 function makeGuess() {
     if (isGameOver) return;
     const input = document.getElementById('guess-input');
@@ -279,10 +292,15 @@ function makeGuess() {
     
     if (cleanGuess.length === 0) return;
 
-    // TAM AD KONTROLÜ
-    const correctFullName = normalizeInput(targetPlayer.isim); // BURASI DEĞİŞTİ
+    // Hedef ismi kelimelere böl
+    const correctFullName = normalizeInput(targetPlayer.isim);
+    const nameParts = correctFullName.split(' ');
+    
+    const firstName = nameParts[0];
+    const lastName = nameParts.length > 1 ? nameParts[nameParts.length - 1] : firstName;
 
-    if (cleanGuess === correctFullName) {
+    // KURAL: Tahmin kelimesi tam ada, SADECE İLK isme veya SADECE SOYADA eşitse KABUL ET.
+    if (cleanGuess === correctFullName || cleanGuess === firstName || cleanGuess === lastName) {
         endGame(true);
     } else {
         // Yanlış cevap efekti
@@ -295,12 +313,11 @@ function makeGuess() {
         ], { duration: 200 });
 
         setTimeout(() => input.style.borderBottomColor = "#555", 1000);
-        decreaseScore(10);
+        decreaseScore(15);
         input.value = '';
     }
 }
 
-// ⚠️ DEĞİŞİKLİK 4: .name -> .isim YAPILDI
 function endGame(isWin) {
     isGameOver = true;
     clearInterval(timerInterval);
@@ -309,19 +326,18 @@ function endGame(isWin) {
     const input = document.getElementById('guess-input');
 
     if (isWin) {
-        msgArea.innerHTML = `DOĞRU! <strong>${targetPlayer.isim}</strong> +${currentScore} P`; // BURASI DEĞİŞTİ
+        msgArea.innerHTML = `DOĞRU! <strong>${targetPlayer.isim}</strong> +${currentScore} P`;
         msgArea.className = "message success";
         totalScore += currentScore;
         document.getElementById('total-score').innerText = totalScore;
         
-        // Tüm kutuları yeşil yap
         document.querySelectorAll('.letter-box').forEach(box => {
             box.classList.remove('empty'); box.classList.add('solved');
-            box.innerText = box.innerText; // İçeriği tazele
+            box.innerText = box.innerText;
             box.style.color = "white";
         });
     } else {
-        msgArea.innerHTML = `SÜRE BİTTİ! Cevap: ${targetPlayer.isim}`; // BURASI DEĞİŞTİ
+        msgArea.innerHTML = `SÜRE BİTTİ! Cevap: ${targetPlayer.isim}`;
         msgArea.className = "message fail";
         document.querySelectorAll('.letter-box').forEach(box => box.classList.remove('empty'));
     }
@@ -330,33 +346,4 @@ function endGame(isWin) {
     nextBtn.classList.remove('hidden');
     input.disabled = true;
     nextBtn.focus();
-}
-
-// YEDEK: LocalStorage (Firebase çalışmazsa diye)
-function saveScoreToLocal(user, score) {
-    const dateKey = new Date().toLocaleDateString('tr-TR');
-    let leaderboard = JSON.parse(localStorage.getItem('daily_leaderboard')) || {};
-    if (!leaderboard[dateKey]) leaderboard[dateKey] = [];
-    leaderboard[dateKey].push({ name: user, score: score });
-    leaderboard[dateKey].sort((a, b) => b.score - a.score);
-    localStorage.setItem('daily_leaderboard', JSON.stringify(leaderboard));
-    loadLeaderboard();
-}
-
-function loadLeaderboard() {
-    const dateKey = new Date().toLocaleDateString('tr-TR');
-    const listEl = document.getElementById('leaderboard-list');
-    if(!listEl) return;
-    listEl.innerHTML = '';
-    const allData = JSON.parse(localStorage.getItem('daily_leaderboard')) || {};
-    const todaysData = allData[dateKey] || [];
-    if (todaysData.length === 0) {
-        listEl.innerHTML = '<li style="justify-content:center; color:#555;">Henüz yerel skor yok.</li>';
-        return;
-    }
-    todaysData.slice(0, 10).forEach((item, index) => {
-        const li = document.createElement('li');
-        li.innerHTML = `<span>${index + 1}. ${item.name}</span> <span>${item.score} P</span>`;
-        listEl.appendChild(li);
-    });
 }
