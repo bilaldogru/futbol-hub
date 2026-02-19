@@ -6,7 +6,9 @@
     <title>Futbolcu Arena - Günlük Meydan Okuma</title>
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="../../style.css"> <link rel="stylesheet" href="style.css"> </head>
+    <link rel="stylesheet" href="../../style.css"> 
+    <link rel="stylesheet" href="style.css"> 
+</head>
 <body>
 
     <a href="../../index.html" class="back-home-btn">
@@ -74,11 +76,10 @@
         </div>
     </div>
 
-    <script src="script.js"></script>
-
     <script type="module">
       import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-      import { getFirestore, collection, addDoc, query, where, getDocs, updateDoc, doc, increment } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+      // BURAYA DIKKAT: doc, getDoc, setDoc eklendi
+      import { getFirestore, collection, addDoc, query, where, getDocs, updateDoc, doc, increment, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
       // --- SENİN API BİLGİLERİN ---
       const firebaseConfig = {
@@ -93,6 +94,12 @@
 
       const app = initializeApp(firebaseConfig);
       const db = getFirestore(app);
+
+      // --- DEĞİŞİKLİK BURADA: script.js'nin erişebilmesi için window'a bağladık ---
+      window.db = db;
+      window.doc = doc;
+      window.getDoc = getDoc;
+      window.setDoc = setDoc;
 
       window.saveScoreToFirebase = async (newScore, gameName) => {
         // 1. Kullanıcı Giriş Yapmış mı?
@@ -138,5 +145,8 @@
         }
       };
     </script>
+
+    <script src="script.js"></script>
+
 </body>
 </html>

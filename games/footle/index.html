@@ -78,70 +78,74 @@
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        
+        // --- DEĞİŞİKLİK BURADA: doc, getDoc, setDoc eklendi ---
+        import { getFirestore, collection, addDoc, query, where, getDocs, updateDoc, doc, getDoc, setDoc, increment } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+      
+        const firebaseConfig = {
+          apiKey: "AIzaSyD62cMqFmtT_LYOQdyLEib3TlP2sDXVHUY",
+          authDomain: "futbol-hub0.firebaseapp.com", 
+          projectId: "futbol-hub0", 
+          storageBucket: "futbol-hub0.firebasestorage.app", 
+          messagingSenderId: "995690857981", 
+          appId: "1:995690857981:web:01f199920e1c131cd04594", 
+          measurementId: "G-7JT28VLCTE" 
+        };
+      
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
 
-     <script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-  import { getFirestore, collection, addDoc, query, where, getDocs, updateDoc, doc, increment } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+        // --- DEĞİŞİKLİK BURADA: script.js'nin erişebilmesi için window'a bağladık ---
+        window.db = db;
+        window.doc = doc;
+        window.getDoc = getDoc;
+        window.setDoc = setDoc;
+      
+        // Puan Kaydetme Fonksiyonu (Eski kodunuz, dokunmadım)
+        window.saveScoreToFirebase = async (newScore, gameName) => {
+          const userStr = localStorage.getItem('firebaseUser');
+          if (!userStr) {
+            alert("Puanını biriktirmek için ANA SAYFADAN giriş yapmalısın!");
+            return;
+          }
+          const user = JSON.parse(userStr);
+      
+          try {
+            const scoresRef = collection(db, "scores");
+            const q = query(scoresRef, where("email", "==", user.email));
+            const querySnapshot = await getDocs(q);
+      
+            if (!querySnapshot.empty) {
+              const existingDoc = querySnapshot.docs[0];
+              const userDocRef = doc(db, "scores", existingDoc.id);
+      
+              await updateDoc(userDocRef, {
+                score: increment(newScore),
+                lastGame: gameName,
+                lastPlayedDate: new Date()
+              });
+      
+            } else {
+              await addDoc(scoresRef, {
+                name: user.name,
+                email: user.email,
+                photo: user.photo,
+                score: newScore,
+                lastGame: gameName,
+                lastPlayedDate: new Date()
+              });
+              alert(`İlk puanın kaydedildi: ${newScore} Puan! 🏆`);
+            }
+          } catch (e) {
+            console.error("Hata:", e);
+            alert("Bir hata oluştu, puan kaydedilemedi.");
+          }
+        };
+      </script>
 
-  // --- API KEYLERİNİ BURAYA YAPIŞTIR ---
-  const firebaseConfig = 
-  {
-     apiKey: "AIzaSyD62cMqFmtT_LYOQdyLEib3TlP2sDXVHUY",
-    authDomain: "futbol-hub0.firebaseapp.com", 
-    projectId: "futbol-hub0", storageBucket: "futbol-hub0.firebasestorage.app", 
-    messagingSenderId: "995690857981", appId: "1:995690857981:web:01f199920e1c131cd04594", 
-    measurementId: "G-7JT28VLCTE" 
-    };
+      <script src="script.js"></script>
 
-  const app = initializeApp(firebaseConfig);
-  const db = getFirestore(app);
-
-  window.saveScoreToFirebase = async (newScore, gameName) => {
-    // 1. Kullanıcı Giriş Yapmış mı?
-    const userStr = localStorage.getItem('firebaseUser');
-    if (!userStr) {
-      alert("Puanını biriktirmek için ANA SAYFADAN giriş yapmalısın!");
-      return;
-    }
-    const user = JSON.parse(userStr);
-
-    try {
-      // 2. Bu kullanıcı daha önce puan almış mı kontrol et
-      const scoresRef = collection(db, "scores");
-      const q = query(scoresRef, where("email", "==", user.email));
-      const querySnapshot = await getDocs(q);
-
-      if (!querySnapshot.empty) {
-        // --- VARSA: PUANI GÜNCELLE (ÜSTÜNE EKLE) ---
-        const existingDoc = querySnapshot.docs[0]; // Kullanıcının belgesini bul
-        const userDocRef = doc(db, "scores", existingDoc.id);
-
-        await updateDoc(userDocRef, {
-          score: increment(newScore), // Eski puanın üstüne ekler
-          lastGame: gameName,
-          lastPlayedDate: new Date()
-        });
-        alert(`Tebrikler! Toplam puanına +${newScore} eklendi. 🚀`);
-
-      } else {
-        // --- YOKSA: YENİ KAYIT OLUŞTUR ---
-        await addDoc(scoresRef, {
-          name: user.name,
-          email: user.email,
-          photo: user.photo,
-          score: newScore,
-          lastGame: gameName,
-          lastPlayedDate: new Date()
-        });
-        alert(`İlk puanın kaydedildi: ${newScore} Puan! 🏆`);
-      }
-
-    } catch (e) {
-      console.error("Hata:", e);
-      alert("Bir hata oluştu, puan kaydedilemedi.");
-    }
-  };
-</script>
 </body>
 </html>

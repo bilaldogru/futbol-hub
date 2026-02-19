@@ -13,12 +13,11 @@ const hakGosterge = document.getElementById('hakGosterge');
 
 // SAYFA YÜKLENİNCE VERİLERİ ÇEK
 document.addEventListener('DOMContentLoaded', () => {
-    // JSON dosyası 2 klasör yukarıda (../../oyuncular.json)
     fetch('../../oyuncular.json')
         .then(response => response.json())
         .then(data => {
             oyuncular = data;
-            oyunuBaslat(); // Veri gelince oyunu başlat
+            oyunuBaslat(); 
         })
         .catch(err => {
             console.error("Veri çekme hatası:", err);
@@ -26,14 +25,53 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 });
 
-function oyunuBaslat() {
-    // Rastgele bir oyuncu seç
-    hedefOyuncu = oyuncular[Math.floor(Math.random() * oyuncular.length)];
-    console.log("Hedef (Kopya):", hedefOyuncu.isim); // Test için
-    
-    // Geri kalan event listener'lar ve oyun mantığı burada devreye girer
+// --- FIREBASE ENTEGRASYONLU BAŞLATMA (v9 Modüler Yapı İçin) ---
+async function oyunuBaslat() {
+    // window.db yüklenene kadar biraz bekle (hata almamak için)
+    if (!window.db) {
+        setTimeout(oyunuBaslat, 100);
+        return;
+    }
+
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, '0');
+    const day = String(today.getDate()).padStart(2, '0');
+    const dateString = `${year}-${month}-${day}`; 
+
+    try {
+        // v9 Kullanımı
+        const docRef = window.doc(window.db, "daily_footle", dateString);
+        const docSnap = await window.getDoc(docRef);
+
+        if (docSnap.exists()) {
+            console.log("✅ Footle hedefi Firebase'den çekildi.");
+            const targetName = docSnap.data().player;
+            hedefOyuncu = oyuncular.find(p => p.isim === targetName) || oyuncular[0];
+        } else {
+            console.log("⚡ Footle hedefi yok. Sistem seçiyor ve kaydediyor...");
+            
+            const seed = year * 10000 + (today.getMonth() + 1) * 100 + today.getDate() + 99;
+            let m = oyuncular.length;
+            const random = () => { var x = Math.sin(seed) * 10000; return x - Math.floor(x); };
+            const randomIndex = Math.floor(random() * m);
+            
+            hedefOyuncu = oyuncular[randomIndex];
+
+            // Seçileni kaydet (v9)
+            await window.setDoc(docRef, {
+                player: hedefOyuncu.isim,
+                createdAt: new Date()
+            });
+            console.log("💾 Seçim Firebase'e kaydedildi!");
+        }
+    } catch (error) {
+        console.error("Firebase Hatası, yerel mod başlatılıyor:", error);
+        hedefOyuncu = oyuncular[Math.floor(Math.random() * oyuncular.length)];
+    }
+
+    console.log("Hedef:", hedefOyuncu.isim); 
 }
-console.log("Hedef (Kopya):", hedefOyuncu.isim);
 
 // AUTOCOMPLETE
 input.addEventListener('input', function() {
@@ -66,7 +104,6 @@ input.addEventListener('input', function() {
     }
 });
 
-// TAHMİN FONKSİYONU
 function tahminYap() {
     if (oyunBitti) return;
     
@@ -138,7 +175,6 @@ function satirEkle(tahmin) {
     setTimeout(() => row.scrollIntoView({ behavior: 'smooth', block: 'end' }), 100);
 }
 
-// OYUN BİTİRME FONKSİYONU (Refaktör Edildi: Artık HTML içinde geziyor)
 function bitir(kazandi) {
     oyunBitti = true;
     input.disabled = true;
@@ -151,7 +187,6 @@ function bitir(kazandi) {
     const desc = document.getElementById('modalDescription');
     const targetName = document.getElementById('targetPlayerName');
     
-    // Yeni eklediğimiz statik HTML elementleri
     const resultStats = document.getElementById('resultStats');
     const gainedScoreEl = document.getElementById('gainedScore');
     const newTotalScoreEl = document.getElementById('newTotalScore');
@@ -159,13 +194,9 @@ function bitir(kazandi) {
     targetName.innerText = hedefOyuncu.isim.toUpperCase();
 
     if (kazandi) {
-        // --- KAZANMA DURUMU ---
-        
-        // 1. Puan İşlemleri
         const kazanilanPuan = (6 - denemeSayisi) * 100;
         const yeniToplamPuan = addGlobalScore(kazanilanPuan);
 
-        // 2. Görsel Ayarlar
         content.classList.remove('border-red-500', 'shadow-[0_0_50px_rgba(239,68,68,0.3)]');
         content.classList.add('border-green-500', 'shadow-[0_0_50px_rgba(34,197,94,0.3)]');
         
@@ -174,13 +205,11 @@ function bitir(kazandi) {
         title.className = "text-3xl font-black mb-2 tracking-tighter text-green-400";
         desc.innerText = `${denemeSayisi}. denemede doğru bildin.`;
 
-        // 3. İstatistik Alanını Doldur ve Göster
         gainedScoreEl.innerText = kazanilanPuan;
         newTotalScoreEl.innerText = yeniToplamPuan;
-        resultStats.classList.remove('hidden'); // Kutuyu görünür yap
+        resultStats.classList.remove('hidden'); 
 
     } else {
-        // --- KAYBETME DURUMU ---
         content.classList.remove('border-green-500', 'shadow-[0_0_50px_rgba(34,197,94,0.3)]');
         content.classList.add('border-red-500', 'shadow-[0_0_50px_rgba(239,68,68,0.3)]');
         
@@ -189,14 +218,12 @@ function bitir(kazandi) {
         title.className = "text-3xl font-black mb-2 tracking-tighter text-red-500";
         desc.innerText = "Hakların tükendi. Bir dahaki sefere!";
         
-        // Puan alanını gizle (eğer önceki oyundan açık kaldıysa)
         resultStats.classList.add('hidden');
     }
 
     const puan = (maxHak - denemeSayisi + 1) * 100; 
     
     if(window.saveScoreToFirebase) {
-        // 2 saniye bekle sonra kaydet (heyecan olsun)
         setTimeout(() => {
             window.saveScoreToFirebase(puan, "Footle");
         }, 1000);
@@ -205,7 +232,6 @@ function bitir(kazandi) {
     modal.classList.remove('hidden');
 }
 
-// Event Listeners
 submitBtn.addEventListener('click', tahminYap);
 input.addEventListener('keypress', (e) => { if (e.key === 'Enter') tahminYap(); });
 document.addEventListener('click', (e) => { 
@@ -214,7 +240,6 @@ document.addEventListener('click', (e) => {
     }
 });
 
-// --- PUAN SİSTEMİ ---
 function addGlobalScore(points) {
     let currentScore = parseInt(localStorage.getItem('futbolHub_totalScore')) || 0;
     currentScore += points;

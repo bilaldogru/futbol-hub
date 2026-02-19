@@ -17,13 +17,11 @@ let currentDifficulty = "";
 
 // --- 1. BAŞLANGIÇ VE KONTROLLER ---
 document.addEventListener('DOMContentLoaded', () => {
-    // Tarih Gösterimi
     const dateStr = new Date().toLocaleDateString('tr-TR');
     if(document.getElementById('date-display')) {
         document.getElementById('date-display').innerText = dateStr;
     }
 
-    // Kullanıcı Kontrolü (Google ismini çeker)
     const userStr = localStorage.getItem('firebaseUser');
     if (!userStr) {
         alert("Bu oyunu oynamak ve puan kazanmak için Ana Sayfadan GİRİŞ yapmalısın!");
@@ -32,23 +30,20 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     username = JSON.parse(userStr).name; 
 
-    // Oyuncuları JSON'dan Yükle
     fetch('../../oyuncular.json') 
         .then(response => response.json())
         .then(data => {
             allPlayers = data;
             console.log("Oyuncu verileri yüklendi.");
-            checkPlayedDifficulties(); // Günlük hakları kontrol et (Butonları kapatır)
+            checkPlayedDifficulties(); 
         })
         .catch(err => console.error("JSON Hatası:", err));
 
-    // Enter tuşu ile tahmin yapma
     document.getElementById('guess-input').addEventListener('keypress', (e) => {
         if (e.key === 'Enter') makeGuess();
     });
 });
 
-// GÜNLÜK HAK KONTROLÜ (Bugün oynanan zorlukların butonunu kilitler)
 function checkPlayedDifficulties() {
     const today = new Date().toLocaleDateString('tr-TR');
     const played = JSON.parse(localStorage.getItem('playedBilmece')) || {};
@@ -60,17 +55,12 @@ function checkPlayedDifficulties() {
     }
 }
 
-// OYUNU ZORLUĞA GÖRE BAŞLAT (Butonlara basınca burası çalışır)
 window.startGame = function(difficulty) {
     currentDifficulty = difficulty;
-    
-    // Zorluk ekranını kapat, oyunu aç
     document.getElementById('difficulty-modal').style.display = 'none';
     document.getElementById('game-wrapper').classList.remove('blurred');
     
     let pool = [];
-
-    // OYUNCULARI JSON'DAKİ "zorluk" DEĞERİNE GÖRE FİLTRELE
     if(difficulty === 'kolay') {
         baseScore = 100;
         pool = allPlayers.filter(p => p.zorluk === "kolay");
@@ -82,17 +72,70 @@ window.startGame = function(difficulty) {
         pool = allPlayers.filter(p => p.zorluk === "zor");
     }
 
-    // Güvenlik: Eğer JSON'a zorluk eklemeyi unuttuysan oyun çökmesin diye tüm havuzu alır
     if(pool.length < maxQuestions) {
         console.warn("DİKKAT: JSON dosyasında bu zorlukta yeterli oyuncu yok! Tüm oyuncular alınıyor.");
         pool = allPlayers;
     }
 
     prepareDailyQuestions(pool);
-    loadQuestion();
 }
 
-// KARAKTER TEMİZLEYİCİ
+// --- 2. GÜNLÜK SORULAR (FIREBASE KAYITLI v9 Modüler Yapı) ---
+async function prepareDailyQuestions(pool) {
+    if (!window.db) {
+        setTimeout(() => prepareDailyQuestions(pool), 100);
+        return;
+    }
+
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, '0');
+    const day = String(today.getDate()).padStart(2, '0');
+    
+    const documentId = `${year}-${month}-${day}-${currentDifficulty}`; 
+
+    try {
+        const docRef = window.doc(window.db, "daily_tahmin_et", documentId);
+        const docSnap = await window.getDoc(docRef);
+
+        if (docSnap.exists()) {
+            console.log(`✅ ${documentId} listesi Firebase'den çekildi.`);
+            const targetPlayerNames = docSnap.data().players;
+            
+            dailyPlayers = [];
+            targetPlayerNames.forEach(name => {
+                const playerObj = allPlayers.find(p => p.isim === name);
+                if (playerObj) dailyPlayers.push(playerObj);
+            });
+        } else {
+            console.log(`⚡ ${documentId} Firebase'de yok. Seçiliyor ve kaydediliyor...`);
+            
+            const seed = year * 10000 + (today.getMonth() + 1) * 100 + today.getDate() + (currentDifficulty === 'kolay' ? 1 : currentDifficulty === 'orta' ? 2 : 3);
+            const shuffled = seededShuffle([...pool], seed);
+            dailyPlayers = shuffled.slice(0, maxQuestions);
+            
+            const playerNamesToSave = dailyPlayers.map(p => p.isim);
+            await window.setDoc(docRef, {
+                players: playerNamesToSave,
+                createdAt: new Date()
+            });
+            console.log("💾 Seçim Firebase'e kaydedildi!");
+        }
+
+        questionIndex = 0;
+        totalScore = 0;
+        document.getElementById('total-score').innerText = "0";
+        loadQuestion();
+
+    } catch (error) {
+        console.error("Firebase Hatası, yerel mod başlatılıyor:", error);
+        const seed = year * 10000 + (today.getMonth() + 1) * 100 + today.getDate() + (currentDifficulty === 'kolay' ? 1 : 2);
+        dailyPlayers = seededShuffle([...pool], seed).slice(0, maxQuestions);
+        questionIndex = 0;
+        loadQuestion();
+    }
+}
+
 function normalizeInput(text) {
     if (!text) return "";
     return text.toString()
@@ -105,19 +148,6 @@ function normalizeInput(text) {
         .replace(/ç/g, "c").replace(/Ç/g, "c")
         .replace(/[^a-zA-Z0-9 ]/g, "")
         .trim().toUpperCase();
-}
-
-function prepareDailyQuestions(pool) {
-    const today = new Date();
-    // Tohum (Seed) ayarı: Aynı gün kolay ve zor girince aynı sorular çıkmasın diye
-    const diffOffset = currentDifficulty === 'kolay' ? 1 : currentDifficulty === 'orta' ? 2 : 3;
-    const seed = today.getFullYear() * 10000 + (today.getMonth() + 1) * 100 + today.getDate() + diffOffset;
-    
-    const shuffled = seededShuffle([...pool], seed);
-    dailyPlayers = shuffled.slice(0, maxQuestions);
-    questionIndex = 0;
-    totalScore = 0;
-    document.getElementById('total-score').innerText = "0";
 }
 
 function seededShuffle(array, seed) {
@@ -140,7 +170,7 @@ function loadQuestion() {
     
     clearInterval(timerInterval);
     seconds = 0;
-    currentScore = baseScore; // Puan seçilen zorluğa göre başlar
+    currentScore = baseScore; 
     revealedIndices = [];
     globalLetterIndexMap = [];
     isGameOver = false;
@@ -160,14 +190,12 @@ function loadQuestion() {
     timerInterval = setInterval(gameLoop, 1000);
 }
 
-// SONRAKİ SORUYA GEÇ
 window.nextQuestion = function() {
     questionIndex++;
     loadQuestion();
 }
 
 function finishDailyChallenge() {
-    // OYNANDI OLARAK KAYDET (Bugün bir daha bu zorluğa giremez)
     const today = new Date().toLocaleDateString('tr-TR');
     let played = JSON.parse(localStorage.getItem('playedBilmece')) || {};
     if(!played[today]) played[today] = [];
@@ -188,7 +216,6 @@ function finishDailyChallenge() {
             <button onclick="location.href='../../index.html'" class="action-btn" style="background:#444;">ANA MENÜYE DÖN</button>
         </div>`;
     
-    // PUANI FIREBASE'E KAYDET
     if(window.saveScoreToFirebase) {
         window.saveScoreToFirebase(totalScore, `Bilmece (${currentDifficulty.toUpperCase()})`);
     }
@@ -245,7 +272,7 @@ function gameLoop() {
     
     if (seconds <= 15 && seconds % 3 === 0) {
         revealClueCard((seconds / 3) - 1);
-        decreaseScore(Math.floor(baseScore * 0.05)); // Puan kaybı zorlukla orantılı
+        decreaseScore(Math.floor(baseScore * 0.05)); 
     }
     
     if (seconds > 15 && seconds % 2 === 0) {
@@ -283,7 +310,6 @@ function decreaseScore(amount) {
     document.getElementById('current-score').innerText = currentScore;
 }
 
-// İSİM, SOYİSİM VEYA TAM İSİM KONTROLÜ
 function makeGuess() {
     if (isGameOver) return;
     const input = document.getElementById('guess-input');
@@ -292,18 +318,15 @@ function makeGuess() {
     
     if (cleanGuess.length === 0) return;
 
-    // Hedef ismi kelimelere böl
     const correctFullName = normalizeInput(targetPlayer.isim);
     const nameParts = correctFullName.split(' ');
     
     const firstName = nameParts[0];
     const lastName = nameParts.length > 1 ? nameParts[nameParts.length - 1] : firstName;
 
-    // KURAL: Tahmin kelimesi tam ada, SADECE İLK isme veya SADECE SOYADA eşitse KABUL ET.
     if (cleanGuess === correctFullName || cleanGuess === firstName || cleanGuess === lastName) {
         endGame(true);
     } else {
-        // Yanlış cevap efekti
         input.style.borderBottomColor = "var(--matte-red)";
         input.animate([
             { transform: 'translateX(0px)' },
