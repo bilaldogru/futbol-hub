@@ -1,9 +1,21 @@
-// Global Değişkenler
+// --- 1. GLOBAL DEĞİŞKENLER ---
 let oyuncular = [];
 let hedefOyuncu = {};
 let oyunBitti = false;
 let denemeSayisi = 0;
 const maxHak = 5;
+
+// --- MULTIPLAYER DEĞİŞKENLERİ ---
+let isMultiplayer = false;
+let roomId = null;
+let playerRole = null; 
+let multiRounds = 3;
+let currentMultiRound = 0;
+let multiTargets = [];
+let myScore = 0;
+let oppScore = 0;
+let roomUnsubscribe = null;
+let myGuesses = []; 
 
 // DOM Elementleri
 const input = document.getElementById('playerInput');
@@ -11,28 +23,307 @@ const autocompleteList = document.getElementById('autocomplete-list');
 const submitBtn = document.getElementById('submitBtn');
 const hakGosterge = document.getElementById('hakGosterge');
 
-// SAYFA YÜKLENİNCE VERİLERİ ÇEK
+// --- 2. BAŞLANGIÇ VE LOBİ ---
 document.addEventListener('DOMContentLoaded', () => {
     fetch('../../oyuncular.json')
         .then(response => response.json())
         .then(data => {
             oyuncular = data;
-            oyunuBaslat(); 
+            const urlParams = new URLSearchParams(window.location.search);
+            const joinRoomId = urlParams.get('room');
+            
+            if (joinRoomId) {
+                document.getElementById('modeSelectionModal').classList.add('hidden');
+                joinRoom(joinRoomId);
+            }
         })
-        .catch(err => {
-            console.error("Veri çekme hatası:", err);
-            alert("Oyuncu listesi yüklenemedi!");
-        });
+        .catch(err => console.error("Veri çekme hatası:", err));
 });
 
-// --- FIREBASE ENTEGRASYONLU BAŞLATMA (v9 Modüler Yapı İçin) ---
-async function oyunuBaslat() {
-    // window.db yüklenene kadar biraz bekle (hata almamak için)
-    if (!window.db) {
-        setTimeout(oyunuBaslat, 100);
+window.startSinglePlayer = function() {
+    document.getElementById('modeSelectionModal').classList.add('hidden');
+    isMultiplayer = false;
+    oyunuBaslat(); 
+};
+
+window.showMultiplayerSetup = function() {
+    document.getElementById('modeSelectionModal').classList.add('hidden');
+    document.getElementById('multiplayerSetupModal').classList.remove('hidden');
+};
+
+window.backToModeSelection = function() {
+    document.getElementById('multiplayerSetupModal').classList.add('hidden');
+    document.getElementById('modeSelectionModal').classList.remove('hidden');
+};
+
+// --- 3. MULTIPLAYER: ODA OLUŞTURMA VE KATILMA ---
+window.createRoom = async function(rounds) {
+    if(!window.db) { alert("Bağlantı bekleniyor..."); return; }
+    
+    multiRounds = rounds;
+    roomId = Math.random().toString(36).substring(2, 7).toUpperCase();
+    playerRole = 'player1';
+    isMultiplayer = true;
+
+    let shuffled = [...oyuncular].sort(() => 0.5 - Math.random());
+    multiTargets = shuffled.slice(0, rounds).map(p => p.isim);
+
+    const roomRef = window.doc(window.db, "footle_rooms", roomId);
+    await window.setDoc(roomRef, {
+        rounds: rounds,
+        targets: multiTargets,
+        p1Score: 0,
+        p2Score: 0,
+        p1Status: 'playing',
+        p2Status: 'waiting',
+        p1Guesses: [], 
+        p2Guesses: [], 
+        currentRound: 1,
+        status: 'waiting_for_p2',
+        createdAt: new Date()
+    });
+
+    const linkStr = window.location.origin + window.location.pathname + "?room=" + roomId;
+    document.getElementById('inviteLink').value = linkStr;
+    document.getElementById('linkArea').classList.remove('hidden');
+
+    listenToRoom(); 
+};
+
+window.copyInviteLink = function() {
+    const linkInput = document.getElementById('inviteLink');
+    const copyIcon = document.getElementById('copyIcon');
+    const copyTooltip = document.getElementById('copyTooltip');
+    const copyBtn = document.getElementById('copyBtn');
+
+    // Seç ve modern yöntemle kopyala
+    linkInput.select();
+    linkInput.setSelectionRange(0, 99999); // Mobil cihazlar için
+    
+    navigator.clipboard.writeText(linkInput.value).then(() => {
+        // Kopyalama başarılı olunca görsel şölen başlasın:
+        
+        // 1. İkonu değiştir (Dosya ikonundan TİK ikonuna) ve yeşil yap
+        copyIcon.classList.remove('fa-copy');
+        copyIcon.classList.add('fa-check', 'text-green-500');
+        
+        // 2. Butonun etrafını hafif yeşil parlat
+        copyBtn.classList.replace('bg-gray-800', 'bg-green-900/30');
+        copyBtn.classList.add('border', 'border-green-500');
+
+        // 3. "Kopyalandı!" baloncuğunu yukarı kaydırarak göster
+        copyTooltip.classList.remove('opacity-0', 'translate-y-2');
+        copyTooltip.classList.add('opacity-100', 'translate-y-0');
+
+        // 4. İki saniye bekle ve her şeyi eski haline geri getir
+        setTimeout(() => {
+            copyIcon.classList.add('fa-copy');
+            copyIcon.classList.remove('fa-check', 'text-green-500');
+            
+            copyBtn.classList.replace('bg-green-900/30', 'bg-gray-800');
+            copyBtn.classList.remove('border', 'border-green-500');
+            
+            copyTooltip.classList.remove('opacity-100', 'translate-y-0');
+            copyTooltip.classList.add('opacity-0', 'translate-y-2');
+        }, 2000);
+        
+    }).catch(err => {
+        // Eğer cihazın panosuna erişim yoksa eski yöntemi (fallback) kullan
+        document.execCommand("copy");
+    });
+};
+
+async function joinRoom(id) {
+    if(!window.db) { setTimeout(() => joinRoom(id), 200); return; }
+
+    roomId = id;
+    playerRole = 'player2';
+    isMultiplayer = true;
+    
+    showWaitingOverlay("ODAYA BAĞLANILIYOR...");
+
+    const roomRef = window.doc(window.db, "footle_rooms", roomId);
+    const docSnap = await window.getDoc(roomRef);
+
+    if (!docSnap.exists() || docSnap.data().status !== 'waiting_for_p2') {
+        alert("Oda bulunamadı veya dolu!");
+        window.location.href = "index.html"; 
         return;
     }
 
+    const data = docSnap.data();
+    multiRounds = data.rounds;
+    multiTargets = data.targets;
+
+    await window.updateDoc(roomRef, { p2Status: 'playing' });
+    listenToRoom();
+}
+
+// --- 4. MULTIPLAYER: GERÇEK ZAMANLI SENKRONİZASYON ---
+function listenToRoom() {
+    const roomRef = window.doc(window.db, "footle_rooms", roomId);
+    
+    roomUnsubscribe = window.onSnapshot(roomRef, (docSnap) => {
+        if(!docSnap.exists()) return;
+        const data = docSnap.data();
+
+        myScore = playerRole === 'player1' ? data.p1Score : data.p2Score;
+        oppScore = playerRole === 'player1' ? data.p2Score : data.p1Score;
+        document.getElementById('myScore').innerText = myScore;
+        document.getElementById('opponentScore').innerText = oppScore;
+        document.getElementById('currentRoundDisplay').innerText = data.currentRound;
+        document.getElementById('totalRoundsDisplay').innerText = data.rounds;
+
+        // Rakibin hamlelerini (renklerini) alıp ekrana çiz
+        const oppGuesses = playerRole === 'player1' ? data.p2Guesses : data.p1Guesses;
+        renderOpponentBoard(oppGuesses || []);
+
+        if (playerRole === 'player1' && data.status === 'waiting_for_p2' && data.p2Status === 'playing') {
+            window.updateDoc(roomRef, { status: 'active' });
+        }
+
+        if (data.status === 'active' && currentMultiRound !== data.currentRound) {
+            currentMultiRound = data.currentRound;
+            document.getElementById('multiplayerSetupModal').classList.add('hidden');
+            document.getElementById('multiplayerScoreBoard').classList.remove('hidden');
+            
+            // Container'ı görünür yap (Eskiden gizliydi)
+            const oppBoardContainer = document.getElementById('opponentBoardContainer');
+            oppBoardContainer.classList.remove('hidden');
+            oppBoardContainer.classList.add('flex');
+            
+            hideWaitingOverlay();
+            oyunuBaslat();
+        }
+
+        if (playerRole === 'player1' && data.status === 'active' && data.p1Status === 'finished' && data.p2Status === 'finished') {
+            if (data.currentRound < data.rounds) {
+                window.updateDoc(roomRef, {
+                    currentRound: data.currentRound + 1,
+                    p1Status: 'playing',
+                    p2Status: 'playing',
+                    p1Guesses: [], 
+                    p2Guesses: []
+                });
+            } else {
+                window.updateDoc(roomRef, { status: 'game_over' });
+            }
+        }
+
+        if (data.status === 'game_over') {
+            showMultiplayerResult(data);
+        }
+    });
+}
+
+// RAKİBİN RENKLERİNİ ÇİZME FONKSİYONU
+function renderOpponentBoard(guesses) {
+    const oppBoard = document.getElementById('opponentBoard');
+    if(!oppBoard) return;
+    
+    oppBoard.innerHTML = '';
+    
+    guesses.forEach(rowStr => {
+        // GELEN METNİ TEKRAR DİZİYE ÇEVİR
+        const rowColors = rowStr.split('-'); 
+        
+        const rowDiv = document.createElement('div');
+        rowDiv.className = "flex gap-1 justify-center";
+        
+        rowColors.forEach(color => {
+            const box = document.createElement('div');
+            box.className = "w-4 h-4 sm:w-5 sm:h-5 rounded-sm transition-all duration-300 transform scale-100 ";
+            
+            if (color === 'correct') box.className += "bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.6)]";
+            else if (color === 'partial') box.className += "bg-yellow-500";
+            else box.className += "bg-gray-700";
+            
+            rowDiv.appendChild(box);
+        });
+        
+        oppBoard.appendChild(rowDiv);
+    });
+}
+
+function showWaitingOverlay(msg) {
+    let el = document.getElementById('waitOverlay');
+    if(!el) {
+        el = document.createElement('div');
+        el.id = 'waitOverlay';
+        el.className = 'fixed inset-0 z-[150] flex flex-col items-center justify-center bg-black/90 backdrop-blur-md text-white font-black text-2xl text-center px-4';
+        document.body.appendChild(el);
+    }
+    el.innerHTML = `<i class="fa-solid fa-futbol animate-bounce text-6xl text-green-500 mb-6 shadow-[0_0_20px_rgba(34,197,94,0.5)] rounded-full"></i><p>${msg}</p>`;
+    el.style.display = 'flex';
+}
+
+function hideWaitingOverlay() {
+    const el = document.getElementById('waitOverlay');
+    if(el) el.style.display = 'none';
+}
+
+function showMultiplayerResult(data) {
+    hideWaitingOverlay();
+    document.getElementById('opponentBoardContainer').classList.remove('flex');
+    document.getElementById('opponentBoardContainer').classList.add('hidden');
+    if(roomUnsubscribe) roomUnsubscribe(); 
+    
+    const myFinalScore = playerRole === 'player1' ? data.p1Score : data.p2Score;
+    const oppFinalScore = playerRole === 'player1' ? data.p2Score : data.p1Score;
+
+    let titleStr, colorClass;
+    if (myFinalScore > oppFinalScore) { titleStr = "🏆 KAZANDIN!"; colorClass = "text-green-500"; } 
+    else if (myFinalScore < oppFinalScore) { titleStr = "❌ KAYBETTİN!"; colorClass = "text-red-500"; } 
+    else { titleStr = "🤝 BERABERE!"; colorClass = "text-yellow-500"; }
+
+    const modal = document.getElementById('endModal');
+    const content = document.getElementById('modalContent');
+    
+    content.innerHTML = `
+        <h2 class="text-4xl font-black mb-4 ${colorClass}">${titleStr}</h2>
+        <div class="flex justify-around items-center bg-gray-800 p-6 rounded-2xl mb-6 border border-gray-700">
+            <div class="text-center">
+                <p class="text-gray-400 text-xs mb-1">SEN</p>
+                <p class="text-4xl font-bold text-white">${myFinalScore}</p>
+            </div>
+            <div class="text-2xl text-gray-600 font-black">VS</div>
+            <div class="text-center">
+                <p class="text-gray-400 text-xs mb-1">RAKİP</p>
+                <p class="text-4xl font-bold text-white">${oppFinalScore}</p>
+            </div>
+        </div>
+        <button onclick="location.href='index.html'" class="w-full bg-white text-black font-black py-4 rounded-xl hover:bg-gray-200 shadow-lg">ANA MENÜYE DÖN</button>
+    `;
+    modal.classList.remove('hidden');
+}
+
+// --- 5. OYUN MOTORU ---
+function resetBoard() {
+    document.getElementById('gameBoard').innerHTML = '';
+    denemeSayisi = 0;
+    oyunBitti = false;
+    myGuesses = []; 
+    hakGosterge.innerText = maxHak;
+    input.disabled = false;
+    submitBtn.disabled = false;
+    input.value = '';
+    input.focus();
+    autocompleteList.innerHTML = '';
+    autocompleteList.classList.add('hidden');
+}
+
+async function oyunuBaslat() {
+    resetBoard(); 
+
+    if (isMultiplayer) {
+        const targetName = multiTargets[currentMultiRound - 1];
+        hedefOyuncu = oyuncular.find(p => p.isim === targetName) || oyuncular[0];
+        console.log(`Tur ${currentMultiRound} Hedefi:`, hedefOyuncu.isim);
+        return;
+    }
+
+    if (!window.db) { setTimeout(oyunuBaslat, 100); return; }
+    
     const today = new Date();
     const year = today.getFullYear();
     const month = String(today.getMonth() + 1).padStart(2, '0');
@@ -40,58 +331,38 @@ async function oyunuBaslat() {
     const dateString = `${year}-${month}-${day}`; 
 
     try {
-        // v9 Kullanımı
         const docRef = window.doc(window.db, "daily_footle", dateString);
         const docSnap = await window.getDoc(docRef);
 
         if (docSnap.exists()) {
-            console.log("✅ Footle hedefi Firebase'den çekildi.");
             const targetName = docSnap.data().player;
             hedefOyuncu = oyuncular.find(p => p.isim === targetName) || oyuncular[0];
         } else {
-            console.log("⚡ Footle hedefi yok. Sistem seçiyor ve kaydediyor...");
-            
             const seed = year * 10000 + (today.getMonth() + 1) * 100 + today.getDate() + 99;
             let m = oyuncular.length;
             const random = () => { var x = Math.sin(seed) * 10000; return x - Math.floor(x); };
             const randomIndex = Math.floor(random() * m);
-            
             hedefOyuncu = oyuncular[randomIndex];
 
-            // Seçileni kaydet (v9)
-            await window.setDoc(docRef, {
-                player: hedefOyuncu.isim,
-                createdAt: new Date()
-            });
-            console.log("💾 Seçim Firebase'e kaydedildi!");
+            await window.setDoc(docRef, { player: hedefOyuncu.isim, createdAt: new Date() });
         }
     } catch (error) {
-        console.error("Firebase Hatası, yerel mod başlatılıyor:", error);
         hedefOyuncu = oyuncular[Math.floor(Math.random() * oyuncular.length)];
     }
-
-    console.log("Hedef:", hedefOyuncu.isim); 
 }
 
-// AUTOCOMPLETE
 input.addEventListener('input', function() {
     const val = this.value.trim().toLowerCase();
     autocompleteList.innerHTML = '';
-    
-    if (!val || oyunBitti) { 
-        autocompleteList.classList.add('hidden'); 
-        return; 
-    }
+    if (!val || oyunBitti) { autocompleteList.classList.add('hidden'); return; }
 
     const matches = oyuncular.filter(o => o.isim.toLowerCase().includes(val)).slice(0, 5);
-    
     if (matches.length > 0) {
         autocompleteList.classList.remove('hidden');
         matches.forEach(m => {
             const item = document.createElement('div');
             item.className = "p-3 hover:bg-green-900/50 cursor-pointer border-b border-gray-700 last:border-0 text-white font-semibold";
             item.innerText = m.isim;
-            
             item.onclick = () => {
                 input.value = m.isim;
                 autocompleteList.classList.add('hidden');
@@ -99,27 +370,19 @@ input.addEventListener('input', function() {
             };
             autocompleteList.appendChild(item);
         });
-    } else { 
-        autocompleteList.classList.add('hidden'); 
-    }
+    } else { autocompleteList.classList.add('hidden'); }
 });
 
 function tahminYap() {
     if (oyunBitti) return;
-    
     const isim = input.value.trim();
     const tahmin = oyuncular.find(o => o.isim.toLowerCase() === isim.toLowerCase());
-    
-    if (!tahmin) {
-        alert("Lütfen listeden geçerli bir oyuncu seçin!");
-        return;
-    }
+    if (!tahmin) { alert("Lütfen listeden geçerli bir oyuncu seçin!"); return; }
 
     denemeSayisi++;
     hakGosterge.innerText = maxHak - denemeSayisi;
     input.value = "";
     autocompleteList.classList.add('hidden');
-    
     satirEkle(tahmin);
 
     if (tahmin.isim === hedefOyuncu.isim) {
@@ -142,6 +405,8 @@ function satirEkle(tahmin) {
         { val: tahmin.yas, target: hedefOyuncu.yas, type: 'number' }
     ];
 
+    let currentGuessColors = []; 
+
     kriterler.forEach((k, i) => {
         const card = document.createElement('div');
         card.className = "flip-card h-full w-full";
@@ -149,6 +414,8 @@ function satirEkle(tahmin) {
         let renk = "wrong";
         if (k.val === k.target) renk = "correct";
         else if (k.type === 'number') renk = "partial"; 
+
+        currentGuessColors.push(renk); 
 
         let icerik = k.val;
         if (k.type === 'number' && k.val !== k.target) {
@@ -158,27 +425,52 @@ function satirEkle(tahmin) {
         card.innerHTML = `
             <div class="flip-inner h-full w-full">
                 <div class="flip-front"></div>
-                <div class="flip-back ${renk} font-bold text-[10px] sm:text-xs">
-                    ${icerik}
-                </div>
+                <div class="flip-back ${renk} font-bold text-[10px] sm:text-xs">${icerik}</div>
             </div>`;
-            
         row.appendChild(card);
-        
-        setTimeout(() => { 
-            card.classList.add('flipped'); 
-            card.style.opacity = "1"; 
-        }, i * 300);
+        setTimeout(() => { card.classList.add('flipped'); card.style.opacity = "1"; }, i * 300);
     });
 
     board.appendChild(row);
     setTimeout(() => row.scrollIntoView({ behavior: 'smooth', block: 'end' }), 100);
+
+    if (isMultiplayer) {
+        // FİREBASE ÇÖKMESİN DİYE DİZİYİ METNE ÇEVİRİYORUZ (Örn: "correct-wrong-partial")
+        myGuesses.push(currentGuessColors.join('-')); 
+        
+        const roomRef = window.doc(window.db, "footle_rooms", roomId);
+        const updateData = {};
+        const prefix = playerRole === 'player1' ? 'p1' : 'p2';
+        updateData[prefix + 'Guesses'] = myGuesses; 
+        
+        window.updateDoc(roomRef, updateData).catch(e => console.error("Firebase Hatası:", e));
+    }
 }
 
+// --- 6. OYUN BİTİŞ MANTIĞI ---
 function bitir(kazandi) {
     oyunBitti = true;
     input.disabled = true;
     submitBtn.disabled = true;
+
+    if (isMultiplayer) {
+        const kazanilanPuan = kazandi ? (6 - denemeSayisi) * 100 : 0;
+        myScore += kazanilanPuan; 
+        
+        const roomRef = window.doc(window.db, "footle_rooms", roomId);
+        const updateData = {};
+        if (playerRole === 'player1') {
+            updateData.p1Score = myScore;
+            updateData.p1Status = 'finished';
+        } else {
+            updateData.p2Score = myScore;
+            updateData.p2Status = 'finished';
+        }
+        window.updateDoc(roomRef, updateData); 
+
+        showWaitingOverlay("RAKİBİN BİTİRMESİ BEKLENİYOR...<br><span class='text-sm text-green-400 font-normal mt-2 block'>Bu turdan +" + kazanilanPuan + " Puan aldın.</span>");
+        return; 
+    }
 
     const modal = document.getElementById('endModal');
     const content = document.getElementById('modalContent');
@@ -221,10 +513,9 @@ function bitir(kazandi) {
         resultStats.classList.add('hidden');
     }
 
-    const puan = (maxHak - denemeSayisi + 1) * 100; 
-    
     if(window.saveScoreToFirebase) {
         setTimeout(() => {
+            const puan = (maxHak - denemeSayisi + 1) * 100; 
             window.saveScoreToFirebase(puan, "Footle");
         }, 1000);
     }
@@ -244,6 +535,5 @@ function addGlobalScore(points) {
     let currentScore = parseInt(localStorage.getItem('futbolHub_totalScore')) || 0;
     currentScore += points;
     localStorage.setItem('futbolHub_totalScore', currentScore);
-    console.log(`${points} puan eklendi. Yeni Toplam: ${currentScore}`);
     return currentScore;
 }
