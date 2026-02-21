@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grid Savaşları | Best of 3</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="text-white min-h-screen flex flex-col items-center font-['Montserrat'] overflow-x-hidden relative pb-24">
+
+    <div class="bg-overlay"></div>
+
+    <button onclick="leaveGame()" class="back-home-btn cursor-pointer">
+        <i class="fa-solid fa-arrow-left"></i>
+        <span class="btn-text">ANA MENÜ / ÇIKIŞ</span>
+    </button>
+
+    <div id="customToast" class="fixed top-10 left-1/2 transform -translate-x-1/2 -translate-y-24 z-[9999] transition-all duration-300 opacity-0 flex items-center gap-3 px-6 py-4 rounded-2xl shadow-2xl font-bold text-white border-2">
+        <i id="toastIcon" class="text-2xl"></i><span id="toastMsg"></span>
+    </div>
+
+    <div id="waitOverlay" class="fixed inset-0 z-[150] flex-col items-center justify-center bg-black/90 backdrop-blur-md text-white font-black text-2xl text-center px-4 hidden">
+        <i class="fa-solid fa-futbol animate-bounce text-6xl text-purple-500 mb-6"></i><p id="waitText">ODAYA BAĞLANILIYOR...</p>
+    </div>
+
+    <div id="intermissionOverlay" class="fixed inset-0 z-[250] flex-col items-center justify-center bg-black/95 backdrop-blur-xl text-white text-center px-4 hidden">
+        <h2 id="intermissionTitle" class="text-5xl md:text-7xl font-black mb-4 drop-shadow-lg"></h2>
+        <p class="text-xl md:text-2xl text-gray-400 mb-8 font-bold">Yeni tur hazırlanıyor. Derin bir nefes al...</p>
+        <div class="text-7xl md:text-9xl font-black text-yellow-400 animate-pulse drop-shadow-[0_0_20px_rgba(250,204,21,0.5)]" id="intermissionTimer">10</div>
+    </div>
+
+    <div id="lobby-screen" class="absolute inset-0 z-[120] flex items-center justify-center bg-black/90 backdrop-blur-lg px-4">
+        <div id="create-box" class="bg-gray-900 border-2 border-purple-500 p-8 rounded-3xl max-w-md w-full text-center shadow-2xl">
+            <h2 class="text-3xl font-black mb-2 tracking-tighter text-white">GRID SAVAŞLARI</h2>
+            <p class="text-gray-400 text-sm mb-6">3 Turun 2'sini alan kazanır! Puanını koy.</p>
+            <input type="number" id="bet-amount" placeholder="Bahis (Örn: 500)" class="w-full bg-black border border-gray-700 rounded-xl py-4 px-4 mb-4 text-white text-center font-bold text-lg focus:outline-none focus:border-purple-500">
+            <button onclick="createRoom()" class="w-full bg-purple-600 text-white font-black py-4 rounded-xl hover:bg-purple-500 transition-all shadow-lg mb-4">ODA KUR & LİNK AL</button>
+            <div id="linkArea" class="hidden text-left mt-4 border-t border-gray-800 pt-4">
+                <p class="text-xs text-purple-400 mb-2 text-center">Oda Oluşturuldu! Linki Gönder:</p>
+                <div class="flex items-center bg-black rounded-lg p-2 border border-gray-700 relative">
+                    <input type="text" id="inviteLink" readonly class="bg-transparent w-full text-gray-300 text-xs px-2 outline-none">
+                    <span id="copyTooltip" class="absolute -top-8 right-0 bg-purple-500 text-white text-[10px] px-2 py-1 rounded opacity-0 transition-all font-bold">KOPYALANDI!</span>
+                    <button id="copyBtn" onclick="copyInviteLink()" class="bg-gray-800 text-white px-3 py-1 rounded text-sm hover:bg-gray-700 transition"><i id="copyIcon" class="fa-solid fa-copy"></i></button>
+                </div>
+            </div>
+        </div>
+
+        <div id="join-box" class="bg-gray-900 border-2 border-fuchsia-500 p-8 rounded-3xl max-w-md w-full text-center shadow-2xl hidden">
+            <h2 class="text-3xl font-black mb-2 tracking-tighter text-white">MEYDAN OKUMA!</h2>
+            <p class="text-gray-400 text-sm mb-4">Ortadaki Toplam Ödül:</p>
+            <div class="text-5xl font-black text-fuchsia-400 mb-6 drop-shadow-lg"><span id="prize-display">0</span> P</div>
+            <button onclick="joinRoom()" class="w-full bg-fuchsia-500 text-white font-black py-4 rounded-xl hover:bg-fuchsia-400 transition-all shadow-lg">BAHSİ KABUL ET</button>
+        </div>
+    </div>
+
+    <div id="game-main-container" class="hidden w-full h-full max-w-[1600px] mx-auto px-2 pt-16 flex-col lg:flex-row gap-4 justify-center items-center relative z-10">
+        
+        <div id="left-sidebar" class="hidden lg:flex flex-col w-64 history-sidebar bg-gray-900/80 border-green-900/50 p-4 rounded-2xl">
+            <h3 class="text-green-400 font-black text-sm mb-4 flex items-center gap-2"><i class="fa-solid fa-trophy"></i> SENİN HAMLELERİN</h3>
+            <div id="my-moves-list" class="flex flex-col gap-2 overflow-y-auto"></div>
+        </div>
+
+        <div id="game-center-area" class="flex-1 flex flex-col items-center justify-center w-full max-w-2xl h-full">
+            <div class="text-center w-full mb-2">
+                <div id="round-display" class="inline-block bg-yellow-500 text-black text-xs font-black px-4 py-1 rounded-full mb-1">TUR 1 / 3</div>
+                <div class="text-white font-black text-3xl flex justify-center items-center gap-4 bg-black/40 py-2 rounded-2xl border border-gray-800">
+                    <span class="text-sm text-gray-400">SEN</span>
+                    <span id="score-p1" class="text-green-500">0</span>
+                    <span class="text-gray-600">-</span>
+                    <span id="score-p2" class="text-red-500">0</span>
+                    <span class="text-sm text-gray-400">RAKİP</span>
+                </div>
+            </div>
+
+            <div class="flex justify-between items-center w-full bg-gray-800 p-2 sm:p-4 rounded-2xl border border-gray-700 mb-4 shadow-xl">
+                <div id="my-box" class="flex-1 text-center p-1 sm:p-2 rounded-xl transition-all opacity-50 border-2 border-transparent">
+                    <p id="my-name" class="font-black text-xs sm:text-sm truncate">Sen</p>
+                </div>
+                <div class="flex flex-col items-center px-2">
+                    <div id="turn-indicator" class="font-black text-white text-[10px] sm:text-xs">SIRA KİMDE?</div>
+                    <div id="timer-display" class="text-2xl sm:text-4xl font-black text-yellow-400 drop-shadow-md">30</div>
+                </div>
+                <div id="opp-box" class="flex-1 text-center p-1 sm:p-2 rounded-xl transition-all opacity-50 border-2 border-transparent">
+                    <p id="opp-name" class="font-black text-xs sm:text-sm truncate">Rakip</p>
+                </div>
+            </div>
+
+            <div class="grid-board bg-black p-2 sm:p-3 rounded-2xl shadow-2xl border border-gray-800">
+                <div class="cell empty-corner"></div>
+                <div class="cell header-cell" id="col-0"></div><div class="cell header-cell" id="col-1"></div><div class="cell header-cell" id="col-2"></div>
+                <div class="cell header-cell" id="row-0"></div>
+                <div class="cell grid-cell" id="cell-0-0" onclick="openSearch(0, 0)"></div><div class="cell grid-cell" id="cell-0-1" onclick="openSearch(0, 1)"></div><div class="cell grid-cell" id="cell-0-2" onclick="openSearch(0, 2)"></div>
+                <div class="cell header-cell" id="row-1"></div>
+                <div class="cell grid-cell" id="cell-1-0" onclick="openSearch(1, 0)"></div><div class="cell grid-cell" id="cell-1-1" onclick="openSearch(1, 1)"></div><div class="cell grid-cell" id="cell-1-2" onclick="openSearch(1, 2)"></div>
+                <div class="cell header-cell" id="row-2"></div>
+                <div class="cell grid-cell" id="cell-2-0" onclick="openSearch(2, 0)"></div><div class="cell grid-cell" id="cell-2-1" onclick="openSearch(2, 1)"></div><div class="cell grid-cell" id="cell-2-2" onclick="openSearch(2, 2)"></div>
+            </div>
+        </div>
+
+        <div id="right-sidebar" class="hidden lg:flex flex-col w-64 history-sidebar bg-gray-900/80 border-red-900/50 p-4 rounded-2xl">
+            <h3 class="text-red-400 font-black text-sm mb-4 flex items-center gap-2"><i class="fa-solid fa-skull"></i> RAKİP HAMLELERİ</h3>
+            <div id="opp-moves-list" class="flex flex-col gap-2 overflow-y-auto"></div>
+        </div>
+    </div>
+
+    <div id="bottom-search-bar" class="fixed bottom-0 left-0 w-full bg-gray-950/95 backdrop-blur-xl border-t-2 border-green-500 p-4 transform translate-y-full transition-transform duration-300 z-[200] flex flex-col gap-2 rounded-t-3xl max-h-[50vh]">
+        <div class="flex justify-between items-center px-2">
+            <span id="selected-cell-info" class="text-xs font-bold text-green-400"></span>
+            <button onclick="closeSearch()" class="text-gray-400 hover:text-white bg-gray-800 px-3 py-1 rounded-full text-xs font-bold"><i class="fa-solid fa-chevron-down"></i> Kapat</button>
+        </div>
+        <div class="relative w-full">
+            <i class="fa-solid fa-search absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+            <input type="text" id="bottom-player-search" placeholder="Futbolcu adı yaz..." onkeyup="filterPlayersBottom()" autocomplete="off" class="w-full bg-black border border-gray-700 rounded-full py-3 pl-12 pr-4 text-white focus:outline-none focus:border-green-500 font-bold transition-all text-sm">
+        </div>
+        <div id="bottom-search-results" class="overflow-y-auto flex flex-col px-1 flex-1 pb-4"></div>
+    </div>
+
+    <div id="endModal" class="fixed inset-0 z-[300] flex items-center justify-center bg-black/95 backdrop-blur-lg px-4 hidden">
+        <div id="modalContent" class="bg-gray-900 border-2 p-8 rounded-3xl max-w-sm w-full text-center shadow-2xl">
+            <div id="modalEmoji" class="text-6xl mb-4"></div>
+            <h2 id="modalTitle" class="text-4xl font-black mb-2"></h2>
+            <p id="modalDesc" class="text-gray-400 font-bold text-lg mb-6"></p>
+            <button onclick="window.location.href='../../index.html'" class="w-full bg-white text-black font-black py-4 rounded-xl hover:bg-gray-200 transition-all shadow-lg">ANA MENÜYE DÖN</button>
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getFirestore, doc, setDoc, getDoc, updateDoc, onSnapshot, collection, query, where, getDocs, increment, addDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+          apiKey: "AIzaSyD62cMqFmtT_LYOQdyLEib3TlP2sDXVHUY", 
+          authDomain: "futbol-hub0.firebaseapp.com", 
+          projectId: "futbol-hub0", 
+          storageBucket: "futbol-hub0.firebasestorage.app", 
+          messagingSenderId: "995690857981", 
+          appId: "1:995690857981:web:01f199920e1c131cd04594"
+        };
+        const app = initializeApp(firebaseConfig);
+        window.db = getFirestore(app);
+        
+        window.doc = doc; window.setDoc = setDoc; window.getDoc = getDoc;
+        window.updateDoc = updateDoc; window.onSnapshot = onSnapshot; 
+        window.collection = collection; window.query = query; 
+        window.where = where; window.getDocs = getDocs; window.increment = increment; window.addDoc = addDoc;
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>

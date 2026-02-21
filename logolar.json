@@ -1,0 +1,28 @@
+{
+  "ulkeler": {
+    "Türkiye": "tr", "Arjantin": "ar", "Brezilya": "br", "Fransa": "fr", "İngiltere": "gb-eng",
+    "Almanya": "de", "İspanya": "es", "Hollanda": "nl", "Portekiz": "pt", "İtalya": "it",
+    "Belçika": "be", "Uruguay": "uy", 
+    "Danimarka": "dk"
+  },
+  "takimlar": {
+    "Galatasaray": "https://upload.wikimedia.org/wikipedia/commons/f/f6/Galatasaray_Sports_Club_Logo.png",
+    "Fenerbahçe": "https://upload.wikimedia.org/wikipedia/tr/8/86/Fenerbah%C3%A7e_SK.png",
+    "Beşiktaş": "https://upload.wikimedia.org/wikipedia/commons/2/2a/Besiktas_JK_logo.svg",
+    "Trabzonspor": "https://upload.wikimedia.org/wikipedia/tr/a/ab/TrabzonsporAmblemi.png",
+    "Real Madrid": "https://upload.wikimedia.org/wikipedia/tr/9/98/Real_Madrid.png",
+    "Barcelona": "https://upload.wikimedia.org/wikipedia/tr/4/43/FCBarcelona.png",
+    "Atletico Madrid": "https://upload.wikimedia.org/wikipedia/tr/thumb/c/c1/Atletico_Madrid_logo.svg/1200px-Atletico_Madrid_logo.svg.png",
+    "Man City": "https://upload.wikimedia.org/wikipedia/tr/thumb/f/f6/Manchester_City.svg/1200px-Manchester_City.svg.png",
+    "Arsenal": "https://upload.wikimedia.org/wikipedia/tr/thumb/4/4b/Arsenal_logo.svg/1200px-Arsenal_logo.svg.png",
+    "Liverpool": "https://upload.wikimedia.org/wikipedia/tr/thumb/3/3f/150px-Liverpool_FC_logo.png/1200px-150px-Liverpool_FC_logo.png",
+    "Man United": "https://upload.wikimedia.org/wikipedia/tr/thumb/b/b6/Manchester_United.png/1200px-Manchester_United.png",
+    "Chelsea": "https://upload.wikimedia.org/wikipedia/tr/thumb/a/ab/Chelsea_FC.svg/1200px-Chelsea_FC.svg.png",
+    "Bayern Münih": "https://upload.wikimedia.org/wikipedia/commons/1/1b/FC_Bayern_M%C3%BCnchen_logo_%282017%29.svg",
+    "Dortmund": "https://upload.wikimedia.org/wikipedia/commons/6/67/Borussia_Dortmund_logo.svg",
+    "Inter": "https://upload.wikimedia.org/wikipedia/commons/0/05/FC_Internazionale_Milano_2021.svg",
+    "Juventus": "https://upload.wikimedia.org/wikipedia/commons/b/bc/Juventus_FC_2017_icon_%28black%29.svg",
+    "Milan": "https://upload.wikimedia.org/wikipedia/commons/d/d0/Logo_of_AC_Milan.svg",
+    "Napoli": "https://upload.wikimedia.org/wikipedia/commons/2/28/SSC_Napoli_2021_logo.svg"
+  }
+}
