@@ -309,5 +309,18 @@
       fetchLeaderboard();
     </script>
 
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const lastScroll = sessionStorage.getItem("futbolHub_scroll");
+            if (lastScroll) {
+                window.scrollTo(0, parseInt(lastScroll));
+            }
+        });
+
+        window.addEventListener("scroll", function() {
+            sessionStorage.setItem("futbolHub_scroll", window.scrollY);
+        });
+    </script>
+
 </body>
 </html>
