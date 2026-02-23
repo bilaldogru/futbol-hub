@@ -15,7 +15,10 @@ let multiTargets = [];
 let myScore = 0;
 let oppScore = 0;
 let roomUnsubscribe = null;
+let lobbyUnsubscribe = null; 
 let myGuesses = []; 
+let selectedRoundsToCreate = 3; 
+let roomExpireTimer = null; // YENİ: 5 Dakikalık Saatli Bomba
 
 // DOM Elementleri
 const input = document.getElementById('playerInput');
@@ -23,7 +26,7 @@ const autocompleteList = document.getElementById('autocomplete-list');
 const submitBtn = document.getElementById('submitBtn');
 const hakGosterge = document.getElementById('hakGosterge');
 
-// --- 2. BAŞLANGIÇ VE LOBİ ---
+// --- 2. BAŞLANGIÇ ---
 document.addEventListener('DOMContentLoaded', () => {
     fetch('../../oyuncular.json')
         .then(response => response.json())
@@ -40,38 +43,140 @@ document.addEventListener('DOMContentLoaded', () => {
         .catch(err => console.error("Veri çekme hatası:", err));
 });
 
+// --- 3. MENÜ VE LOBİ YÖNETİMİ ---
 window.startSinglePlayer = function() {
     document.getElementById('modeSelectionModal').classList.add('hidden');
     isMultiplayer = false;
     oyunuBaslat(); 
 };
 
-window.showMultiplayerSetup = function() {
+window.openLobby = function() {
     document.getElementById('modeSelectionModal').classList.add('hidden');
-    document.getElementById('multiplayerSetupModal').classList.remove('hidden');
+    document.getElementById('lobbyModal').classList.remove('hidden');
+    fetchLobbyRooms(); 
 };
 
-window.backToModeSelection = function() {
-    document.getElementById('multiplayerSetupModal').classList.add('hidden');
+window.backToModeSelectionFromLobby = function() {
+    if(lobbyUnsubscribe) lobbyUnsubscribe(); 
+    document.getElementById('lobbyModal').classList.add('hidden');
     document.getElementById('modeSelectionModal').classList.remove('hidden');
 };
 
-// --- 3. MULTIPLAYER: ODA OLUŞTURMA VE KATILMA ---
-window.createRoom = async function(rounds) {
+window.showMultiplayerSetup = function() {
+    if(lobbyUnsubscribe) lobbyUnsubscribe(); 
+    document.getElementById('lobbyModal').classList.add('hidden');
+    document.getElementById('multiplayerSetupModal').classList.remove('hidden');
+    
+    document.getElementById('setupControls').classList.remove('hidden');
+    document.getElementById('linkArea').classList.add('hidden');
+    selectRounds(3); 
+};
+
+// KULLANICI GERİ ÇIKARSA ODAYI SİL
+window.backToLobby = async function() {
+    if (roomExpireTimer) clearTimeout(roomExpireTimer); // Zamanlayıcıyı durdur
+
+    if (playerRole === 'player1' && roomId) {
+        try {
+            await window.deleteDoc(window.doc(window.db, "footle_rooms", roomId));
+        } catch(e) {}
+    }
+    
+    roomId = null;
+    playerRole = null;
+    isMultiplayer = false;
+    if(roomUnsubscribe) roomUnsubscribe();
+
+    document.getElementById('multiplayerSetupModal').classList.add('hidden');
+    document.getElementById('lobbyModal').classList.remove('hidden');
+    fetchLobbyRooms();
+};
+
+// KULLANICI BEKLERKEN SEKMEYİ KAPATIRSA ODAYI SİL
+window.addEventListener('beforeunload', (e) => {
+    if (playerRole === 'player1' && roomId) {
+        window.deleteDoc(window.doc(window.db, "footle_rooms", roomId));
+    }
+});
+
+// --- 4. AÇIK LOBİLERİ ÇEKME ---
+window.fetchLobbyRooms = function() {
+    if(!window.db) return;
+    
+    const roomsRef = window.collection(window.db, "footle_rooms");
+    const q = window.query(roomsRef, window.where("status", "==", "waiting_for_p2"), window.where("isPrivate", "==", false));
+    
+    if(lobbyUnsubscribe) lobbyUnsubscribe();
+    
+    lobbyUnsubscribe = window.onSnapshot(q, (snapshot) => {
+        const roomList = document.getElementById('roomList');
+        roomList.innerHTML = '';
+        
+        let validRoomCount = 0;
+
+        snapshot.forEach((doc) => {
+            const data = doc.data();
+            const roomId = doc.id;
+            
+            // YENİ: 5 dakikadan (300.000 ms) eski odaları lobide GÖSTERME
+            const now = new Date().getTime();
+            if (data.createdAtMs && (now - data.createdAtMs > 300000)) {
+                return; // Bu odayı atla
+            }
+
+            validRoomCount++;
+            
+            const roomItem = document.createElement('div');
+            roomItem.className = "flex justify-between items-center bg-gray-800 p-3 rounded-lg hover:bg-gray-700 border border-gray-700 transition";
+            roomItem.innerHTML = `
+                <div>
+                    <p class="text-white font-bold text-sm">Oda: #${roomId}</p>
+                    <p class="text-xs text-green-400">${data.rounds} Tur</p>
+                </div>
+                <button onclick="joinRoom('${roomId}')" class="bg-green-600 hover:bg-green-500 text-white text-xs font-bold px-4 py-2 rounded transition shadow-lg shadow-green-500/20">KATIL</button>
+            `;
+            roomList.appendChild(roomItem);
+        });
+
+        if(validRoomCount === 0) {
+            roomList.innerHTML = '<p class="text-gray-500 text-sm text-center mt-4">Şu an açık oda yok. Yeni bir tane kur!</p>';
+        }
+    });
+};
+
+// --- 5. ODA OLUŞTURMA VE KATILMA ---
+window.selectRounds = function(rounds) {
+    selectedRoundsToCreate = rounds;
+    
+    document.getElementById('btnRound3').className = "flex-1 bg-gray-800 text-white font-bold py-3 rounded-xl border border-gray-600 hover:bg-gray-700 hover:border-green-500 transition";
+    document.getElementById('btnRound5').className = "flex-1 bg-gray-800 text-white font-bold py-3 rounded-xl border border-gray-600 hover:bg-gray-700 hover:border-green-500 transition";
+    document.getElementById('btnRound10').className = "flex-1 bg-gray-800 text-white font-bold py-3 rounded-xl border border-gray-600 hover:bg-gray-700 hover:border-green-500 transition";
+    
+    const activeBtn = document.getElementById('btnRound' + rounds);
+    activeBtn.className = "flex-1 bg-green-900/30 text-white font-bold py-3 rounded-xl border border-green-500 hover:bg-gray-700 transition";
+};
+
+window.confirmAndCreateRoom = async function() {
     if(!window.db) { alert("Bağlantı bekleniyor..."); return; }
     
+    const rounds = selectedRoundsToCreate;
     multiRounds = rounds;
     roomId = Math.random().toString(36).substring(2, 7).toUpperCase();
     playerRole = 'player1';
     isMultiplayer = true;
+    
+    const isPrivate = document.getElementById('privateRoomCheck').checked;
 
     let shuffled = [...oyuncular].sort(() => 0.5 - Math.random());
     multiTargets = shuffled.slice(0, rounds).map(p => p.isim);
+
+    const nowMs = new Date().getTime(); // Şimdiki zamanı milisaniye olarak al
 
     const roomRef = window.doc(window.db, "footle_rooms", roomId);
     await window.setDoc(roomRef, {
         rounds: rounds,
         targets: multiTargets,
+        isPrivate: isPrivate, 
         p1Score: 0,
         p2Score: 0,
         p1Status: 'playing',
@@ -80,9 +185,22 @@ window.createRoom = async function(rounds) {
         p2Guesses: [], 
         currentRound: 1,
         status: 'waiting_for_p2',
-        createdAt: new Date()
+        createdAtMs: nowMs // Firebase zaman damgası yerine direkt MS kaydediyoruz (Filtreleme kolay olsun diye)
     });
 
+    // YENİ: 5 DAKİKALIK (300.000 ms) SAATLİ BOMBA
+    roomExpireTimer = setTimeout(async () => {
+        if (roomId && playerRole === 'player1') {
+            try {
+                await window.deleteDoc(window.doc(window.db, "footle_rooms", roomId));
+                alert("5 dakika boyunca kimse katılmadığı için oda iptal edildi.");
+                window.backToLobby(); // Odayı sil ve lobiye at
+            } catch(e) {}
+        }
+    }, 300000);
+
+    document.getElementById('setupControls').classList.add('hidden');
+    
     const linkStr = window.location.origin + window.location.pathname + "?room=" + roomId;
     document.getElementById('inviteLink').value = linkStr;
     document.getElementById('linkArea').classList.remove('hidden');
@@ -96,40 +214,28 @@ window.copyInviteLink = function() {
     const copyTooltip = document.getElementById('copyTooltip');
     const copyBtn = document.getElementById('copyBtn');
 
-    // Seç ve modern yöntemle kopyala
     linkInput.select();
-    linkInput.setSelectionRange(0, 99999); // Mobil cihazlar için
+    linkInput.setSelectionRange(0, 99999); 
     
     navigator.clipboard.writeText(linkInput.value).then(() => {
-        // Kopyalama başarılı olunca görsel şölen başlasın:
-        
-        // 1. İkonu değiştir (Dosya ikonundan TİK ikonuna) ve yeşil yap
         copyIcon.classList.remove('fa-copy');
         copyIcon.classList.add('fa-check', 'text-green-500');
-        
-        // 2. Butonun etrafını hafif yeşil parlat
         copyBtn.classList.replace('bg-gray-800', 'bg-green-900/30');
         copyBtn.classList.add('border', 'border-green-500');
-
-        // 3. "Kopyalandı!" baloncuğunu yukarı kaydırarak göster
         copyTooltip.classList.remove('opacity-0', 'translate-y-2');
         copyTooltip.classList.add('opacity-100', 'translate-y-0');
 
-        // 4. İki saniye bekle ve her şeyi eski haline geri getir
         setTimeout(() => {
             copyIcon.classList.add('fa-copy');
             copyIcon.classList.remove('fa-check', 'text-green-500');
-            
             copyBtn.classList.replace('bg-green-900/30', 'bg-gray-800');
             copyBtn.classList.remove('border', 'border-green-500');
-            
             copyTooltip.classList.remove('opacity-100', 'translate-y-0');
             copyTooltip.classList.add('opacity-0', 'translate-y-2');
         }, 2000);
         
     }).catch(err => {
-        // Eğer cihazın panosuna erişim yoksa eski yöntemi (fallback) kullan
-        document.execCommand("copy");
+        document.execCommand("copy"); 
     });
 };
 
@@ -140,13 +246,16 @@ async function joinRoom(id) {
     playerRole = 'player2';
     isMultiplayer = true;
     
+    if(lobbyUnsubscribe) lobbyUnsubscribe();
+    document.getElementById('lobbyModal').classList.add('hidden');
+    
     showWaitingOverlay("ODAYA BAĞLANILIYOR...");
 
     const roomRef = window.doc(window.db, "footle_rooms", roomId);
     const docSnap = await window.getDoc(roomRef);
 
     if (!docSnap.exists() || docSnap.data().status !== 'waiting_for_p2') {
-        alert("Oda bulunamadı veya dolu!");
+        alert("Oda bulunamadı, dolu veya süresi dolmuş!");
         window.location.href = "index.html"; 
         return;
     }
@@ -159,7 +268,7 @@ async function joinRoom(id) {
     listenToRoom();
 }
 
-// --- 4. MULTIPLAYER: GERÇEK ZAMANLI SENKRONİZASYON ---
+// --- 6. MULTIPLAYER: GERÇEK ZAMANLI SENKRONİZASYON ---
 function listenToRoom() {
     const roomRef = window.doc(window.db, "footle_rooms", roomId);
     
@@ -174,11 +283,12 @@ function listenToRoom() {
         document.getElementById('currentRoundDisplay').innerText = data.currentRound;
         document.getElementById('totalRoundsDisplay').innerText = data.rounds;
 
-        // Rakibin hamlelerini (renklerini) alıp ekrana çiz
         const oppGuesses = playerRole === 'player1' ? data.p2Guesses : data.p1Guesses;
         renderOpponentBoard(oppGuesses || []);
 
+        // BİRİ ODAYA GİRDİYSE SAATLİ BOMBAYI İPTAL ET
         if (playerRole === 'player1' && data.status === 'waiting_for_p2' && data.p2Status === 'playing') {
+            if (roomExpireTimer) clearTimeout(roomExpireTimer); // Bombayı durdur!
             window.updateDoc(roomRef, { status: 'active' });
         }
 
@@ -187,7 +297,6 @@ function listenToRoom() {
             document.getElementById('multiplayerSetupModal').classList.add('hidden');
             document.getElementById('multiplayerScoreBoard').classList.remove('hidden');
             
-            // Container'ı görünür yap (Eskiden gizliydi)
             const oppBoardContainer = document.getElementById('opponentBoardContainer');
             oppBoardContainer.classList.remove('hidden');
             oppBoardContainer.classList.add('flex');
@@ -216,7 +325,6 @@ function listenToRoom() {
     });
 }
 
-// RAKİBİN RENKLERİNİ ÇİZME FONKSİYONU
 function renderOpponentBoard(guesses) {
     const oppBoard = document.getElementById('opponentBoard');
     if(!oppBoard) return;
@@ -224,9 +332,7 @@ function renderOpponentBoard(guesses) {
     oppBoard.innerHTML = '';
     
     guesses.forEach(rowStr => {
-        // GELEN METNİ TEKRAR DİZİYE ÇEVİR
         const rowColors = rowStr.split('-'); 
-        
         const rowDiv = document.createElement('div');
         rowDiv.className = "flex gap-1 justify-center";
         
@@ -297,7 +403,7 @@ function showMultiplayerResult(data) {
     modal.classList.remove('hidden');
 }
 
-// --- 5. OYUN MOTORU ---
+// --- 7. OYUN MOTORU ---
 function resetBoard() {
     document.getElementById('gameBoard').innerHTML = '';
     denemeSayisi = 0;
@@ -435,19 +541,16 @@ function satirEkle(tahmin) {
     setTimeout(() => row.scrollIntoView({ behavior: 'smooth', block: 'end' }), 100);
 
     if (isMultiplayer) {
-        // FİREBASE ÇÖKMESİN DİYE DİZİYİ METNE ÇEVİRİYORUZ (Örn: "correct-wrong-partial")
-        myGuesses.push(currentGuessColors.join('-')); 
-        
+        myGuesses.push(currentGuessColors.join('-'));
         const roomRef = window.doc(window.db, "footle_rooms", roomId);
         const updateData = {};
         const prefix = playerRole === 'player1' ? 'p1' : 'p2';
         updateData[prefix + 'Guesses'] = myGuesses; 
-        
         window.updateDoc(roomRef, updateData).catch(e => console.error("Firebase Hatası:", e));
     }
 }
 
-// --- 6. OYUN BİTİŞ MANTIĞI ---
+// --- 8. OYUN BİTİŞ MANTIĞI ---
 function bitir(kazandi) {
     oyunBitti = true;
     input.disabled = true;
