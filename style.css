@@ -3,16 +3,17 @@ html {
 }
 section {
     scroll-margin-top: 80px;
-    position: relative; /* YENİ: Dalga ayırıcıların düzgün durması için */
+    position: relative;
 }
 
 :root {
     --bg-dark: #0f0f13;
-    --bg-darker: #0a0a0c; /* YENİ: Dalgalar arası geçiş için eklendi */
+    --bg-darker: #0a0a0c; 
     --card-bg: #1a1a24;
-    --primary-green: #22c55e; /* Neon yeşiline güncellendi */
-    --accent-blue: #3b82f6; /* Neon mavisine güncellendi */
-    --primary-fuchsia: #e91e63; /* YENİ: Grid Savaşları için pembe/mor */
+    --primary-green: #22c55e; 
+    --accent-blue: #3b82f6; 
+    --primary-fuchsia: #e91e63; 
+    --primary-orange: #e67e22; 
     --primary-gold: #ffd700;
     --text-white: #eeeeee;
     --text-gray: #aaaaaa;
@@ -38,46 +39,20 @@ body {
     opacity: 0.5;
 }
 
-/* --- NAVBAR: MENÜYÜ TAM ORTALIYORUZ --- */
+/* --- NAVBAR --- */
 .navbar {
-    display: flex; 
-    justify-content: space-between; 
-    align-items: center;
-    padding: 20px 50px;
-    background: rgba(15, 15, 19, 0.95);
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 20px 50px; background: rgba(15, 15, 19, 0.95);
     border-bottom: 1px solid rgba(255,255,255,0.05);
-    position: sticky; top: 0; z-index: 1000;
-    backdrop-filter: blur(10px);
+    position: sticky; top: 0; z-index: 1000; backdrop-filter: blur(10px);
 }
-
-.logo { 
-    flex: 1; /* Sol kısmı tutar */
-    font-size: 1.8rem; font-weight: 900; letter-spacing: 1px; 
-    display: flex; justify-content: flex-start;
-}
+.logo { flex: 1; font-size: 1.8rem; font-weight: 900; letter-spacing: 1px; display: flex; justify-content: flex-start;}
 .logo span { color: var(--primary-green); }
-
-.nav-links {
-    flex: 1; /* Orta kısmı tutar */
-    display: flex;
-    justify-content: center; /* LİNKLERİ TAM ORTAYA ALIR */
-    gap: 30px;
-}
-
-.nav-links a {
-    color: var(--text-gray); text-decoration: none; font-size: 1.1rem;
-    font-weight: 700; transition: color 0.3s;
-}
+.nav-links { flex: 1; display: flex; justify-content: center; gap: 30px; }
+.nav-links a { color: var(--text-gray); text-decoration: none; font-size: 1.1rem; font-weight: 700; transition: color 0.3s; }
 .nav-links a:hover, .nav-links a.active { color: var(--text-white); }
 
-.user-profile { 
-    flex: 1; /* Sağ kısmı tutar */
-    display: flex;
-    justify-content: flex-end; /* BUTONLARI SAĞA İTER */
-    cursor: pointer; color: var(--accent-blue); 
-}
-
-/* Kullanıcı Bilgi Alanı */
+.user-profile { flex: 1; display: flex; justify-content: flex-end; cursor: pointer; color: var(--accent-blue); }
 #user-info { display: none; align-items: center; gap: 15px; }
 #user-info img { width: 35px; height: 35px; border-radius: 50%; border: 2px solid var(--primary-green); object-fit: cover; }
 #login-btn { cursor: pointer; background: var(--primary-green); color: black; padding: 8px 20px; border-radius: 50px; font-weight: 900; transition: 0.3s; }
@@ -104,29 +79,20 @@ body {
     box-shadow: 0 0 10px rgba(255, 215, 0, 0.3); display: none;
     animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
-
-@keyframes popIn {
-    from { transform: scale(0); opacity: 0; }
-    to { transform: scale(1); opacity: 1; }
-}
+@keyframes popIn { from { transform: scale(0); opacity: 0; } to { transform: scale(1); opacity: 1; } }
 
 /* HERO SECTION */
 .hero {
-    height: 70vh; /* Dalga için biraz yer açtık */
-    display: flex; flex-direction: column; justify-content: center; align-items: center;
-    text-align: center; position: relative;
-    background: radial-gradient(circle at center, #1e1e2f 0%, #0f0f13 70%);
+    height: 70vh; display: flex; flex-direction: column; justify-content: center; align-items: center;
+    text-align: center; position: relative; background: radial-gradient(circle at center, #1e1e2f 0%, #0f0f13 70%);
 }
-
 .hero h1 {
     font-size: 4rem; margin-bottom: 10px; font-weight: 900;
     background: linear-gradient(to right, #fff, #a7f3d0);
     -webkit-background-clip: text; -webkit-text-fill-color: transparent;
     text-shadow: 0 10px 30px rgba(0,0,0,0.5);
 }
-
-.hero p { font-size: 1.2rem; color: var(--text-gray); max-width: 600px; margin-bottom: 30px; font-weight: 500; }
-
+.hero h2 { font-size: 1.2rem; color: var(--text-gray); max-width: 600px; margin-bottom: 30px; font-weight: 500; line-height: 1.5;}
 .cta-button {
     padding: 15px 40px; background: var(--primary-green); color: #000;
     text-decoration: none; font-weight: 900; font-size: 1.2rem; border-radius: 50px;
@@ -134,11 +100,7 @@ body {
 }
 .cta-button:hover { transform: scale(1.05); box-shadow: 0 0 30px rgba(34, 197, 94, 0.7); }
 
-/* YENİ: DALGA AYIRICILAR (SVG WAVES) */
-.wave-divider {
-    position: absolute; bottom: 0; left: 0; width: 100%; overflow: hidden; line-height: 0;
-    transform: rotate(180deg);
-}
+.wave-divider { position: absolute; bottom: 0; left: 0; width: 100%; overflow: hidden; line-height: 0; transform: rotate(180deg); }
 .wave-divider svg { position: relative; display: block; width: calc(137% + 1.3px); height: 80px; }
 .wave-divider .shape-fill { fill: var(--bg-darker); }
 
@@ -146,14 +108,12 @@ body {
 /* --- OYUNLAR VE GENEL KART AYARLARI --- */
 .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; position: relative; z-index: 5; }
 
-/* YENİ: Aurora Arka Planı (Oyunlar bölümü için) */
 #games-grid {
     background: radial-gradient(circle at top left, rgba(34, 197, 94, 0.05), transparent 40%),
                 radial-gradient(circle at bottom right, rgba(59, 130, 246, 0.05), transparent 40%),
                 var(--bg-darker);
     padding: 80px 0;
 }
-
 .section-title { 
     font-size: 2.2rem; margin-bottom: 40px; border-left: 5px solid var(--primary-green); 
     padding-left: 15px; text-shadow: 0 0 15px rgba(255,255,255,0.1); letter-spacing: 2px; font-weight: 900;
@@ -168,9 +128,10 @@ body {
     border: 1px solid rgba(255,255,255,0.05); transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     display: flex; flex-direction: column;
 }
+/* YUKARI HAREKET EFEKTİ (TÜM KARTLARDA ÇALIŞIR) */
 .game-card:hover { transform: translateY(-10px); z-index: 10; }
 
-/* YENİ: RENKLİ KART PARLAMA EFEKTLERİ */
+/* KART RENK PARLAMALARI */
 .card-green { border: 1px solid rgba(34, 197, 94, 0.2); }
 .card-green:hover { border-color: var(--primary-green); box-shadow: 0 10px 30px rgba(34, 197, 94, 0.3); }
 .card-green:hover .play-btn { background: var(--primary-green); color: #000; border-color: var(--primary-green); }
@@ -183,18 +144,46 @@ body {
 .card-fuchsia:hover { border-color: var(--primary-fuchsia); box-shadow: 0 10px 35px rgba(233, 30, 99, 0.4); }
 .card-fuchsia:hover .play-btn { background: var(--primary-fuchsia); color: #fff; border-color: var(--primary-fuchsia); }
 
-/* Kart Resimleri */
-.card-image { height: 200px; position: relative; overflow: hidden; }
-.card-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
-.game-card:hover .card-image img, .game-card:hover .card-image.hangman-bg { transform: scale(1.1); }
+.card-orange { border: 1px solid rgba(230, 126, 34, 0.2); }
+.card-orange:hover { border-color: var(--primary-orange); box-shadow: 0 10px 35px rgba(230, 126, 34, 0.4); }
+.card-orange:hover .play-btn { background: var(--primary-orange); color: #fff; border-color: var(--primary-orange); }
 
-.hangman-bg { background: linear-gradient(135deg, rgba(34, 197, 94, 0.4) 0%, rgba(0, 0, 0, 0.8) 100%), url('https://images.unsplash.com/photo-1574629810360-7efbbe195018?q=80&w=1000'); background-size: cover; background-position: center; transition: 0.5s;}
-.squad-bg { background: linear-gradient(135deg, rgba(33, 150, 243, 0.4) 0%, rgba(0, 0, 0, 0.8) 100%), url('https://images.unsplash.com/photo-1508098682722-e99c43a406b2?q=80&w=1000'); background-size: cover; }
-.tactics-bg { background: linear-gradient(45deg, #4a148c, #000); }
+/* --- YENİ STANDART RESİM SİSTEMİ (YAKINLAŞTIRMA İÇİN) --- */
+.card-image { 
+    height: 220px; 
+    position: relative; 
+    overflow: hidden; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+}
 
+.card-image .bg-img { 
+    position: absolute; 
+    top: 0; left: 0; width: 100%; height: 100%; 
+    background-size: cover !important; 
+    background-position: center !important; 
+    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    z-index: 1;
+}
+
+/* YAKINLAŞTIRMA EFEKTİ (RESİM BÜYÜR) */
+.game-card:hover .bg-img { transform: scale(1.15); }
+
+/* Grid Savaşları Emojisi İçin Özel Büyüme */
+.grid-emoji {
+    font-size: 4.5rem; color: white; margin: 0; 
+    filter: drop-shadow(0 0 15px rgba(255,255,255,0.6)); 
+    position: relative; z-index: 2; 
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.game-card:hover .grid-emoji { transform: scale(1.2); }
+
+/* Kartın İçinde Kalan Karartma Efekti */
 .game-card:hover .card-image::after {
     content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-    background: radial-gradient(circle at center, rgba(255,255,255,0.1) 0%, transparent 70%); pointer-events: none;
+    background: radial-gradient(circle at center, rgba(255,255,255,0.15) 0%, transparent 70%); pointer-events: none;
+    z-index: 3;
 }
 
 .badge {
@@ -208,6 +197,7 @@ body {
 .card-green:hover h3 { color: var(--primary-green); }
 .card-blue:hover h3 { color: var(--accent-blue); }
 .card-fuchsia:hover h3 { color: var(--primary-fuchsia); }
+.card-orange:hover h3 { color: var(--primary-orange); }
 
 .card-info p { color: var(--text-gray); font-size: 0.95rem; margin-bottom: 20px; flex-grow: 1; font-family: 'Montserrat', sans-serif;}
 .card-stats { display: flex; gap: 15px; color: #888; font-size: 0.85rem; margin-bottom: 20px; font-weight: 700; }
@@ -226,12 +216,9 @@ body {
     background: linear-gradient(to bottom, var(--bg-darker) 0%, #110f16 100%);
     padding-top: 100px; padding-bottom: 80px; position: relative;
 }
-/* YENİ: Başlığa Altın Sarısı Parlama */
 #leaderboard .section-title { border-left-color: var(--primary-gold); text-shadow: 0 0 20px rgba(255, 215, 0, 0.2); }
-
 .section-desc { color: var(--text-gray); margin-bottom: 50px; font-size: 1.1rem; }
 
-/* YENİ: Podyuma Sahne Işığı Efekti */
 .leaderboard-wrapper {
     display: flex; justify-content: center; align-items: flex-end; gap: 20px; margin-bottom: 50px; flex-wrap: wrap;
     background: radial-gradient(ellipse at bottom, rgba(255, 215, 0, 0.1) 0%, transparent 60%);
@@ -286,7 +273,6 @@ body {
     padding: 40px; border-radius: 24px; width: 90%; max-width: 800px; text-align: center; position: relative;
     animation: popUp 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: 0 20px 50px rgba(0,0,0,0.8);
 }
-
 @keyframes popUp { from {transform: scale(0.8); opacity: 0;} to {transform: scale(1); opacity: 1;} }
 
 .close-btn { color: #888; position: absolute; right: 25px; top: 15px; font-size: 28px; font-weight: bold; cursor: pointer; transition: 0.3s; }
@@ -308,42 +294,10 @@ body {
 
 .price-tag { background: var(--primary-green); color: black; padding: 6px 15px; border-radius: 50px; font-weight: 900; display: inline-block; margin-top: 15px; font-size: 1rem; font-family: 'Rajdhani'; }
 
-
-/* --- HAKKIMIZDA BÖLÜMÜ --- */
-#about { padding: 100px 0; background: #110f16; border-top: 1px solid rgba(255,255,255,0.02); }
-#about .section-title { border-left-color: var(--accent-blue); text-shadow: 0 0 15px rgba(59, 130, 246, 0.2); }
-
-.about-container { display: flex; align-items: center; gap: 60px; flex-wrap: wrap; }
-.about-text { flex: 1; min-width: 300px; }
-.about-text p { margin-bottom: 25px; line-height: 1.7; color: var(--text-gray); font-size: 1.05rem; font-family: 'Montserrat';}
-.about-text strong { color: var(--accent-blue); }
-
-.features { display: flex; gap: 20px; margin-top: 30px; }
-.feature-box {
-    display: flex; align-items: center; gap: 15px; background: rgba(255,255,255,0.03); 
-    padding: 15px 20px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); transition: 0.3s;
-    font-weight: 700;
-}
-.feature-box:hover { border-color: var(--accent-blue); background: rgba(59, 130, 246, 0.1); transform: translateY(-5px); }
-.feature-box i { font-size: 1.5rem; color: var(--accent-blue); }
-
-.about-image { flex: 1; min-width: 300px; text-align: center;}
-.about-image img {
-    width: 100%; max-width: 500px; border-radius: 24px; box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-    filter: grayscale(30%); transition: 0.5s; border: 2px solid rgba(59, 130, 246, 0.2); transform: rotate(2deg);
-}
-.about-image img:hover { filter: grayscale(0%); transform: rotate(0deg) scale(1.02); border-color: var(--accent-blue); }
-
-/* --- FOOTER --- */
-footer {
-    text-align: center; padding: 40px; background: var(--bg-darker);
-    color: var(--text-gray); font-weight: 700; border-top: 1px solid rgba(255,255,255,0.05);
-}
 /* --- HAKKIMIZDA BÖLÜMÜ GELİŞTİRİLMİŞ --- */
 #about { padding: 120px 0; background: #110f16; position: relative; }
 #about .section-title { border-left-color: var(--accent-blue); text-shadow: 0 0 15px rgba(59, 130, 246, 0.2); }
 
-/* Noktalı Listeleme Tasarımı */
 .about-points { margin: 30px 0; display: flex; flex-direction: column; gap: 15px; }
 .point-item { display: flex; align-items: flex-start; gap: 15px; }
 .point-item .dot { 
@@ -353,28 +307,16 @@ footer {
 }
 .point-item p { margin: 0; font-size: 1rem; color: var(--text-gray); }
 
-/* İletişim Kutuları */
-.contact-box { 
-    margin-top: 40px; display: grid; 
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; 
-}
+.contact-box { margin-top: 40px; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
 .contact-item { 
     display: flex; align-items: center; gap: 20px; 
     background: rgba(255, 255, 255, 0.03); padding: 20px; 
-    border-radius: 15px; border: 1px solid rgba(255, 255, 255, 0.05);
-    transition: 0.3s;
+    border-radius: 15px; border: 1px solid rgba(255, 255, 255, 0.05); transition: 0.3s;
 }
-.contact-item:hover { 
-    border-color: var(--accent-blue); 
-    background: rgba(59, 130, 246, 0.05); 
-    transform: translateY(-5px); 
-}
+.contact-item:hover { border-color: var(--accent-blue); background: rgba(59, 130, 246, 0.05); transform: translateY(-5px); }
 .contact-item i { font-size: 2rem; color: var(--accent-blue); }
 .contact-item h4 { font-size: 0.9rem; color: var(--text-white); margin-bottom: 5px; }
-.contact-item a { 
-    color: var(--accent-blue); text-decoration: none; 
-    font-weight: 900; font-size: 1rem; letter-spacing: 0.5px;
-}
+.contact-item a { color: var(--accent-blue); text-decoration: none; font-weight: 900; font-size: 1rem; letter-spacing: 0.5px;}
 .contact-item a:hover { text-decoration: underline; }
 
 .about-container { display: flex; align-items: center; gap: 60px; flex-wrap: wrap; }
@@ -387,19 +329,11 @@ footer {
 .about-image img:hover { transform: rotate(0deg) scale(1.02); border-color: var(--accent-blue); }
 
 .reveal {
-    opacity: 0;
-    transform: translateY(30px);
+    opacity: 0; transform: translateY(30px);
     transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    pointer-events: none; /* Görünmezken tıklanmasın */
+    pointer-events: none;
 }
-
-.reveal.active {
-    opacity: 1;
-    transform: translateY(0);
-    pointer-events: auto;
-}
-
-/* Kartların sırayla açılması için ufak gecikmeler (Opsiyonel) */
+.reveal.active { opacity: 1; transform: translateY(0); pointer-events: auto; }
 .reveal:nth-child(2) { transition-delay: 0.1s; }
 .reveal:nth-child(3) { transition-delay: 0.2s; }
 .reveal:nth-child(4) { transition-delay: 0.3s; }
@@ -415,5 +349,5 @@ footer {
     .podium-card { width: 100%; height: auto !important; order: unset !important; border-radius: 20px; }
     .rank-badge { position: relative; top: 0; margin-top: -40px; margin-bottom: 10px; }
     .about-container { grid-template-columns: 1fr; text-align: center; }
-    .features { flex-direction: column; align-items: center; }
+    .contact-box { flex-direction: column; align-items: center; }
 }

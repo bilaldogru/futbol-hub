@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kafa Topu - Stabilize Fizikler</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/phaser/3.60.0/phaser.min.js"></script>
+    <style>
+        body {
+            margin: 0; display: flex; justify-content: center; align-items: center;
+            height: 100vh; background-color: #111; color: white;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; flex-direction: column;
+        }
+        canvas {
+            border: 4px solid #fff; border-radius: 10px;
+            box-shadow: 0 0 40px rgba(255, 255, 255, 0.2);
+        }
+        .instructions { margin-top: 15px; text-align: center; display: flex; gap: 40px; }
+        .p1-inst { color: #3498db; }
+        .p2-inst { color: #e74c3c; }
+        kbd { background-color: #333; padding: 3px 8px; border-radius: 4px; border: 1px solid #555; color: #fff; }
+    </style>
+</head>
+<body>
+
+    <h2>Kafa Topu Prototip - Stabilize Versiyon</h2>
+    <div id="game-container"></div>
+    
+    <div class="instructions">
+        <div class="p2-inst">
+            <p><strong>SOL OYUNCU (KIRMIZI)</strong></p>
+            <p>Hareket: <kbd>A</kbd> <kbd>D</kbd> | Zıplama: <kbd>W</kbd> | Şut: <kbd>BOŞLUK</kbd></p>
+        </div>
+        <div class="p1-inst">
+            <p><strong>SAĞ OYUNCU (MAVİ)</strong></p>
+            <p>Hareket: <kbd>←</kbd> <kbd>→</kbd> | Zıplama: <kbd>↑</kbd> | Şut: <kbd>ENTER</kbd></p>
+        </div>
+    </div>
+
+    <script>
+        const config = {
+            type: Phaser.AUTO,
+            width: 800,
+            height: 500,
+            parent: 'game-container',
+            physics: {
+                default: 'arcade',
+                arcade: {
+                    gravity: { y: 2000 }, // Hızlı düşüş için yerçekimi korunuyor
+                    debug: false 
+                }
+            },
+            scene: { preload: preload, create: create, update: update }
+        };
+
+        const game = new Phaser.Game(config);
+        
+        let player1, player2, ball;
+        let cursors, wasdKeys, shootKeys;
+        let score1 = 0, score2 = 0;
+        let scoreText;
+        let isGoal = false;
+        let canShootP1 = true, canShootP2 = true; 
+
+        function preload() {
+            let graphics = this.add.graphics();
+            
+            // Zemin: Daha kalın ve sağlam yapıldı (100px)
+            graphics.fillStyle(0x2ecc71, 1); graphics.fillRect(0, 0, 800, 100); graphics.generateTexture('ground', 800, 100);
+            
+            // Üst Direk
+            graphics.clear(); graphics.fillStyle(0xffffff, 1); graphics.fillRect(0, 0, 70, 15); graphics.generateTexture('post', 70, 15);
+            
+            // Oyuncular ve Top
+            graphics.clear(); graphics.fillStyle(0x3498db, 1); graphics.fillCircle(30, 30, 30); graphics.generateTexture('p1', 60, 60);
+            graphics.clear(); graphics.fillStyle(0xe74c3c, 1); graphics.fillCircle(30, 30, 30); graphics.generateTexture('p2', 60, 60);
+            graphics.clear(); graphics.fillStyle(0xffffff, 1); graphics.fillCircle(20, 20, 20);
+            graphics.fillStyle(0x000000, 1); graphics.fillCircle(20, 20, 8); graphics.generateTexture('ball', 40, 40);
+            
+            graphics.destroy(); 
+        }
+
+        function create() {
+            this.cameras.main.setBackgroundColor('#2c3e50');
+
+            const platforms = this.physics.add.staticGroup();
+            // Zemin y koordinatı 450'ye çekildi (800x100 boyutunda)
+            let ground = platforms.create(400, 500, 'ground'); 
+            ground.refreshBody();
+
+            platforms.create(35, 320, 'post'); 
+            platforms.create(765, 320, 'post'); 
+
+            let leftGoal = this.add.zone(20, 410, 40, 140);
+            this.physics.add.existing(leftGoal, true);
+            let rightGoal = this.add.zone(780, 410, 40, 140);
+            this.physics.add.existing(rightGoal, true);
+
+            player2 = this.physics.add.sprite(200, 300, 'p2'); 
+            player2.setBounce(0.0).setCollideWorldBounds(true).setCircle(30).setMass(2);
+
+            player1 = this.physics.add.sprite(600, 300, 'p1'); 
+            player1.setBounce(0.0).setCollideWorldBounds(true).setCircle(30).setMass(2);
+
+            ball = this.physics.add.sprite(400, 100, 'ball');
+            // Topun sürüklenmesi (drag) artırıldı, sekmesi hafif düşürüldü
+            ball.setBounce(0.8).setCollideWorldBounds(true).setCircle(20).setMass(1).setDrag(15);
+
+            this.physics.add.collider(player1, platforms);
+            this.physics.add.collider(player2, platforms);
+            this.physics.add.collider(ball, platforms);
+            this.physics.add.collider(player1, ball);
+            this.physics.add.collider(player2, ball);
+            this.physics.add.collider(player1, player2);
+
+            this.physics.add.overlap(ball, leftGoal, () => scoreGoal(1), null, this);
+            this.physics.add.overlap(ball, rightGoal, () => scoreGoal(2), null, this);
+
+            scoreText = this.add.text(400, 60, '0 - 0', { fontSize: '64px', fill: '#fff', fontStyle: 'bold' }).setOrigin(0.5);
+
+            cursors = this.input.keyboard.createCursorKeys();
+            wasdKeys = this.input.keyboard.addKeys({ up: 'W', left: 'A', right: 'D' });
+            shootKeys = this.input.keyboard.addKeys({ p1Shoot: 'ENTER', p2Shoot: 'SPACE' });
+        }
+
+        function update() {
+            if (isGoal) return;
+
+            if (cursors.left.isDown) player1.setVelocityX(-350);
+            else if (cursors.right.isDown) player1.setVelocityX(350);
+            else player1.setVelocityX(0);
+
+            if (cursors.up.isDown && player1.body.touching.down) player1.setVelocityY(-780);
+            
+            if (Phaser.Input.Keyboard.JustDown(shootKeys.p1Shoot) && canShootP1) tryShoot(player1, -1); 
+
+            if (wasdKeys.left.isDown) player2.setVelocityX(-350);
+            else if (wasdKeys.right.isDown) player2.setVelocityX(350);
+            else player2.setVelocityX(0);
+
+            if (wasdKeys.up.isDown && player2.body.touching.down) player2.setVelocityY(-780);
+
+            if (Phaser.Input.Keyboard.JustDown(shootKeys.p2Shoot) && canShootP2) tryShoot(player2, 1); 
+        }
+
+        function tryShoot(player, direction) {
+            let distance = Phaser.Math.Distance.Between(player.x, player.y, ball.x, ball.y);
+            if (distance < 75) {
+                // Şut hızı 1000'den 750'ye düşürüldü
+                let shootVelocity = new Phaser.Math.Vector2(direction * 750, -500);
+                ball.setVelocity(shootVelocity.x, shootVelocity.y);
+                
+                if (player === player1) {
+                    canShootP1 = false;
+                    setTimeout(() => canShootP1 = true, 400);
+                } else {
+                    canShootP2 = false;
+                    setTimeout(() => canShootP2 = true, 400);
+                }
+            }
+        }
+
+        function scoreGoal(scorer) {
+            if (isGoal) return;
+            isGoal = true;
+            if (scorer === 1) score1++; else score2++;
+            scoreText.setText(score2 + ' - ' + score1);
+            ball.setVelocity(0, 0); player1.setVelocity(0, 0); player2.setVelocity(0, 0);
+            ball.body.allowGravity = false;
+            setTimeout(() => resetPositions(), 2000);
+        }
+
+        function resetPositions() {
+            player2.setPosition(200, 300);
+            player1.setPosition(600, 300);
+            ball.setPosition(400, 100);
+            ball.setVelocity(0, 0);
+            ball.body.allowGravity = true;
+            isGoal = false;
+        }
+    </script>
+</body>
+</html>

@@ -10,7 +10,6 @@
 <body>
 
     <div class="bg-overlay"></div>
-    <div class="bg-pattern"></div>
 
     <nav class="navbar">
         <div class="logo">⚽ FUTBOL<span>HUB</span></div>
@@ -28,11 +27,9 @@
             
             <div id="user-info">
                 <span id="user-total-score" class="score-badge">0 P</span>
-                
                 <button id="shop-btn" onclick="openShop()">
                     <i class="fa-solid fa-cart-shopping"></i> MAĞAZA
                 </button>
-
                 <img id="user-pic" src="" alt="Avatar">
                 <span id="user-name"></span>
                 <span id="logout-btn"><i class="fa-solid fa-right-from-bracket"></i></span>
@@ -43,13 +40,14 @@
     <header class="hero">
         <div class="hero-content">
             <h1>FUTBOL BİLGİNİ KONUŞTUR</h1>
-            <h2>En zorlu futbol bulmacaları, tahmin oyunları ve taktik savaşları tek adreste.</p>
+            <h2>En zorlu futbol bulmacaları, tahmin oyunları ve taktik savaşları tek adreste.</h2>
+            <br>
             <a href="#games-grid" class="cta-button">OYNAMAYA BAŞLA</a>
         </div>
 
         <div class="wave-divider">
             <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill" fill="#050507"></path>
+                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
             </svg>
         </div>
     </header>
@@ -60,8 +58,9 @@
             
             <div class="grid">
                 
-                <div class="game-card card-green" onclick="location.href='games/tahmin-et/index.html'">
-                    <div class="card-image hangman-bg">
+                <div class="game-card card-green reveal" onclick="location.href='games/tahmin-et/index.html'">
+                    <div class="card-image">
+                        <div class="bg-img" style="background: linear-gradient(135deg, rgba(34, 197, 94, 0.4) 0%, rgba(0, 0, 0, 0.8) 100%), url('https://images.unsplash.com/photo-1574629810360-7efbbe195018?q=80&w=1000');"></div>
                         <span class="badge">GÜNLÜK</span>
                     </div>
                     <div class="card-info">
@@ -75,8 +74,10 @@
                     </div>
                 </div>
 
-                <div class="game-card card-blue" onclick="location.href='games/footle/index.html'">
-                    <img src="https://images.unsplash.com/photo-1551958219-acbc608c6377?q=80&w=600&h=400&auto=format&fit=crop" style="width:100%; height:220px; object-fit:cover;" alt="Footle">
+                <div class="game-card card-blue reveal" onclick="location.href='games/footle/index.html'">
+                    <div class="card-image">
+                        <div class="bg-img" style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.4) 0%, rgba(0, 0, 0, 0.8) 100%), url('https://images.unsplash.com/photo-1551958219-acbc608c6377?q=80&w=600&h=400');"></div>
+                    </div>
                     <div class="card-info">
                         <h3>Footle</h3>
                         <p>Günün gizli futbolcusunu özellikleri ile bul!</p>
@@ -84,10 +85,11 @@
                     </div>
                 </div>
 
-                <div class="game-card card-fuchsia" onclick="location.href='games/grid/index.html'">
-                    <div class="card-image" style="background: linear-gradient(135deg, #e91e63, #4a148c); display:flex; justify-content:center; align-items:center; height: 220px; position: relative; overflow: hidden;">
-                        <span class="badge" style="background: #ffd700; color: #000; z-index: 10;">YENİ / 1v1</span>
-                        <h2 style="font-size: 4.5rem; color: white; margin: 0; filter: drop-shadow(0 0 15px rgba(255,255,255,0.6)); z-index: 10; transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">❌⭕</h2>
+                <div class="game-card card-fuchsia reveal" onclick="location.href='games/grid/index.html'">
+                    <div class="card-image">
+                        <div class="bg-img" style="background: linear-gradient(135deg, #e91e63, #4a148c);"></div>
+                        <span class="badge" style="background: #ffd700; color: #000;">YENİ / 1v1</span>
+                        <h2 class="grid-emoji">❌⭕</h2>
                     </div>
                     <div class="card-info">
                         <h3>Grid Savaşları</h3>
@@ -95,9 +97,26 @@
                         <div class="play-btn">MEYDAN OKU</div>
                     </div>
                 </div>
+
+                <div class="game-card card-orange reveal" onclick="location.href='games/kafa-topu/index.html'">
+                    <div class="card-image">
+                        <div class="bg-img" style="background: linear-gradient(135deg, rgba(230, 126, 34, 0.4) 0%, rgba(0, 0, 0, 0.8) 100%), url('https://images.unsplash.com/photo-1579952363873-27f3bade9f55?q=80&w=600&h=400');"></div>
+                        <span class="badge" style="background: #111; color: #fff; border: 1px solid #e67e22;">YEREL 1v1</span>
+                    </div>
+                    <div class="card-info">
+                        <h3>Arena (Kafa Topu)</h3>
+                        <p>Aynı klavyede arkadaşınla kozlarını paylaş! Şutunu çek, derbiyi kazan.</p>
+                        <div class="card-stats">
+                            <span><i class="fa-solid fa-gamepad"></i> 2 Kişilik</span>
+                            <span style="color: #e67e22;"><i class="fa-solid fa-fire"></i> YENİ</span>
+                        </div>
+                        <div class="play-btn" style="background-color: #e67e22; color: white;">SAHAYA İN</div>
+                    </div>
+                </div>
                 
-                <div class="game-card locked">
-                    <div class="card-image squad-bg">
+                <div class="game-card locked reveal">
+                    <div class="card-image">
+                        <div class="bg-img" style="background: linear-gradient(135deg, rgba(33, 150, 243, 0.4) 0%, rgba(0, 0, 0, 0.8) 100%), url('https://images.unsplash.com/photo-1508098682722-e99c43a406b2?q=80&w=1000');"></div>
                         <span class="badge coming-soon">YAKINDA</span>
                     </div>
                     <div class="card-info">
@@ -107,8 +126,9 @@
                     </div>
                 </div>
 
-                <div class="game-card locked">
-                    <div class="card-image tactics-bg">
+                <div class="game-card locked reveal">
+                    <div class="card-image">
+                        <div class="bg-img" style="background: linear-gradient(45deg, #4a148c, #000);"></div>
                         <span class="badge coming-soon">YAKINDA</span>
                     </div>
                     <div class="card-info">
@@ -123,11 +143,11 @@
 
         <div class="wave-divider" style="transform: rotate(0deg); bottom: -1px;">
             <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill" fill="#0a0a0c"></path>
+                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
             </svg>
         </div>
     </section>
-
+    
     <section id="leaderboard">
         <div class="container">
             <h2 class="section-title"><i class="fa-solid fa-trophy" style="color: #ffd700;"></i> HAFTANIN KRALLARI</h2>
@@ -143,7 +163,7 @@
 
          <div class="wave-divider" style="bottom: -1px;">
             <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-                <path d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z" class="shape-fill" fill="#110f16"></path>
+                <path d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z" class="shape-fill"></path>
             </svg>
         </div>
     </section>
@@ -258,19 +278,12 @@
       const logoutBtn = document.getElementById('logout-btn');
       const scoreBadge = document.getElementById('user-total-score');
       
-      window.openShop = () => {
-          document.getElementById('shop-modal').style.display = 'flex'; 
-      };
-      
-      window.closeShop = () => {
-          document.getElementById('shop-modal').style.display = 'none';
-      };
+      window.openShop = () => { document.getElementById('shop-modal').style.display = 'flex'; };
+      window.closeShop = () => { document.getElementById('shop-modal').style.display = 'none'; };
 
       window.onclick = function(event) {
           const modal = document.getElementById('shop-modal');
-          if (event.target == modal) {
-              modal.style.display = "none";
-          }
+          if (event.target == modal) { modal.style.display = "none"; }
       }
 
       window.buyPack = (type) => {
@@ -319,9 +332,7 @@
                 scoreBadge.innerText = "0 P";
                 scoreBadge.style.display = 'inline-block';
             }
-        } catch (e) {
-            console.error("Puan çekilemedi:", e);
-        }
+        } catch (e) { console.error("Puan çekilemedi:", e); }
       }
 
       async function fetchLeaderboard() {
@@ -384,7 +395,7 @@
         for (var i = 0; i < reveals.length; i++) {
             var windowHeight = window.innerHeight;
             var elementTop = reveals[i].getBoundingClientRect().top;
-            var elementVisible = 100; // Öğe ekranın 100px içine girince başlasın
+            var elementVisible = 100; 
 
             if (elementTop < windowHeight - elementVisible) {
                 reveals[i].classList.add("active");
@@ -392,10 +403,9 @@
         }
     }
 
-    // Hem kaydırınca hem de sayfa ilk açıldığında kontrol et
     window.addEventListener("scroll", reveal);
     window.addEventListener("load", reveal);
-</script>
+    </script>
 
 </body>
 </html>

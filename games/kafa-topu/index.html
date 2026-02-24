@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arena - Futbol Hub</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/phaser/3.60.0/phaser.min.js"></script>
+</head>
+<body>
+
+    <div class="top-bar">
+        <a href="../../index.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i> Hub'a Dön</a>
+    </div>
+
+    <div class="match-hud">
+        <div class="score-board">
+            <span id="score-red">0</span> <span style="color:#555;">-</span> <span id="score-blue">0</span>
+        </div>
+        <div class="time-display" id="timer-display">01:00</div>
+    </div>
+
+    <div id="game-container">
+        <div id="game-over-screen">
+            <h2>MAÇ BİTTİ</h2>
+            <button class="restart-btn" onclick="location.reload()">TEKRAR OYNA</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
