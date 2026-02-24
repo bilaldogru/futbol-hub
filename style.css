@@ -42,9 +42,12 @@ body {
 /* --- NAVBAR --- */
 .navbar {
     display: flex; justify-content: space-between; align-items: center;
-    padding: 20px 50px; background: rgba(15, 15, 19, 0.95);
-    border-bottom: 1px solid rgba(255,255,255,0.05);
-    position: sticky; top: 0; z-index: 1000; backdrop-filter: blur(10px);
+    padding: 20px 50px; 
+    background: rgba(15, 15, 19, 0.7); /* Şeffaflığı 0.95'ten 0.7'ye düşürdük */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08); /* Sınırı biraz daha belirgin yaptık */
+    position: sticky; top: 0; z-index: 1000; 
+    backdrop-filter: blur(15px); /* Bulanıklığı arttırdık */
+    -webkit-backdrop-filter: blur(15px); /* Safari desteği için */
 }
 .logo { flex: 1; font-size: 1.8rem; font-weight: 900; letter-spacing: 1px; display: flex; justify-content: flex-start;}
 .logo span { color: var(--primary-green); }
@@ -84,7 +87,16 @@ body {
 /* HERO SECTION */
 .hero {
     height: 70vh; display: flex; flex-direction: column; justify-content: center; align-items: center;
-    text-align: center; position: relative; background: radial-gradient(circle at center, #1e1e2f 0%, #0f0f13 70%);
+    text-align: center; position: relative; 
+    background: radial-gradient(circle at center, #1e1e2f 0%, #0f0f13 70%);
+    background-size: 200% 200%; /* Animasyon için arkaplanı büyüttük */
+    animation: gradientMove 15s ease infinite; /* Yeni animasyon */
+}
+
+@keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 .hero h1 {
     font-size: 4rem; margin-bottom: 10px; font-weight: 900;
@@ -148,6 +160,13 @@ body {
 .card-orange:hover { border-color: var(--primary-orange); box-shadow: 0 10px 35px rgba(230, 126, 34, 0.4); }
 .card-orange:hover .play-btn { background: var(--primary-orange); color: #fff; border-color: var(--primary-orange); }
 
+/* KART BUTONLARINA PARLAMA EFEKTİ EKLENDİ */
+.card-green:hover .play-btn { box-shadow: 0 0 15px rgba(34, 197, 94, 0.4); }
+.card-blue:hover .play-btn { box-shadow: 0 0 15px rgba(59, 130, 246, 0.4); }
+.card-fuchsia:hover .play-btn { box-shadow: 0 0 15px rgba(233, 30, 99, 0.4); }
+.card-orange:hover .play-btn { box-shadow: 0 0 15px rgba(230, 126, 34, 0.4); }
+
+
 /* --- YENİ STANDART RESİM SİSTEMİ (YAKINLAŞTIRMA İÇİN) --- */
 .card-image { 
     height: 220px; 
@@ -207,7 +226,34 @@ body {
     color: var(--text-white); text-align: center; text-decoration: none; font-weight: 800; border-radius: 10px; transition: all 0.3s;
 }
 
-.game-card.locked { opacity: 0.6; pointer-events: none; }
+/* KİLİTLİ OYUNLAR İÇİN YENİ EFEKT */
+.game-card.locked { 
+    opacity: 0.7; 
+    pointer-events: auto; /* Hover tetiklensin diye açtık */
+    cursor: not-allowed; /* İmleç yasak işareti olsun */
+    filter: grayscale(100%); /* Tamamen siyah beyaz yap */
+    transition: filter 0.3s, transform 0.3s;
+}
+
+/* Kilitli oyuna tıklamaya çalışırsa ufak bir sallantı (hata hissi) versin */
+.game-card.locked:hover { 
+    transform: translateY(0); /* Normal kartlar gibi yukarı zıplamasın */
+    animation: shake 0.4s;
+}
+
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    75% { transform: translateX(-5px); }
+    100% { transform: translateX(0); }
+}
+
+.play-btn.disabled { 
+    border-color: rgba(255,255,255,0.1); 
+    color: #888; 
+    cursor: not-allowed;
+}
 .play-btn.disabled { border-color: rgba(255,255,255,0.05); color: #555; }
 
 
