@@ -440,31 +440,79 @@ body {
 }
 
 
-/* KAYAN HABER BANDI (TICKER) CSS */
+/* --- MAKSİMUM OKUNABİLİR KAYAR HABER BANDI (TICKER) --- */
 .news-ticker {
-    background: var(--primary-green);
-    color: #000;
-    padding: 10px 0;
+    background: #0a0a0c; /* Sitenin temasına uygun çok koyu arka plan */
+    border-top: 1px solid rgba(34, 197, 94, 0.3); /* İnce yeşil çizgiler */
+    border-bottom: 1px solid rgba(34, 197, 94, 0.3);
+    box-shadow: 
+        inset 0 0 20px rgba(0,0,0,0.8), /* Derinlik hissi */
+        0 0 15px rgba(34, 197, 94, 0.05); /* Dışarıya çok hafif parlama */
+    padding: 12px 0;
     overflow: hidden;
     position: relative;
-    border-top: 2px solid #16a34a;
-    border-bottom: 2px solid #16a34a;
     z-index: 20;
+}
+
+/* Arka plana çok çok hafif, göz yormayan çapraz çizgi dokusu (Karbon fiber hissi) */
+.news-ticker::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 10px,
+        rgba(255,255,255,0.02) 10px,
+        rgba(255,255,255,0.02) 20px
+    );
+    pointer-events: none;
+}
+
+/* Tarama ışığını beyaza değil, şeffaf yeşile çevirdik. Yazıyı kapatmaz, parlatır. */
+.news-ticker::after {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%; width: 50%; height: 100%;
+    background: linear-gradient(to right, transparent, rgba(34, 197, 94, 0.15), transparent);
+    transform: skewX(-20deg);
+    animation: scan-effect 6s infinite linear;
+    pointer-events: none;
+}
+
+@keyframes scan-effect {
+    0% { left: -100%; }
+    100% { left: 200%; }
 }
 
 .ticker-content {
     display: flex;
     gap: 50px;
     white-space: nowrap;
-    animation: scroll-ticker 20s linear infinite;
-    font-weight: 700;
-    font-size: 1rem;
-    letter-spacing: 0.5px;
+    animation: scroll-ticker 25s linear infinite; 
+    font-weight: 600; /* Font kalınlığını ideal seviyeye çektik */
+    font-size: 1.1rem;
+    letter-spacing: 1px; /* Harfler arası boşluk okunabilirliği artırır */
+    text-transform: uppercase;
 }
 
-.ticker-content span { padding-right: 50px; }
+/* Normal metinler açık gri (göz yormaz) */
+.ticker-content span { 
+    padding-right: 50px; 
+    display: flex; 
+    align-items: center; 
+    gap: 8px;
+    color: #cccccc; 
+}
+
+/* Vurgulanan metinler (GÜNÜN REKORU vb.) Neon Yeşil */
+.ticker-content span strong {
+    color: var(--primary-green);
+    font-weight: 900;
+    text-shadow: 0 0 10px rgba(34, 197, 94, 0.4); /* Sadece başlıklar parlar */
+}
 
 @keyframes scroll-ticker {
     0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); } /* Yarıya gelince başa sarar (kusursuz döngü) */
+    100% { transform: translateX(-50%); }
 }
