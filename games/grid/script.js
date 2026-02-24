@@ -27,18 +27,25 @@ window.showToast = function(msg, type = 'error') {
     }, 3000);
 }
 
+// --- GLOBAL DEĞİŞKENLER ---
 let countryCodes = {};
 let teamLogos = {};
 let currentUser = null;
 let userFirebaseDocId = null;
 let currentRoomId = null;
 let playerNum = 0; 
+let playerRole = null;
 let allPlayers = [];
 let currentSelectedCell = null;
 let timerInterval = null;
 let timeLeft = 30;
 
-// ÇIKIŞ YAPILIRSA HÜKMEN MAĞLUBİYET
+// LOBİ DEĞİŞKENLERİ
+let lobbyUnsubscribe = null; 
+let roomUnsubscribe = null;
+let roomExpireTimer = null; 
+
+// --- ÇIKIŞ VE TEMİZLİK ---
 window.leaveGame = async function() {
     if (currentRoomId && playerNum !== 0) {
         try {
@@ -51,14 +58,15 @@ window.leaveGame = async function() {
 }
 
 window.addEventListener('beforeunload', (e) => {
-    if (currentRoomId && playerNum !== 0) {
-        window.updateDoc(window.doc(window.db, "grid_rooms", currentRoomId), {
-            abandonedBy: playerNum
-        });
+    if (currentRoomId && playerNum !== 0 && document.getElementById('game-main-container').classList.contains('flex')) {
+        window.updateDoc(window.doc(window.db, "grid_rooms", currentRoomId), { abandonedBy: playerNum });
+    }
+    else if (playerNum === 1 && currentRoomId) {
+        window.deleteDoc(window.doc(window.db, "grid_rooms", currentRoomId));
     }
 });
 
-// GİRİŞ KONTROLÜ VE VERİ YÜKLEME
+// --- BAŞLANGIÇ ---
 document.addEventListener('DOMContentLoaded', () => {
     const userStr = localStorage.getItem('firebaseUser');
     if (!userStr) {
@@ -75,25 +83,58 @@ document.addEventListener('DOMContentLoaded', () => {
         allPlayers = oyuncularData;
         countryCodes = logolarData.ulkeler;
         teamLogos = logolarData.takimlar;
+        
+        const urlParams = new URLSearchParams(window.location.search);
+        const roomId = urlParams.get('room');
+        if (!roomId) {
+            window.fetchLobbyRooms();
+        }
     }).catch(err => {
-        console.error("Veriler Çekilemedi:", err);
         showToast("Veri bağlantı hatası!", "error");
     });
 
+    // LİNK İLE GELENLER VE ÖZEL DAVET EKRANI
     const urlParams = new URLSearchParams(window.location.search);
     const roomId = urlParams.get('room');
 
     if (roomId) {
-        document.getElementById('create-box').classList.add('hidden');
-        document.getElementById('join-box').classList.remove('hidden');
+        document.getElementById('lobbyModal').classList.add('hidden');
+        document.getElementById('multiplayerSetupModal').classList.add('hidden');
+        
         currentRoomId = roomId;
         playerNum = 2;
         
+        document.getElementById('waitText').innerText = "ODAYA BAĞLANILIYOR...";
+        document.getElementById('waitOverlay').classList.remove('hidden');
+        document.getElementById('waitOverlay').classList.add('flex');
+        
         setTimeout(async() => {
             if(!window.db) return;
-            const docSnap = await window.getDoc(window.doc(window.db, "grid_rooms", roomId));
-            if(docSnap.exists()){
-                document.getElementById('prize-display').innerText = docSnap.data().bet * 2;
+            try {
+                const docSnap = await window.getDoc(window.doc(window.db, "grid_rooms", roomId));
+                if(docSnap.exists()){
+                    const data = docSnap.data();
+                    const bet = data.bet;
+                    const p1Name = data.p1;
+                    
+                    document.getElementById('waitOverlay').classList.add('hidden');
+                    document.getElementById('waitOverlay').classList.remove('flex');
+                    
+                    document.getElementById('invite-prize').innerText = bet * 2;
+                    document.getElementById('invite-challenger-name').innerText = `${p1Name} seni maça davet ediyor!`;
+                    document.getElementById('inviteModal').classList.remove('hidden');
+                    
+                    document.getElementById('acceptInviteBtn').onclick = () => {
+                        document.getElementById('inviteModal').classList.add('hidden');
+                        window.joinRoomByButton(roomId);
+                    };
+                } else {
+                    alert("Oda bulunamadı veya süresi dolmuş.");
+                    window.location.href = "../../index.html";
+                }
+            } catch (e) {
+                alert("Bağlantı hatası.");
+                window.location.href = "../../index.html";
             }
         }, 1500);
     } else {
@@ -101,6 +142,97 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
+// --- LOBİ YÖNETİMİ ---
+window.showMultiplayerSetup = function() {
+    if(lobbyUnsubscribe) lobbyUnsubscribe(); 
+    document.getElementById('lobbyModal').classList.add('hidden');
+    document.getElementById('multiplayerSetupModal').classList.remove('hidden');
+    
+    document.getElementById('setupControls').classList.remove('hidden');
+    document.getElementById('linkArea').classList.add('hidden');
+};
+
+window.backToLobby = async function() {
+    try {
+        if (roomExpireTimer) clearTimeout(roomExpireTimer);
+
+        if (playerRole === 'player1' && currentRoomId) {
+            const docSnap = await window.getDoc(window.doc(window.db, "grid_rooms", currentRoomId));
+            if(docSnap.exists()){
+                const betAmount = docSnap.data().bet;
+                if(userFirebaseDocId) {
+                    await window.updateDoc(window.doc(window.db, "scores", userFirebaseDocId), { 
+                        score: window.increment(betAmount) 
+                    });
+                }
+            }
+            await window.deleteDoc(window.doc(window.db, "grid_rooms", currentRoomId));
+        }
+    } catch(e) { 
+        console.error("Geri çıkma/İptal işlemi hatası:", e); 
+    } finally {
+        currentRoomId = null;
+        playerRole = null;
+        if(roomUnsubscribe) roomUnsubscribe();
+
+        const setupModal = document.getElementById('multiplayerSetupModal');
+        const lobbyModal = document.getElementById('lobbyModal');
+        const linkArea = document.getElementById('linkArea');
+        const setupControls = document.getElementById('setupControls');
+        
+        if (setupModal) setupModal.classList.add('hidden');
+        if (lobbyModal) lobbyModal.classList.remove('hidden');
+        if (setupControls) setupControls.classList.remove('hidden');
+        if (linkArea) linkArea.classList.add('hidden');
+
+        if (typeof window.fetchLobbyRooms === 'function') {
+            window.fetchLobbyRooms();
+        }
+    }
+};
+
+window.fetchLobbyRooms = function() {
+    if(!window.db) return;
+    
+    const roomsRef = window.collection(window.db, "grid_rooms");
+    const q = window.query(roomsRef, window.where("status", "==", "waiting_for_p2"), window.where("isPrivate", "==", false));
+    
+    if(lobbyUnsubscribe) lobbyUnsubscribe();
+    
+    lobbyUnsubscribe = window.onSnapshot(q, (snapshot) => {
+        const roomList = document.getElementById('roomList');
+        roomList.innerHTML = '';
+        
+        let validRoomCount = 0;
+
+        snapshot.forEach((doc) => {
+            const data = doc.data();
+            const roomId = doc.id;
+            
+            const now = new Date().getTime();
+            if (data.createdAtMs && (now - data.createdAtMs > 300000)) return; 
+
+            validRoomCount++;
+            
+            const roomItem = document.createElement('div');
+            roomItem.className = "flex justify-between items-center bg-gray-800 p-3 rounded-lg hover:bg-gray-700 border border-gray-700 transition";
+            roomItem.innerHTML = `
+                <div>
+                    <p class="text-white font-bold text-sm">Oda: #${roomId}</p>
+                    <p class="text-xs text-purple-400">Bahis: ${data.bet} Puan</p>
+                </div>
+                <button onclick="joinRoomByButton('${roomId}')" class="bg-purple-600 hover:bg-purple-500 text-white text-xs font-bold px-4 py-2 rounded transition shadow-lg">KATIL</button>
+            `;
+            roomList.appendChild(roomItem);
+        });
+
+        if(validRoomCount === 0) {
+            roomList.innerHTML = '<p class="text-gray-500 text-sm text-center mt-4">Şu an açık oda yok. Yeni bir tane kur!</p>';
+        }
+    });
+};
+
+// --- PUAN DÜŞME ---
 async function handleBetTransaction(betAmount) {
     const q = window.query(window.collection(window.db, "scores"), window.where("email", "==", currentUser.email));
     const qs = await window.getDocs(q);
@@ -129,7 +261,7 @@ async function handleBetTransaction(betAmount) {
     return userDocRef;
 }
 
-// KUSURSUZ (9'DA 9) TABLO BULUCU ALGORİTMA
+// --- GRID ALGORİTMASI ---
 function generateBestGrid() {
     let validTeams = Object.keys(teamLogos);
     let validNations = Object.keys(countryCodes);
@@ -190,33 +322,25 @@ function generateBestGrid() {
     return chosen;
 }
 
-// ODA KURMA
-window.createRoom = async (betAmount) => {
+// --- ODA OLUŞTURMA VE KATILMA ---
+window.confirmAndCreateRoom = async () => {
     try {
         if (!window.db) return showToast("Bağlantı Bekleniyor...", "error");
 
-        let finalBet = 0;
-        if (typeof betAmount === 'number' && betAmount > 0) {
-            finalBet = betAmount;
-        } else {
-            const inputEl = document.getElementById('bet-amount');
-            if (inputEl && inputEl.value) {
-                finalBet = parseInt(inputEl.value);
-            } else if (inputEl && inputEl.placeholder) {
-                finalBet = parseInt(inputEl.placeholder);
-            }
-        }
+        const inputEl = document.getElementById('bet-amount');
+        let finalBet = parseInt(inputEl.value);
 
         if (!finalBet || isNaN(finalBet) || finalBet <= 0) {
             return showToast("Lütfen geçerli bir bahis miktarı girin!", "error");
         }
+        
+        const isPrivate = document.getElementById('privateRoomCheck').checked;
 
         document.getElementById('waitText').innerText = "ODA KURULUYOR...";
         document.getElementById('waitOverlay').classList.remove('hidden');
         document.getElementById('waitOverlay').classList.add('flex');
 
         const userDocRef = await handleBetTransaction(finalBet);
-        
         if (!userDocRef) {
             document.getElementById('waitOverlay').classList.add('hidden');
             document.getElementById('waitOverlay').classList.remove('flex');
@@ -224,11 +348,12 @@ window.createRoom = async (betAmount) => {
         }
 
         const bestGrid = generateBestGrid();
-
         const roomId = Math.random().toString(36).substring(2, 8).toUpperCase();
+        const nowMs = new Date().getTime();
         
         await window.setDoc(window.doc(window.db, "grid_rooms", roomId), {
             bet: finalBet,
+            isPrivate: isPrivate,
             p1: currentUser.name,
             p1DocId: userDocRef.id,
             p2: null,
@@ -242,16 +367,30 @@ window.createRoom = async (betAmount) => {
             gridDetails: ["", "", "", "", "", "", "", "", ""], 
             cols: bestGrid.teams,
             rows: bestGrid.nations,
-            moveHistory: [], // YENİ: Geçmiş hamleleri tutacak dizi
-            status: 'waiting',
-            abandonedBy: null
+            moveHistory: [], 
+            status: 'waiting_for_p2',
+            createdAtMs: nowMs
         });
 
         currentRoomId = roomId;
+        playerRole = 'player1';
+        playerNum = 1;
+
+        roomExpireTimer = setTimeout(async () => {
+            if (currentRoomId && playerRole === 'player1') {
+                try {
+                    await window.deleteDoc(window.doc(window.db, "grid_rooms", currentRoomId));
+                    alert("5 dakika boyunca kimse katılmadığı için oda iptal edildi. Puanın iade edildi.");
+                    await window.updateDoc(userDocRef, { score: window.increment(finalBet) });
+                    window.backToLobby(); 
+                } catch(e) {}
+            }
+        }, 300000);
+
+        document.getElementById('setupControls').classList.add('hidden');
         const linkStr = window.location.origin + window.location.pathname + "?room=" + roomId;
-        
-        if(document.getElementById('inviteLink')) document.getElementById('inviteLink').value = linkStr;
-        if(document.getElementById('linkArea')) document.getElementById('linkArea').classList.remove('hidden');
+        document.getElementById('inviteLink').value = linkStr;
+        document.getElementById('linkArea').classList.remove('hidden');
         
         document.getElementById('waitOverlay').classList.add('hidden');
         document.getElementById('waitOverlay').classList.remove('flex');
@@ -259,7 +398,6 @@ window.createRoom = async (betAmount) => {
         listenToRoom(roomId);
 
     } catch (error) {
-        console.error("ODA KURMA HATASI:", error);
         showToast("Bir hata oluştu: " + error.message, "error");
         document.getElementById('waitOverlay').classList.add('hidden');
         document.getElementById('waitOverlay').classList.remove('flex');
@@ -277,65 +415,72 @@ window.copyInviteLink = function() {
     
     navigator.clipboard.writeText(linkInput.value).then(() => {
         copyIcon.classList.replace('fa-copy', 'fa-check');
-        copyIcon.classList.add('text-green-500');
-        copyBtn.classList.replace('bg-gray-800', 'bg-green-900/50');
-        copyBtn.classList.add('border', 'border-green-500');
-        
+        copyIcon.classList.add('text-white');
+        copyBtn.classList.replace('bg-gray-800', 'bg-purple-900/50');
+        copyBtn.classList.add('border', 'border-purple-500');
         copyTooltip.classList.remove('opacity-0', 'translate-y-2');
         copyTooltip.classList.add('opacity-100', 'translate-y-0');
 
         setTimeout(() => {
             copyIcon.classList.replace('fa-check', 'fa-copy');
-            copyIcon.classList.remove('text-green-500');
-            copyBtn.classList.replace('bg-green-900/50', 'bg-gray-800');
-            copyBtn.classList.remove('border', 'border-green-500');
-            copyTooltip.classList.replace('opacity-100', 'opacity-0');
+            copyBtn.classList.replace('bg-purple-900/50', 'bg-gray-800');
+            copyBtn.classList.remove('border', 'border-purple-500');
+            copyTooltip.classList.remove('opacity-100', 'translate-y-0');
+            copyTooltip.classList.add('opacity-0', 'translate-y-2');
         }, 2000);
     }).catch(() => document.execCommand("copy"));
 };
 
-window.joinRoom = async () => {
+window.joinRoomByButton = async (roomId) => {
     try {
+        if(lobbyUnsubscribe) lobbyUnsubscribe();
+        document.getElementById('lobbyModal').classList.add('hidden');
+        
         document.getElementById('waitText').innerText = "ODAYA GİRİLİYOR...";
         document.getElementById('waitOverlay').classList.remove('hidden');
         document.getElementById('waitOverlay').classList.add('flex');
 
-        const docRef = window.doc(window.db, "grid_rooms", currentRoomId);
+        currentRoomId = roomId;
+        playerNum = 2;
+        playerRole = 'player2';
+
+        const docRef = window.doc(window.db, "grid_rooms", roomId);
         const docSnap = await window.getDoc(docRef);
         
-        if (!docSnap.exists()) {
+        if (!docSnap.exists() || docSnap.data().status !== 'waiting_for_p2') {
             document.getElementById('waitOverlay').classList.add('hidden');
-            return showToast("Oda bulunamadı!", "error");
+            return alert("Oda bulunamadı, dolu veya süresi dolmuş!");
         }
         
         const roomData = docSnap.data();
-        if (roomData.p2) {
-            document.getElementById('waitOverlay').classList.add('hidden');
-            return showToast("Oda zaten dolu!", "error");
-        }
-
         const userDocRef = await handleBetTransaction(roomData.bet);
+        
         if(!userDocRef) {
             document.getElementById('waitOverlay').classList.add('hidden');
+            window.location.href = "index.html";
             return;
         }
         
         await window.updateDoc(docRef, { p2: currentUser.name, p2DocId: userDocRef.id, status: 'playing' });
         
         document.getElementById('waitOverlay').classList.add('hidden');
-        listenToRoom(currentRoomId);
+        listenToRoom(roomId);
     } catch (error) {
-        console.error("ODAYA KATILMA HATASI:", error);
         showToast("Bir hata oluştu.", "error");
         document.getElementById('waitOverlay').classList.add('hidden');
     }
 };
 
+// --- OYUN İÇİ SENKRONİZASYON VE ÇİZİMLER ---
 function listenToRoom(roomId) {
-    window.onSnapshot(window.doc(window.db, "grid_rooms", roomId), (docSnap) => {
+    roomUnsubscribe = window.onSnapshot(window.doc(window.db, "grid_rooms", roomId), (docSnap) => {
+        if(!docSnap.exists()) return;
         const data = docSnap.data();
 
-        // RAKİP OYUNDAN ÇIKTIYSA HÜKMEN KAZAN
+        if (playerRole === 'player1' && data.status === 'playing' && roomExpireTimer) {
+            clearTimeout(roomExpireTimer);
+        }
+
         if (data.abandonedBy && !data.matchWinner) {
             if (data.abandonedBy !== playerNum) {
                 handleGameEnd(playerNum, data.bet, true);
@@ -350,7 +495,7 @@ function listenToRoom(roomId) {
                 interOverlay.classList.remove('flex');
             }
 
-            document.getElementById('lobby-screen').classList.add('hidden');
+            document.getElementById('multiplayerSetupModal').classList.add('hidden');
             document.getElementById('game-main-container').classList.remove('hidden');
             document.getElementById('game-main-container').classList.add('flex');
 
@@ -367,8 +512,6 @@ function listenToRoom(roomId) {
             drawHeaders(data.cols, data.rows);
             updateGridVisuals(data.gridState, data.gridDetails);
             updateTurnIndicator(data.turn);
-            
-            // YENİ: GEÇMİŞ HAMLELERİ PANELLERE ÇİZ
             updateSidebarsHistory(data.moveHistory);
 
             if(data.matchWinner !== null) {
@@ -393,7 +536,7 @@ function listenToRoom(roomId) {
                         gridDetails: ["","","","","","","","",""],
                         cols: newGrid.teams,
                         rows: newGrid.nations,
-                        moveHistory: [], // YENİ TURDA GEÇMİŞİ SIFIRLA
+                        moveHistory: [],
                         turn: ((data.currentRound + 1) % 2 === 0) ? 2 : 1,
                         status: 'playing' 
                     });
@@ -433,7 +576,6 @@ function showIntermissionScreen(lastRoundWinner) {
     }, 1000);
 }
 
-// YENİ: SÜRE HER İKİ OYUNCUDA DA AKIYOR (Ama sadece aktif olan DB'ye yazıyor)
 function startTimer(turn) {
     if (timerInterval) clearInterval(timerInterval);
 
@@ -449,7 +591,6 @@ function startTimer(turn) {
             clearInterval(timerInterval);
             closeSearch(); 
             
-            // Eğer o an benim sıramsa veritabanına "Süre bitti" yaz
             if (turn === playerNum) {
                 showToast("Süre doldu! Sıra rakibe geçti.", "error");
 
@@ -521,7 +662,6 @@ function updateGridVisuals(state, details) {
     }
 }
 
-// YENİ: HAMLE GEÇMİŞİ PANELLERİNİ ÇİZ
 function updateSidebarsHistory(moveHistory) {
     const myMovesList = document.getElementById('my-moves-list');
     const oppMovesList = document.getElementById('opp-moves-list');
@@ -533,7 +673,6 @@ function updateSidebarsHistory(moveHistory) {
 
     if (!moveHistory) return;
 
-    // En son yapılan hamle en üstte çıksın diye listeyi ters çeviriyoruz
     moveHistory.slice().reverse().forEach(move => {
         const icon = move.correct ? '<span class="text-green-500 font-black">✔️</span>' : '<span class="text-red-500 font-black">❌</span>';
         const borderColor = move.correct ? 'border-green-500/50' : 'border-red-500/50';
@@ -553,7 +692,6 @@ function updateSidebarsHistory(moveHistory) {
         div.className = `history-item ${borderColor} ${bgColor} p-2 rounded-xl mb-2 border flex w-full transition-all`;
         div.innerHTML = itemHtml;
 
-        // Hamleyi yapan kişiye göre ilgili panele at
         if(move.p === playerNum) myMovesList.appendChild(div);
         else oppMovesList.appendChild(div);
     });
@@ -603,7 +741,6 @@ window.filterPlayersBottom = function() {
     });
 }
 
-// OYUNCU SEÇME VE GEÇMİŞİ KAYDETME
 window.selectPlayer = async function(player) {
     closeSearch();
     
@@ -625,7 +762,6 @@ window.selectPlayer = async function(player) {
         showToast("YANLIŞ TAHMİN! Sıra rakibe geçti.", "error");
     }
 
-    // YENİ: GEÇMİŞE YAZ
     let newMove = {
         p: playerNum,
         name: player.isim,
@@ -685,7 +821,6 @@ window.selectPlayer = async function(player) {
     await window.updateDoc(docRef, data);
 }
 
-// MAÇ SONU EKRANI
 async function handleGameEnd(winnerNum, bet, isAbandoned = false) {
     if (timerInterval) clearInterval(timerInterval);
     const interOverlay = document.getElementById('intermissionOverlay');
