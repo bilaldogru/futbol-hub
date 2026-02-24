@@ -97,3 +97,24 @@ body {
     border: none; border-radius: 50px; font-weight: 900; font-family: 'Rajdhani'; cursor: pointer; transition: 0.3s; 
 }
 .restart-btn:hover { background: #e67e22; color: #fff; transform: scale(1.1); box-shadow: 0 0 30px #e67e22; }
+
+/* --- LOBİ VE ARAYÜZ UYUMLULUK EKLENTİSİ --- */
+#game-wrapper.hidden {
+    display: none !important;
+}
+
+#game-wrapper {
+    display: flex;
+    width: 100%;
+}
+
+/* HUD Pozisyonunu statikten normale çevirdik çünkü wrapper içine aldık */
+.match-hud {
+    position: relative !important;
+    top: 0 !important;
+    margin-bottom: 20px;
+}
+
+#game-container {
+    margin-top: 0 !important; /* Wrapper kullandığımız için marjı sıfırladık */
+}

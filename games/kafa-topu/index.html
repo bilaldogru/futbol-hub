@@ -4,41 +4,141 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Arena - Futbol Hub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/phaser/3.60.0/phaser.min.js"></script>
+    <script src="https://unpkg.com/peerjs@1.5.2/dist/peerjs.min.js"></script>
 </head>
-<body>
+<body class="text-white min-h-screen flex flex-col items-center overflow-hidden relative">
 
-    <div class="top-bar">
+    <div class="top-bar z-[100]">
         <a href="../../index.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i> Hub'a Dön</a>
     </div>
 
-    <div class="match-hud">
-        <div class="score-board">
-            <span id="score-red">0</span> <span style="color:#555;">-</span> <span id="score-blue">0</span>
+    <div id="customToast" class="fixed top-10 left-1/2 transform -translate-x-1/2 -translate-y-24 z-[9999] transition-all duration-300 opacity-0 flex items-center gap-3 px-6 py-4 rounded-2xl shadow-2xl font-bold text-white border-2">
+        <i id="toastIcon" class="text-2xl"></i><span id="toastMsg"></span>
+    </div>
+
+    <div id="waitOverlay" class="fixed inset-0 z-[150] flex flex-col items-center justify-center bg-black/90 backdrop-blur-md text-white font-black text-2xl text-center px-4 hidden">
+        <i class="fa-solid fa-futbol animate-bounce text-6xl text-orange-500 mb-6"></i><p id="waitText">ODAYA BAĞLANILIYOR...</p>
+    </div>
+
+    <div id="joinConfirmModal" class="fixed inset-0 z-[140] bg-black/80 backdrop-blur-sm flex items-center justify-center px-4 hidden">
+        <div class="bg-gray-900 border-2 border-orange-500 p-8 rounded-3xl shadow-[0_0_50px_rgba(234,88,12,0.3)] max-w-sm w-full text-center">
+            <div class="mb-6">
+                <i class="fa-solid fa-circle-question text-5xl text-orange-500 mb-4"></i>
+                <h3 class="text-2xl font-black text-white mb-2">MAÇA KATIL?</h3>
+                <p id="confirmBetText" class="text-gray-400 font-bold">Bu maça girmek için <span class="text-orange-400">...</span> puan bahis yatıracaksın.</p>
+            </div>
+            <div class="flex gap-4">
+                <button onclick="closeJoinConfirm()" class="flex-1 bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 rounded-xl transition">VAZGEÇ</button>
+                <button id="finalJoinBtn" class="flex-1 bg-orange-600 hover:bg-orange-500 text-white font-bold py-3 rounded-xl transition shadow-lg">KATIL</button>
+            </div>
         </div>
-        <div class="time-display" id="timer-display">01:00</div>
+    </div>
+
+    <div id="lobbyModal" class="absolute inset-0 z-[120] flex items-center justify-center bg-black/90 backdrop-blur-lg px-4 font-['Montserrat']">
+        <div class="bg-gray-900 border-2 border-orange-500 p-6 rounded-3xl max-w-md w-full text-center shadow-[0_0_30px_rgba(230,126,34,0.3)] relative flex flex-col max-h-[80vh]">
+            <button onclick="fetchLobbyRooms()" class="absolute top-4 right-4 text-orange-400 hover:text-white"><i class="fa-solid fa-rotate-right"></i></button>
+            <h2 class="text-3xl font-black mb-1 text-white tracking-tighter">ARENA (1v1)</h2>
+            <p class="text-xs text-gray-400 mb-4 font-bold">Açık odalara katıl veya kendin kur</p>
+            
+            <div id="roomList" class="flex-1 overflow-y-auto mb-4 space-y-2 text-left bg-black/50 p-2 rounded-xl border border-gray-800 min-h-[200px] max-h-[300px]">
+                <p class="text-gray-500 text-sm text-center mt-4">Odalar aranıyor...</p>
+            </div>
+
+            <button onclick="showMultiplayerSetup()" class="w-full bg-orange-600 text-white font-black py-3 rounded-xl hover:bg-orange-500 transition shadow-lg mt-2">
+                <i class="fa-solid fa-plus mr-1"></i> YENİ ODA KUR
+            </button>
+        </div>
+    </div>
+
+    <div id="multiplayerSetupModal" class="fixed inset-0 z-[130] flex items-center justify-center bg-black/95 backdrop-blur-lg px-4 font-['Montserrat'] hidden">
+        <div class="bg-gray-900 border-2 border-orange-500 p-8 rounded-3xl max-w-md w-full text-center shadow-2xl relative">
+            <div onclick="window.backToLobby()" class="absolute top-3 left-3 text-gray-400 hover:text-white cursor-pointer z-[999] p-4 text-2xl flex items-center justify-center">
+                <i class="fa-solid fa-arrow-left"></i>
+            </div>
+            
+            <h2 class="text-2xl font-black mb-2 text-white mt-4">ODA KURULUMU</h2>
+            <p class="text-gray-400 text-xs mb-6">Rakibini yen, bahisleri topla!</p>
+            
+            <div id="setupControls">
+                <div class="flex items-center justify-center gap-2 mb-4 bg-gray-800 p-3 rounded-xl border border-gray-700">
+                    <input type="checkbox" id="privateRoomCheck" class="w-4 h-4 accent-orange-500 cursor-pointer">
+                    <label for="privateRoomCheck" class="text-sm text-gray-300 font-bold cursor-pointer select-none">Gizli Lobi (Listede Görünmez)</label>
+                </div>
+
+                <input type="number" id="bet-amount" placeholder="Bahis (Örn: 500 Puan)" class="w-full bg-black border border-gray-700 rounded-xl py-4 px-4 mb-6 text-white text-center font-bold text-lg focus:outline-none focus:border-orange-500">
+
+                <button onclick="confirmAndCreateRoom()" class="w-full bg-orange-500 text-white font-black py-4 rounded-xl transition-all hover:bg-orange-400 shadow-lg shadow-orange-500/20">
+                    ODAYI KUR
+                </button>
+            </div>
+
+            <div id="linkArea" class="hidden mt-4">
+                <p class="text-sm text-orange-400 mb-2 font-semibold">Oda Oluşturuldu! Linki Gönder:</p>
+                <div class="flex items-center bg-black rounded-lg p-2 border border-gray-700 mb-4 relative">
+                    <input type="text" id="inviteLink" readonly class="bg-transparent w-full text-gray-300 text-xs outline-none px-2">
+                    <button id="copyBtn" onclick="copyInviteLink()" class="bg-gray-800 text-white px-3 py-1 rounded text-sm hover:bg-gray-700 transition-colors">
+                        <i id="copyIcon" class="fa-solid fa-copy"></i>
+                    </button>
+                </div>
+                <p class="text-xs text-gray-500 animate-pulse">P2P Bağlantısı Bekleniyor...</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="game-wrapper" class="hidden flex-col items-center w-full relative z-10">
+        <div class="match-hud mt-6 relative top-0 mb-4">
+            <div class="score-board">
+                <span id="score-red">0</span> <span style="color:#555;">-</span> <span id="score-blue">0</span>
+            </div>
+            <div class="time-display" id="timer-display">01:00</div>
+            
+            <div class="flex gap-12 mt-4 bg-black/80 px-6 py-2 rounded-xl border border-gray-800 text-sm font-['Montserrat']">
+                <div class="text-center text-red-500">
+                    <strong id="p1-name-display">KIRMIZI (SEN)</strong><br>
+                    <span class="text-gray-400 text-xs">Yön Tuşları + K/L</span>
+                </div>
+                <div class="text-center text-blue-500">
+                    <strong id="p2-name-display">MAVİ (RAKİP)</strong><br>
+                    <span class="text-gray-400 text-xs">Bekleniyor...</span>
+                </div>
+            </div>
+        </div>
+
+        <div id="game-container">
+            <div id="game-over-screen">
+                <h2 id="winner-text">MAÇ BİTTİ</h2>
+                <button class="restart-btn" onclick="window.leaveGame()">LOBİYE DÖN</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getFirestore, doc, setDoc, getDoc, updateDoc, onSnapshot, collection, query, where, getDocs, increment, addDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyD62cMqFmtT_LYOQdyLEib3TlP2sDXVHUY", 
+            authDomain: "futbol-hub0.firebaseapp.com", 
+            projectId: "futbol-hub0", 
+            storageBucket: "futbol-hub0.firebasestorage.app", 
+            messagingSenderId: "995690857981", 
+            appId: "1:995690857981:web:01f199920e1c131cd04594"
+        };
+        const app = initializeApp(firebaseConfig);
+        window.db = getFirestore(app);
         
-        <div style="display: flex; gap: 50px; margin-top: 15px; background: rgba(0,0,0,0.8); padding: 10px 20px; border-radius: 10px; border: 1px solid #333;">
-            <div style="color: #ff4757; text-align: center;">
-                <strong>KIRMIZI (A,D,W)</strong><br>
-                Düz: <kbd>F</kbd> | Havadan: <kbd>G</kbd>
-            </div>
-            <div style="color: #1e90ff; text-align: center;">
-                <strong>MAVİ (←,→,↑)</strong><br>
-                Düz: <kbd>K</kbd> | Havadan: <kbd>L</kbd>
-            </div>
-        </div>
-    </div>
-
-    <div id="game-container">
-        <div id="game-over-screen">
-            <h2>MAÇ BİTTİ</h2>
-            <button class="restart-btn" onclick="location.reload()">TEKRAR OYNA</button>
-        </div>
-    </div>
-
+        window.doc = doc; window.setDoc = setDoc; window.getDoc = getDoc;
+        window.updateDoc = updateDoc; window.onSnapshot = onSnapshot; 
+        window.collection = collection; window.query = query; 
+        window.where = where; window.getDocs = getDocs; window.increment = increment; window.deleteDoc = deleteDoc; window.addDoc = addDoc;
+    </script>
     <script src="script.js"></script>
 </body>
 </html>
