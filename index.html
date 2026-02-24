@@ -53,13 +53,8 @@
     </header>
 
     <div class="news-ticker">
-        <div class="ticker-content">
-            <span>🔥 <strong>GÜNÜN REKORU:</strong> Footle'da 'Arda Güler' 2. denemede bilindi!</span>
-            <span>🏆 <strong>MEYDAN OKUMA:</strong> Grid Savaşları'nda lobiye yeni odalar eklendi!</span>
-            <span>⭐ <strong>HAFTANIN LİDERİ:</strong> Ahmet, 4500 Puanla zirvede.</span>
-            <span>⚽ <strong>YAKINDA:</strong> Kadro Mühendisi modu çok yakında aktif!</span>
-            <span>🔥 <strong>GÜNÜN REKORU:</strong> Footle'da 'Arda Güler' 2. denemede bilindi!</span>
-            <span>🏆 <strong>MEYDAN OKUMA:</strong> Grid Savaşları'nda lobiye yeni odalar eklendi!</span>
+        <div class="ticker-content" id="dynamic-ticker">
+            <span>Yükleniyor...</span>
         </div>
     </div>
 
@@ -99,7 +94,7 @@
                 <div class="game-card card-fuchsia reveal" onclick="location.href='games/grid/index.html'">
                     <div class="card-image">
                         <div class="bg-img" style="background: linear-gradient(135deg, #e91e63, #4a148c);"></div>
-                        <span class="badge" style="background: #ffd700; color: #000;">YENİ / 1v1</span>
+                        <span class="badge live" style="background: #ffd700; color: #000;">YENİ / 1v1</span>
                         <h2 class="grid-emoji">❌⭕</h2>
                     </div>
                     <div class="card-info">
@@ -265,7 +260,8 @@
     <script type="module">
       import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
       import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-      import { getFirestore, collection, query, orderBy, limit, getDocs, where } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+      // DİKKAT: onSnapshot buraya eklendi!
+      import { getFirestore, collection, query, orderBy, limit, getDocs, where, onSnapshot } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
       const firebaseConfig = {
         apiKey: "AIzaSyD62cMqFmtT_LYOQdyLEib3TlP2sDXVHUY",
@@ -384,6 +380,34 @@
       }
       
       fetchLeaderboard();
+
+      // --- KAYAR YAZI BANDINI (TICKER) FIREBASE'DEN CANLI ÇEKME ---
+      function loadDynamicTicker() {
+          const tickerContainer = document.getElementById('dynamic-ticker');
+          
+          onSnapshot(collection(db, "ticker_messages"), (snapshot) => {
+              let messagesHTML = "";
+              
+              if (snapshot.empty) {
+                  messagesHTML = `
+                      <span>🔥 <strong>SİSTEM:</strong> Veritabanından mesaj bekleniyor...</span>
+                      <span>🏆 <strong>BİLGİ:</strong> Firebase panelinden 'ticker_messages' koleksiyonu oluşturun.</span>
+                  `;
+              } else {
+                  snapshot.forEach((doc) => {
+                      messagesHTML += `<span>${doc.data().text}</span>`;
+                  });
+              }
+
+              // CSS kayma animasyonu için yazıları iki kez ekliyoruz
+              tickerContainer.innerHTML = messagesHTML + messagesHTML;
+          }, (error) => {
+              console.error("Ticker çekilirken hata:", error);
+          });
+      }
+
+      loadDynamicTicker();
+
     </script>
 
     <script>
