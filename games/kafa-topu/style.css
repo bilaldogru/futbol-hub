@@ -58,14 +58,14 @@ body {
     transition: 0.3s;
 }
 
-/* --- YENİ NEON DİJİTAL SAHA TASARIMI --- */
+/* --- ESKİ NEON DİJİTAL SAHA TASARIMI (GERİ GETİRİLDİ) --- */
 #game-container {
     position: relative;
-    width: 1400px; /* SAHA UZATILDI */
+    width: 1400px;
     height: 600px;
     border-radius: 15px;
     box-shadow: 0 20px 80px rgba(230, 126, 34, 0.2), 0 0 0 3px rgba(230, 126, 34, 0.4);
-    margin-top: 120px; /* HUD ile çakışmaması için aşağı itildi */
+    margin-top: 0; 
     
     /* Saf CSS Siberpunk Grid Arka Plan */
     background-color: #0a0a0c;

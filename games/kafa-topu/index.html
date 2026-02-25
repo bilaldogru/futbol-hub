@@ -71,6 +71,17 @@
             <p class="text-gray-400 text-xs mb-6">Rakibini yen, bahisleri topla!</p>
             
             <div id="setupControls">
+                
+                <div class="mb-6 bg-gray-800 p-3 rounded-xl border border-gray-700">
+                    <p class="text-xs text-gray-300 mb-3 font-bold">TAKIMINI SEÇ</p>
+                    <div class="flex justify-center gap-3">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/f/f6/Galatasaray_Sports_Club_Logo.png" id="host-team-gs" onclick="selectHostTeam('gs')" class="host-team-btn w-12 h-12 cursor-pointer border-2 border-orange-500 rounded-full hover:scale-110 transition bg-white p-1">
+    <img src="https://upload.wikimedia.org/wikipedia/tr/8/86/Fenerbah%C3%A7e_SK.png" id="host-team-fb" onclick="selectHostTeam('fb')" class="host-team-btn w-12 h-12 cursor-pointer border-2 border-transparent rounded-full hover:scale-110 transition bg-white p-1">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/2/20/Logo_of_Be%C5%9Fikta%C5%9F_JK.svg" id="host-team-bjk" onclick="selectHostTeam('bjk')" class="host-team-btn w-12 h-12 cursor-pointer border-2 border-transparent rounded-full hover:scale-110 transition bg-white p-1">
+    <img src="https://upload.wikimedia.org/wikipedia/tr/a/ab/TrabzonsporAmblemi.png" id="host-team-ts" onclick="selectHostTeam('ts')" class="host-team-btn w-12 h-12 cursor-pointer border-2 border-transparent rounded-full hover:scale-110 transition bg-white p-1">
+</div>
+                </div>
+
                 <div class="flex items-center justify-center gap-2 mb-4 bg-gray-800 p-3 rounded-xl border border-gray-700">
                     <input type="checkbox" id="privateRoomCheck" class="w-4 h-4 accent-orange-500 cursor-pointer">
                     <label for="privateRoomCheck" class="text-sm text-gray-300 font-bold cursor-pointer select-none">Gizli Lobi (Listede Görünmez)</label>
@@ -96,19 +107,40 @@
         </div>
     </div>
 
+    <div id="clientTeamModal" class="hidden fixed inset-0 z-[140] flex items-center justify-center bg-black/95 backdrop-blur-lg px-4 font-['Montserrat']">
+        <div class="bg-gray-900 border-2 border-orange-500 p-8 rounded-3xl max-w-md w-full text-center shadow-2xl relative">
+            <h2 class="text-3xl font-black mb-2 text-white">TAKIMINI SEÇ</h2>
+            <p class="text-gray-400 text-xs mb-6">Rakibinin karşısına hangi takımla çıkacaksın?</p>
+            
+                <div class="flex justify-center gap-4 mb-8">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/f/f6/Galatasaray_Sports_Club_Logo.png" id="client-team-gs" onclick="selectClientTeam('gs')" class="client-team-btn w-16 h-16 cursor-pointer border-4 border-orange-500 rounded-full hover:scale-110 transition bg-white p-1 shadow-lg">
+    <img src="https://upload.wikimedia.org/wikipedia/tr/8/86/Fenerbah%C3%A7e_SK.png" id="client-team-fb" onclick="selectClientTeam('fb')" class="client-team-btn w-16 h-16 cursor-pointer border-4 border-transparent rounded-full hover:scale-110 transition bg-white p-1 shadow-lg">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/2/20/Logo_of_Be%C5%9Fikta%C5%9F_JK.svg" id="client-team-bjk" onclick="selectClientTeam('bjk')" class="client-team-btn w-16 h-16 cursor-pointer border-4 border-transparent rounded-full hover:scale-110 transition bg-white p-1 shadow-lg">
+    <img src="https://upload.wikimedia.org/wikipedia/tr/a/ab/TrabzonsporAmblemi.png" id="client-team-ts" onclick="selectClientTeam('ts')" class="client-team-btn w-16 h-16 cursor-pointer border-4 border-transparent rounded-full hover:scale-110 transition bg-white p-1 shadow-lg">
+</div>
+
+            <button onclick="confirmClientTeamAndJoin()" class="w-full bg-orange-600 text-white font-black py-4 rounded-xl transition-all hover:bg-orange-500 shadow-lg shadow-orange-500/30">MAÇA GİR</button>
+            <button onclick="cancelClientTeamSelection()" class="w-full bg-gray-800 text-gray-300 font-bold py-3 rounded-xl mt-3 hover:bg-gray-700 border border-gray-700 transition-all">İPTAL</button>
+        </div>
+    </div>
+
     <div id="game-wrapper" class="hidden flex-col items-center w-full relative z-10">
         <div class="match-hud mt-6 relative top-0 mb-4">
-            <div class="score-board">
+            
+            <div class="score-board flex items-center justify-center gap-6">
+                <img id="score-logo-p1" src="" class="w-16 h-16 object-contain hidden bg-white rounded-full p-1 drop-shadow-xl">
                 <span id="score-red">0</span> <span style="color:#555;">-</span> <span id="score-blue">0</span>
+                <img id="score-logo-p2" src="" class="w-16 h-16 object-contain hidden bg-white rounded-full p-1 drop-shadow-xl">
             </div>
+            
             <div class="time-display" id="timer-display">01:00</div>
             
             <div class="flex gap-12 mt-4 bg-black/80 px-6 py-2 rounded-xl border border-gray-800 text-sm font-['Montserrat']">
-                <div class="text-center text-red-500">
+                <div class="text-center" id="hud-p1-box">
                     <strong id="p1-name-display">KIRMIZI (SEN)</strong><br>
                     <span class="text-gray-400 text-xs">Yön Tuşları + K/L</span>
                 </div>
-                <div class="text-center text-blue-500">
+                <div class="text-center" id="hud-p2-box">
                     <strong id="p2-name-display">MAVİ (RAKİP)</strong><br>
                     <span class="text-gray-400 text-xs">Bekleniyor...</span>
                 </div>
