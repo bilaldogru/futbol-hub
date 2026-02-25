@@ -51,7 +51,7 @@ let currentGoalMsg = "";
 let remoteKeys = { up: false, left: false, right: false, flat: false, high: false };
 let prevRemoteKeys = { flat: false, high: false };
 
-// --- BAŞLANGIÇ VE URL KONTROLÜ ---
+// --- BAŞLANGIÇ VE URL KONTROLÜ (MEYDAN OKUMA) ---
 document.addEventListener('DOMContentLoaded', () => {
     const userStr = localStorage.getItem('firebaseUser');
     if (!userStr) {
@@ -60,15 +60,27 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
     }
     currentUser = JSON.parse(userStr);
-    window.fetchLobbyRooms();
 
-    // Link ile gelindiyse (Örn: ?room=ABC123) otomatik onayı tetikle
     const urlParams = new URLSearchParams(window.location.search);
     const roomFromUrl = urlParams.get('room');
+
     if (roomFromUrl) {
+        // 1. DURUM: Link ile gelindi! Lobiyi hiç gösterme, direkt bilgileri çek.
+        // Firebase yüklenene kadar boşluk olmasın diye kısa bir yükleniyor yazısı gösterelim
+        document.getElementById('waitText').innerText = "DAVET BİLGİLERİ ALINIYOR...";
+        document.getElementById('waitOverlay').classList.remove('hidden');
+        document.getElementById('waitOverlay').classList.add('flex');
+
         setTimeout(() => {
+            document.getElementById('waitOverlay').classList.add('hidden');
+            document.getElementById('waitOverlay').classList.remove('flex');
             window.joinRoomByButton(roomFromUrl);
-        }, 1500); // Firebase bağlantısı için kısa bekleme
+        }, 1500); 
+
+    } else {
+        // 2. DURUM: Normal giriş yapıldı. Lobiyi görünür yap ve odaları çek.
+        document.getElementById('lobbyModal').classList.remove('hidden');
+        window.fetchLobbyRooms();
     }
 });
 
@@ -101,7 +113,7 @@ async function handleBetTransaction(betAmount) {
     return userDocRef;
 }
 
-// --- LOBİ VE KATILIM MEKANİZMASI ---
+// --- LOBİ LİSTESİ ---
 window.fetchLobbyRooms = function() {
     if(!window.db) return;
     const roomsRef = window.collection(window.db, "arena_rooms");
@@ -136,7 +148,7 @@ window.fetchLobbyRooms = function() {
     });
 };
 
-// --- ONAY VE ASIL KATILMA ---
+// --- MEYDAN OKUMA (GRID TARZI ONAY) ---
 window.joinRoomByButton = async (roomId) => {
     if(!window.db) return;
 
@@ -146,27 +158,37 @@ window.joinRoomByButton = async (roomId) => {
     if (docSnap.exists()) {
         const roomData = docSnap.data();
         
-        // Modal içeriğini doldur
-        document.querySelector('#confirmBetText span').innerText = roomData.bet;
-        document.getElementById('joinConfirmModal').classList.remove('hidden');
+        // Grid'deki Meydan Okuma ekranını doldur (Toplam ödül genellikle bahis x2'dir)
+        document.getElementById('invite-challenger-name').innerText = `${roomData.p1Name.toUpperCase()} seni maça davet ediyor!`;
+        document.getElementById('invite-prize').innerText = roomData.bet * 2;
+        
+        // Modalı göster
+        document.getElementById('inviteModal').classList.remove('hidden');
 
-        // Onaylanırsa asıl katılımı başlat
-        document.getElementById('finalJoinBtn').onclick = () => {
-            window.closeJoinConfirm();
+        // KABUL ET butonuna asıl katılma kodunu bağla
+        document.getElementById('acceptInviteBtn').onclick = () => {
+            document.getElementById('inviteModal').classList.add('hidden');
             executeRoomJoin(roomId);
         };
     } else {
-        showToast("Oda bulunamadı!", "error");
+        showToast("Oda bulunamadı veya süre doldu!", "error");
     }
 };
 
-window.closeJoinConfirm = () => {
-    document.getElementById('joinConfirmModal').classList.add('hidden');
-    // URL'deki parametreyi temizle (tekrar açılmaması için)
+// --- DAVETİ REDDETME VE MODAL KAPATMA ---
+window.closeInviteModal = () => {
+    document.getElementById('inviteModal').classList.add('hidden');
+    
+    // URL'yi temizle
     const newurl = window.location.protocol + "//" + window.location.host + window.location.pathname;
     window.history.pushState({path:newurl},'',newurl);
+    
+    // Daveti reddettiği için şimdi Lobiyi göster
+    document.getElementById('lobbyModal').classList.remove('hidden');
+    window.fetchLobbyRooms();
 };
 
+// --- ASIL KATILMA İŞLEMİ ---
 async function executeRoomJoin(roomId) {
     if(lobbyUnsubscribe) lobbyUnsubscribe();
     document.getElementById('lobbyModal').classList.add('hidden');
@@ -187,8 +209,13 @@ async function executeRoomJoin(roomId) {
     const roomData = docSnap.data();
     betAmountGlobal = roomData.bet;
 
+    // PUAN BURADA DÜŞER
     const userDocRef = await handleBetTransaction(betAmountGlobal);
-    if(!userDocRef) { document.getElementById('waitOverlay').classList.add('hidden'); return; }
+    if(!userDocRef) { 
+        document.getElementById('waitOverlay').classList.add('hidden'); 
+        document.getElementById('lobbyModal').classList.remove('hidden');
+        return; 
+    }
     
     await window.updateDoc(docRef, { p2Name: currentUser.name, p2DocId: userDocRef.id, status: 'playing' });
 

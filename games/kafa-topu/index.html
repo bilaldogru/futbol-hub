@@ -27,21 +27,25 @@
         <i class="fa-solid fa-futbol animate-bounce text-6xl text-orange-500 mb-6"></i><p id="waitText">ODAYA BAĞLANILIYOR...</p>
     </div>
 
-    <div id="joinConfirmModal" class="fixed inset-0 z-[140] bg-black/80 backdrop-blur-sm flex items-center justify-center px-4 hidden">
-        <div class="bg-gray-900 border-2 border-orange-500 p-8 rounded-3xl shadow-[0_0_50px_rgba(234,88,12,0.3)] max-w-sm w-full text-center">
-            <div class="mb-6">
-                <i class="fa-solid fa-circle-question text-5xl text-orange-500 mb-4"></i>
-                <h3 class="text-2xl font-black text-white mb-2">MAÇA KATIL?</h3>
-                <p id="confirmBetText" class="text-gray-400 font-bold">Bu maça girmek için <span class="text-orange-400">...</span> puan bahis yatıracaksın.</p>
+    <div id="inviteModal" class="fixed inset-0 z-[400] flex items-center justify-center bg-black/95 backdrop-blur-xl px-4 hidden">
+        <div class="bg-gray-900 border-2 border-orange-500 p-8 rounded-3xl max-w-md w-full text-center shadow-[0_0_50px_rgba(234,88,12,0.3)] relative">
+            <div class="text-6xl mb-4 animate-bounce">⚔️</div>
+            <h2 class="text-3xl font-black mb-2 tracking-tighter text-white">MEYDAN OKUMA!</h2>
+            <p id="invite-challenger-name" class="text-orange-400 font-bold mb-6 text-sm">Bir oyuncu seni maça davet ediyor!</p>
+            
+            <div class="bg-gray-800 p-4 rounded-xl mb-8 border border-gray-700 shadow-inner">
+                <p class="text-gray-400 text-xs font-bold mb-1 tracking-widest">ORTADAKİ TOPLAM ÖDÜL</p>
+                <div class="text-5xl font-black text-yellow-400 drop-shadow-md"><span id="invite-prize">0</span> P</div>
             </div>
-            <div class="flex gap-4">
-                <button onclick="closeJoinConfirm()" class="flex-1 bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 rounded-xl transition">VAZGEÇ</button>
-                <button id="finalJoinBtn" class="flex-1 bg-orange-600 hover:bg-orange-500 text-white font-bold py-3 rounded-xl transition shadow-lg">KATIL</button>
+
+            <div class="flex gap-3">
+                <button onclick="closeInviteModal()" class="flex-1 bg-gray-800 text-gray-300 font-bold py-4 rounded-xl hover:bg-red-600 hover:text-white border border-gray-600 hover:border-red-500 transition-all">REDDET</button>
+                <button id="acceptInviteBtn" class="flex-1 bg-orange-600 text-white font-black py-4 rounded-xl hover:bg-orange-500 shadow-lg shadow-orange-500/30 transition-all">KABUL ET</button>
             </div>
         </div>
     </div>
 
-    <div id="lobbyModal" class="absolute inset-0 z-[120] flex items-center justify-center bg-black/90 backdrop-blur-lg px-4 font-['Montserrat']">
+    <div id="lobbyModal" class="hidden absolute inset-0 z-[120] flex items-center justify-center bg-black/90 backdrop-blur-lg px-4 font-['Montserrat']">
         <div class="bg-gray-900 border-2 border-orange-500 p-6 rounded-3xl max-w-md w-full text-center shadow-[0_0_30px_rgba(230,126,34,0.3)] relative flex flex-col max-h-[80vh]">
             <button onclick="fetchLobbyRooms()" class="absolute top-4 right-4 text-orange-400 hover:text-white"><i class="fa-solid fa-rotate-right"></i></button>
             <h2 class="text-3xl font-black mb-1 text-white tracking-tighter">ARENA (1v1)</h2>
