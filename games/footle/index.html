@@ -123,11 +123,18 @@
         <div id="opponentBoard" class="flex flex-col gap-1 w-32"></div>
     </div>
 
-    <main class="flex-grow flex flex-col items-center justify-start mt-4 w-full max-w-xl px-4 pb-48">
-        <div class="grid grid-cols-5 gap-2 w-full mb-2 text-[10px] uppercase font-bold text-gray-400 text-center tracking-widest">
+    <main class="flex-grow flex flex-col items-center justify-start mt-4 w-full max-w-xl px-4 pb-48 relative">
+        
+        <div id="first-guess-hint" class="absolute top-[40%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center justify-center text-center opacity-40 pointer-events-none transition-opacity duration-700 z-0 w-full px-4">
+            <h2 class="text-2xl md:text-4xl font-black text-white mb-2 tracking-wider drop-shadow-lg">İLK TAHMİNİNİ YAP</h2>
+            <p class="text-gray-300 font-bold text-sm md:text-base">Aşağıdaki alana bir futbolcu adı yazarak oyuna başla.</p>
+            <i class="fa-solid fa-arrow-down text-5xl mt-6 text-green-500 animate-bounce"></i>
+        </div>
+
+        <div class="grid grid-cols-5 gap-2 w-full mb-2 text-[10px] uppercase font-bold text-gray-400 text-center tracking-widest relative z-10">
             <div>Uyruk</div><div>Lig</div><div>Takım</div><div>Poz</div><div>Yaş</div>
         </div>
-        <div id="gameBoard" class="flex flex-col gap-2 w-full"></div>
+        <div id="gameBoard" class="flex flex-col gap-2 w-full relative z-10"></div>
     </main>
 
     <footer class="fixed bottom-0 w-full max-w-xl p-6 bg-gradient-to-t from-black via-black to-transparent z-40">

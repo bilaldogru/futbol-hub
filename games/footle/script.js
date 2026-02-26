@@ -485,6 +485,13 @@ function tahminYap() {
     const tahmin = oyuncular.find(o => o.isim.toLowerCase() === isim.toLowerCase());
     if (!tahmin) { alert("Lütfen listeden geçerli bir oyuncu seçin!"); return; }
 
+
+    const hint = document.getElementById('first-guess-hint');
+    if (hint && !hint.classList.contains('hidden')) {
+        hint.classList.replace('opacity-40', 'opacity-0'); // Yavaşça görünmez yap
+        setTimeout(() => hint.classList.add('hidden'), 700); // Animasyon bitince DOM'dan kaldır
+    }
+
     denemeSayisi++;
     hakGosterge.innerText = maxHak - denemeSayisi;
     input.value = "";
