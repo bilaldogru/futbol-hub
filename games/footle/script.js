@@ -325,30 +325,54 @@ function listenToRoom() {
     });
 }
 
+// --- RAKİP DURUMUNU GÜNCELLEME (SADECE SON TAHMİN) ---
 function renderOpponentBoard(guesses) {
     const oppBoard = document.getElementById('opponentBoard');
     if(!oppBoard) return;
     
+    // Eski genişlik sınırını kaldırıp yatayda rahat yayılmasını sağlayalım
+    oppBoard.className = "flex justify-center w-full transition-all duration-300";
     oppBoard.innerHTML = '';
     
-    guesses.forEach(rowStr => {
-        const rowColors = rowStr.split('-'); 
-        const rowDiv = document.createElement('div');
-        rowDiv.className = "flex gap-1 justify-center";
+    // Eğer rakip henüz tahmin yapmadıysa
+    if (!guesses || guesses.length === 0) {
+        oppBoard.innerHTML = '<span class="text-xs text-gray-500 font-bold animate-pulse">İlk tahmin bekleniyor...</span>';
+        return;
+    }
+
+    // Sadece dizideki en son tahmini al
+    const currentGuessNumber = guesses.length;
+    const lastGuessStr = guesses[currentGuessNumber - 1];
+    const rowColors = lastGuessStr.split('-'); 
+    
+    // Dış Kapsayıcı (Şık bir kapsül tasarımı)
+    const rowDiv = document.createElement('div');
+    rowDiv.className = "flex items-center gap-3 bg-gray-900/80 px-4 py-2 rounded-full border border-gray-700 shadow-lg";
+    
+    // "Tahmin X:" Yazısı
+    const label = document.createElement('span');
+    label.className = "text-xs font-bold text-gray-400 tracking-wider uppercase";
+    label.innerText = `Tahmin ${currentGuessNumber}:`;
+    rowDiv.appendChild(label);
+
+    // Renk Kutularının Kapsayıcısı
+    const boxesDiv = document.createElement('div');
+    boxesDiv.className = "flex gap-1.5";
+
+    // Kutuları Oluştur
+    rowColors.forEach(color => {
+        const box = document.createElement('div');
+        box.className = "w-4 h-4 sm:w-5 sm:h-5 rounded-sm transition-all duration-300 transform scale-100";
         
-        rowColors.forEach(color => {
-            const box = document.createElement('div');
-            box.className = "w-4 h-4 sm:w-5 sm:h-5 rounded-sm transition-all duration-300 transform scale-100 ";
-            
-            if (color === 'correct') box.className += "bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.6)]";
-            else if (color === 'partial') box.className += "bg-yellow-500";
-            else box.className += "bg-gray-700";
-            
-            rowDiv.appendChild(box);
-        });
+        if (color === 'correct') box.className += " bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.6)]";
+        else if (color === 'partial') box.className += " bg-yellow-500";
+        else box.className += " bg-gray-700";
         
-        oppBoard.appendChild(rowDiv);
+        boxesDiv.appendChild(box);
     });
+    
+    rowDiv.appendChild(boxesDiv);
+    oppBoard.appendChild(rowDiv);
 }
 
 function showWaitingOverlay(msg) {
