@@ -19,7 +19,7 @@ let roomUnsubscribe = null;
 let lobbyUnsubscribe = null; 
 let myGuesses = []; 
 let selectedRoundsToCreate = 3; 
-let roomExpireTimer = null; // YENİ: 5 Dakikalık Saatli Bomba
+let roomExpireTimer = null; 
 
 // DOM Elementleri
 const input = document.getElementById('playerInput');
@@ -27,8 +27,63 @@ const autocompleteList = document.getElementById('autocomplete-list');
 const submitBtn = document.getElementById('submitBtn');
 const hakGosterge = document.getElementById('hakGosterge');
 
+// --- BİLDİRİM SİSTEMİ (TOAST) EKLENDİ ---
+window.showToast = function(msg, type = 'error') {
+    let toast = document.getElementById('customToast');
+    if(!toast) {
+        toast = document.createElement('div');
+        toast.id = 'customToast';
+        toast.innerHTML = `<i id="toastIcon" class="text-2xl"></i><span id="toastMsg"></span>`;
+        document.body.appendChild(toast);
+    }
+    const toastMsg = document.getElementById('toastMsg');
+    const toastIcon = document.getElementById('toastIcon');
+
+    toastMsg.innerHTML = msg;
+    toast.className = "fixed top-10 left-1/2 transform -translate-x-1/2 z-[9999] transition-all duration-300 flex items-center gap-3 px-6 py-4 rounded-2xl shadow-2xl font-bold text-white border-2";
+
+    if(type === 'error') {
+        toast.classList.add('bg-red-900/90', 'border-red-500', 'shadow-[0_0_30px_rgba(239,68,68,0.4)]');
+        toastIcon.className = "fa-solid fa-circle-exclamation text-red-400 text-2xl";
+    } else if (type === 'success') {
+        toast.classList.add('bg-green-900/90', 'border-green-500', 'shadow-[0_0_30px_rgba(34,197,94,0.4)]');
+        toastIcon.className = "fa-solid fa-circle-check text-green-400 text-2xl";
+    }
+
+    toast.classList.remove('opacity-0', '-translate-y-24');
+    toast.classList.add('opacity-100', 'translate-y-0');
+
+    setTimeout(() => {
+        toast.classList.remove('opacity-100', 'translate-y-0');
+        toast.classList.add('opacity-0', '-translate-y-24');
+    }, 3000);
+}
+
+// --- GÜNLÜK OYUN KİLİDİ KONTROLÜ ---
+function checkDailyLock() {
+    const btn = document.getElementById('btnDailyMode');
+    const icon = document.getElementById('dailyModeIcon');
+    const text = document.getElementById('dailyModeText');
+    
+    if(!btn) return;
+    
+    const today = new Date().toDateString();
+    const lastPlayed = localStorage.getItem('footle_daily_last_played');
+    
+    if(lastPlayed === today) {
+        btn.disabled = true; 
+        btn.classList.add('opacity-50', 'cursor-not-allowed', 'bg-black');
+        btn.classList.remove('hover:bg-gray-700', 'hover:border-white');
+        
+        icon.className = "fa-solid fa-lock text-red-500 mr-2";
+        text.innerText = "GÜNLÜK OYNANDI (YARIN GEL)";
+    }
+}
+
 // --- 2. BAŞLANGIÇ ---
 document.addEventListener('DOMContentLoaded', () => {
+    checkDailyLock(); // Sayfa açılırken kilidi kontrol et
+    
     fetch('../../oyuncular.json')
         .then(response => response.json())
         .then(data => {
@@ -46,6 +101,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // --- 3. MENÜ VE LOBİ YÖNETİMİ ---
 window.startSinglePlayer = function() {
+    const today = new Date().toDateString();
+    if(localStorage.getItem('footle_daily_last_played') === today) {
+        window.showToast("Bugünkü hakkını zaten kullandın. Yarın tekrar gel!", "error");
+        return;
+    }
+
     document.getElementById('modeSelectionModal').classList.add('hidden');
     isMultiplayer = false;
     oyunuBaslat(); 
@@ -61,6 +122,7 @@ window.backToModeSelectionFromLobby = function() {
     if(lobbyUnsubscribe) lobbyUnsubscribe(); 
     document.getElementById('lobbyModal').classList.add('hidden');
     document.getElementById('modeSelectionModal').classList.remove('hidden');
+    checkDailyLock(); 
 };
 
 window.showMultiplayerSetup = function() {
@@ -73,9 +135,8 @@ window.showMultiplayerSetup = function() {
     selectRounds(3); 
 };
 
-// KULLANICI GERİ ÇIKARSA ODAYI SİL
 window.backToLobby = async function() {
-    if (roomExpireTimer) clearTimeout(roomExpireTimer); // Zamanlayıcıyı durdur
+    if (roomExpireTimer) clearTimeout(roomExpireTimer); 
 
     if (playerRole === 'player1' && roomId) {
         try {
@@ -93,7 +154,6 @@ window.backToLobby = async function() {
     fetchLobbyRooms();
 };
 
-// KULLANICI BEKLERKEN SEKMEYİ KAPATIRSA ODAYI SİL
 window.addEventListener('beforeunload', (e) => {
     if (playerRole === 'player1' && roomId) {
         window.deleteDoc(window.doc(window.db, "footle_rooms", roomId));
@@ -119,11 +179,8 @@ window.fetchLobbyRooms = function() {
             const data = doc.data();
             const roomId = doc.id;
             
-            // YENİ: 5 dakikadan (300.000 ms) eski odaları lobide GÖSTERME
             const now = new Date().getTime();
-            if (data.createdAtMs && (now - data.createdAtMs > 300000)) {
-                return; // Bu odayı atla
-            }
+            if (data.createdAtMs && (now - data.createdAtMs > 300000)) return; 
 
             validRoomCount++;
             
@@ -171,7 +228,7 @@ window.confirmAndCreateRoom = async function() {
     let shuffled = [...oyuncular].sort(() => 0.5 - Math.random());
     multiTargets = shuffled.slice(0, rounds).map(p => p.isim);
 
-    const nowMs = new Date().getTime(); // Şimdiki zamanı milisaniye olarak al
+    const nowMs = new Date().getTime(); 
 
     const roomRef = window.doc(window.db, "footle_rooms", roomId);
     await window.setDoc(roomRef, {
@@ -186,16 +243,15 @@ window.confirmAndCreateRoom = async function() {
         p2Guesses: [], 
         currentRound: 1,
         status: 'waiting_for_p2',
-        createdAtMs: nowMs // Firebase zaman damgası yerine direkt MS kaydediyoruz (Filtreleme kolay olsun diye)
+        createdAtMs: nowMs 
     });
 
-    // YENİ: 5 DAKİKALIK (300.000 ms) SAATLİ BOMBA
     roomExpireTimer = setTimeout(async () => {
         if (roomId && playerRole === 'player1') {
             try {
                 await window.deleteDoc(window.doc(window.db, "footle_rooms", roomId));
                 alert("5 dakika boyunca kimse katılmadığı için oda iptal edildi.");
-                window.backToLobby(); // Odayı sil ve lobiye at
+                window.backToLobby(); 
             } catch(e) {}
         }
     }, 300000);
@@ -235,9 +291,7 @@ window.copyInviteLink = function() {
             copyTooltip.classList.add('opacity-0', 'translate-y-2');
         }, 2000);
         
-    }).catch(err => {
-        document.execCommand("copy"); 
-    });
+    }).catch(err => { document.execCommand("copy"); });
 };
 
 async function joinRoom(id) {
@@ -287,9 +341,8 @@ function listenToRoom() {
         const oppGuesses = playerRole === 'player1' ? data.p2Guesses : data.p1Guesses;
         renderOpponentBoard(oppGuesses || []);
 
-        // BİRİ ODAYA GİRDİYSE SAATLİ BOMBAYI İPTAL ET
         if (playerRole === 'player1' && data.status === 'waiting_for_p2' && data.p2Status === 'playing') {
-            if (roomExpireTimer) clearTimeout(roomExpireTimer); // Bombayı durdur!
+            if (roomExpireTimer) clearTimeout(roomExpireTimer); 
             window.updateDoc(roomRef, { status: 'active' });
         }
 
@@ -310,19 +363,15 @@ function listenToRoom() {
             if (data.currentRound < data.rounds) {
                 window.updateDoc(roomRef, {
                     currentRound: data.currentRound + 1,
-                    p1Status: 'playing',
-                    p2Status: 'playing',
-                    p1Guesses: [], 
-                    p2Guesses: []
+                    p1Status: 'playing', p2Status: 'playing',
+                    p1Guesses: [], p2Guesses: []
                 });
             } else {
                 window.updateDoc(roomRef, { status: 'game_over' });
             }
         }
 
-        if (data.status === 'game_over') {
-            showMultiplayerResult(data);
-        }
+        if (data.status === 'game_over') { showMultiplayerResult(data); }
     });
 }
 
@@ -331,44 +380,35 @@ function renderOpponentBoard(guesses) {
     const oppBoard = document.getElementById('opponentBoard');
     if(!oppBoard) return;
     
-    // Eski genişlik sınırını kaldırıp yatayda rahat yayılmasını sağlayalım
     oppBoard.className = "flex justify-center w-full transition-all duration-300";
     oppBoard.innerHTML = '';
     
-    // Eğer rakip henüz tahmin yapmadıysa
     if (!guesses || guesses.length === 0) {
         oppBoard.innerHTML = '<span class="text-xs text-gray-500 font-bold animate-pulse">İlk tahmin bekleniyor...</span>';
         return;
     }
 
-    // Sadece dizideki en son tahmini al
     const currentGuessNumber = guesses.length;
     const lastGuessStr = guesses[currentGuessNumber - 1];
     const rowColors = lastGuessStr.split('-'); 
     
-    // Dış Kapsayıcı (Şık bir kapsül tasarımı)
     const rowDiv = document.createElement('div');
     rowDiv.className = "flex items-center gap-3 bg-gray-900/80 px-4 py-2 rounded-full border border-gray-700 shadow-lg";
     
-    // "Tahmin X:" Yazısı
     const label = document.createElement('span');
     label.className = "text-xs font-bold text-gray-400 tracking-wider uppercase";
     label.innerText = `Tahmin ${currentGuessNumber}:`;
     rowDiv.appendChild(label);
 
-    // Renk Kutularının Kapsayıcısı
     const boxesDiv = document.createElement('div');
     boxesDiv.className = "flex gap-1.5";
 
-    // Kutuları Oluştur
     rowColors.forEach(color => {
         const box = document.createElement('div');
         box.className = "w-4 h-4 sm:w-5 sm:h-5 rounded-sm transition-all duration-300 transform scale-100";
-        
         if (color === 'correct') box.className += " bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.6)]";
         else if (color === 'partial') box.className += " bg-yellow-500";
         else box.className += " bg-gray-700";
-        
         boxesDiv.appendChild(box);
     });
     
@@ -442,7 +482,7 @@ function resetBoard() {
     autocompleteList.innerHTML = '';
     autocompleteList.classList.add('hidden');
     
-    //Her tur başladığında bonus haklarını sıfırla
+    // Her tur başladığında bonus haklarını sıfırla
     bonusKazanilanlar = { uyruk: false, lig: false, takim: false, pozisyon: false, yas: false };
 }
 
@@ -452,7 +492,6 @@ async function oyunuBaslat() {
     if (isMultiplayer) {
         const targetName = multiTargets[currentMultiRound - 1];
         hedefOyuncu = oyuncular.find(p => p.isim === targetName) || oyuncular[0];
-        console.log(`Tur ${currentMultiRound} Hedefi:`, hedefOyuncu.isim);
         return;
     }
 
@@ -513,11 +552,10 @@ function tahminYap() {
     const tahmin = oyuncular.find(o => o.isim.toLowerCase() === isim.toLowerCase());
     if (!tahmin) { alert("Lütfen listeden geçerli bir oyuncu seçin!"); return; }
 
-
     const hint = document.getElementById('first-guess-hint');
     if (hint && !hint.classList.contains('hidden')) {
-        hint.classList.replace('opacity-40', 'opacity-0'); // Yavaşça görünmez yap
-        setTimeout(() => hint.classList.add('hidden'), 700); // Animasyon bitince DOM'dan kaldır
+        hint.classList.replace('opacity-40', 'opacity-0'); 
+        setTimeout(() => hint.classList.add('hidden'), 700); 
     }
 
     denemeSayisi++;
@@ -547,21 +585,20 @@ function satirEkle(tahmin) {
     ];
 
     let currentGuessColors = []; 
-    let kazanilanEkstraPuan = 0; // Bu tahminde kazanılacak TOPLAM puan
+    let kazanilanEkstraPuan = 0; 
     
-    // Önce hangi kartlardan puan alacağımızı hesaplayalım (Animasyonlardan önce bilmemiz lazım)
     const eklenecekPuanlar = kriterler.map(k => {
         if (k.val === k.target && isMultiplayer && !bonusKazanilanlar[k.id]) {
             bonusKazanilanlar[k.id] = true;
             kazanilanEkstraPuan += k.puan;
-            return k.puan; // Bu karta eklenecek puan
+            return k.puan; 
         }
         return 0;
     });
 
     kriterler.forEach((k, i) => {
         const card = document.createElement('div');
-        card.className = "flip-card h-full w-full relative"; // 'relative' eklendi ki uçan yazı bunun içinde dursun
+        card.className = "flip-card h-full w-full relative"; 
         
         let renk = "wrong";
         if (k.val === k.target) renk = "correct";
@@ -581,55 +618,35 @@ function satirEkle(tahmin) {
             </div>`;
         row.appendChild(card);
 
-        // KART DÖNME ANİMASYONU VE PUAN EFEKTİ
         setTimeout(() => { 
             card.classList.add('flipped'); 
             card.style.opacity = "1"; 
 
-            // EĞER BU KARTTAN PUAN KAZANILDIYSA UÇAN YAZI EFEKTİNİ TETİKLE
             const kazanilan = eklenecekPuanlar[i];
             if (kazanilan > 0) {
-                
-                // 1. Skoru anlık olarak güncelle
                 myScore += kazanilan;
                 const scoreEl = document.getElementById('myScore');
                 scoreEl.innerText = myScore;
                 
-                // 2. Skoru patlatma/zıplatma efekti (Yukarıdaki skor tablosu için)
                 scoreEl.classList.add('text-green-400', 'scale-150', 'drop-shadow-[0_0_10px_rgba(34,197,94,1)]', 'inline-block', 'transition-all', 'duration-300');
-                setTimeout(() => {
-                    scoreEl.classList.remove('text-green-400', 'scale-150', 'drop-shadow-[0_0_10px_rgba(34,197,94,1)]');
-                }, 400);
+                setTimeout(() => scoreEl.classList.remove('text-green-400', 'scale-150', 'drop-shadow-[0_0_10px_rgba(34,197,94,1)]'), 400);
 
-                // 3. KARTIN ÜSTÜNDEN UÇAN YAZI (RPG stili) - DAHA YAVAŞ VE NET
                 const floatingText = document.createElement('div');
                 floatingText.innerText = `+${kazanilan}`;
-                // Yazıyı biraz daha büyüttük, transition süresini (duration-1000) 1 saniye yaptık
                 floatingText.className = "absolute -top-4 left-1/2 transform -translate-x-1/2 text-green-400 font-black text-2xl sm:text-3xl z-[100] drop-shadow-[0_0_12px_rgba(0,0,0,1)] pointer-events-none transition-all duration-1000 ease-out opacity-100";
-
+                
                 card.appendChild(floatingText);
 
-            // Yazı hemen yukarı doğru süzülmeye başlasın (Daha yükseğe: -top-24)
-            setTimeout(() => {
-                floatingText.classList.replace('-top-4', '-top-24'); 
-            }, 50);
-
-            // Yazı tam 1.2 saniye boyunca net olarak görünsün, SONRA silinmeye başlasın
-            setTimeout(() => {
-                floatingText.classList.replace('opacity-100', 'opacity-0');
-            }, 1200);
-
-            // Tamamen görünmez olduktan sonra HTML kalabalığı yapmasın diye sil
-            setTimeout(() => floatingText.remove(), 2500);
+                setTimeout(() => floatingText.classList.replace('-top-4', '-top-24'), 50);
+                setTimeout(() => floatingText.classList.replace('opacity-100', 'opacity-0'), 1200);
+                setTimeout(() => floatingText.remove(), 2500);
             }
-        }, i * 300); // Her kart 300ms arayla döner
+        }, i * 300); 
     });
 
     board.appendChild(row);
     setTimeout(() => row.scrollIntoView({ behavior: 'smooth', block: 'end' }), 100);
 
-    // YENİ: Firebase güncellemesini kartların dönmesi bittikten SONRA yapalım ki,
-    // rakibin ekranındaki kutular ve senin skorun animasyonlarla eş zamanlı güncellensin.
     if (isMultiplayer) {
         myGuesses.push(currentGuessColors.join('-'));
         
@@ -644,7 +661,7 @@ function satirEkle(tahmin) {
             }
 
             window.updateDoc(roomRef, updateData).catch(e => console.error("Firebase Hatası:", e));
-        }, kriterler.length * 300); // Yaklaşık 1.5 saniye sonra Firebase'e gönder
+        }, kriterler.length * 300); 
     }
 }
 
@@ -653,6 +670,11 @@ function bitir(kazandi) {
     oyunBitti = true;
     input.disabled = true;
     submitBtn.disabled = true;
+
+    // Tek Oyuncuysa bugünü "oynandı" olarak kaydet
+    if (!isMultiplayer) {
+        localStorage.setItem('footle_daily_last_played', new Date().toDateString());
+    }
 
     if (isMultiplayer) {
         const kazanilanPuan = kazandi ? (8 - denemeSayisi) * 100 : 0;
@@ -709,15 +731,15 @@ function bitir(kazandi) {
         emoji.innerText = "❌";
         title.innerText = "MAÇ BİTTİ";
         title.className = "text-3xl font-black mb-2 tracking-tighter text-red-500";
-        desc.innerText = "Hakların tükendi. Bir dahaki sefere!";
+        desc.innerText = "Hakların tükendi. Yarın tekrar dene!";
         
         resultStats.classList.add('hidden');
     }
 
     if(window.saveScoreToFirebase) {
         setTimeout(() => {
-            const puan = (maxHak - denemeSayisi + 1) * 100; 
-            window.saveScoreToFirebase(puan, "Footle");
+            const puan = kazandi ? (8 - denemeSayisi) * 100 : 0; 
+            if(puan > 0) window.saveScoreToFirebase(puan, "Footle");
         }, 1000);
     }
 
