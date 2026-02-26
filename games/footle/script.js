@@ -3,7 +3,8 @@ let oyuncular = [];
 let hedefOyuncu = {};
 let oyunBitti = false;
 let denemeSayisi = 0;
-const maxHak = 5;
+const maxHak = 7;
+let bonusKazanilanlar = { uyruk: false, lig: false, takim: false, pozisyon: false, yas: false };
 
 // --- MULTIPLAYER DEĞİŞKENLERİ ---
 let isMultiplayer = false;
@@ -440,6 +441,9 @@ function resetBoard() {
     input.focus();
     autocompleteList.innerHTML = '';
     autocompleteList.classList.add('hidden');
+    
+    //Her tur başladığında bonus haklarını sıfırla
+    bonusKazanilanlar = { uyruk: false, lig: false, takim: false, pozisyon: false, yas: false };
 }
 
 async function oyunuBaslat() {
@@ -535,18 +539,29 @@ function satirEkle(tahmin) {
     row.className = "grid grid-cols-5 gap-2 h-14 sm:h-16 w-full"; 
     
     const kriterler = [
-        { val: tahmin.uyruk, target: hedefOyuncu.uyruk, type: 'text' },
-        { val: tahmin.lig, target: hedefOyuncu.lig, type: 'text' },
-        { val: tahmin.takim, target: hedefOyuncu.takim, type: 'text' },
-        { val: tahmin.pozisyon, target: hedefOyuncu.pozisyon, type: 'text' },
-        { val: tahmin.yas, target: hedefOyuncu.yas, type: 'number' }
+        { id: 'uyruk', val: tahmin.uyruk, target: hedefOyuncu.uyruk, type: 'text', puan: 50 },
+        { id: 'lig', val: tahmin.lig, target: hedefOyuncu.lig, type: 'text', puan: 25 },
+        { id: 'takim', val: tahmin.takim, target: hedefOyuncu.takim, type: 'text', puan: 50 },
+        { id: 'pozisyon', val: tahmin.pozisyon, target: hedefOyuncu.pozisyon, type: 'text', puan: 25 },
+        { id: 'yas', val: tahmin.yas, target: hedefOyuncu.yas, type: 'number', puan: 25 }
     ];
 
     let currentGuessColors = []; 
+    let kazanilanEkstraPuan = 0; // Bu tahminde kazanılacak TOPLAM puan
+    
+    // Önce hangi kartlardan puan alacağımızı hesaplayalım (Animasyonlardan önce bilmemiz lazım)
+    const eklenecekPuanlar = kriterler.map(k => {
+        if (k.val === k.target && isMultiplayer && !bonusKazanilanlar[k.id]) {
+            bonusKazanilanlar[k.id] = true;
+            kazanilanEkstraPuan += k.puan;
+            return k.puan; // Bu karta eklenecek puan
+        }
+        return 0;
+    });
 
     kriterler.forEach((k, i) => {
         const card = document.createElement('div');
-        card.className = "flip-card h-full w-full";
+        card.className = "flip-card h-full w-full relative"; // 'relative' eklendi ki uçan yazı bunun içinde dursun
         
         let renk = "wrong";
         if (k.val === k.target) renk = "correct";
@@ -565,19 +580,71 @@ function satirEkle(tahmin) {
                 <div class="flip-back ${renk} font-bold text-[10px] sm:text-xs">${icerik}</div>
             </div>`;
         row.appendChild(card);
-        setTimeout(() => { card.classList.add('flipped'); card.style.opacity = "1"; }, i * 300);
+
+        // KART DÖNME ANİMASYONU VE PUAN EFEKTİ
+        setTimeout(() => { 
+            card.classList.add('flipped'); 
+            card.style.opacity = "1"; 
+
+            // EĞER BU KARTTAN PUAN KAZANILDIYSA UÇAN YAZI EFEKTİNİ TETİKLE
+            const kazanilan = eklenecekPuanlar[i];
+            if (kazanilan > 0) {
+                
+                // 1. Skoru anlık olarak güncelle
+                myScore += kazanilan;
+                const scoreEl = document.getElementById('myScore');
+                scoreEl.innerText = myScore;
+                
+                // 2. Skoru patlatma/zıplatma efekti (Yukarıdaki skor tablosu için)
+                scoreEl.classList.add('text-green-400', 'scale-150', 'drop-shadow-[0_0_10px_rgba(34,197,94,1)]', 'inline-block', 'transition-all', 'duration-300');
+                setTimeout(() => {
+                    scoreEl.classList.remove('text-green-400', 'scale-150', 'drop-shadow-[0_0_10px_rgba(34,197,94,1)]');
+                }, 400);
+
+                // 3. KARTIN ÜSTÜNDEN UÇAN YAZI (RPG stili) - DAHA YAVAŞ VE NET
+                const floatingText = document.createElement('div');
+                floatingText.innerText = `+${kazanilan}`;
+                // Yazıyı biraz daha büyüttük, transition süresini (duration-1000) 1 saniye yaptık
+                floatingText.className = "absolute -top-4 left-1/2 transform -translate-x-1/2 text-green-400 font-black text-2xl sm:text-3xl z-[100] drop-shadow-[0_0_12px_rgba(0,0,0,1)] pointer-events-none transition-all duration-1000 ease-out opacity-100";
+
+                card.appendChild(floatingText);
+
+            // Yazı hemen yukarı doğru süzülmeye başlasın (Daha yükseğe: -top-24)
+            setTimeout(() => {
+                floatingText.classList.replace('-top-4', '-top-24'); 
+            }, 50);
+
+            // Yazı tam 1.2 saniye boyunca net olarak görünsün, SONRA silinmeye başlasın
+            setTimeout(() => {
+                floatingText.classList.replace('opacity-100', 'opacity-0');
+            }, 1200);
+
+            // Tamamen görünmez olduktan sonra HTML kalabalığı yapmasın diye sil
+            setTimeout(() => floatingText.remove(), 2500);
+            }
+        }, i * 300); // Her kart 300ms arayla döner
     });
 
     board.appendChild(row);
     setTimeout(() => row.scrollIntoView({ behavior: 'smooth', block: 'end' }), 100);
 
+    // YENİ: Firebase güncellemesini kartların dönmesi bittikten SONRA yapalım ki,
+    // rakibin ekranındaki kutular ve senin skorun animasyonlarla eş zamanlı güncellensin.
     if (isMultiplayer) {
         myGuesses.push(currentGuessColors.join('-'));
-        const roomRef = window.doc(window.db, "footle_rooms", roomId);
-        const updateData = {};
-        const prefix = playerRole === 'player1' ? 'p1' : 'p2';
-        updateData[prefix + 'Guesses'] = myGuesses; 
-        window.updateDoc(roomRef, updateData).catch(e => console.error("Firebase Hatası:", e));
+        
+        setTimeout(() => {
+            const roomRef = window.doc(window.db, "footle_rooms", roomId);
+            const updateData = {};
+            const prefix = playerRole === 'player1' ? 'p1' : 'p2';
+            
+            updateData[prefix + 'Guesses'] = myGuesses; 
+            if (kazanilanEkstraPuan > 0) {
+                updateData[prefix + 'Score'] = myScore;
+            }
+
+            window.updateDoc(roomRef, updateData).catch(e => console.error("Firebase Hatası:", e));
+        }, kriterler.length * 300); // Yaklaşık 1.5 saniye sonra Firebase'e gönder
     }
 }
 
@@ -588,7 +655,7 @@ function bitir(kazandi) {
     submitBtn.disabled = true;
 
     if (isMultiplayer) {
-        const kazanilanPuan = kazandi ? (6 - denemeSayisi) * 100 : 0;
+        const kazanilanPuan = kazandi ? (8 - denemeSayisi) * 100 : 0;
         myScore += kazanilanPuan; 
         
         const roomRef = window.doc(window.db, "footle_rooms", roomId);
@@ -620,7 +687,7 @@ function bitir(kazandi) {
     targetName.innerText = hedefOyuncu.isim.toUpperCase();
 
     if (kazandi) {
-        const kazanilanPuan = (6 - denemeSayisi) * 100;
+        const kazanilanPuan = (8 - denemeSayisi) * 100;
         const yeniToplamPuan = addGlobalScore(kazanilanPuan);
 
         content.classList.remove('border-red-500', 'shadow-[0_0_50px_rgba(239,68,68,0.3)]');
