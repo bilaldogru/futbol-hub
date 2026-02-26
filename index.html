@@ -27,6 +27,12 @@
             
             <div id="user-info">
                 <span id="user-total-score" class="score-badge">0 P</span>
+                <div id="level-container" style="display: none; align-items: center; gap: 8px; margin-right: 15px;">
+    <span id="user-level" style="background: linear-gradient(45deg, #3b82f6, #8b5cf6); color: white; padding: 4px 10px; border-radius: 8px; font-weight: 900; font-size: 0.8rem; text-shadow: 0 1px 3px rgba(0,0,0,0.5);">Lv.1</span>
+    <div style="width: 80px; height: 10px; background: rgba(255,255,255,0.1); border-radius: 10px; overflow: hidden; border: 1px solid rgba(255,255,255,0.2);">
+        <div id="xp-bar-fill" style="height: 100%; width: 0%; background: linear-gradient(90deg, #3b82f6, #22c55e); transition: width 0.5s ease-out;"></div>
+    </div>
+</div>
                 <button id="shop-btn" onclick="openShop()">
                     <i class="fa-solid fa-cart-shopping"></i> MAĞAZA
                 </button>
@@ -217,10 +223,6 @@
                 <div class="about-points">
                     <div class="point-item">
                         <span class="dot"></span>
-                        <p><strong>Açık Kaynak:</strong> Projemiz tüm futbolseverlerin geliştirmesine açıktır.</p>
-                    </div>
-                    <div class="point-item">
-                        <span class="dot"></span>
                         <p><strong>Topluluk Odaklı:</strong> Her güncellememizde kullanıcı geri bildirimlerini temel alıyoruz.</p>
                     </div>
                     <div class="point-item">
@@ -294,9 +296,47 @@
       }
 
       window.buyPack = (type) => {
-          let packName = type === 'bronze' ? 'Bronz' : type === 'silver' ? 'Gümüş' : 'Altın';
-          alert(packName + " Top açılıyor... ⚽ (Şansına güven!)");
-      };
+    closeShop();
+    
+    const overlay = document.getElementById('pack-overlay');
+    const container = document.getElementById('pack-container');
+    const ballEl = document.getElementById('pack-animated-ball');
+    const rewardEl = document.getElementById('pack-reward');
+    const rewardTitle = document.getElementById('reward-title');
+    const rewardDesc = document.getElementById('reward-desc');
+
+    // Topun rengini ve başlangıç durumunu ayarla
+    ballEl.className = `ball`; // Önce temizle
+    setTimeout(() => { ballEl.classList.add(`ball-${type}`, 'scale-in', 'spin'); }, 50);
+    
+    // Ekranı aç ve ödülü gizle
+    overlay.classList.add('active');
+    rewardEl.classList.remove('show');
+    
+    // 1. Aşama: Top sallansın
+    setTimeout(() => { container.classList.add('pack-shake'); }, 1500);
+
+    // 2. Aşama: Top patlar ve ödül çıkar
+    setTimeout(() => {
+        container.classList.remove('pack-shake');
+        ballEl.classList.remove('scale-in'); ballEl.classList.add('scale-out'); // Top küçülüp kaybolur
+        
+        // Ödül Metinleri
+        if(type === 'gold') { rewardTitle.innerText = "İKONİK KART!"; rewardDesc.innerText = "Altın Krampon Kilidi Açıldı!"; }
+        else if(type === 'silver') { rewardTitle.innerText = "NADİR GÜÇ!"; rewardDesc.innerText = "+10 Enerji Başlangıcı!"; }
+        else { rewardTitle.innerText = "STANDART"; rewardDesc.innerText = "Sıradan Forma Paketi"; }
+
+        rewardEl.style.display = "flex"; // Görünür yap
+        setTimeout(() => rewardEl.classList.add('show'), 50); // Animasyonu tetikle
+    }, 2500);
+};
+
+window.closePack = () => {
+    document.getElementById('pack-overlay').classList.remove('active');
+    // Kapatınca topu eski haline getir ki bir dahakine yine animasyonla gelsin
+    document.getElementById('pack-animated-ball').classList.remove('scale-out', 'spin');
+    document.getElementById('pack-reward').style.display = "none";
+};
 
       loginBtn.addEventListener('click', () => {
         signInWithPopup(auth, provider).catch((error) => console.error("Hata:", error));
@@ -327,20 +367,30 @@
       });
 
       async function fetchUserScore(email) {
-        try {
-            const q = query(collection(db, "scores"), where("email", "==", email));
-            const querySnapshot = await getDocs(q);
+    try {
+        const q = query(collection(db, "scores"), where("email", "==", email));
+        const querySnapshot = await getDocs(q);
 
-            if (!querySnapshot.empty) {
-                const data = querySnapshot.docs[0].data();
-                scoreBadge.innerText = `${data.score} P`;
-                scoreBadge.style.display = 'inline-block';
-            } else {
-                scoreBadge.innerText = "0 P";
-                scoreBadge.style.display = 'inline-block';
-            }
-        } catch (e) { console.error("Puan çekilemedi:", e); }
-      }
+        let score = 0;
+        if (!querySnapshot.empty) {
+            score = querySnapshot.docs[0].data().score;
+        }
+        
+        // Puanı yazdır
+        scoreBadge.innerText = `${score} P`;
+        scoreBadge.style.display = 'inline-block';
+
+        // XP ve Seviye Hesaplama (Her 500 Puan = 1 Seviye)
+        const level = Math.floor(score / 500) + 1;
+        const currentXp = score % 500;
+        const xpPercentage = (currentXp / 500) * 100;
+
+        document.getElementById('level-container').style.display = 'flex';
+        document.getElementById('user-level').innerText = `Lv.${level}`;
+        document.getElementById('xp-bar-fill').style.width = `${xpPercentage}%`;
+
+    } catch (e) { console.error("Puan çekilemedi:", e); }
+}
 
       async function fetchLeaderboard() {
         try {
@@ -442,5 +492,24 @@
     window.addEventListener("load", reveal);
     </script>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
+
+
+    <div id="pack-overlay">
+    <div id="pack-container">
+        <div id="pack-animated-ball" class="ball"></div>
+        
+        <div id="pack-reward">
+            <div class="reward-card">
+                <div class="reward-content">
+                    <i class="fa-solid fa-star bounce-star"></i>
+                    <h2 id="reward-title">EFSANEVİ!</h2>
+                    <p id="reward-desc">Gizli yetenek kilidi açıldı</p>
+                </div>
+            </div>
+            <button onclick="closePack()" class="continue-btn">DEVAM ET</button>
+        </div>
+    </div>
+</div>
 </body>
 </html>
