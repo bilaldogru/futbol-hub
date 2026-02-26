@@ -24,6 +24,48 @@ window.showToast = function(msg, type = 'error') {
     }, 3000);
 }
 
+// --- ZORUNLU AVCI FONKSİYON 1: "Bekleniyor..." yazısını sayfada bulup ezer ---
+function clearWaitingTexts() {
+    const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null, false);
+    let node;
+    while (node = walker.nextNode()) {
+        if (node.nodeValue.trim() === 'Bekleniyor...') {
+            node.nodeValue = 'Bağlandı';
+            if (node.parentElement) {
+                node.parentElement.classList.remove('text-red-500', 'text-gray-400', 'text-gray-500');
+                node.parentElement.classList.add('text-green-500');
+            }
+        }
+    }
+}
+
+// --- ZORUNLU AVCI FONKSİYON 2: HTML ID'si ne olursa olsun süreyi bulur ve günceller ---
+function updateTimerUI(t) {
+    let m = Math.floor(t / 60);
+    let s = t % 60;
+    let text = `0${m}:${s < 10 ? '0'+s : s}`;
+    
+    // Önce klasik ID'leri dener
+    let possibleIds = ['timer-display', 'timer', 'time', 'game-timer'];
+    let found = false;
+    for(let id of possibleIds) {
+        let el = document.getElementById(id);
+        if(el) { el.innerText = text; found = true; }
+    }
+    
+    // Eğer HTML'de ID yoksa, sayfadaki 01:00 vb. yazıları bulup zorla değiştirir
+    if(!found) {
+        const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null, false);
+        let node;
+        while (node = walker.nextNode()) {
+            let val = node.nodeValue.trim();
+            if (val.match(/^[0-9]{2}:[0-9]{2}$/)) { 
+                node.nodeValue = text;
+            }
+        }
+    }
+}
+
 // --- GLOBAL DEĞİŞKENLER VE TAKIM VERİLERİ ---
 const TEAMS = {
     'gs': { primary: 0xfdb913, secondary: 0xa90432, hex: '#fdb913', logo: 'https://upload.wikimedia.org/wikipedia/commons/f/f6/Galatasaray_Sports_Club_Logo.png', name: 'GS' }, 
@@ -43,14 +85,12 @@ let peer = null;
 let conn = null;
 let isHost = false;
 
-// TAKIM SEÇİM DEĞİŞKENLERİ
 let selectedHostTeam = 'gs';
 let selectedClientTeam = 'gs';
 let roomToJoinId = null;
 let globalP1Team = 'gs';
 let globalP2Team = 'fb';
 
-// --- PHASER DEĞİŞKENLERİ ---
 let game = null;
 let p1, p2, p1Leg, p2Leg, ball;
 let cursors, shootKeys;
@@ -58,21 +98,19 @@ let sRed = 0, sBlue = 0;
 let goalLock = false;
 let p1CanShoot = true, p2CanShoot = true;
 let gameActive = false; 
-let timeLeft = 60; 
+let timeLeft = 90; // Başlangıç global süre
 let timerInterval;
 let goalAnnouncerText;
 let currentGoalMsg = ""; 
 let remoteKeys = { up: false, left: false, right: false, flat: false, high: false };
 let prevRemoteKeys = { flat: false, high: false };
 
-// --- SÜPER GÜÇ DEĞİŞKENLERİ ---
 let powerUpsGroup;
 let powerUpTimer;
 let activePowerUps = [];
 let lastTouchedPlayer = 0; 
 let powerUpAnnouncer;
 
-// KALE OBJELERİ (Büyüme/Küçülme sırasında pozisyonlarını güncellemek için)
 let leftGoalVisual, rightGoalVisual;
 let leftPostObj, rightPostObj;
 let leftGoalZone, rightGoalZone;
@@ -86,7 +124,6 @@ const POWER_TYPES = [
     { id: 'freeze_opponent', color: 0x00ffff, text: 'DONDURUCU!', icon: '❄️' } 
 ];
 
-// --- BAŞLANGIÇ VE URL KONTROLÜ (MEYDAN OKUMA) ---
 document.addEventListener('DOMContentLoaded', () => {
     const userStr = localStorage.getItem('firebaseUser');
     if (!userStr) {
@@ -185,9 +222,10 @@ window.fetchLobbyRooms = function() {
             validRoomCount++;
             const roomItem = document.createElement('div');
             roomItem.className = "flex justify-between items-center bg-gray-800 p-3 rounded-lg hover:bg-gray-700 border border-gray-700 transition";
+            
             roomItem.innerHTML = `
                 <div class="flex items-center gap-3">
-                    <img src="${TEAMS[data.p1Team].logo}" class="w-8 h-8 bg-white rounded-full p-0.5">
+                    <img src="${TEAMS[data.p1Team].logo}" class="w-8 h-8 bg-white rounded-full p-0.5 object-contain">
                     <div>
                         <p class="text-white font-bold text-sm">Kurucu: ${data.p1Name}</p>
                         <p class="text-xs text-orange-400">Bahis: ${data.bet} Puan</p>
@@ -369,10 +407,12 @@ function updateScoreboardUI() {
     const logo1 = document.getElementById('score-logo-p1');
     logo1.src = t1.logo;
     logo1.classList.remove('hidden');
+    logo1.classList.add('object-contain'); 
     
     const logo2 = document.getElementById('score-logo-p2');
     logo2.src = t2.logo;
     logo2.classList.remove('hidden');
+    logo2.classList.add('object-contain'); 
 
     document.getElementById('score-red').style.color = t1.hex;
     document.getElementById('score-red').style.textShadow = `0 0 20px ${t1.hex}`;
@@ -392,6 +432,8 @@ function setupHostConnection() {
     document.getElementById('p1-name-display').innerText = `${currentUser.name.toUpperCase()} (SEN)`;
     document.getElementById('p2-name-display').innerText = `RAKİP BAĞLANDI`;
     
+    clearWaitingTexts(); 
+    
     conn.on('data', (data) => { 
         if (data.type === 'init') {
             globalP2Team = data.p2Team; 
@@ -408,6 +450,8 @@ function setupClientConnection() {
     document.getElementById('waitOverlay').classList.remove('flex');
     document.getElementById('game-wrapper').classList.remove('hidden');
     document.getElementById('game-wrapper').classList.add('flex');
+    
+    clearWaitingTexts(); 
     
     updateScoreboardUI();
     startPhaserGame();
@@ -426,7 +470,7 @@ function handleDisconnect() {
 }
 
 // ==========================================
-// --- PHASER OYUN MANTIĞI (KALE BUG'I VE SÜPER GÜÇLER FİXLENDİ) ---
+// --- PHASER OYUN MANTIĞI ---
 // ==========================================
 
 function startPhaserGame() {
@@ -561,11 +605,10 @@ function create() {
     } else {
         this.physics.add.collider(ceiling, ball);
         
-        // 1. SORUN ÇÖZÜMÜ: Top üst direkte takılırsa otomatik sahaya fırlat
         this.physics.add.collider(ball, posts, (b, p) => {
             if (Math.abs(b.body.velocity.y) < 30 && b.y < p.y) {
                 let dir = (b.x < 700) ? 1 : -1; 
-                b.setVelocity(dir * 250, -300); // Havaya ve ortaya doğru fırlat
+                b.setVelocity(dir * 250, -300); 
             }
         }); 
 
@@ -582,7 +625,7 @@ function create() {
         this.physics.add.overlap(ball, rightGoalZone, () => goal(1, this));
         
         powerUpTimer = this.time.addEvent({
-            delay: 10000, 
+            delay: 5000, 
             callback: spawnPowerUp, 
             callbackScope: this, 
             loop: true 
@@ -600,7 +643,7 @@ function spawnPowerUp() {
     if (powerUpsGroup.getChildren().length >= 3) return;
 
     let randX = Phaser.Math.Between(300, 1100);
-    let randY = Phaser.Math.Between(150, 350);
+    let randY = Phaser.Math.Between(300, 480);
     let randomType = POWER_TYPES[Math.floor(Math.random() * POWER_TYPES.length)];
     
     let pu = powerUpsGroup.create(randX, randY, 'power_box').setDepth(1);
@@ -620,7 +663,6 @@ function spawnPowerUp() {
 function collectPowerUp(ball, powerUp) {
     let takerId = lastTouchedPlayer;
     
-    // EĞER TOPA KİMSE VURMADAN GÜÇ ALINIRSA: En yakın oyuncuyu seç
     if (takerId === 0) {
         let d1 = Phaser.Math.Distance.Between(ball.x, ball.y, p1.x, p1.y);
         let d2 = Phaser.Math.Distance.Between(ball.x, ball.y, p2.x, p2.y);
@@ -650,13 +692,12 @@ function applyPowerUp(type, takerId) {
         powerObj.timer = setTimeout(() => { if(targetPlayer.active) { targetPlayer.setScale(1); targetLeg.setScale(1); targetPlayer.setMass(500); } }, 7000);
     } 
     else if (type.id === 'big_goal') {
-        // 2. SORUN ÇÖZÜMÜ: DEV KALE (Rakip kalesini büyütür, üst direk fizik objesi de yukarı çıkar)
         let goalToScaleZone = (takerId === 1) ? rightGoalZone : leftGoalZone;
         let visualGoal = (takerId === 1) ? rightGoalVisual : leftGoalVisual;
         let targetPost = (takerId === 1) ? rightPostObj : leftPostObj;
 
         visualGoal.setScale(1, 1.6); visualGoal.y = 332; 
-        targetPost.setY(129); targetPost.refreshBody(); // Fizik bariyeri yukarı kaydı!
+        targetPost.setY(129); targetPost.refreshBody(); 
         goalToScaleZone.body.setSize(70, 416);
 
         powerObj.timer = setTimeout(() => { 
@@ -668,13 +709,12 @@ function applyPowerUp(type, takerId) {
         }, 7000);
     }
     else if (type.id === 'small_goal') {
-        // 2. SORUN ÇÖZÜMÜ: MİNİ KALE (Kendi kaleni küçültürsün, üst direk aşağı inip neti kapatır)
         let goalToScaleZone = (takerId === 1) ? leftGoalZone : rightGoalZone;
         let visualGoal = (takerId === 1) ? leftGoalVisual : rightGoalVisual;
         let targetPost = (takerId === 1) ? leftPostObj : rightPostObj;
 
         visualGoal.setScale(1, 0.5); visualGoal.y = 475; 
-        targetPost.setY(415); targetPost.refreshBody(); // Fizik bariyeri aşağı kaydı!
+        targetPost.setY(415); targetPost.refreshBody(); 
         goalToScaleZone.body.setSize(70, 130);
 
         powerObj.timer = setTimeout(() => { 
@@ -709,19 +749,15 @@ function applyPowerUp(type, takerId) {
     activePowerUps.push(powerObj);
 }
 
-// GOL OLDUĞUNDA HER ŞEYİ SIFIRLAMA
 function clearAllPowerUps() {
     activePowerUps.forEach(pu => clearTimeout(pu.timer));
     activePowerUps = [];
     
-    // Karakterleri sıfırla
     if(p1 && p1.active) { p1.setScale(1); p1Leg.setScale(1); p1.setMass(500); p1.clearTint(); p1.body.moves = true; p1Leg.setVisible(true); p1CanShoot = true; }
     if(p2 && p2.active) { p2.setScale(1); p2Leg.setScale(1); p2.setMass(500); p2.clearTint(); p2.body.moves = true; p2Leg.setVisible(true); p2CanShoot = true; }
     
-    // Topu sıfırla
     if(ball && ball.active) { ball.setScale(0.22); ball.setBounce(0.85); ball.setMass(1); ball.setDragX(100); ball.clearTint(); }
     
-    // Kalelerin Görselini ve Fizik Direklerini Sıfırla
     if(leftGoalVisual) { 
         leftGoalVisual.setScale(1,1); leftGoalVisual.y = 410; 
         if(leftPostObj) { leftPostObj.setY(285); leftPostObj.refreshBody(); }
@@ -733,7 +769,6 @@ function clearAllPowerUps() {
         if(rightGoalZone) rightGoalZone.body.setSize(70, 220); 
     }
 
-    // Ekrandaki alınmamış kutuları ve ikonları sil
     powerUpsGroup.getChildren().forEach(pu => {
         if(pu.iconRef) pu.iconRef.destroy();
     });
@@ -794,7 +829,6 @@ function update() {
         });
 
         if (conn && conn.open) {
-            // Client'a kalelerin mevcut durumu da (y ve scale) yollanıyor!
             conn.send({ 
                 type: 'state', 
                 state: { 
@@ -832,7 +866,6 @@ function updateClientState(data) {
     ball.setPosition(data.b.x, data.b.y).setRotation(data.b.r).setScale(data.b.s); 
     if(data.b.c !== 16777215) ball.setTint(data.b.c); else ball.clearTint(); 
     
-    // CLİENT KALELERİNİ GÜNCELLE
     if(data.goals) {
         leftGoalVisual.setScale(1, data.goals.l.s).setY(data.goals.l.y);
         leftPostObj.setY(data.goals.l.py);
@@ -854,8 +887,9 @@ function updateClientState(data) {
     powerUpAnnouncer.setText(data.announcer.text).setColor(data.announcer.color).setAlpha(data.announcer.alpha).setScale(data.announcer.scale);
 
     document.getElementById('score-red').innerText = data.sRed; document.getElementById('score-blue').innerText = data.sBlue;
-    let m = Math.floor(data.time / 60), s = data.time % 60;
-    document.getElementById('timer-display').innerText = `0${m}:${s < 10 ? '0'+s : s}`;
+    
+    // YENİ GÜÇLÜ FONKSİYON İLE SÜREYİ EKRANA YAZDIR
+    updateTimerUI(data.time);
     
     if (data.msg !== currentGoalMsg) { 
         currentGoalMsg = data.msg; 
@@ -917,9 +951,17 @@ function playGoalAnimation(scene, msg) {
 }
 
 function startTimer() {
+    if (timerInterval) clearInterval(timerInterval);
+    timeLeft = 90; // OYUN BAŞLADIĞINDA SÜREYİ KESİN OLARAK SIFIRLAR
+    
+    updateTimerUI(timeLeft); 
+
     timerInterval = setInterval(() => { 
         if(goalLock || !gameActive) return; 
         timeLeft--; 
+        
+        updateTimerUI(timeLeft);
+
         if (timeLeft <= 0) { 
             clearInterval(timerInterval); 
             if(powerUpTimer) powerUpTimer.remove(); 
