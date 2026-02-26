@@ -19,7 +19,8 @@ let roomUnsubscribe = null;
 let lobbyUnsubscribe = null; 
 let myGuesses = []; 
 let selectedRoundsToCreate = 3; 
-let roomExpireTimer = null; 
+let roomExpireTimer = null;
+let buTurKazanilanPuan = 0;
 
 // DOM Elementleri
 const input = document.getElementById('playerInput');
@@ -484,6 +485,7 @@ function resetBoard() {
     
     // Her tur başladığında bonus haklarını sıfırla
     bonusKazanilanlar = { uyruk: false, lig: false, takim: false, pozisyon: false, yas: false };
+    buTurKazanilanPuan = 0;
 }
 
 async function oyunuBaslat() {
@@ -625,6 +627,7 @@ function satirEkle(tahmin) {
             const kazanilan = eklenecekPuanlar[i];
             if (kazanilan > 0) {
                 myScore += kazanilan;
+                buTurKazanilanPuan += kazanilan;
                 const scoreEl = document.getElementById('myScore');
                 scoreEl.innerText = myScore;
                 
@@ -676,9 +679,13 @@ function bitir(kazandi) {
         localStorage.setItem('footle_daily_last_played', new Date().toDateString());
     }
 
+    // MULTIPLAYER İÇİN OYUN BİTİŞİ
     if (isMultiplayer) {
-        const kazanilanPuan = kazandi ? (8 - denemeSayisi) * 100 : 0;
-        myScore += kazanilanPuan; 
+        // Temel oyun bitiş puanını hesapla (Bonuslar hariç)
+        const temelPuan = kazandi ? (8 - denemeSayisi) * 100 : 0;
+        
+        myScore += temelPuan; // Toplam skora ekle
+        buTurKazanilanPuan += temelPuan; // Bu tur mesajı için toplama ekle
         
         const roomRef = window.doc(window.db, "footle_rooms", roomId);
         const updateData = {};
@@ -691,22 +698,51 @@ function bitir(kazandi) {
         }
         window.updateDoc(roomRef, updateData); 
 
-        showWaitingOverlay("RAKİBİN BİTİRMESİ BEKLENİYOR...<br><span class='text-sm text-green-400 font-normal mt-2 block'>Bu turdan +" + kazanilanPuan + " Puan aldın.</span>");
+        // MESAJDA ARTIK SADECE TEMEL PUANI DEĞİL, TOPLAM BONUSLARI DA YAZACAK
+        let waitMsg = `RAKİBİN BİTİRMESİ BEKLENİYOR...<br><span class='text-sm text-green-400 font-normal mt-2 block'>Bu turdan toplam +${buTurKazanilanPuan} Puan aldın.</span>`;
+        
+        if (!kazandi) {
+            waitMsg += `
+            <div class="mt-8 bg-red-900/40 border-2 border-red-500/50 p-4 rounded-xl inline-block min-w-[250px] shadow-[0_0_20px_rgba(239,68,68,0.3)]">
+                <p class="text-xs text-red-400 font-black mb-1 tracking-widest">BULAMADIN! DOĞRU CEVAP:</p>
+                <p class="text-2xl font-black text-white">${hedefOyuncu.isim.toUpperCase()}</p>
+                <p class="text-xs text-gray-400 mt-2">${hedefOyuncu.takim} • ${hedefOyuncu.uyruk}</p>
+            </div>`;
+        } else {
+            waitMsg += `
+            <div class="mt-8 bg-green-900/40 border border-green-500/50 p-4 rounded-xl inline-block min-w-[250px]">
+                <p class="text-xs text-green-400 font-bold mb-1 tracking-widest">TEBRİKLER, BİLDİN!</p>
+                <p class="text-2xl font-black text-white">${hedefOyuncu.isim.toUpperCase()}</p>
+            </div>`;
+        }
+
+        showWaitingOverlay(waitMsg);
         return; 
     }
 
+    // TEK OYUNCULU MOD İÇİN OYUN BİTİŞİ EKRANI
     const modal = document.getElementById('endModal');
     const content = document.getElementById('modalContent');
     const emoji = document.getElementById('modalEmoji');
     const title = document.getElementById('modalTitle');
     const desc = document.getElementById('modalDescription');
+    
     const targetName = document.getElementById('targetPlayerName');
+    const correctPlayerContainer = document.getElementById('correctPlayerContainer');
+    const correctPlayerLabel = document.getElementById('correctPlayerLabel');
+    const targetPlayerDetails = document.getElementById('targetPlayerDetails');
     
     const resultStats = document.getElementById('resultStats');
     const gainedScoreEl = document.getElementById('gainedScore');
     const newTotalScoreEl = document.getElementById('newTotalScore');
 
+    // Gizli oyuncunun ismini ve özelliklerini ekrana bas
     targetName.innerText = hedefOyuncu.isim.toUpperCase();
+    targetPlayerDetails.innerHTML = `
+        <span class="bg-black/50 border border-gray-600 px-2 py-1 rounded-md">${hedefOyuncu.uyruk}</span>
+        <span class="bg-black/50 border border-gray-600 px-2 py-1 rounded-md">${hedefOyuncu.takim}</span>
+        <span class="bg-black/50 border border-gray-600 px-2 py-1 rounded-md">${hedefOyuncu.pozisyon}</span>
+    `;
 
     if (kazandi) {
         const kazanilanPuan = (8 - denemeSayisi) * 100;
@@ -719,6 +755,11 @@ function bitir(kazandi) {
         title.innerText = "TEBRİKLER!";
         title.className = "text-3xl font-black mb-2 tracking-tighter text-green-400";
         desc.innerText = `${denemeSayisi}. denemede doğru bildin.`;
+
+        // DOĞRU BİLİNCE KUTU YEŞİL VE SAKİN DURACAK
+        correctPlayerContainer.className = "bg-green-900/20 p-4 rounded-2xl mb-6 border border-green-500/30";
+        correctPlayerLabel.innerText = "GİZLİ OYUNCU";
+        correctPlayerLabel.className = "text-xs text-green-500 font-bold tracking-widest uppercase mb-1";
 
         gainedScoreEl.innerText = kazanilanPuan;
         newTotalScoreEl.innerText = yeniToplamPuan;
@@ -733,6 +774,11 @@ function bitir(kazandi) {
         title.className = "text-3xl font-black mb-2 tracking-tighter text-red-500";
         desc.innerText = "Hakların tükendi. Yarın tekrar dene!";
         
+        // KAYBETTİĞİNDE KUTU KIRMIZI VE PARLAK OLACAK (DİKKAT ÇEKECEK)
+        correctPlayerContainer.className = "bg-red-900/30 p-4 rounded-2xl mb-6 border-2 border-red-500 shadow-[0_0_20px_rgba(239,68,68,0.3)]";
+        correctPlayerLabel.innerText = "DOĞRU CEVAP NEYDİ?";
+        correctPlayerLabel.className = "text-xs text-red-400 font-black tracking-widest uppercase mb-1";
+
         resultStats.classList.add('hidden');
     }
 
@@ -744,19 +790,4 @@ function bitir(kazandi) {
     }
 
     modal.classList.remove('hidden');
-}
-
-submitBtn.addEventListener('click', tahminYap);
-input.addEventListener('keypress', (e) => { if (e.key === 'Enter') tahminYap(); });
-document.addEventListener('click', (e) => { 
-    if (e.target !== input && e.target !== autocompleteList) {
-        autocompleteList.classList.add('hidden'); 
-    }
-});
-
-function addGlobalScore(points) {
-    let currentScore = parseInt(localStorage.getItem('futbolHub_totalScore')) || 0;
-    currentScore += points;
-    localStorage.setItem('futbolHub_totalScore', currentScore);
-    return currentScore;
 }
