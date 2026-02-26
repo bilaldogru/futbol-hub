@@ -3,7 +3,7 @@ let oyuncular = [];
 let hedefOyuncu = {};
 let oyunBitti = false;
 let denemeSayisi = 0;
-const maxHak = 5;
+const maxHak = 7;
 
 // --- MULTIPLAYER DEĞİŞKENLERİ ---
 let isMultiplayer = false;
@@ -588,7 +588,7 @@ function bitir(kazandi) {
     submitBtn.disabled = true;
 
     if (isMultiplayer) {
-        const kazanilanPuan = kazandi ? (6 - denemeSayisi) * 100 : 0;
+        const kazanilanPuan = kazandi ? (8 - denemeSayisi) * 100 : 0;
         myScore += kazanilanPuan; 
         
         const roomRef = window.doc(window.db, "footle_rooms", roomId);
@@ -620,7 +620,7 @@ function bitir(kazandi) {
     targetName.innerText = hedefOyuncu.isim.toUpperCase();
 
     if (kazandi) {
-        const kazanilanPuan = (6 - denemeSayisi) * 100;
+        const kazanilanPuan = (8 - denemeSayisi) * 100;
         const yeniToplamPuan = addGlobalScore(kazanilanPuan);
 
         content.classList.remove('border-red-500', 'shadow-[0_0_50px_rgba(239,68,68,0.3)]');
