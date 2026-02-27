@@ -3,19 +3,38 @@
 /* Genel Ayarlar */
 body { 
     font-family: 'Montserrat', sans-serif; 
-    background-color: #121212; 
+    background-color: #0a0a0c; 
     overflow-x: hidden; 
 }
 
-/* Saha Degrade Arka Planı */
-.pitch-gradient { 
-    background: radial-gradient(circle at center, #1a4d1a 0%, #0a0a0a 100%); 
+/* 2. DEĞİŞİKLİK: Saha Degrade ve Nokta Dokusu Belirginleştirildi */
+.pitch-gradient-texture-blue { 
+    background: 
+        /* Nokta dokusu belirginliği artırıldı (0.05 -> 0.15) */
+        radial-gradient(rgba(255, 255, 255, 0.15) 1px, transparent 1px),
+        /* Yeşil -> Mavi Degrade */
+        radial-gradient(circle at center, #001a4d 0%, #0a0a0c 100%);
+    background-size: 25px 25px, 100% 100%;
 }
 
 /* Tahmin Renkleri */
-.correct { background-color: #22c55e !important; border-color: #16a34a !important; text-shadow: 0 0 10px rgba(34,197,94,0.5); }
-.partial { background-color: #eab308 !important; border-color: #ca8a04 !important; color: black !important; }
-.wrong { background-color: #374151 !important; border-color: #1f2937 !important; }
+/* 3. DEĞİŞİKLİK: Doğru tahmin rengi yeşile döndürüldü */
+.correct { 
+    background-color: #22c55e !important; /* Tailwind Green 500 */
+    border-color: #16a34a !important; /* Tailwind Green 600 */
+    text-shadow: 0 0 10px rgba(34,197,94,0.6); 
+    color: black !important; /* Daha iyi okunabilirlik */
+}
+.partial { 
+    background-color: #eab308 !important; /* Tailwind Yellow 500 */
+    border-color: #ca8a04 !important; /* Tailwind Yellow 600 */
+    color: black !important; 
+}
+.wrong { 
+    background-color: #374151 !important; /* Tailwind Gray 700 */
+    border-color: #1f2937 !important; /* Tailwind Gray 800 */
+    color: #9ca3af !important; /* Tailwind Gray 400 */
+}
 
 /* Flip (Dönme) Animasyonu */
 .flip-card { perspective: 1000px; opacity: 0; }
@@ -32,7 +51,7 @@ body {
 }
 
 .flip-front { background-color: #1f2937; }
-.flip-back { transform: rotateX(180deg); color: white; border: 2px solid transparent; }
+.flip-back { transform: rotateX(180deg); border: 2px solid transparent; }
 
 /* Modal Animasyonu */
 @keyframes modalShow {
@@ -41,7 +60,7 @@ body {
 }
 .modal-animate { animation: modalShow 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
 
-/* Geri Dön Butonu (Modern Glassmorphism) */
+/* Geri Dön Butonu (Glassmorphism Maviye Döndü) */
 .back-home-btn {
     position: fixed;
     top: 15px;
@@ -56,20 +75,27 @@ body {
     z-index: 100;
     padding: 8px 16px;
     background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(10px); /* Buzlu cam efekti */
+    backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 50px;
     transition: all 0.3s ease;
 }
 
+/* Üzerine gelince maviye dönme */
 .back-home-btn:hover {
-    background: rgba(34, 197, 94, 0.2);
-    border-color: #22c55e;
-    color: #22c55e;
+    background: rgba(59, 130, 246, 0.1);
+    border-color: #3b82f6;
+    color: #3b82f6;
     transform: translateX(3px);
+    box-shadow: 0 0 10px rgba(59,130,246,0.3);
 }
 
-/* Mobilde yazıyı gizle, sadece ok kalsın */
+/* Parlama Efektleri (Mavi) */
+.modal-glow { box-shadow: 0 0 50px rgba(59,130,246,0.2); }
+.modal-glow-gold { border-color: #facc15; box-shadow: 0 0 50px rgba(250,204,21,0.3); } /* Kazanınca altın */
+.header-glow-blue { box-shadow: 0 0 20px rgba(59,130,246,0.2); }
+
+/* Mobilde yazıyı gizle */
 @media (max-width: 640px) {
     .btn-text {
         display: none;

@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="text-white min-h-screen flex flex-col items-center pitch-gradient">
+<body class="text-white min-h-screen flex flex-col items-center pitch-gradient-texture-blue">
 
     <a href="../../index.html" class="back-home-btn z-[140]">
         <i class="fa-solid fa-arrow-left"></i>
@@ -17,23 +17,23 @@
     </a>
 
     <div id="modeSelectionModal" onclick="if(event.target === this) window.location.href='../../index.html'" class="fixed inset-0 z-[120] flex items-center justify-center bg-black/95 backdrop-blur-lg px-4">
-        <div class="bg-gray-900 border-2 border-green-500 p-8 rounded-3xl max-w-md w-full text-center shadow-[0_0_50px_rgba(34,197,94,0.2)]">
+        <div class="bg-gray-900 border-2 border-blue-500 p-8 rounded-3xl max-w-md w-full text-center shadow-[0_0_50px_rgba(59,130,246,0.2)] modal-glow">
             <h2 class="text-3xl font-black mb-6 tracking-tighter text-white">OYUN MODU SEÇ</h2>
             
             <button id="btnDailyMode" onclick="startSinglePlayer()" class="w-full bg-gray-800 text-white border border-gray-600 font-bold py-4 rounded-xl mb-4 transition-all hover:bg-gray-700 hover:border-white">
                 <i id="dailyModeIcon" class="fa-solid fa-user mr-2"></i> <span id="dailyModeText">TEK OYUNCULU (GÜNLÜK)</span>
             </button>
             
-            <button onclick="openLobby()" class="w-full bg-green-500 text-black font-black py-4 rounded-xl transition-all hover:bg-green-400 shadow-lg shadow-green-500/20">
+            <button onclick="openLobby()" class="w-full bg-blue-500 text-black font-black py-4 rounded-xl transition-all hover:bg-blue-400 shadow-lg shadow-blue-500/20 active:scale-95">
                 <i class="fa-solid fa-globe mr-2"></i> MULTIPLAYER (LOBİ)
             </button>
         </div>
     </div>
 
     <div id="lobbyModal" onclick="if(event.target === this) window.location.href='../../index.html'" class="fixed inset-0 z-[125] flex items-center justify-center bg-black/95 backdrop-blur-lg px-4 hidden">
-        <div class="bg-gray-900 border-2 border-green-500 p-6 rounded-3xl max-w-md w-full text-center shadow-2xl relative flex flex-col max-h-[80vh]">
+        <div class="bg-gray-900 border-2 border-blue-500 p-6 rounded-3xl max-w-md w-full text-center shadow-2xl relative flex flex-col max-h-[80vh] modal-glow">
             <button onclick="backToModeSelectionFromLobby()" class="absolute top-4 left-4 text-gray-400 hover:text-white"><i class="fa-solid fa-arrow-left"></i></button>
-            <button onclick="fetchLobbyRooms()" class="absolute top-4 right-4 text-green-400 hover:text-white"><i class="fa-solid fa-rotate-right"></i></button>
+            <button onclick="fetchLobbyRooms()" class="absolute top-4 right-4 text-blue-400 hover:text-white"><i class="fa-solid fa-rotate-right"></i></button>
             
             <h2 class="text-2xl font-black mb-4 text-white">AÇIK LOBİLER</h2>
             
@@ -41,42 +41,42 @@
                 <p class="text-gray-500 text-sm text-center mt-4">Odalar aranıyor...</p>
             </div>
 
-            <button onclick="showMultiplayerSetup()" class="w-full bg-green-500 text-black font-black py-3 rounded-xl hover:bg-green-400 transition shadow-lg shadow-green-500/20 mt-2">
+            <button onclick="showMultiplayerSetup()" class="w-full bg-blue-500 text-black font-black py-3 rounded-xl hover:bg-blue-400 transition shadow-lg shadow-blue-500/20 mt-2 active:scale-95">
                 <i class="fa-solid fa-plus mr-1"></i> YENİ ODA KUR
             </button>
         </div>
     </div>
 
     <div id="multiplayerSetupModal" class="fixed inset-0 z-[130] flex items-center justify-center bg-black/95 backdrop-blur-lg px-4 hidden">
-        <div class="bg-gray-900 border-2 border-green-500 p-8 rounded-3xl max-w-md w-full text-center shadow-2xl relative">
+        <div class="bg-gray-900 border-2 border-blue-500 p-8 rounded-3xl max-w-md w-full text-center shadow-2xl relative modal-glow">
             <button onclick="backToLobby()" class="absolute top-4 left-4 text-gray-400 hover:text-white"><i class="fa-solid fa-arrow-left"></i></button>
             
             <h2 class="text-2xl font-black mb-2 text-white">VS OLUŞTUR</h2>
             
             <div id="setupControls">
                 <div class="flex items-center justify-center gap-2 mb-4 bg-gray-800 p-3 rounded-xl border border-gray-700">
-                    <input type="checkbox" id="privateRoomCheck" class="w-4 h-4 accent-green-500 cursor-pointer">
+                    <input type="checkbox" id="privateRoomCheck" class="w-4 h-4 accent-blue-500 cursor-pointer">
                     <label for="privateRoomCheck" class="text-sm text-gray-300 font-bold cursor-pointer select-none">Gizli Lobi (Listede Görünmez)</label>
                 </div>
 
                 <p class="text-gray-400 text-sm mb-4">Kaç tur kapışmak istiyorsunuz?</p>
                 
                 <div class="flex gap-2 mb-6">
-                    <button id="btnRound3" onclick="selectRounds(3)" class="flex-1 bg-green-900/30 border-green-500 text-white font-bold py-3 rounded-xl border hover:bg-gray-700 hover:border-green-500 transition">3 TUR</button>
-                    <button id="btnRound5" onclick="selectRounds(5)" class="flex-1 bg-gray-800 text-white font-bold py-3 rounded-xl border border-gray-600 hover:bg-gray-700 hover:border-green-500 transition">5 TUR</button>
-                    <button id="btnRound10" onclick="selectRounds(10)" class="flex-1 bg-gray-800 text-white font-bold py-3 rounded-xl border border-gray-600 hover:bg-gray-700 hover:border-green-500 transition">10 TUR</button>
+                    <button id="btnRound3" onclick="selectRounds(3)" class="flex-1 bg-blue-900/30 border-blue-500 text-white font-bold py-3 rounded-xl border hover:bg-gray-700 hover:border-blue-500 transition">3 TUR</button>
+                    <button id="btnRound5" onclick="selectRounds(5)" class="flex-1 bg-gray-800 text-white font-bold py-3 rounded-xl border border-gray-600 hover:bg-gray-700 hover:border-blue-500 transition">5 TUR</button>
+                    <button id="btnRound10" onclick="selectRounds(10)" class="flex-1 bg-gray-800 text-white font-bold py-3 rounded-xl border border-gray-600 hover:bg-gray-700 hover:border-blue-500 transition">10 TUR</button>
                 </div>
 
-                <button onclick="confirmAndCreateRoom()" class="w-full bg-green-500 text-black font-black py-4 rounded-xl transition-all hover:bg-green-400 shadow-lg shadow-green-500/20">
+                <button onclick="confirmAndCreateRoom()" class="w-full bg-blue-500 text-black font-black py-4 rounded-xl transition-all hover:bg-blue-400 shadow-lg shadow-blue-500/20 active:scale-95">
                     ODAYI KUR
                 </button>
             </div>
 
             <div id="linkArea" class="hidden mt-4">
-                <p class="text-sm text-green-400 mb-2 font-semibold">Oda Oluşturuldu! Linki Arkadaşına Gönder:</p>
+                <p class="text-sm text-blue-400 mb-2 font-semibold">Oda Oluşturuldu! Linki Arkadaşına Gönder:</p>
                 <div class="flex items-center bg-black rounded-lg p-2 border border-gray-700 mb-4 relative">
                     <input type="text" id="inviteLink" readonly class="bg-transparent w-full text-gray-300 text-xs outline-none px-2">
-                    <span id="copyTooltip" class="absolute -top-8 right-0 bg-green-500 text-black text-[10px] font-black px-2 py-1 rounded shadow-[0_0_10px_rgba(34,197,94,0.5)] opacity-0 transform translate-y-2 transition-all duration-300 pointer-events-none z-50">KOPYALANDI!</span>
+                    <span id="copyTooltip" class="absolute -top-8 right-0 bg-blue-500 text-black text-[10px] font-black px-2 py-1 rounded shadow-[0_0_10px_rgba(59,130,246,0.5)] opacity-0 transform translate-y-2 transition-all duration-300 pointer-events-none z-50">KOPYALANDI!</span>
                     <button id="copyBtn" onclick="copyInviteLink()" class="bg-gray-800 text-white px-3 py-1 rounded text-sm hover:bg-gray-700 transition-colors">
                         <i id="copyIcon" class="fa-solid fa-copy transition-all duration-300"></i>
                     </button>
@@ -87,7 +87,7 @@
     </div>
 
     <div id="endModal" class="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 backdrop-blur-md hidden px-4">
-        <div id="modalContent" class="bg-gray-900 border-2 p-8 rounded-3xl max-w-sm w-full text-center modal-animate shadow-2xl relative">
+        <div id="modalContent" class="bg-gray-900 border-2 p-8 rounded-3xl max-w-sm w-full text-center modal-animate shadow-2xl relative border-blue-500 modal-glow-gold">
             <div id="modalEmoji" class="text-6xl mb-4"></div>
             <h2 id="modalTitle"></h2>
             <p id="modalDescription" class="text-gray-400 mb-4"></p>
@@ -103,13 +103,15 @@
         </div>
     </div>
 
-    <header class="w-full max-w-2xl flex justify-between items-center p-4 border-b border-gray-700 bg-black/40 backdrop-blur-md sticky top-0 z-50">
-        <div class="text-xs font-bold text-green-400 px-3 py-1 bg-green-950 rounded-full border border-green-800">
-            HAK: <span id="hakGosterge">7</span>/7
-        </div>
-        <h1 class="text-3xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-yellow-300">FOOTLE</h1>
-        <button class="text-2xl text-gray-400 hover:text-white transition"><i class="fa-solid fa-chart-simple"></i></button>
-    </header>
+    <div class="w-full max-w-2xl p-4 sticky top-0 z-50">
+        <header class="relative bg-gray-900 border-2 border-blue-500 rounded-2xl p-4 flex items-center justify-center header-glow-blue">
+            <div class="absolute left-4 text-xs font-bold text-blue-400 px-3 py-1 bg-blue-950 rounded-full border border-blue-800">
+                HAK: <span id="hakGosterge">7</span>/7
+            </div>
+            <h1 class="text-3xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-yellow-300 text-center">FOOTLE</h1>
+            <button class="absolute right-4 text-2xl text-gray-400 hover:text-white transition"><i class="fa-solid fa-chart-simple"></i></button>
+        </header>
+    </div>
 
     <div id="multiplayerScoreBoard" class="hidden w-full max-w-2xl flex justify-between px-4 py-2 bg-gray-900 border-b border-gray-800 text-sm font-bold z-40">
         <div class="text-blue-400">SEN: <span id="myScore">0</span></div>
@@ -127,7 +129,7 @@
         <div id="first-guess-hint" class="absolute top-[40%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center justify-center text-center opacity-40 pointer-events-none transition-opacity duration-700 z-0 w-full px-4">
             <h2 class="text-2xl md:text-4xl font-black text-white mb-2 tracking-wider drop-shadow-lg">İLK TAHMİNİNİ YAP</h2>
             <p class="text-gray-300 font-bold text-sm md:text-base">Aşağıdaki alana bir futbolcu adı yazarak oyuna başla.</p>
-            <i class="fa-solid fa-arrow-down text-5xl mt-6 text-green-500 animate-bounce"></i>
+            <i class="fa-solid fa-arrow-down text-5xl mt-6 text-blue-500 animate-bounce"></i>
         </div>
 
         <div class="grid grid-cols-5 gap-2 w-full mb-2 text-[10px] uppercase font-bold text-gray-400 text-center tracking-widest relative z-10">
@@ -137,10 +139,10 @@
     </main>
 
     <footer class="fixed bottom-0 w-full max-w-xl p-6 bg-gradient-to-t from-black via-black to-transparent z-40">
-        <div class="relative">
-            <div id="autocomplete-list" class="absolute bottom-full left-0 w-full bg-gray-800 border border-gray-700 rounded-t-xl overflow-hidden hidden shadow-2xl mb-1 max-h-60 overflow-y-auto"></div>
-            <input type="text" id="playerInput" placeholder="Futbolcu ara..." autocomplete="off" class="w-full bg-gray-900 border-2 border-green-500 rounded-2xl py-4 px-6 focus:outline-none focus:ring-4 focus:ring-green-500/20 text-lg text-white placeholder-gray-500">
-            <button id="submitBtn" class="absolute right-2 top-1/2 -translate-y-1/2 bg-green-500 text-black p-3 rounded-xl hover:bg-green-400 transition font-bold shadow-lg shadow-green-500/20">
+        <div class="relative rounded-3xl bg-transparent">
+            <div id="autocomplete-list" class="absolute bottom-full left-0 w-full bg-gray-800 border border-gray-700 rounded-t-xl overflow-hidden hidden shadow-2xl mb-1 max-h-60 overflow-y-auto z-50"></div>
+            <input type="text" id="playerInput" placeholder="Futbolcu ara..." autocomplete="off" class="w-full bg-transparent border-none rounded-2xl py-4 px-6 focus:outline-none focus:ring-2 focus:ring-blue-500 text-lg text-white placeholder-gray-500 header-glow-blue">
+            <button id="submitBtn" class="absolute right-3 top-1/2 -translate-y-1/2 bg-blue-500 text-black p-3 rounded-xl hover:bg-blue-400 transition font-bold shadow-lg shadow-blue-500/20 active:scale-95">
                 <i class="fa-solid fa-check"></i>
             </button>
         </div>
@@ -163,6 +165,7 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
+        // Global fonksiyonlar
         window.db = db;
         window.doc = doc;
         window.getDoc = getDoc;
@@ -172,7 +175,7 @@
         window.collection = collection; 
         window.query = query;           
         window.where = where;
-        window.deleteDoc = deleteDoc;            
+        window.deleteDoc = deleteDoc;           
       
         window.saveScoreToFirebase = async (newScore, gameName) => {
           const userStr = localStorage.getItem('firebaseUser');
