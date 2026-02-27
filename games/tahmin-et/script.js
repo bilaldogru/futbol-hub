@@ -30,12 +30,21 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     username = JSON.parse(userStr).name; 
 
-    fetch('../../oyuncular.json') 
+        fetch('../../oyuncular.json') 
         .then(response => response.json())
         .then(data => {
             allPlayers = data;
             console.log("Oyuncu verileri yüklendi.");
             checkPlayedDifficulties(); 
+            // --- YENİ: OTOMATİK BAŞLATMA KONTROLÜ ---
+            const autoStart = localStorage.getItem('autoStartArena');
+            if (autoStart) {
+                // Hafızadan sil ki sürekli aynı yeri açmasın
+                localStorage.removeItem('autoStartArena');
+                // Oyuncu verileri yüklendikten hemen sonra oyunu başlat
+                startGame(autoStart); 
+            }
+            // ----------------------------------------
         })
         .catch(err => console.error("JSON Hatası:", err));
 
@@ -44,21 +53,54 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+// --- YENİLENMİŞ KİLİT KONTROL SİSTEMİ ---
 function checkPlayedDifficulties() {
+    // (Eğer hala test etmek istersen bu satırın başındaki // işaretlerini silersin)
+    // localStorage.removeItem('playedBilmece'); 
+
     const today = new Date().toLocaleDateString('tr-TR');
     const played = JSON.parse(localStorage.getItem('playedBilmece')) || {};
     
     if(played[today]) {
-        if(played[today].includes('kolay')) document.getElementById('btn-kolay').disabled = true;
-        if(played[today].includes('orta')) document.getElementById('btn-orta').disabled = true;
-        if(played[today].includes('zor')) document.getElementById('btn-zor').disabled = true;
+        // Hangi modlar oynandıysa onları görsel olarak kilitle
+        if(played[today].includes('kolay')) lockButton('btn-kolay', 'KOLAY');
+        if(played[today].includes('orta')) lockButton('btn-orta', 'ORTA');
+        if(played[today].includes('zor')) lockButton('btn-zor', 'ZOR');
     }
 }
 
+// GÖRSEL KİLİTLEME FONKSİYONU
+function lockButton(btnId, levelName) {
+    const btn = document.getElementById(btnId);
+    if (!btn) return;
+    
+    btn.disabled = true; // Tıklamayı kapat
+    
+    // Footle'daki gibi soluk, siyah, tıklanamaz tasarım
+    btn.className = "w-full bg-black border border-gray-700 text-gray-500 font-black py-4 rounded-xl opacity-60 cursor-not-allowed flex flex-col items-center justify-center transition-all";
+    
+    // İçeriği Kırmızı Kilit ve Çizili Yazı ile değiştir
+    btn.innerHTML = `
+        <div class="flex items-center gap-2 mb-1">
+            <i class="fa-solid fa-lock text-red-500"></i>
+            <span class="text-xl line-through">${levelName}</span>
+        </div>
+        <span class="text-[10px] text-red-400 font-bold tracking-widest">BUGÜN OYNANDI</span>
+    `;
+}
+
+// OYUNU BAŞLATMA FONKSİYONU (Güvenlik Korumalı)
 window.startGame = function(difficulty) {
+    // Güvenlik: Eğer bugün oynanmışsa girilmesini kesinlikle engelle
+    const today = new Date().toLocaleDateString('tr-TR');
+    const played = JSON.parse(localStorage.getItem('playedBilmece')) || {};
+    if (played[today] && played[today].includes(difficulty)) {
+        alert("Bu zorluk seviyesini bugün zaten oynadın. Yarın tekrar gel!");
+        return;
+    }
+
     currentDifficulty = difficulty;
-    document.getElementById('difficulty-modal').style.display = 'none';
-    document.getElementById('game-wrapper').classList.remove('blurred');
+    document.getElementById('difficulty-modal').classList.add('hidden'); // Tailwind gizleme sınıfı
     
     let pool = [];
     if(difficulty === 'kolay') {
@@ -195,6 +237,7 @@ window.nextQuestion = function() {
     loadQuestion();
 }
 
+// --- 1. GÜNCELLENMİŞ OYUN BİTİŞ EKRANI ---
 function finishDailyChallenge() {
     const today = new Date().toLocaleDateString('tr-TR');
     let played = JSON.parse(localStorage.getItem('playedBilmece')) || {};
@@ -202,46 +245,111 @@ function finishDailyChallenge() {
     played[today].push(currentDifficulty);
     localStorage.setItem('playedBilmece', JSON.stringify(played));
 
-    const gameContainer = document.querySelector('.game-container');
+    let nextDiff = null;
+    let nextDiffText = "";
+    let nextDiffColor = "";
     
-    gameContainer.innerHTML = `
-        <div style="text-align:center; padding: 40px;">
-            <h1 style="color:var(--matte-green); font-size: 3rem;">GÖREV TAMAMLANDI!</h1>
-            <p style="color:#aaa; margin-top:10px;">${currentDifficulty.toUpperCase()} Zorluk Puanı</p>
-            <div style="font-size: 5rem; font-weight:bold; color: white; text-shadow: 0 0 20px rgba(255,255,255,0.2); margin: 20px 0;">
-                ${totalScore}
+    // Eğer kolaydaysa ve ortayı henüz oynamadıysa
+    if (currentDifficulty === 'kolay' && !played[today].includes('orta')) {
+        nextDiff = 'orta';
+        nextDiffText = 'ORTA SEVİYEYE GEÇ';
+        // text-black yerine text-white yapıldı
+        nextDiffColor = 'bg-yellow-500 text-white hover:bg-yellow-400 shadow-[0_0_20px_rgba(234,179,8,0.2)]';
+    } 
+    // Eğer ortadaysa ve zoru henüz oynamadıysa
+    else if (currentDifficulty === 'orta' && !played[today].includes('zor')) {
+        nextDiff = 'zor';
+        nextDiffText = 'ZOR SEVİYEYE GEÇ';
+        // text-black yerine text-white yapıldı
+        nextDiffColor = 'bg-red-500 text-white hover:bg-red-400 shadow-[0_0_20px_rgba(239,68,68,0.2)]';
+    }
+
+    let nextButtonHTML = "";
+    if (nextDiff) {
+        nextButtonHTML = `
+            <button onclick="playNextMode('${nextDiff}')" class="w-full max-w-sm ${nextDiffColor} font-black py-4 rounded-xl transition-all active:scale-95 mb-4 border border-transparent">
+                ${nextDiffText} <i class="fa-solid fa-forward-step ml-2"></i>
+            </button>
+        `;
+    }
+
+    const gameWrapper = document.getElementById('game-wrapper');
+    
+    gameWrapper.innerHTML = `
+        <div class="flex flex-col items-center justify-center h-full p-6 text-center animate-[modalShow_0.5s_ease-out_forwards]">
+            
+            <div class="text-7xl mb-4 drop-shadow-[0_0_20px_rgba(255,215,0,0.6)]">🏆</div>
+            <h1 class="text-4xl sm:text-5xl font-black mb-2 tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-yellow-300">
+                GÖREV TAMAMLANDI!
+            </h1>
+            <p class="text-gray-400 font-bold uppercase tracking-widest mb-8 text-sm">
+                ${currentDifficulty} SEVİYE
+            </p>
+            
+            <div class="bg-gray-900/80 border-2 border-green-500 rounded-3xl p-8 mb-8 shadow-[0_0_40px_rgba(34,197,94,0.2)] w-full max-w-sm">
+                <p class="text-xs text-gray-500 uppercase font-black tracking-widest mb-2">TOPLAM KAZANILAN PUAN</p>
+                <div class="text-6xl sm:text-7xl font-black text-green-400 drop-shadow-[0_0_15px_rgba(34,197,94,0.6)]">
+                    ${totalScore}
+                </div>
             </div>
-            <p style="color:#fff;">Tebrikler ${username}!</p>
-            <br>
-            <button onclick="location.href='../../index.html'" class="action-btn" style="background:#444;">ANA MENÜYE DÖN</button>
-        </div>`;
-    
+            
+            <p class="text-lg text-white font-bold mb-8">Tebrikler <span class="text-green-400">${username}</span>!</p>
+            
+            ${nextButtonHTML}
+            
+            <button onclick="location.href='../../index.html'" class="w-full max-w-sm bg-gray-800 text-white font-black py-4 rounded-xl transition-all active:scale-95 hover:bg-gray-700 border border-gray-600">
+                ANA MENÜYE DÖN <i class="fa-solid fa-house ml-2"></i>
+            </button>
+            
+        </div>
+    `;
+
     if(window.saveScoreToFirebase) {
-        window.saveScoreToFirebase(totalScore, `Bilmece (${currentDifficulty.toUpperCase()})`);
+        window.saveScoreToFirebase(totalScore, `Arena (${currentDifficulty.toUpperCase()})`);
     }
 }
 
+// --- YENİLENMİŞ AKILLI VE MOBİL UYUMLU HARF KUTULARI ---
 function renderHangman() {
     const container = document.getElementById('hangman-area');
+    
+    // Kelimeler arası boşluk (gap-x-6). Satırlar arası boşluk (gap-y-3).
+    container.className = "flex flex-wrap justify-center gap-x-6 sm:gap-x-8 gap-y-3 mb-6 min-h-[60px] w-full max-w-lg shrink-0";
     container.innerHTML = '';
+    
     const cleanFullName = normalizeInput(targetPlayer.isim);
-    const nameParts = cleanFullName.split(' ');
+    const nameParts = cleanFullName.split(' '); 
     let globalCounter = 0;
 
-    nameParts.forEach(part => {
-        const rowDiv = document.createElement('div');
-        rowDiv.className = 'hangman-row';
+    nameParts.forEach((part) => {
+        const wordDiv = document.createElement('div');
+        
+        // YENİ: "flex-wrap" KALDIRILDI! Artık kelimenin harfleri ASLA alt satıra düşemez, yan yana kalmaya zorlanır.
+        wordDiv.className = 'flex justify-center gap-1 sm:gap-1.5';
+
+        // YENİ: Kelime 7 harften uzunsa (Örn: CHRISTOPHER), kutuları mobilde biraz daha küçük yap.
+        const isLongWord = part.length > 7;
+        const sizeClasses = isLongWord 
+            ? 'w-6 h-8 sm:w-10 sm:h-12 text-base sm:text-xl' // Uzun kelimeler için dar kutular
+            : 'w-8 h-10 sm:w-11 sm:h-14 text-xl sm:text-2xl'; // Normal kelimeler için standart kutular
+
         for (let i = 0; i < part.length; i++) {
             const char = part[i];
             const span = document.createElement('span');
-            span.className = 'letter-box empty';
+            
+            // "flex-shrink" eklendi. Ekran çok darsa kutular taşmak yerine esneyip hafifçe daralacak.
+            span.className = `letter-box ${sizeClasses} flex-shrink bg-gray-800 border-2 border-gray-600 rounded-lg flex items-center justify-center font-black text-transparent shadow-md transition-all duration-300 select-none`;
+            
+            span.classList.add('empty'); 
             span.id = `char-${globalCounter}`;
-            span.innerText = char;
+            span.innerText = char; 
+            
             globalLetterIndexMap.push({ id: globalCounter, char: char });
-            rowDiv.appendChild(span);
+            wordDiv.appendChild(span);
             globalCounter++;
         }
-        container.appendChild(rowDiv);
+        
+        container.appendChild(wordDiv);
     });
 }
 
@@ -341,32 +449,55 @@ function makeGuess() {
     }
 }
 
+// --- YENİLENMİŞ OTOMATİK GEÇİŞLİ OYUN BİTİŞİ ---
 function endGame(isWin) {
     isGameOver = true;
     clearInterval(timerInterval);
     const msgArea = document.getElementById('message-area');
-    const nextBtn = document.getElementById('next-btn');
     const input = document.getElementById('guess-input');
 
     if (isWin) {
-        msgArea.innerHTML = `DOĞRU! <strong>${targetPlayer.isim}</strong> +${currentScore} P`;
-        msgArea.className = "message success";
+        // KAZANMA DURUMU
+        msgArea.innerHTML = `<span class="text-green-400">DOĞRU!</span> <strong>${targetPlayer.isim}</strong> <br><span class="text-sm text-gray-400">Bu sorudan +${currentScore} Puan aldın.</span>`;
+        msgArea.className = "text-center font-black text-xl mb-4 p-4 bg-green-900/20 border border-green-500 rounded-xl shadow-[0_0_20px_rgba(34,197,94,0.3)] block";
+        
         totalScore += currentScore;
         document.getElementById('total-score').innerText = totalScore;
         
-        document.querySelectorAll('.letter-box').forEach(box => {
-            box.classList.remove('empty'); box.classList.add('solved');
-            box.innerText = box.innerText;
-            box.style.color = "white";
+        document.querySelectorAll('.letter-box, span[id^="char-"]').forEach(box => {
+            box.classList.remove('empty', 'text-transparent', 'bg-gray-800', 'border-gray-600'); 
+            box.classList.add('bg-green-500', 'border-green-400', 'text-black', 'shadow-[0_0_15px_rgba(34,197,94,0.5)]');
         });
+
+        // 2 Saniye bekleyip OTOMATİK olarak sıradaki soruya geç
+        setTimeout(() => {
+            nextQuestion();
+        }, 2000);
+
     } else {
-        msgArea.innerHTML = `SÜRE BİTTİ! Cevap: ${targetPlayer.isim}`;
-        msgArea.className = "message fail";
-        document.querySelectorAll('.letter-box').forEach(box => box.classList.remove('empty'));
+        // KAYBETME DURUMU
+        msgArea.innerHTML = `<span class="text-red-500">SÜRE BİTTİ!</span> <br><span class="text-sm text-gray-400">Doğru Cevap: <span class="text-white">${targetPlayer.isim}</span></span>`;
+        msgArea.className = "text-center font-black text-xl mb-4 p-4 bg-red-900/20 border border-red-500 rounded-xl shadow-[0_0_20px_rgba(239,68,68,0.3)] block";
+        
+        document.querySelectorAll('.letter-box, span[id^="char-"]').forEach(box => {
+            box.classList.remove('empty', 'text-transparent', 'bg-gray-800', 'border-gray-600');
+            box.classList.add('bg-red-900/50', 'border-red-500', 'text-red-200');
+        });
+
+        // Oyuncu doğru cevabı okuyabilsin diye 3 Saniye bekleyip OTOMATİK sıradaki soruya geç
+        setTimeout(() => {
+            nextQuestion();
+        }, 3000);
     }
     
-    msgArea.classList.remove('hidden');
-    nextBtn.classList.remove('hidden');
+    // İnputu kilitle, artık butona gerek yok
     input.disabled = true;
-    nextBtn.focus();
+}
+
+// ---YENİ MODU BAŞLATMA MANTIĞI ---
+window.playNextMode = function(diff) {
+    // Geçilecek modu yerel hafızaya kaydet
+    localStorage.setItem('autoStartArena', diff);
+    // Sayfayı yenile ki oyun sıfırdan temiz bir şekilde kurulsun
+    location.reload();
 }

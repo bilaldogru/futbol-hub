@@ -2,148 +2,161 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Futbolcu Arena - Günlük Meydan Okuma</title>
-    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <link rel="stylesheet" href="../../style.css"> 
     <link rel="stylesheet" href="style.css"> 
 </head>
-<body>
+<body class="text-white h-[100dvh] overflow-hidden flex flex-col items-center pitch-gradient font-['Montserrat']">
 
-    <a href="../../index.html" class="back-home-btn">
-        <i class="fa-solid fa-arrow-left"></i> <span class="btn-text">ANA MENÜ</span>
+    <a href="../../index.html" class="fixed top-4 left-4 z-[140] flex items-center gap-2 text-white font-bold text-sm px-4 py-2 bg-white/5 backdrop-blur-md border border-white/10 rounded-full hover:bg-green-500/20 hover:border-green-500 hover:text-green-500 transition-all shadow-lg">
+        <i class="fa-solid fa-arrow-left"></i> <span class="hidden sm:inline">ANA MENÜ</span>
     </a>
-    
-    <div class="bg-overlay"></div>
 
-    <div id="difficulty-modal" class="modal" style="display:flex;" onclick="if(event.target === this) window.location.href='../../index.html'">
-        <div class="modal-content" style="text-align:center; max-width: 500px; padding: 40px; border: 2px solid var(--primary-green); border-radius: 15px; background: #1a1a24;">
-            <h2 style="font-size: 2.5rem; color: var(--primary-green); margin-bottom: 10px;">ZORLUK SEÇİMİ</h2>
-            <p style="color: #ccc; margin-bottom: 30px;">Her zorluk seviyesini günde sadece 1 kez oynayabilirsin!</p>
+    <div id="difficulty-modal" class="fixed inset-0 z-[120] flex items-center justify-center bg-black/95 backdrop-blur-lg px-4 transition-opacity duration-300">
+        <div class="bg-gray-900 border-2 border-green-500 p-8 rounded-3xl max-w-md w-full text-center shadow-[0_0_50px_rgba(34,197,94,0.2)] modal-animate">
+            <h2 class="text-4xl font-black mb-2 tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-yellow-300">ZORLUK SEÇİMİ</h2>
+            <p class="text-gray-400 mb-8 text-sm font-bold tracking-wide">Her seviyeyi günde sadece 1 kez oynayabilirsin!</p>
             
-            <div style="display:flex; flex-direction:column; gap:15px;">
-                <button id="btn-kolay" class="diff-btn easy" onclick="startGame('kolay')">
-                    KOLAY  <br><small>1 Soru = 100 Puan</small>
+            <div class="flex flex-col gap-4">
+                <button id="btn-kolay" onclick="startGame('kolay'); document.getElementById('difficulty-modal').classList.add('hidden');" class="w-full bg-green-900/30 border border-green-500 text-green-400 font-black py-4 rounded-xl transition-all hover:bg-green-500 hover:text-black shadow-lg shadow-green-500/10">
+                    <span class="text-xl block mb-1">KOLAY</span>
+                    <span class="text-xs font-bold opacity-80">1 SORU = 100 PUAN</span>
                 </button>
-                <button id="btn-orta" class="diff-btn medium" onclick="startGame('orta')">
-                    ORTA  <br><small>1 Soru = 150 Puan</small>
+                
+                <button id="btn-orta" onclick="startGame('orta'); document.getElementById('difficulty-modal').classList.add('hidden');" class="w-full bg-yellow-900/30 border border-yellow-500 text-yellow-400 font-black py-4 rounded-xl transition-all hover:bg-yellow-500 hover:text-black shadow-lg shadow-yellow-500/10">
+                    <span class="text-xl block mb-1">ORTA</span>
+                    <span class="text-xs font-bold opacity-80">1 SORU = 150 PUAN</span>
                 </button>
-                <button id="btn-zor" class="diff-btn hard" onclick="startGame('zor')">
-                    ZOR <br><small>1 Soru = 250 Puan</small>
+                
+                <button id="btn-zor" onclick="startGame('zor'); document.getElementById('difficulty-modal').classList.add('hidden');" class="w-full bg-red-900/30 border border-red-500 text-red-400 font-black py-4 rounded-xl transition-all hover:bg-red-500 hover:text-black shadow-lg shadow-red-500/10">
+                    <span class="text-xl block mb-1">ZOR</span>
+                    <span class="text-xs font-bold opacity-80">1 SORU = 250 PUAN</span>
                 </button>
             </div>
         </div>
     </div>
 
-    <div class="main-layout blurred" id="game-wrapper">
-        <div class="game-section">
-            <div class="game-container">
-                <header>
-                    <div class="header-top">
-                        <h1>FUTBOLCU ARENA</h1>
-                        <div class="question-counter">SORU: <span id="q-count">1</span>/10</div>
-                    </div>
-                    
-                    <div class="stats">
-                        <div class="score-box current">
-                            <span class="label">BU SORU</span>
-                            <span id="current-score" class="value">100</span>
-                        </div>
-                        <div class="score-box total">
-                            <span class="label">TOPLAM PUAN</span>
-                            <span id="total-score" class="value">0</span>
-                        </div>
-                    </div>
-                </header>
+    <div id="game-wrapper" class="w-full max-w-2xl flex flex-col h-full relative z-10 overflow-hidden">
+        
+        <header class="w-full flex justify-between items-center p-4 border-b border-gray-700 bg-black/40 backdrop-blur-md shrink-0 z-50">
+            <div class="text-xs font-bold text-gray-300 px-3 py-1 bg-gray-900 rounded-full border border-gray-700">
+                SORU: <span id="q-count" class="text-green-400">1</span>/10
+            </div>
+            <h1 class="text-2xl sm:text-3xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-yellow-300 text-center">
+                ARENA
+            </h1>
+            <button class="text-2xl text-gray-400 hover:text-white transition"><i class="fa-solid fa-fire text-orange-500"></i></button>
+        </header>
 
-                <div class="hangman-container" id="hangman-area"></div>
-
-                <div class="clues-wrapper">
-                    <h3>İPUÇLARI</h3>
-                    <div class="clues-container" id="clues-area"></div>
-                </div>
-
-                <div class="input-area">
-                    <input type="text" id="guess-input" placeholder="Futbolcunun adını veya soyadını yaz..." autocomplete="off">
-                    <button onclick="makeGuess()">TAHMİN ET</button>
-                </div>
-
-                <div id="message-area" class="message hidden"></div>
-                
-                <button id="next-btn" class="hidden action-btn" onclick="nextQuestion()">SIRADAKİ SORU ▶</button>
+        <div class="w-full flex justify-between px-6 py-3 bg-gray-900/80 border-b border-gray-800 text-sm font-bold shrink-0 z-40 backdrop-blur-sm">
+            <div class="flex flex-col items-center">
+                <span class="text-[10px] text-gray-500 tracking-widest mb-1">BU SORU</span>
+                <span id="current-score" class="text-green-400 text-xl font-black">100</span>
+            </div>
+            <div class="flex flex-col items-center">
+                <span class="text-[10px] text-gray-500 tracking-widest mb-1">TOPLAM PUAN</span>
+                <span id="total-score" class="text-yellow-400 text-xl font-black">0</span>
             </div>
         </div>
+
+        <main class="flex-grow flex flex-col items-center w-full px-4 overflow-y-auto">
+            
+            <div class="w-full max-w-lg flex flex-col items-center my-auto py-6 shrink-0">
+                
+                <div id="hangman-area" class="flex flex-wrap justify-center gap-2 mb-6 min-h-[60px] w-full shrink-0">
+                </div>
+
+                <div class="w-full bg-gray-800/80 p-5 sm:p-6 rounded-3xl border border-gray-700 shadow-xl backdrop-blur-md mb-2 transition-all duration-300 shrink-0">
+                    <h3 class="text-xs text-green-500 font-black mb-4 tracking-widest uppercase text-center flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-magnifying-glass"></i> İPUÇLARI
+                    </h3>
+                    <div id="clues-area" class="flex flex-col gap-3 text-sm sm:text-base font-bold text-gray-300">
+                    </div>
+                </div>
+
+                <div id="message-area" class="text-center font-black text-xl w-full hidden mt-4 shrink-0"></div>
+                
+                <button id="next-btn" class="hidden shrink-0"></button>
+            </div>
+        </main>
+
+        <footer class="w-full p-4 sm:p-6 shrink-0 z-40 bg-transparent">
+            <div class="relative w-full max-w-lg mx-auto">
+                <input type="text" id="guess-input" placeholder="Futbolcunun adını yaz..." autocomplete="off" class="w-full bg-gray-900 border-2 border-green-500 rounded-2xl py-4 px-6 focus:outline-none focus:ring-4 focus:ring-green-500/20 text-lg font-bold text-white placeholder-gray-500 shadow-2xl">
+                
+                <button onclick="makeGuess()" class="absolute right-2 top-1/2 -translate-y-1/2 bg-green-500 text-black p-3 rounded-xl hover:bg-green-400 transition font-black shadow-lg shadow-green-500/20 active:scale-95">
+                    <i class="fa-solid fa-check text-xl"></i>
+                </button>
+            </div>
+        </footer>
     </div>
 
     <script type="module">
-      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-      // BURAYA DIKKAT: doc, getDoc, setDoc eklendi
-      import { getFirestore, collection, addDoc, query, where, getDocs, updateDoc, doc, increment, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getFirestore, collection, addDoc, query, where, getDocs, updateDoc, doc, increment, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-      // --- SENİN API BİLGİLERİN ---
-      const firebaseConfig = {
-        apiKey: "AIzaSyD62cMqFmtT_LYOQdyLEib3TlP2sDXVHUY",
-        authDomain: "futbol-hub0.firebaseapp.com", 
-        projectId: "futbol-hub0", 
-        storageBucket: "futbol-hub0.firebasestorage.app", 
-        messagingSenderId: "995690857981", 
-        appId: "1:995690857981:web:01f199920e1c131cd04594", 
-        measurementId: "G-7JT28VLCTE" 
-      };
+        const firebaseConfig = {
+            apiKey: "AIzaSyD62cMqFmtT_LYOQdyLEib3TlP2sDXVHUY",
+            authDomain: "futbol-hub0.firebaseapp.com", 
+            projectId: "futbol-hub0", 
+            storageBucket: "futbol-hub0.firebasestorage.app", 
+            messagingSenderId: "995690857981", 
+            appId: "1:995690857981:web:01f199920e1c131cd04594", 
+            measurementId: "G-7JT28VLCTE" 
+        };
 
-      const app = initializeApp(firebaseConfig);
-      const db = getFirestore(app);
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
 
-      // --- DEĞİŞİKLİK BURADA: script.js'nin erişebilmesi için window'a bağladık ---
-      window.db = db;
-      window.doc = doc;
-      window.getDoc = getDoc;
-      window.setDoc = setDoc;
+        window.db = db;
+        window.doc = doc;
+        window.getDoc = getDoc;
+        window.setDoc = setDoc;
 
-      window.saveScoreToFirebase = async (newScore, gameName) => {
-        // 1. Kullanıcı Giriş Yapmış mı?
-        const userStr = localStorage.getItem('firebaseUser');
-        if (!userStr) {
-          alert("Puanını biriktirmek için ANA SAYFADAN giriş yapmalısın!");
-          return;
-        }
-        const user = JSON.parse(userStr);
+        window.saveScoreToFirebase = async (newScore, gameName) => {
+            const userStr = localStorage.getItem('firebaseUser');
+            if (!userStr) {
+                alert("Puanını biriktirmek için ANA SAYFADAN giriş yapmalısın!");
+                return;
+            }
+            const user = JSON.parse(userStr);
 
-        try {
-          // 2. Bu kullanıcı daha önce puan almış mı kontrol et
-          const scoresRef = collection(db, "scores");
-          const q = query(scoresRef, where("email", "==", user.email));
-          const querySnapshot = await getDocs(q);
+            try {
+                const scoresRef = collection(db, "scores");
+                const q = query(scoresRef, where("email", "==", user.email));
+                const querySnapshot = await getDocs(q);
 
-          if (!querySnapshot.empty) {
-            // --- VARSA: PUANI GÜNCELLE (ÜSTÜNE EKLE) ---
-            const existingDoc = querySnapshot.docs[0]; 
-            const userDocRef = doc(db, "scores", existingDoc.id);
+                if (!querySnapshot.empty) {
+                    const existingDoc = querySnapshot.docs[0]; 
+                    const userDocRef = doc(db, "scores", existingDoc.id);
 
-            await updateDoc(userDocRef, {
-              score: increment(newScore), // Eski puanın üstüne ekler
-              lastGame: gameName,
-              lastPlayedDate: new Date()
-            });
-
-          } else {
-            // --- YOKSA: YENİ KAYIT OLUŞTUR ---
-            await addDoc(scoresRef, {
-              name: user.name,
-              email: user.email,
-              photo: user.photo,
-              score: newScore,
-              lastGame: gameName,
-              lastPlayedDate: new Date()
-            });
-          }
-
-        } catch (e) {
-          console.error("Hata:", e);
-          alert("Bir hata oluştu, puan kaydedilemedi.");
-        }
-      };
+                    await updateDoc(userDocRef, {
+                        score: increment(newScore), 
+                        lastGame: gameName,
+                        lastPlayedDate: new Date()
+                    });
+                } else {
+                    await addDoc(scoresRef, {
+                        name: user.name,
+                        email: user.email,
+                        photo: user.photo,
+                        score: newScore,
+                        lastGame: gameName,
+                        lastPlayedDate: new Date()
+                    });
+                }
+            } catch (e) {
+                console.error("Hata:", e);
+                alert("Bir hata oluştu, puan kaydedilemedi.");
+            }
+        };
     </script>
 
     <script src="script.js"></script>
