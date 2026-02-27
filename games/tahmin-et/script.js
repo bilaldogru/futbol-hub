@@ -122,7 +122,7 @@ window.startGame = function(difficulty) {
     prepareDailyQuestions(pool);
 }
 
-// --- 2. GÜNLÜK SORULAR (FIREBASE KAYITLI v9 Modüler Yapı) ---
+// --- YENİLENMİŞ SORU HAZIRLAMA (KALDIĞI YERDEN DEVAM ETME MANTIĞI) ---
 async function prepareDailyQuestions(pool) {
     if (!window.db) {
         setTimeout(() => prepareDailyQuestions(pool), 100);
@@ -141,17 +141,13 @@ async function prepareDailyQuestions(pool) {
         const docSnap = await window.getDoc(docRef);
 
         if (docSnap.exists()) {
-            console.log(`✅ ${documentId} listesi Firebase'den çekildi.`);
             const targetPlayerNames = docSnap.data().players;
-            
             dailyPlayers = [];
             targetPlayerNames.forEach(name => {
                 const playerObj = allPlayers.find(p => p.isim === name);
                 if (playerObj) dailyPlayers.push(playerObj);
             });
         } else {
-            console.log(`⚡ ${documentId} Firebase'de yok. Seçiliyor ve kaydediliyor...`);
-            
             const seed = year * 10000 + (today.getMonth() + 1) * 100 + today.getDate() + (currentDifficulty === 'kolay' ? 1 : currentDifficulty === 'orta' ? 2 : 3);
             const shuffled = seededShuffle([...pool], seed);
             dailyPlayers = shuffled.slice(0, maxQuestions);
@@ -161,21 +157,31 @@ async function prepareDailyQuestions(pool) {
                 players: playerNamesToSave,
                 createdAt: new Date()
             });
-            console.log("💾 Seçim Firebase'e kaydedildi!");
         }
-
-        questionIndex = 0;
-        totalScore = 0;
-        document.getElementById('total-score').innerText = "0";
-        loadQuestion();
-
     } catch (error) {
         console.error("Firebase Hatası, yerel mod başlatılıyor:", error);
         const seed = year * 10000 + (today.getMonth() + 1) * 100 + today.getDate() + (currentDifficulty === 'kolay' ? 1 : 2);
         dailyPlayers = seededShuffle([...pool], seed).slice(0, maxQuestions);
-        questionIndex = 0;
-        loadQuestion();
     }
+
+    // --- YENİ: İLERLEMEYİ KONTROL ET VE YÜKLE ---
+    const todayStr = new Date().toLocaleDateString('tr-TR');
+    let progress = JSON.parse(localStorage.getItem('arenaProgress')) || {};
+    
+    // Eğer bugün bu zorluk seviyesinde kaydedilmiş bir ilerleme varsa:
+    if (progress[todayStr] && progress[todayStr][currentDifficulty]) {
+        questionIndex = progress[todayStr][currentDifficulty].questionIndex;
+        totalScore = progress[todayStr][currentDifficulty].totalScore;
+        console.log(`Kayıt bulundu: Soru ${questionIndex + 1}, Puan ${totalScore}`);
+    } else {
+        // Yoksa sıfırdan başlat
+        questionIndex = 0;
+        totalScore = 0;
+    }
+
+    // Arayüzdeki skoru güncelle ve soruyu yükle
+    document.getElementById('total-score').innerText = totalScore;
+    loadQuestion();
 }
 
 function normalizeInput(text) {
@@ -449,7 +455,7 @@ function makeGuess() {
     }
 }
 
-// --- YENİLENMİŞ OTOMATİK GEÇİŞLİ OYUN BİTİŞİ ---
+// --- YENİLENMİŞ OTOMATİK GEÇİŞLİ VE HİLE KORUMALI OYUN BİTİŞİ ---
 function endGame(isWin) {
     isGameOver = true;
     clearInterval(timerInterval);
@@ -469,10 +475,7 @@ function endGame(isWin) {
             box.classList.add('bg-green-500', 'border-green-400', 'text-black', 'shadow-[0_0_15px_rgba(34,197,94,0.5)]');
         });
 
-        // 2 Saniye bekleyip OTOMATİK olarak sıradaki soruya geç
-        setTimeout(() => {
-            nextQuestion();
-        }, 2000);
+        setTimeout(() => { nextQuestion(); }, 2000);
 
     } else {
         // KAYBETME DURUMU
@@ -484,20 +487,21 @@ function endGame(isWin) {
             box.classList.add('bg-red-900/50', 'border-red-500', 'text-red-200');
         });
 
-        // Oyuncu doğru cevabı okuyabilsin diye 3 Saniye bekleyip OTOMATİK sıradaki soruya geç
-        setTimeout(() => {
-            nextQuestion();
-        }, 3000);
+        setTimeout(() => { nextQuestion(); }, 3000);
     }
     
-    // İnputu kilitle, artık butona gerek yok
     input.disabled = true;
-}
 
-// ---YENİ MODU BAŞLATMA MANTIĞI ---
-window.playNextMode = function(diff) {
-    // Geçilecek modu yerel hafızaya kaydet
-    localStorage.setItem('autoStartArena', diff);
-    // Sayfayı yenile ki oyun sıfırdan temiz bir şekilde kurulsun
-    location.reload();
+    // --- YENİ: İLERLEMEYİ ANINDA KAYDET (HİLE KORUMASI) ---
+    // Oyuncu soruyu doğru/yanlış bitirdiği SALİSEDE, bir sonraki soruya geçeceğini ve güncel puanını hafızaya kazıyoruz.
+    const todayStr = new Date().toLocaleDateString('tr-TR');
+    let progress = JSON.parse(localStorage.getItem('arenaProgress')) || {};
+    if (!progress[todayStr]) progress[todayStr] = {};
+    
+    progress[todayStr][currentDifficulty] = {
+        questionIndex: questionIndex + 1, // Bir sonraki soruya geçmeye hak kazandı
+        totalScore: totalScore            // Güncel toplam puanı
+    };
+    
+    localStorage.setItem('arenaProgress', JSON.stringify(progress));
 }
