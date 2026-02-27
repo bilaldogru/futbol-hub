@@ -23,7 +23,7 @@
     </div>
 
     <div id="waitOverlay" class="fixed inset-0 z-[150] flex-col items-center justify-center bg-black/90 backdrop-blur-md text-white font-black text-2xl text-center px-4 hidden">
-        <i class="fa-solid fa-futbol animate-bounce text-6xl text-purple-500 mb-6"></i><p id="waitText">ODAYA BAĞLANILIYOR...</p>
+        <i class="fa-solid fa-futbol animate-bounce text-6xl text-[#e91e63] mb-6"></i><p id="waitText">ODAYA BAĞLANILIYOR...</p>
     </div>
 
     <div id="intermissionOverlay" class="fixed inset-0 z-[250] flex-col items-center justify-center bg-black/95 backdrop-blur-xl text-white text-center px-4 hidden">
@@ -33,8 +33,8 @@
     </div>
 
     <div id="lobbyModal" onclick="if(event.target === this) window.location.href='../../index.html'" class="absolute inset-0 z-[120] flex items-center justify-center bg-black/90 backdrop-blur-lg px-4">
-        <div class="bg-gray-900 border-2 border-purple-500 p-6 rounded-3xl max-w-md w-full text-center shadow-2xl relative flex flex-col max-h-[80vh]">
-            <button onclick="fetchLobbyRooms()" class="absolute top-4 right-4 text-purple-400 hover:text-white"><i class="fa-solid fa-rotate-right"></i></button>
+        <div class="bg-gray-900 border-2 border-[#e91e63] p-6 rounded-3xl max-w-md w-full text-center shadow-[0_0_50px_rgba(233,30,99,0.2)] relative flex flex-col max-h-[80vh]">
+            <button onclick="fetchLobbyRooms()" class="absolute top-4 right-4 text-[#e91e63] hover:text-white"><i class="fa-solid fa-rotate-right"></i></button>
             
             <h2 class="text-3xl font-black mb-1 text-white tracking-tighter">GRID SAVAŞLARI</h2>
             <p class="text-xs text-gray-400 mb-4 font-bold">Açık odalara katıl veya kendin kur</p>
@@ -43,14 +43,14 @@
                 <p class="text-gray-500 text-sm text-center mt-4">Odalar aranıyor...</p>
             </div>
 
-            <button onclick="showMultiplayerSetup()" class="w-full bg-purple-600 text-white font-black py-3 rounded-xl hover:bg-purple-500 transition shadow-lg mt-2">
+            <button onclick="showMultiplayerSetup()" class="w-full bg-[#e91e63] text-white font-black py-3 rounded-xl hover:bg-[#d81b60] transition shadow-[0_0_20px_rgba(233,30,99,0.4)] mt-2 active:scale-95">
                 <i class="fa-solid fa-plus mr-1"></i> YENİ ODA KUR
             </button>
         </div>
     </div>
 
     <div id="multiplayerSetupModal" class="fixed inset-0 z-[130] flex items-center justify-center bg-black/95 backdrop-blur-lg px-4 hidden">
-        <div class="bg-gray-900 border-2 border-purple-500 p-8 rounded-3xl max-w-md w-full text-center shadow-2xl relative">
+        <div class="bg-gray-900 border-2 border-[#e91e63] p-8 rounded-3xl max-w-md w-full text-center shadow-[0_0_50px_rgba(233,30,99,0.2)] relative">
             <div onclick="window.backToLobby()" class="absolute top-3 left-3 text-gray-400 hover:text-white cursor-pointer z-[999] p-4 text-2xl flex items-center justify-center">
                 <i class="fa-solid fa-arrow-left"></i>
             </div>
@@ -60,22 +60,22 @@
             
             <div id="setupControls">
                 <div class="flex items-center justify-center gap-2 mb-4 bg-gray-800 p-3 rounded-xl border border-gray-700">
-                    <input type="checkbox" id="privateRoomCheck" class="w-4 h-4 accent-purple-500 cursor-pointer">
+                    <input type="checkbox" id="privateRoomCheck" class="w-4 h-4 accent-pink-500 cursor-pointer">
                     <label for="privateRoomCheck" class="text-sm text-gray-300 font-bold cursor-pointer select-none">Gizli Lobi (Listede Görünmez)</label>
                 </div>
 
-                <input type="number" id="bet-amount" placeholder="Bahis (Örn: 500 Puan)" class="w-full bg-black border border-gray-700 rounded-xl py-4 px-4 mb-6 text-white text-center font-bold text-lg focus:outline-none focus:border-purple-500">
+                <input type="number" id="bet-amount" placeholder="Bahis (Örn: 500 Puan)" class="w-full bg-black border border-gray-700 rounded-xl py-4 px-4 mb-6 text-white text-center font-bold text-lg focus:outline-none focus:border-[#e91e63]">
 
-                <button onclick="confirmAndCreateRoom()" class="w-full bg-purple-500 text-white font-black py-4 rounded-xl transition-all hover:bg-purple-400 shadow-lg shadow-purple-500/20">
+                <button onclick="confirmAndCreateRoom()" class="w-full bg-[#e91e63] text-white font-black py-4 rounded-xl transition-all hover:bg-[#d81b60] shadow-[0_0_20px_rgba(233,30,99,0.4)] active:scale-95">
                     ODAYI KUR
                 </button>
             </div>
 
             <div id="linkArea" class="hidden mt-4">
-                <p class="text-sm text-purple-400 mb-2 font-semibold">Oda Oluşturuldu! Linki Arkadaşına Gönder:</p>
+                <p class="text-sm text-[#e91e63] mb-2 font-semibold">Oda Oluşturuldu! Linki Arkadaşına Gönder:</p>
                 <div class="flex items-center bg-black rounded-lg p-2 border border-gray-700 mb-4 relative">
                     <input type="text" id="inviteLink" readonly class="bg-transparent w-full text-gray-300 text-xs outline-none px-2">
-                    <span id="copyTooltip" class="absolute -top-8 right-0 bg-purple-500 text-white text-[10px] font-black px-2 py-1 rounded shadow-[0_0_10px_rgba(168,85,247,0.5)] opacity-0 transform translate-y-2 transition-all duration-300 pointer-events-none z-50">KOPYALANDI!</span>
+                    <span id="copyTooltip" class="absolute -top-8 right-0 bg-[#e91e63] text-white text-[10px] font-black px-2 py-1 rounded shadow-[0_0_10px_rgba(233,30,99,0.5)] opacity-0 transform translate-y-2 transition-all duration-300 pointer-events-none z-50">KOPYALANDI!</span>
                     <button id="copyBtn" onclick="copyInviteLink()" class="bg-gray-800 text-white px-3 py-1 rounded text-sm hover:bg-gray-700 transition-colors">
                         <i id="copyIcon" class="fa-solid fa-copy transition-all duration-300"></i>
                     </button>
@@ -87,8 +87,8 @@
 
     <div id="game-main-container" class="hidden w-full h-full max-w-[1600px] mx-auto px-2 pt-16 flex-col lg:flex-row gap-4 justify-center items-center relative z-10">
         
-        <div id="left-sidebar" class="hidden lg:flex flex-col w-64 history-sidebar bg-gray-900/80 border-green-900/50 p-4 rounded-2xl">
-            <h3 class="text-green-400 font-black text-sm mb-4 flex items-center gap-2"><i class="fa-solid fa-trophy"></i> SENİN HAMLELERİN</h3>
+        <div id="left-sidebar" class="hidden lg:flex flex-col w-64 history-sidebar bg-gray-900/80 border-[#e91e63] p-4 rounded-2xl shadow-[0_0_30px_rgba(233,30,99,0.2)]">
+            <h3 class="text-[#e91e63] font-black text-sm mb-4 flex items-center gap-2"><i class="fa-solid fa-trophy"></i> SENİN HAMLELERİN</h3>
             <div id="my-moves-list" class="flex flex-col gap-2 overflow-y-auto"></div>
         </div>
 
@@ -97,27 +97,26 @@
                 <div id="round-display" class="inline-block bg-yellow-500 text-black text-xs font-black px-4 py-1 rounded-full mb-1">TUR 1 / 3</div>
                 <div class="text-white font-black text-3xl flex justify-center items-center gap-4 bg-black/40 py-2 rounded-2xl border border-gray-800">
                     <span class="text-sm text-gray-400">SEN</span>
-                    <span id="score-p1" class="text-green-500">0</span>
+                    <span id="score-p1" class="text-[#e91e63]">0</span>
                     <span class="text-gray-600">-</span>
-                    <span id="score-p2" class="text-red-500">0</span>
-                    <span class="text-sm text-gray-400">RAKİP</span>
+                    <span id="score-p2" class="text-[#e91e63]">0</span> <span class="text-sm text-gray-400">RAKİP</span>
                 </div>
             </div>
 
             <div class="flex justify-between items-center w-full bg-gray-800 p-2 sm:p-4 rounded-2xl border border-gray-700 mb-4 shadow-xl">
-                <div id="my-box" class="flex-1 text-center p-1 sm:p-2 rounded-xl transition-all opacity-50 border-2 border-transparent">
+                <div id="my-box" class="flex-1 text-center p-1 sm:p-2 rounded-xl transition-all opacity-50 border-b-4 border-transparent">
                     <p id="my-name" class="font-black text-xs sm:text-sm truncate">Sen</p>
                 </div>
                 <div class="flex flex-col items-center px-2">
                     <div id="turn-indicator" class="font-black text-white text-[10px] sm:text-xs">SIRA KİMDE?</div>
                     <div id="timer-display" class="text-2xl sm:text-4xl font-black text-yellow-400 drop-shadow-md">30</div>
                 </div>
-                <div id="opp-box" class="flex-1 text-center p-1 sm:p-2 rounded-xl transition-all opacity-50 border-2 border-transparent">
+                <div id="opp-box" class="flex-1 text-center p-1 sm:p-2 rounded-xl transition-all opacity-50 border-b-4 border-transparent">
                     <p id="opp-name" class="font-black text-xs sm:text-sm truncate">Rakip</p>
                 </div>
             </div>
 
-            <div class="grid-board bg-black p-2 sm:p-3 rounded-2xl shadow-2xl border border-gray-800">
+            <div class="grid-board bg-black p-2 sm:p-3 rounded-2xl border-2 border-[#e91e63] shadow-[0_0_40px_rgba(233,30,99,0.3)]">
                 <div class="cell empty-corner"></div>
                 <div class="cell header-cell" id="col-0"></div><div class="cell header-cell" id="col-1"></div><div class="cell header-cell" id="col-2"></div>
                 <div class="cell header-cell" id="row-0"></div>
@@ -129,38 +128,38 @@
             </div>
         </div>
 
-        <div id="right-sidebar" class="hidden lg:flex flex-col w-64 history-sidebar bg-gray-900/80 border-red-900/50 p-4 rounded-2xl">
-            <h3 class="text-red-400 font-black text-sm mb-4 flex items-center gap-2"><i class="fa-solid fa-skull"></i> RAKİP HAMLELERİ</h3>
+        <div id="right-sidebar" class="hidden lg:flex flex-col w-64 history-sidebar bg-gray-900/80 border-[#e91e63] p-4 rounded-2xl shadow-[0_0_30px_rgba(233,30,99,0.2)]">
+            <h3 class="text-[#e91e63] font-black text-sm mb-4 flex items-center gap-2"><i class="fa-solid fa-skull"></i> RAKİP HAMLELERİ</h3>
             <div id="opp-moves-list" class="flex flex-col gap-2 overflow-y-auto"></div>
         </div>
     </div>
 
-    <div id="bottom-search-bar" class="fixed bottom-0 left-0 w-full bg-gray-950/95 backdrop-blur-xl border-t-2 border-green-500 p-4 transform translate-y-full transition-transform duration-300 z-[200] flex flex-col gap-2 rounded-t-3xl max-h-[50vh]">
+    <div id="bottom-search-bar" class="fixed bottom-0 left-0 w-full bg-gray-950/95 backdrop-blur-xl border-t-2 border-[#e91e63] p-4 transform translate-y-full transition-transform duration-300 z-[200] flex flex-col gap-2 rounded-t-3xl max-h-[50vh] shadow-[0_-10px_30px_rgba(233,30,99,0.2)]">
         <div class="flex justify-between items-center px-2">
-            <span id="selected-cell-info" class="text-xs font-bold text-green-400"></span>
+            <span id="selected-cell-info" class="text-xs font-bold text-[#e91e63]"></span>
             <button onclick="closeSearch()" class="text-gray-400 hover:text-white bg-gray-800 px-3 py-1 rounded-full text-xs font-bold"><i class="fa-solid fa-chevron-down"></i> Kapat</button>
         </div>
         <div class="relative w-full">
             <i class="fa-solid fa-search absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
-            <input type="text" id="bottom-player-search" placeholder="Futbolcu adı yaz..." onkeyup="filterPlayersBottom()" autocomplete="off" class="w-full bg-black border border-gray-700 rounded-full py-3 pl-12 pr-4 text-white focus:outline-none focus:border-green-500 font-bold transition-all text-sm">
+            <input type="text" id="bottom-player-search" placeholder="Futbolcu adı yaz..." onkeyup="filterPlayersBottom()" autocomplete="off" class="w-full bg-black border border-gray-700 rounded-full py-3 pl-12 pr-4 text-white focus:outline-none focus:border-[#e91e63] font-bold transition-all text-sm">
         </div>
         <div id="bottom-search-results" class="overflow-y-auto flex flex-col px-1 flex-1 pb-4"></div>
     </div>
 
     <div id="endModal" class="fixed inset-0 z-[300] flex items-center justify-center bg-black/95 backdrop-blur-lg px-4 hidden">
-        <div id="modalContent" class="bg-gray-900 border-2 p-8 rounded-3xl max-w-sm w-full text-center shadow-2xl">
+        <div id="modalContent" class="bg-gray-900 border-2 p-8 rounded-3xl max-w-sm w-full text-center shadow-[0_0_50px_rgba(255,255,255,0.2)]">
             <div id="modalEmoji" class="text-6xl mb-4"></div>
             <h2 id="modalTitle" class="text-4xl font-black mb-2"></h2>
             <p id="modalDesc" class="text-gray-400 font-bold text-lg mb-6"></p>
-            <button onclick="window.location.href='../../index.html'" class="w-full bg-white text-black font-black py-4 rounded-xl hover:bg-gray-200 transition-all shadow-lg">ANA MENÜYE DÖN</button>
+            <button onclick="window.location.href='../../index.html'" class="w-full bg-white text-black font-black py-4 rounded-xl hover:bg-gray-200 transition-all shadow-lg active:scale-95">ANA MENÜYE DÖN</button>
         </div>
     </div>
 
     <div id="inviteModal" class="fixed inset-0 z-[400] flex items-center justify-center bg-black/95 backdrop-blur-xl px-4 hidden">
-        <div class="bg-gray-900 border-2 border-fuchsia-500 p-8 rounded-3xl max-w-md w-full text-center shadow-[0_0_50px_rgba(217,70,239,0.3)] relative">
+        <div class="bg-gray-900 border-2 border-[#e91e63] p-8 rounded-3xl max-w-md w-full text-center shadow-[0_0_50px_rgba(233,30,99,0.3)] relative">
             <div class="text-6xl mb-4 animate-bounce">⚔️</div>
             <h2 class="text-3xl font-black mb-2 tracking-tighter text-white">MEYDAN OKUMA!</h2>
-            <p id="invite-challenger-name" class="text-fuchsia-400 font-bold mb-6 text-sm">Bir oyuncu seni maça davet ediyor!</p>
+            <p id="invite-challenger-name" class="text-[#e91e63] font-bold mb-6 text-sm">Bir oyuncu seni maça davet ediyor!</p>
             
             <div class="bg-gray-800 p-4 rounded-xl mb-8 border border-gray-700 shadow-inner">
                 <p class="text-gray-400 text-xs font-bold mb-1 tracking-widest">ORTADAKİ TOPLAM ÖDÜL</p>
@@ -169,7 +168,7 @@
 
             <div class="flex gap-3">
                 <button onclick="window.location.href='../../index.html'" class="flex-1 bg-gray-800 text-gray-300 font-bold py-4 rounded-xl hover:bg-red-600 hover:text-white border border-gray-600 hover:border-red-500 transition-all">REDDET</button>
-                <button id="acceptInviteBtn" class="flex-1 bg-fuchsia-600 text-white font-black py-4 rounded-xl hover:bg-fuchsia-500 shadow-lg shadow-fuchsia-500/30 transition-all">KABUL ET</button>
+                <button id="acceptInviteBtn" class="flex-1 bg-[#e91e63] text-white font-black py-4 rounded-xl hover:bg-[#d81b60] shadow-lg shadow-[#e91e63]/30 transition-all active:scale-95">KABUL ET</button>
             </div>
         </div>
     </div>
