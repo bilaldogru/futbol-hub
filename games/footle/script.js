@@ -68,7 +68,7 @@ function checkDailyLock() {
 
     // 🛠️ TEST MODU: Her sayfa yenilendiğinde bugünün oynanma kaydını siler.
     // Oyunu gerçek oyunculara açacağın zaman bu satırı SİLMEYİ UNUTMA!
-    localStorage.removeItem('footle_daily_last_played')
+    //localStorage.removeItem('footle_daily_last_played')
     
     if(!btn) return;
     
