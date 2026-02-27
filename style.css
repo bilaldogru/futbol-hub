@@ -29,7 +29,6 @@ body {
     overflow-x: hidden;
 }
 
-/* Arka Plan Deseni (Hero bölümü için hafif destek) */
 .bg-overlay {
     position: fixed;
     top: 0; left: 0; width: 100%; height: 100%;
@@ -39,7 +38,6 @@ body {
     opacity: 0.3; 
 }
 
-/* --- NAVBAR --- */
 .navbar {
     display: flex; justify-content: space-between; align-items: center;
     padding: 20px 50px; 
@@ -64,7 +62,6 @@ body {
 #logout-btn { color: #ff4444; cursor: pointer; font-size: 1.1rem; margin-left: 5px; transition: 0.3s; }
 #logout-btn:hover { transform: scale(1.1); }
 
-/* Mağaza Butonu */
 #shop-btn {
     background: linear-gradient(45deg, #ffaa00, #ffcc00);
     color: black; border: none; padding: 6px 15px; border-radius: 20px;
@@ -74,7 +71,6 @@ body {
 }
 #shop-btn:hover { transform: scale(1.05); box-shadow: 0 0 20px rgba(255, 170, 0, 0.6); }
 
-/* Puan Rozeti */
 .score-badge {
     background: linear-gradient(45deg, #ffd700, #ffaa00);
     color: #000; padding: 5px 12px; border-radius: 20px;
@@ -84,7 +80,6 @@ body {
 }
 @keyframes popIn { from { transform: scale(0); opacity: 0; } to { transform: scale(1); opacity: 1; } }
 
-/* HERO SECTION */
 .hero {
     height: 70vh; display: flex; flex-direction: column; justify-content: center; align-items: center;
     text-align: center; position: relative; 
@@ -122,7 +117,6 @@ body {
 
 .wave-divider { display: none !important; }
 
-/* --- MAKSİMUM OKUNABİLİR KAYAR HABER BANDI (TICKER) --- */
 .news-ticker {
     background: #0a0a0c; 
     border-top: 1px solid rgba(34, 197, 94, 0.3); 
@@ -151,19 +145,16 @@ body {
 
 @keyframes scroll-ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
-/* --- OYUNLAR VE GENEL KART AYARLARI --- */
 .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; position: relative; z-index: 5; }
 
-/* OYUNLAR KISMI: NOKTALI YAPI (SIRALAMA DÜZELTİLDİ) */
 #games-grid {
     background: 
-        radial-gradient(rgba(255, 255, 255, 0.07) 2px, transparent 2px), /* Noktalar ÜSTTE */
-        linear-gradient(to bottom, var(--bg-dark) 0%, var(--bg-darker) 100%); /* Renk geçişi ALTTA */
+        radial-gradient(rgba(255, 255, 255, 0.07) 2px, transparent 2px),
+        linear-gradient(to bottom, var(--bg-dark) 0%, var(--bg-darker) 100%); 
     background-size: 40px 40px, 100% 100%;
     padding: 80px 0;
 }
 
-/* 1. Ateş Efektli Başlık Stilleri */
 .fire-text {
     background: linear-gradient(to bottom, #ffeb3b, #ff9800, #f44336);
     -webkit-background-clip: text;
@@ -172,18 +163,38 @@ body {
 }
 .fire-icon {
     color: #ff9800;
-    animation: fire-flicker 0.1s infinite alternate;
+    animation: fire-flicker 1.5s infinite alternate ease-in-out;
 }
 
 @keyframes fire-glow {
     from { text-shadow: 0 0 5px rgba(255, 152, 0, 0.5); }
     to { text-shadow: 0 0 20px rgba(255, 152, 0, 0.9), 0 0 10px rgba(244, 67, 54, 0.8); }
 }
-
 @keyframes fire-flicker {
     0% { transform: scale(1) rotate(-3deg); color: #ffeb3b; text-shadow: 0 0 5px #ffeb3b; }
     50% { transform: scale(1.1) rotate(3deg); color: #ff9800; text-shadow: 0 0 10px #ff9800; }
     100% { transform: scale(1) rotate(-3deg); color: #f44336; text-shadow: 0 0 5px #f44336; }
+}
+
+.gold-text {
+    background: linear-gradient(to bottom, #fff700, #ffd700, #d4af37);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gold-glow 2s infinite alternate;
+}
+.gold-icon {
+    color: #ffd700;
+    animation: gold-flicker 1.5s infinite alternate ease-in-out;
+}
+
+@keyframes gold-glow {
+    from { text-shadow: 0 0 5px rgba(255, 215, 0, 0.5); }
+    to { text-shadow: 0 0 20px rgba(255, 215, 0, 0.9), 0 0 10px rgba(212, 175, 55, 0.8); }
+}
+@keyframes gold-flicker {
+    0% { transform: scale(1); color: #fff700; text-shadow: 0 0 5px #fff700; }
+    50% { transform: scale(1.05); color: #ffd700; text-shadow: 0 0 10px #ffd700; }
+    100% { transform: scale(1); color: #d4af37; text-shadow: 0 0 5px #d4af37; }
 }
 
 .section-title { 
@@ -191,12 +202,11 @@ body {
     padding-left: 15px; text-shadow: 0 0 15px rgba(255,255,255,0.1); letter-spacing: 2px; font-weight: 900;
     display: flex; align-items: center; gap: 10px;
 }
-/* Oyunlar kısmının başlık çizgisini de ateş rengi yapalım */
 #games-grid .section-title { border-left-color: #ff9800; }
+#leaderboard .section-title { border-left-color: #ffd700; }
 
 .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
 
-/* KART TEMEL AYARLARI */
 .game-card {
     background: var(--card-bg); border-radius: 15px; overflow: hidden; cursor: pointer;
     border: 1px solid rgba(255,255,255,0.05); transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -204,7 +214,6 @@ body {
 }
 .game-card:hover { transform: translateY(-10px); z-index: 10; }
 
-/* KART RENK PARLAMALARI */
 .card-green { border: 1px solid rgba(34, 197, 94, 0.2); }
 .card-green:hover { border-color: var(--primary-green); box-shadow: 0 10px 30px rgba(34, 197, 94, 0.3); }
 .card-green:hover .play-btn { background: var(--primary-green); color: #fff; border-color: var(--primary-green); }
@@ -226,8 +235,6 @@ body {
 .card-fuchsia:hover .play-btn { box-shadow: 0 0 15px rgba(233, 30, 99, 0.4); }
 .card-orange:hover .play-btn { box-shadow: 0 0 15px rgba(230, 126, 34, 0.4); }
 
-
-/* YENİ STANDART RESİM SİSTEMİ */
 .card-image { height: 220px; position: relative; overflow: hidden; display: flex; justify-content: center; align-items: center; }
 .card-image .bg-img { 
     position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
@@ -262,16 +269,13 @@ body {
 @keyframes shake { 0% { transform: translateX(0); } 25% { transform: translateX(-5px); } 50% { transform: translateX(5px); } 75% { transform: translateX(-5px); } 100% { transform: translateX(0); } }
 .play-btn.disabled { border-color: rgba(255,255,255,0.05); color: #555; cursor: not-allowed; }
 
-
-/* --- LİDERLİK TABLOSU (NOKTALI YAPI DEVAMI) --- */
 #leaderboard {
     background: 
-        radial-gradient(rgba(255, 255, 255, 0.07) 2px, transparent 2px), /* Noktalar ÜSTTE */
-        linear-gradient(to bottom, var(--bg-darker) 0%, #110f16 100%);   /* Renk geçişi ALTTA */
+        radial-gradient(rgba(255, 255, 255, 0.07) 2px, transparent 2px), 
+        linear-gradient(to bottom, var(--bg-darker) 0%, #110f16 100%);   
     background-size: 40px 40px, 100% 100%;
     padding-top: 100px; padding-bottom: 120px; position: relative;
 }
-#leaderboard .section-title { border-left-color: var(--primary-gold); text-shadow: 0 0 20px rgba(255, 215, 0, 0.2); }
 .section-desc { color: var(--text-gray); margin-bottom: 50px; font-size: 1.1rem; }
 
 .leaderboard-wrapper { display: flex; justify-content: center; align-items: flex-end; gap: 20px; margin-bottom: 50px; flex-wrap: wrap; background: radial-gradient(ellipse at bottom, rgba(255, 215, 0, 0.1) 0%, transparent 60%); padding-bottom: 20px; }
@@ -298,8 +302,6 @@ body {
 .list-item .name { flex-grow: 1; text-align: left; padding-left: 10px; font-weight: 700; display: flex; align-items: center;}
 .list-item .points { color: var(--primary-green); font-weight: 900; font-size: 1.1rem;}
 
-
-/* --- MAĞAZA (MODAL) --- */
 .modal { display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.85); backdrop-filter: blur(5px); justify-content: center; align-items: center; }
 .shop-content { background: linear-gradient(145deg, #1a1a24, #0a0a0c); border: 1px solid rgba(255,255,255,0.1); padding: 40px; border-radius: 24px; width: 90%; max-width: 800px; text-align: center; position: relative; animation: popUp 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: 0 20px 50px rgba(0,0,0,0.8); }
 @keyframes popUp { from {transform: scale(0.8); opacity: 0;} to {transform: scale(1); opacity: 1;} }
@@ -315,7 +317,6 @@ body {
 .ball-gold { background: radial-gradient(circle at 30% 30%, #ffd700, #b8860b); border: 2px solid #8a6408; box-shadow: 0 0 30px rgba(255, 215, 0, 0.4), inset -10px -10px 20px rgba(0,0,0,0.6); }
 .price-tag { background: var(--primary-green); color: black; padding: 6px 15px; border-radius: 50px; font-weight: 900; display: inline-block; margin-top: 15px; font-size: 1rem; font-family: 'Rajdhani'; }
 
-/* --- PAKET AÇILIM MODAL STİLLERİ --- */
 #pack-overlay {
     display: none; 
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
@@ -355,7 +356,6 @@ body {
 }
 .continue-btn:hover { transform: scale(1.1); box-shadow: 0 0 40px rgba(255,255,255,0.8); }
 
-/* --- HAKKIMIZDA BÖLÜMÜ --- */
 #about { 
     padding: 120px 0; 
     background: 
@@ -392,7 +392,6 @@ body {
 .reveal:nth-child(4) { transition-delay: 0.3s; }
 .reveal:nth-child(5) { transition-delay: 0.4s; }
 
-/* --- MOBİL UYUMLULUK --- */
 @media (max-width: 768px) {
     .navbar { flex-direction: column; gap: 15px; padding: 15px; }
     .nav-links { gap: 15px; font-size: 0.9rem; }
@@ -410,7 +409,6 @@ body {
 ::-webkit-scrollbar-thumb { background: var(--primary-green); border-radius: 10px; }
 ::-webkit-scrollbar-thumb:hover { background: #16a34a; }
 
-/* FOOTER */
 footer {
     text-align: center;
     padding: 20px;

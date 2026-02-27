@@ -27,12 +27,6 @@
             
             <div id="user-info">
                 <span id="user-total-score" class="score-badge">0 P</span>
-                <div id="level-container" style="display: none; align-items: center; gap: 8px; margin-right: 15px;">
-    <span id="user-level" style="background: linear-gradient(45deg, #3b82f6, #8b5cf6); color: white; padding: 4px 10px; border-radius: 8px; font-weight: 900; font-size: 0.8rem; text-shadow: 0 1px 3px rgba(0,0,0,0.5);">Lv.1</span>
-    <div style="width: 80px; height: 10px; background: rgba(255,255,255,0.1); border-radius: 10px; overflow: hidden; border: 1px solid rgba(255,255,255,0.2);">
-        <div id="xp-bar-fill" style="height: 100%; width: 0%; background: linear-gradient(90deg, #3b82f6, #22c55e); transition: width 0.5s ease-out;"></div>
-    </div>
-</div>
                 <button id="shop-btn" onclick="openShop()">
                     <i class="fa-solid fa-cart-shopping"></i> MAĞAZA
                 </button>
@@ -73,7 +67,7 @@
             
             <div class="grid">
                 
-                <div class="game-card card-green reveal" onclick="location.href='games/tahmin-et/index.html'">
+                <div class="game-card card-green reveal" onclick="playGame('gizli_efsane', 'games/tahmin-et/index.html')">
                     <div class="card-image">
                         <div class="bg-img" style="background: linear-gradient(135deg, rgba(34, 197, 94, 0.4) 0%, rgba(0, 0, 0, 0.8) 100%), url('https://images.unsplash.com/photo-1574629810360-7efbbe195018?q=80&w=1000');"></div>
                         <span class="badge">GÜNLÜK</span>
@@ -82,14 +76,14 @@
                         <h3>Gizli Efsane</h3>
                         <p>İpuçlarını takip et, gizli futbolcuyu bul. Her gün yeni 10 soru!</p>
                         <div class="card-stats">
-                            <span><i class="fa-solid fa-play"></i> 1.2k Oynanma</span>
+                            <span><i class="fa-solid fa-play"></i> <span id="count-gizli_efsane">100</span> Oynanma</span>
                             <span><i class="fa-solid fa-star" style="color: #ffd700;"></i> 4.8</span>
                         </div>
                         <div class="play-btn">OYNA</div>
                     </div>
                 </div>
 
-                <div class="game-card card-blue reveal" onclick="location.href='games/footle/index.html'">
+                <div class="game-card card-blue reveal" onclick="playGame('footle', 'games/footle/index.html')">
                     <div class="card-image">
                         <div class="bg-img" style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.4) 0%, rgba(0, 0, 0, 0.8) 100%), url('https://images.unsplash.com/photo-1551958219-acbc608c6377?q=80&w=600&h=400');"></div>
                         <span class="badge" style="background: var(--accent-blue); color: #fff; border: 1px solid #7cb3ff;">GÜNLÜK / MÜCADELE</span>
@@ -98,14 +92,14 @@
                         <h3>Footle</h3>
                         <p>Günün gizli futbolcusunu özellikleri ile bul!</p>
                         <div class="card-stats">
-                            <span><i class="fa-solid fa-play"></i> 2.4k Oynanma</span>
+                            <span><i class="fa-solid fa-play"></i> <span id="count-footle">100</span> Oynanma</span>
                             <span><i class="fa-solid fa-star" style="color: #ffd700;"></i> 4.9</span>
                         </div>
                         <div class="play-btn">OYNA</div>
                     </div>
                 </div>
 
-                <div class="game-card card-fuchsia reveal" onclick="location.href='games/grid/index.html'">
+                <div class="game-card card-fuchsia reveal" onclick="playGame('grid_savaslari', 'games/grid/index.html')">
                     <div class="card-image">
                         <div class="bg-img" style="background: linear-gradient(135deg, #e91e63, #4a148c);"></div>
                         <span class="badge live" style="background: linear-gradient(135deg, #e91e63, #4a148c); color: #fff; border: 1px solid #ff6699;">YENİ / 1v1</span>
@@ -115,14 +109,14 @@
                         <h3>Grid Savaşları</h3>
                         <p>1v1 Kesişim oyunu! Futbol bilginle X-O-X tahtasını ele geçir.</p>
                         <div class="card-stats">
-                            <span><i class="fa-solid fa-play"></i> 850 Oynanma</span>
+                            <span><i class="fa-solid fa-play"></i> <span id="count-grid_savaslari">100</span> Oynanma</span>
                             <span><i class="fa-solid fa-star" style="color: #ffd700;"></i> 4.7</span>
                         </div>
                         <div class="play-btn">MEYDAN OKU</div>
                     </div>
                 </div>
 
-                <div class="game-card card-orange reveal" onclick="location.href='games/kafa-topu/index.html'">
+                <div class="game-card card-orange reveal" onclick="playGame('arena', 'games/kafa-topu/index.html')">
                     <div class="card-image">
                         <div class="bg-img" style="background: linear-gradient(135deg, rgba(230, 126, 34, 0.4) 0%, rgba(0, 0, 0, 0.8) 100%), url('https://images.unsplash.com/photo-1579952363873-27f3bade9f55?q=80&w=600&h=400');"></div>
                         <span class="badge" style="background: var(--primary-orange); color: #fff; border: 1px solid #ffb077;">YEREL 1v1</span>
@@ -131,7 +125,7 @@
                         <h3>Arena</h3>
                         <p>Arkadaşlarınla heyecan dolu bir müsabakaya hazır mısın?</p>
                         <div class="card-stats">
-                            <span><i class="fa-solid fa-gamepad"></i> 2 Kişilik</span>
+                            <span><i class="fa-solid fa-play"></i> <span id="count-arena">100</span> Oynanma</span>
                             <span><i class="fa-solid fa-star" style="color: #ffd700;"></i> 4.9</span>
                         </div>
                         <div class="play-btn">SAHAYA İN</div>
@@ -174,8 +168,13 @@
     
     <section id="leaderboard">
         <div class="container">
-            <h2 class="section-title"><i class="fa-solid fa-trophy" style="color: #ffd700;"></i> HAFTANIN KRALLARI</h2>
+            <h2 class="section-title">
+                <i class="fa-solid fa-trophy gold-icon"></i> 
+                <span class="gold-text">HAFTANIN KRALLARI</span>
+            </h2>
             <p class="section-desc">Bu hafta en çok puanı toplayan ve futbol bilgisini kanıtlayan efsaneler.</p>
+            
+            <p id="weekly-countdown" style="text-align:center; color:var(--primary-orange); font-weight:bold; margin-bottom:20px;">Sıfırlanmaya Kalan Süre: Hesaplanıyor...</p>
             
             <div class="leaderboard-wrapper">
                 <p style="text-align:center; color:#888;">Yükleniyor...</p>
@@ -274,8 +273,7 @@
     <script type="module">
       import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
       import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-      // DİKKAT: onSnapshot buraya eklendi!
-      import { getFirestore, collection, query, orderBy, limit, getDocs, where, onSnapshot } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+      import { getFirestore, collection, query, orderBy, limit, getDocs, where, onSnapshot, doc, setDoc, updateDoc, increment, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
       const firebaseConfig = {
         apiKey: "AIzaSyD62cMqFmtT_LYOQdyLEib3TlP2sDXVHUY",
@@ -298,6 +296,42 @@
       const userPic = document.getElementById('user-pic');
       const logoutBtn = document.getElementById('logout-btn');
       const scoreBadge = document.getElementById('user-total-score');
+
+      window.playGame = async (gameId, url) => {
+          const statRef = doc(db, "game_stats", "play_counts");
+          try {
+              // Yönlendirmeden önce veritabanına kaydetmeyi BEKLE (await)
+              await updateDoc(statRef, { [gameId]: increment(1) });
+              window.location.href = url;
+          } catch (e) {
+              if(e.code === 'not-found') {
+                  try {
+                      await setDoc(statRef, { [gameId]: 1 });
+                      window.location.href = url;
+                  } catch (innerErr) {
+                      window.location.href = url;
+                  }
+              } else {
+                  window.location.href = url; 
+              }
+          }
+      };
+
+      onSnapshot(doc(db, "game_stats", "play_counts"), (docSnap) => {
+          const games = ['gizli_efsane', 'footle', 'grid_savaslari', 'arena'];
+          if(docSnap.exists()) {
+              const data = docSnap.data();
+              games.forEach(g => {
+                  const el = document.getElementById(`count-${g}`);
+                  if(el) el.innerText = (data[g] || 0) + 100;
+              });
+          } else {
+              games.forEach(g => {
+                  const el = document.getElementById(`count-${g}`);
+                  if(el) el.innerText = "100";
+              });
+          }
+      });
       
       window.openShop = () => { document.getElementById('shop-modal').style.display = 'flex'; };
       window.closeShop = () => { document.getElementById('shop-modal').style.display = 'none'; };
@@ -308,47 +342,40 @@
       }
 
       window.buyPack = (type) => {
-    closeShop();
-    
-    const overlay = document.getElementById('pack-overlay');
-    const container = document.getElementById('pack-container');
-    const ballEl = document.getElementById('pack-animated-ball');
-    const rewardEl = document.getElementById('pack-reward');
-    const rewardTitle = document.getElementById('reward-title');
-    const rewardDesc = document.getElementById('reward-desc');
+        closeShop();
+        const overlay = document.getElementById('pack-overlay');
+        const container = document.getElementById('pack-container');
+        const ballEl = document.getElementById('pack-animated-ball');
+        const rewardEl = document.getElementById('pack-reward');
+        const rewardTitle = document.getElementById('reward-title');
+        const rewardDesc = document.getElementById('reward-desc');
 
-    // Topun rengini ve başlangıç durumunu ayarla
-    ballEl.className = `ball`; // Önce temizle
-    setTimeout(() => { ballEl.classList.add(`ball-${type}`, 'scale-in', 'spin'); }, 50);
-    
-    // Ekranı aç ve ödülü gizle
-    overlay.classList.add('active');
-    rewardEl.classList.remove('show');
-    
-    // 1. Aşama: Top sallansın
-    setTimeout(() => { container.classList.add('pack-shake'); }, 1500);
-
-    // 2. Aşama: Top patlar ve ödül çıkar
-    setTimeout(() => {
-        container.classList.remove('pack-shake');
-        ballEl.classList.remove('scale-in'); ballEl.classList.add('scale-out'); // Top küçülüp kaybolur
+        ballEl.className = `ball`;
+        setTimeout(() => { ballEl.classList.add(`ball-${type}`, 'scale-in', 'spin'); }, 50);
         
-        // Ödül Metinleri
-        if(type === 'gold') { rewardTitle.innerText = "İKONİK KART!"; rewardDesc.innerText = "Altın Krampon Kilidi Açıldı!"; }
-        else if(type === 'silver') { rewardTitle.innerText = "NADİR GÜÇ!"; rewardDesc.innerText = "+10 Enerji Başlangıcı!"; }
-        else { rewardTitle.innerText = "STANDART"; rewardDesc.innerText = "Sıradan Forma Paketi"; }
+        overlay.classList.add('active');
+        rewardEl.classList.remove('show');
+        
+        setTimeout(() => { container.classList.add('pack-shake'); }, 1500);
 
-        rewardEl.style.display = "flex"; // Görünür yap
-        setTimeout(() => rewardEl.classList.add('show'), 50); // Animasyonu tetikle
-    }, 2500);
-};
+        setTimeout(() => {
+            container.classList.remove('pack-shake');
+            ballEl.classList.remove('scale-in'); ballEl.classList.add('scale-out');
+            
+            if(type === 'gold') { rewardTitle.innerText = "İKONİK KART!"; rewardDesc.innerText = "Altın Krampon Kilidi Açıldı!"; }
+            else if(type === 'silver') { rewardTitle.innerText = "NADİR GÜÇ!"; rewardDesc.innerText = "+10 Enerji Başlangıcı!"; }
+            else { rewardTitle.innerText = "STANDART"; rewardDesc.innerText = "Sıradan Forma Paketi"; }
 
-window.closePack = () => {
-    document.getElementById('pack-overlay').classList.remove('active');
-    // Kapatınca topu eski haline getir ki bir dahakine yine animasyonla gelsin
-    document.getElementById('pack-animated-ball').classList.remove('scale-out', 'spin');
-    document.getElementById('pack-reward').style.display = "none";
-};
+            rewardEl.style.display = "flex"; 
+            setTimeout(() => rewardEl.classList.add('show'), 50); 
+        }, 2500);
+      };
+
+      window.closePack = () => {
+          document.getElementById('pack-overlay').classList.remove('active');
+          document.getElementById('pack-animated-ball').classList.remove('scale-out', 'spin');
+          document.getElementById('pack-reward').style.display = "none";
+      };
 
       loginBtn.addEventListener('click', () => {
         signInWithPopup(auth, provider).catch((error) => console.error("Hata:", error));
@@ -378,33 +405,57 @@ window.closePack = () => {
         }
       });
 
+      // Level hesaplaması silindi
       async function fetchUserScore(email) {
-    try {
-        const q = query(collection(db, "scores"), where("email", "==", email));
-        const querySnapshot = await getDocs(q);
+        try {
+            const q = query(collection(db, "scores"), where("email", "==", email));
+            const querySnapshot = await getDocs(q);
 
-        let score = 0;
-        if (!querySnapshot.empty) {
-            score = querySnapshot.docs[0].data().score;
-        }
-        
-        // Puanı yazdır
-        scoreBadge.innerText = `${score} P`;
-        scoreBadge.style.display = 'inline-block';
+            let score = 0;
+            if (!querySnapshot.empty) {
+                score = querySnapshot.docs[0].data().score;
+            }
+            
+            scoreBadge.innerText = `${score} P`;
+            scoreBadge.style.display = 'inline-block';
 
-        // XP ve Seviye Hesaplama (Her 500 Puan = 1 Seviye)
-        const level = Math.floor(score / 500) + 1;
-        const currentXp = score % 500;
-        const xpPercentage = (currentXp / 500) * 100;
+        } catch (e) { console.error("Puan çekilemedi:", e); }
+      }
 
-        document.getElementById('level-container').style.display = 'flex';
-        document.getElementById('user-level').innerText = `Lv.${level}`;
-        document.getElementById('xp-bar-fill').style.width = `${xpPercentage}%`;
+      async function checkWeeklyResetAndFetch() {
+          try {
+              const sysRef = doc(db, "system", "leaderboard");
+              const sysSnap = await getDoc(sysRef);
 
-    } catch (e) { console.error("Puan çekilemedi:", e); }
-}
+              let d = new Date();
+              d.setHours(0,0,0,0);
+              let daysSinceMonday = (d.getDay() - 1 + 7) % 7;
+              let lastMonday = new Date(d);
+              lastMonday.setDate(d.getDate() - daysSinceMonday);
+              let lastMondayTime = lastMonday.getTime();
 
-      async function fetchLeaderboard() {
+              let needReset = false;
+              if (sysSnap.exists()) {
+                  if (sysSnap.data().lastResetTime < lastMondayTime) { needReset = true; }
+              } else {
+                  needReset = true;
+              }
+
+              if (needReset) {
+                  await setDoc(sysRef, { lastResetTime: new Date().getTime() });
+                  const usersSnap = await getDocs(collection(db, "scores"));
+                  const resetPromises = [];
+                  usersSnap.forEach((uDoc) => {
+                      resetPromises.push(updateDoc(doc(db, "scores", uDoc.id), { score: 0 }));
+                  });
+                  await Promise.all(resetPromises);
+              }
+          } catch(e) { console.error("Sıfırlama hatası:", e); }
+          
+          fetchLeaderboardData();
+      }
+
+      async function fetchLeaderboardData() {
         try {
             const q = query(collection(db, "scores"), orderBy("score", "desc"), limit(5));
             const querySnapshot = await getDocs(q);
@@ -441,9 +492,28 @@ window.closePack = () => {
         } catch(e) { console.log("Tablo hatası:", e); }
       }
       
-      fetchLeaderboard();
+      checkWeeklyResetAndFetch();
 
-      // --- KAYAR YAZI BANDINI (TICKER) FIREBASE'DEN CANLI ÇEKME ---
+      function updateWeeklyCountdown() {
+          let d = new Date();
+          d.setHours(0, 0, 0, 0);
+          let daysUntilMonday = (1 - d.getDay() + 7) % 7;
+          if (daysUntilMonday === 0 && new Date() > d) daysUntilMonday = 7; 
+          d.setDate(d.getDate() + daysUntilMonday);
+
+          const diff = d - new Date();
+          const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+          const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+          const minutes = Math.floor((diff / 1000 / 60) % 60);
+
+          const countdownEl = document.getElementById('weekly-countdown');
+          if(countdownEl) {
+              countdownEl.innerText = `Sıfırlanmaya Kalan Süre: ${days} Gün ${hours} Saat ${minutes} Dk`;
+          }
+      }
+      setInterval(updateWeeklyCountdown, 60000);
+      updateWeeklyCountdown();
+
       function loadDynamicTicker() {
           const tickerContainer = document.getElementById('dynamic-ticker');
           
@@ -461,7 +531,6 @@ window.closePack = () => {
                   });
               }
 
-              // CSS kayma animasyonu için yazıları iki kez ekliyoruz
               tickerContainer.innerHTML = messagesHTML + messagesHTML;
           }, (error) => {
               console.error("Ticker çekilirken hata:", error);
@@ -506,22 +575,5 @@ window.closePack = () => {
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
 
-
-    <div id="pack-overlay">
-    <div id="pack-container">
-        <div id="pack-animated-ball" class="ball"></div>
-        
-        <div id="pack-reward">
-            <div class="reward-card">
-                <div class="reward-content">
-                    <i class="fa-solid fa-star bounce-star"></i>
-                    <h2 id="reward-title">EFSANEVİ!</h2>
-                    <p id="reward-desc">Gizli yetenek kilidi açıldı</p>
-                </div>
-            </div>
-            <button onclick="closePack()" class="continue-btn">DEVAM ET</button>
-        </div>
-    </div>
-</div>
 </body>
 </html>
