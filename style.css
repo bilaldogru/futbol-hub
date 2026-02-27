@@ -163,11 +163,36 @@ body {
     padding: 80px 0;
 }
 
+/* 1. Ateş Efektli Başlık Stilleri */
+.fire-text {
+    background: linear-gradient(to bottom, #ffeb3b, #ff9800, #f44336);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: fire-glow 2s infinite alternate;
+}
+.fire-icon {
+    color: #ff9800;
+    animation: fire-flicker 0.1s infinite alternate;
+}
+
+@keyframes fire-glow {
+    from { text-shadow: 0 0 5px rgba(255, 152, 0, 0.5); }
+    to { text-shadow: 0 0 20px rgba(255, 152, 0, 0.9), 0 0 10px rgba(244, 67, 54, 0.8); }
+}
+
+@keyframes fire-flicker {
+    0% { transform: scale(1) rotate(-3deg); color: #ffeb3b; text-shadow: 0 0 5px #ffeb3b; }
+    50% { transform: scale(1.1) rotate(3deg); color: #ff9800; text-shadow: 0 0 10px #ff9800; }
+    100% { transform: scale(1) rotate(-3deg); color: #f44336; text-shadow: 0 0 5px #f44336; }
+}
+
 .section-title { 
     font-size: 2.2rem; margin-bottom: 40px; border-left: 5px solid var(--primary-green); 
     padding-left: 15px; text-shadow: 0 0 15px rgba(255,255,255,0.1); letter-spacing: 2px; font-weight: 900;
     display: flex; align-items: center; gap: 10px;
 }
+/* Oyunlar kısmının başlık çizgisini de ateş rengi yapalım */
+#games-grid .section-title { border-left-color: #ff9800; }
 
 .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
 
@@ -290,13 +315,52 @@ body {
 .ball-gold { background: radial-gradient(circle at 30% 30%, #ffd700, #b8860b); border: 2px solid #8a6408; box-shadow: 0 0 30px rgba(255, 215, 0, 0.4), inset -10px -10px 20px rgba(0,0,0,0.6); }
 .price-tag { background: var(--primary-green); color: black; padding: 6px 15px; border-radius: 50px; font-weight: 900; display: inline-block; margin-top: 15px; font-size: 1rem; font-family: 'Rajdhani'; }
 
+/* --- PAKET AÇILIM MODAL STİLLERİ --- */
+#pack-overlay {
+    display: none; 
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.95); backdrop-filter: blur(15px);
+    z-index: 9999; justify-content: center; align-items: center; flex-direction: column;
+}
+#pack-overlay.active { display: flex; } 
 
-/* --- HAKKIMIZDA BÖLÜMÜ (NOKTALI YAPI DEVAMI) --- */
+#pack-container { position: relative; text-align: center; transition: all 0.3s ease; }
+.pack-shake { animation: pack-shake 0.1s ease-in-out infinite; }
+@keyframes pack-shake { 0% { transform: translateX(0); } 25% { transform: translateX(-5px) rotate(-2deg); } 50% { transform: translateX(5px) rotate(2deg); } 75% { transform: translateX(-5px) rotate(-2deg); } 100% { transform: translateX(0); } }
+
+#pack-animated-ball.ball {
+    width: 160px; height: 160px; margin: 0 auto 20px;
+    box-shadow: 0 0 60px rgba(255,255,255,0.5); transform: scale(0); transition: transform 1s ease;
+}
+#pack-animated-ball.scale-in { transform: scale(1); }
+#pack-animated-ball.scale-out { transform: scale(0); }
+#pack-animated-ball.spin { animation: spin-ball 3s linear infinite; }
+@keyframes spin-ball { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+#pack-reward { display: none; transform: scale(0); transition: all 0.7s ease-out; flex-direction: column; align-items: center; }
+#pack-reward.show { display: flex; transform: scale(1); }
+
+.reward-card { background: linear-gradient(135deg, #facc15, #f97316, #dc2626); padding: 6px; border-radius: 20px; box-shadow: 0 0 80px rgba(230, 126, 34, 0.8); }
+.reward-content { background: #111827; color: white; padding: 35px 50px; border-radius: 15px; border: 2px solid rgba(250, 204, 21, 0.5); display: flex; flex-direction: column; align-items: center; }
+.bounce-star { color: #facc15; font-size: 4rem; margin-bottom: 15px; animation: bounce-star 1s infinite; }
+@keyframes bounce-star { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+
+#reward-title { font-size: 2.5rem; font-weight: 900; margin-bottom: 8px; background: linear-gradient(to right, #fef08a, #ca8a04); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+#reward-desc { color: #d1d5db; font-size: 1.2rem; font-weight: 700; }
+
+.continue-btn {
+    margin-top: 30px; background: white; color: black; padding: 12px 40px; border: none;
+    border-radius: 50px; font-weight: 900; font-size: 1.2rem; cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s; box-shadow: 0 0 25px rgba(255,255,255,0.5);
+}
+.continue-btn:hover { transform: scale(1.1); box-shadow: 0 0 40px rgba(255,255,255,0.8); }
+
+/* --- HAKKIMIZDA BÖLÜMÜ --- */
 #about { 
     padding: 120px 0; 
     background: 
-        radial-gradient(rgba(255, 255, 255, 0.07) 2px, transparent 2px), /* Noktalar ÜSTTE */
-        linear-gradient(to bottom, #110f16 0%, var(--bg-dark) 100%);     /* Renk geçişi ALTTA */
+        radial-gradient(rgba(255, 255, 255, 0.07) 2px, transparent 2px), 
+        linear-gradient(to bottom, #110f16 0%, var(--bg-dark) 100%);     
     background-size: 40px 40px, 100% 100%;
     position: relative; 
 }
@@ -346,62 +410,14 @@ body {
 ::-webkit-scrollbar-thumb { background: var(--primary-green); border-radius: 10px; }
 ::-webkit-scrollbar-thumb:hover { background: #16a34a; }
 
-/* FOOTER (NOKTALI YAPI SONU) */
+/* FOOTER */
 footer {
     text-align: center;
     padding: 20px;
     color: var(--text-gray);
     font-size: 0.9rem;
     background: 
-        radial-gradient(rgba(255, 255, 255, 0.07) 2px, transparent 2px), /* Noktalar ÜSTTE */
-        var(--bg-dark); /* Düz arka plan rengi ALTTA */
+        radial-gradient(rgba(255, 255, 255, 0.07) 2px, transparent 2px), 
+        var(--bg-dark); 
     background-size: 40px 40px, 100% 100%;
 }
-
-/* --- PAKET AÇILIM MODAL STİLLERİ --- */
-#pack-overlay {
-    display: none; /* Başlangıçta gizli */
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0, 0, 0, 0.95); backdrop-filter: blur(15px);
-    z-index: 9999; justify-content: center; align-items: center; flex-direction: column;
-}
-#pack-overlay.active { display: flex; } /* JS ile eklenince görünür */
-
-#pack-container { position: relative; text-align: center; transition: all 0.3s ease; }
-.pack-shake { animation: pack-shake 0.1s ease-in-out infinite; }
-@keyframes pack-shake { 0% { transform: translateX(0); } 25% { transform: translateX(-5px) rotate(-2deg); } 50% { transform: translateX(5px) rotate(2deg); } 75% { transform: translateX(-5px) rotate(-2deg); } 100% { transform: translateX(0); } }
-
-#pack-animated-ball.ball {
-    width: 160px; height: 160px; margin: 0 auto 20px;
-    box-shadow: 0 0 60px rgba(255,255,255,0.5); transform: scale(0); transition: transform 1s ease;
-}
-#pack-animated-ball.scale-in { transform: scale(1); }
-#pack-animated-ball.scale-out { transform: scale(0); }
-#pack-animated-ball.spin { animation: spin-ball 3s linear infinite; }
-@keyframes spin-ball { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-
-#pack-reward {
-    display: none; transform: scale(0); transition: all 0.7s ease-out; flex-direction: column; align-items: center;
-}
-#pack-reward.show { display: flex; transform: scale(1); }
-
-.reward-card {
-    background: linear-gradient(135deg, #facc15, #f97316, #dc2626);
-    padding: 6px; border-radius: 20px; box-shadow: 0 0 80px rgba(230, 126, 34, 0.8);
-}
-.reward-content {
-    background: #111827; color: white; padding: 35px 50px; border-radius: 15px;
-    border: 2px solid rgba(250, 204, 21, 0.5); display: flex; flex-direction: column; align-items: center;
-}
-.bounce-star { color: #facc15; font-size: 4rem; margin-bottom: 15px; animation: bounce-star 1s infinite; }
-@keyframes bounce-star { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
-
-#reward-title { font-size: 2.5rem; font-weight: 900; margin-bottom: 8px; background: linear-gradient(to right, #fef08a, #ca8a04); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-#reward-desc { color: #d1d5db; font-size: 1.2rem; font-weight: 700; }
-
-.continue-btn {
-    margin-top: 30px; background: white; color: black; padding: 12px 40px; border: none;
-    border-radius: 50px; font-weight: 900; font-size: 1.2rem; cursor: pointer;
-    transition: transform 0.3s, box-shadow 0.3s; box-shadow: 0 0 25px rgba(255,255,255,0.5);
-}
-.continue-btn:hover { transform: scale(1.1); box-shadow: 0 0 40px rgba(255,255,255,0.8); }

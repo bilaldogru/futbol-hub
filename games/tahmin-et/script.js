@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // --- YENİLENMİŞ KİLİT KONTROL SİSTEMİ ---
 function checkPlayedDifficulties() {
     // (Eğer hala test etmek istersen bu satırın başındaki // işaretlerini silersin)
-    // localStorage.removeItem('playedBilmece'); 
+    localStorage.removeItem('playedBilmece'); 
 
     const today = new Date().toLocaleDateString('tr-TR');
     const played = JSON.parse(localStorage.getItem('playedBilmece')) || {};
@@ -504,4 +504,12 @@ function endGame(isWin) {
     };
     
     localStorage.setItem('arenaProgress', JSON.stringify(progress));
+}
+
+window.playNextMode = function(nextDifficulty) {
+    // Tarayıcının hafızasına "Bu sayfa açıldığında direkt şu zorlukla başla" talimatını veriyoruz.
+    localStorage.setItem('autoStartArena', nextDifficulty);
+    
+    // Sayfayı tamamen yeniliyoruz ki her şey sıfırlansın, tertemiz başlasın.
+    window.location.reload();
 }
