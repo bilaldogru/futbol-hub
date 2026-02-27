@@ -60,11 +60,15 @@ window.showToast = function(msg, type = 'error') {
     }, 3000);
 }
 
-// --- GÜNLÜK OYUN KİLİDİ KONTROLÜ ---
+// --- FOOTLE İÇİN GÜNLÜK OYUN KİLİDİ KONTROLÜ ---
 function checkDailyLock() {
     const btn = document.getElementById('btnDailyMode');
     const icon = document.getElementById('dailyModeIcon');
     const text = document.getElementById('dailyModeText');
+
+    // 🛠️ TEST MODU: Her sayfa yenilendiğinde bugünün oynanma kaydını siler.
+    // Oyunu gerçek oyunculara açacağın zaman bu satırı SİLMEYİ UNUTMA!
+    localStorage.removeItem('footle_daily_last_played')
     
     if(!btn) return;
     
@@ -73,11 +77,14 @@ function checkDailyLock() {
     
     if(lastPlayed === today) {
         btn.disabled = true; 
+        
+        // Tailwind ile soluk kilitli görünüm
         btn.classList.add('opacity-50', 'cursor-not-allowed', 'bg-black');
         btn.classList.remove('hover:bg-gray-700', 'hover:border-white');
         
-        icon.className = "fa-solid fa-lock text-red-500 mr-2";
-        text.innerText = "GÜNLÜK OYNANDI (YARIN GEL)";
+        // Yazı ve ikonu kilitli formata çevir
+        if(icon) icon.className = "fa-solid fa-lock text-red-500 mr-2";
+        if(text) text.innerText = "GÜNLÜK OYNANDI (YARIN GEL)";
     }
 }
 
@@ -668,7 +675,7 @@ function satirEkle(tahmin) {
     }
 }
 
-// --- 8. OYUN BİTİŞ MANTIĞI ---
+// --- 8. OYUN BİTİŞ MANTIĞI (GÜVENLİ VERSİYON) ---
 function bitir(kazandi) {
     oyunBitti = true;
     input.disabled = true;
@@ -679,13 +686,11 @@ function bitir(kazandi) {
         localStorage.setItem('footle_daily_last_played', new Date().toDateString());
     }
 
-    // MULTIPLAYER İÇİN OYUN BİTİŞİ
+    // MULTIPLAYER MODU İÇİN OYUN BİTİŞİ
     if (isMultiplayer) {
-        // Temel oyun bitiş puanını hesapla (Bonuslar hariç)
         const temelPuan = kazandi ? (8 - denemeSayisi) * 100 : 0;
-        
-        myScore += temelPuan; // Toplam skora ekle
-        buTurKazanilanPuan += temelPuan; // Bu tur mesajı için toplama ekle
+        myScore += temelPuan; 
+        buTurKazanilanPuan += temelPuan; 
         
         const roomRef = window.doc(window.db, "footle_rooms", roomId);
         const updateData = {};
@@ -698,7 +703,6 @@ function bitir(kazandi) {
         }
         window.updateDoc(roomRef, updateData); 
 
-        // MESAJDA ARTIK SADECE TEMEL PUANI DEĞİL, TOPLAM BONUSLARI DA YAZACAK
         let waitMsg = `RAKİBİN BİTİRMESİ BEKLENİYOR...<br><span class='text-sm text-green-400 font-normal mt-2 block'>Bu turdan toplam +${buTurKazanilanPuan} Puan aldın.</span>`;
         
         if (!kazandi) {
@@ -736,50 +740,62 @@ function bitir(kazandi) {
     const gainedScoreEl = document.getElementById('gainedScore');
     const newTotalScoreEl = document.getElementById('newTotalScore');
 
-    // Gizli oyuncunun ismini ve özelliklerini ekrana bas
-    targetName.innerText = hedefOyuncu.isim.toUpperCase();
-    targetPlayerDetails.innerHTML = `
-        <span class="bg-black/50 border border-gray-600 px-2 py-1 rounded-md">${hedefOyuncu.uyruk}</span>
-        <span class="bg-black/50 border border-gray-600 px-2 py-1 rounded-md">${hedefOyuncu.takim}</span>
-        <span class="bg-black/50 border border-gray-600 px-2 py-1 rounded-md">${hedefOyuncu.pozisyon}</span>
-    `;
+    // Güvenlik kontrolleri ile elementleri doldur
+    if(targetName) targetName.innerText = hedefOyuncu.isim.toUpperCase();
+    if(targetPlayerDetails) {
+        targetPlayerDetails.innerHTML = `
+            <span class="bg-black/50 border border-gray-600 px-2 py-1 rounded-md">${hedefOyuncu.uyruk}</span>
+            <span class="bg-black/50 border border-gray-600 px-2 py-1 rounded-md">${hedefOyuncu.takim}</span>
+            <span class="bg-black/50 border border-gray-600 px-2 py-1 rounded-md">${hedefOyuncu.pozisyon}</span>
+        `;
+    }
 
     if (kazandi) {
         const kazanilanPuan = (8 - denemeSayisi) * 100;
         const yeniToplamPuan = addGlobalScore(kazanilanPuan);
 
-        content.classList.remove('border-red-500', 'shadow-[0_0_50px_rgba(239,68,68,0.3)]');
-        content.classList.add('border-green-500', 'shadow-[0_0_50px_rgba(34,197,94,0.3)]');
+        if(content) {
+            content.classList.remove('border-red-500', 'shadow-[0_0_50px_rgba(239,68,68,0.3)]');
+            content.classList.add('border-green-500', 'shadow-[0_0_50px_rgba(34,197,94,0.3)]');
+        }
         
-        emoji.innerText = "🏆";
-        title.innerText = "TEBRİKLER!";
-        title.className = "text-3xl font-black mb-2 tracking-tighter text-green-400";
-        desc.innerText = `${denemeSayisi}. denemede doğru bildin.`;
+        if(emoji) emoji.innerText = "🏆";
+        if(title) {
+            title.innerText = "TEBRİKLER!";
+            title.className = "text-3xl font-black mb-2 tracking-tighter text-green-400";
+        }
+        if(desc) desc.innerText = `${denemeSayisi}. denemede doğru bildin.`;
 
-        // DOĞRU BİLİNCE KUTU YEŞİL VE SAKİN DURACAK
-        correctPlayerContainer.className = "bg-green-900/20 p-4 rounded-2xl mb-6 border border-green-500/30";
-        correctPlayerLabel.innerText = "GİZLİ OYUNCU";
-        correctPlayerLabel.className = "text-xs text-green-500 font-bold tracking-widest uppercase mb-1";
+        if(correctPlayerContainer) correctPlayerContainer.className = "bg-green-900/20 p-4 rounded-2xl mb-6 border border-green-500/30";
+        if(correctPlayerLabel) {
+            correctPlayerLabel.innerText = "GİZLİ OYUNCU";
+            correctPlayerLabel.className = "text-xs text-green-500 font-bold tracking-widest uppercase mb-1";
+        }
 
-        gainedScoreEl.innerText = kazanilanPuan;
-        newTotalScoreEl.innerText = yeniToplamPuan;
-        resultStats.classList.remove('hidden'); 
+        if(gainedScoreEl) gainedScoreEl.innerText = kazanilanPuan;
+        if(newTotalScoreEl) newTotalScoreEl.innerText = yeniToplamPuan;
+        if(resultStats) resultStats.classList.remove('hidden'); 
 
     } else {
-        content.classList.remove('border-green-500', 'shadow-[0_0_50px_rgba(34,197,94,0.3)]');
-        content.classList.add('border-red-500', 'shadow-[0_0_50px_rgba(239,68,68,0.3)]');
+        if(content) {
+            content.classList.remove('border-green-500', 'shadow-[0_0_50px_rgba(34,197,94,0.3)]');
+            content.classList.add('border-red-500', 'shadow-[0_0_50px_rgba(239,68,68,0.3)]');
+        }
         
-        emoji.innerText = "❌";
-        title.innerText = "MAÇ BİTTİ";
-        title.className = "text-3xl font-black mb-2 tracking-tighter text-red-500";
-        desc.innerText = "Hakların tükendi. Yarın tekrar dene!";
+        if(emoji) emoji.innerText = "❌";
+        if(title) {
+            title.innerText = "MAÇ BİTTİ";
+            title.className = "text-3xl font-black mb-2 tracking-tighter text-red-500";
+        }
+        if(desc) desc.innerText = "Hakların tükendi. Yarın tekrar dene!";
         
-        // KAYBETTİĞİNDE KUTU KIRMIZI VE PARLAK OLACAK (DİKKAT ÇEKECEK)
-        correctPlayerContainer.className = "bg-red-900/30 p-4 rounded-2xl mb-6 border-2 border-red-500 shadow-[0_0_20px_rgba(239,68,68,0.3)]";
-        correctPlayerLabel.innerText = "DOĞRU CEVAP NEYDİ?";
-        correctPlayerLabel.className = "text-xs text-red-400 font-black tracking-widest uppercase mb-1";
+        if(correctPlayerContainer) correctPlayerContainer.className = "bg-red-900/30 p-4 rounded-2xl mb-6 border-2 border-red-500 shadow-[0_0_20px_rgba(239,68,68,0.3)]";
+        if(correctPlayerLabel) {
+            correctPlayerLabel.innerText = "DOĞRU CEVAP NEYDİ?";
+            correctPlayerLabel.className = "text-xs text-red-400 font-black tracking-widest uppercase mb-1";
+        }
 
-        resultStats.classList.add('hidden');
+        if(resultStats) resultStats.classList.add('hidden');
     }
 
     if(window.saveScoreToFirebase) {
@@ -789,5 +805,14 @@ function bitir(kazandi) {
         }, 1000);
     }
 
-    modal.classList.remove('hidden');
+    // Modal'ı göster
+    if(modal) modal.classList.remove('hidden');
+}
+
+// --- PUAN HESAPLAMA FONKSİYONU ---
+function addGlobalScore(points) {
+    let currentScore = parseInt(localStorage.getItem('futbolHub_totalScore')) || 0;
+    currentScore += points;
+    localStorage.setItem('futbolHub_totalScore', currentScore);
+    return currentScore;
 }
