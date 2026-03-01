@@ -24,7 +24,37 @@ window.showToast = function(msg, type = 'error') {
     }, 3000);
 }
 
-// --- ZORUNLU AVCI FONKSİYON 1: "Bekleniyor..." yazısını sayfada bulup ezer ---
+// --- SES YÖNETİCİSİ (HTML VE PHASER DIŞI İÇİN) ---
+const arenaSounds = {
+    click: new Audio('../../assets/sounds/click.mp3'),
+    win: new Audio('../../assets/sounds/win.mp3'),       // YENİ: Kazanma sesi
+    lose: new Audio('../../assets/sounds/lose.mp3'),     // YENİ: Kaybetme sesi
+    whistleStart: new Audio('../../assets/sounds/whistle.mp3'),
+    whistleEnd: new Audio('../../assets/sounds/whistle-end.mp3'),
+    goal: new Audio('../../assets/sounds/goal.mp3')
+};
+arenaSounds.click.volume = 0.4;
+arenaSounds.win.volume = 0.6;   // YENİ: Kazanma ses düzeyi
+arenaSounds.lose.volume = 0.5;  // YENİ: Kaybetme ses düzeyi
+arenaSounds.whistleStart.volume = 0.5;
+arenaSounds.whistleEnd.volume = 0.6;
+arenaSounds.goal.volume = 0.7;
+
+window.playArenaSound = function(soundName) {
+    if (arenaSounds[soundName]) {
+        arenaSounds[soundName].currentTime = 0;
+        arenaSounds[soundName].play().catch(e => console.warn("Ses hatası:", e));
+    }
+};
+
+// Tıklanabilir her şeye otomatik click sesi atama
+document.addEventListener('click', function(e) {
+    if (e.target.closest('button, a, .host-team-btn, .client-team-btn')) {
+        playArenaSound('click');
+    }
+});
+
+// --- ZORUNLU AVCI FONKSİYON 1 ---
 function clearWaitingTexts() {
     const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null, false);
     let node;
@@ -39,13 +69,12 @@ function clearWaitingTexts() {
     }
 }
 
-// --- ZORUNLU AVCI FONKSİYON 2: HTML ID'si ne olursa olsun süreyi bulur ve günceller ---
+// --- ZORUNLU AVCI FONKSİYON 2 ---
 function updateTimerUI(t) {
     let m = Math.floor(t / 60);
     let s = t % 60;
     let text = `0${m}:${s < 10 ? '0'+s : s}`;
     
-    // Önce klasik ID'leri dener
     let possibleIds = ['timer-display', 'timer', 'time', 'game-timer'];
     let found = false;
     for(let id of possibleIds) {
@@ -53,7 +82,6 @@ function updateTimerUI(t) {
         if(el) { el.innerText = text; found = true; }
     }
     
-    // Eğer HTML'de ID yoksa, sayfadaki 01:00 vb. yazıları bulup zorla değiştirir
     if(!found) {
         const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null, false);
         let node;
@@ -98,7 +126,7 @@ let sRed = 0, sBlue = 0;
 let goalLock = false;
 let p1CanShoot = true, p2CanShoot = true;
 let gameActive = false; 
-let timeLeft = 90; // Başlangıç global süre
+let timeLeft = 90; 
 let timerInterval;
 let goalAnnouncerText;
 let currentGoalMsg = ""; 
@@ -439,6 +467,7 @@ function setupHostConnection() {
             globalP2Team = data.p2Team; 
             updateScoreboardUI();
             startPhaserGame(); 
+            setTimeout(() => playArenaSound('whistleStart'), 1000);
         }
         if (data.type === 'input') remoteKeys = data.keys; 
     });
@@ -455,6 +484,7 @@ function setupClientConnection() {
     
     updateScoreboardUI();
     startPhaserGame();
+    setTimeout(() => playArenaSound('whistleStart'), 1000);
     
     conn.on('data', (data) => {
         if (data.type === 'state') updateClientState(data.state);
@@ -465,6 +495,7 @@ function setupClientConnection() {
 
 function handleDisconnect() {
     gameActive = false;
+    playArenaSound('lose'); // YENİ: Rakip kaçınca kaybetme/uyarı sesi
     showToast("Rakip bağlantıyı kopardı!", "error");
     setTimeout(() => window.location.href = "../../index.html", 3000);
 }
@@ -888,12 +919,14 @@ function updateClientState(data) {
 
     document.getElementById('score-red').innerText = data.sRed; document.getElementById('score-blue').innerText = data.sBlue;
     
-    // YENİ GÜÇLÜ FONKSİYON İLE SÜREYİ EKRANA YAZDIR
     updateTimerUI(data.time);
     
     if (data.msg !== currentGoalMsg) { 
         currentGoalMsg = data.msg; 
-        if (currentGoalMsg !== "") playGoalAnimation(game.scene.scenes[0], currentGoalMsg); 
+        if (currentGoalMsg !== "") {
+            playGoalAnimation(game.scene.scenes[0], currentGoalMsg); 
+            playArenaSound('goal');
+        }
     }
 }
 
@@ -932,6 +965,7 @@ function goal(scorer, scene) {
     currentGoalMsg = messages[Math.floor(Math.random() * messages.length)];
     
     playGoalAnimation(scene, currentGoalMsg);
+    playArenaSound('goal');
     
     clearAllPowerUps();
 
@@ -952,7 +986,7 @@ function playGoalAnimation(scene, msg) {
 
 function startTimer() {
     if (timerInterval) clearInterval(timerInterval);
-    timeLeft = 90; // OYUN BAŞLADIĞINDA SÜREYİ KESİN OLARAK SIFIRLAR
+    timeLeft = 90; 
     
     updateTimerUI(timeLeft); 
 
@@ -974,6 +1008,10 @@ function startTimer() {
 
 async function showGameOver(win) {
     gameActive = false;
+    
+    // BİTİŞ DÜDÜĞÜ TETİKLEME
+    playArenaSound('whistleEnd');
+
     document.getElementById('game-over-screen').style.display = 'flex';
     const wt = document.getElementById('winner-text');
     
@@ -983,7 +1021,24 @@ async function showGameOver(win) {
         await window.updateDoc(window.doc(window.db, "scores", winnerDocId), { score: window.increment(betAmountGlobal * 2) });
     }
     
-    if (win === 0) wt.innerText = "BERABERE!";
-    else if ((win === 1 && isHost) || (win === 2 && !isHost)) wt.innerText = "KAZANDIN!";
-    else wt.innerText = "KAYBETTİN!";
+    let isWin = false;
+    let isLose = false;
+
+    if (win === 0) {
+        wt.innerText = "BERABERE!";
+    } 
+    else if ((win === 1 && isHost) || (win === 2 && !isHost)) {
+        wt.innerText = "KAZANDIN!";
+        isWin = true;
+    } 
+    else {
+        wt.innerText = "KAYBETTİN!";
+        isLose = true;
+    }
+
+    // YENİ: Bitiş düdüğünden hemen sonra (1.5 sn) win veya lose sesi çal
+    setTimeout(() => {
+        if (isWin) playArenaSound('win');
+        else if (isLose) playArenaSound('lose');
+    }, 1500);
 }

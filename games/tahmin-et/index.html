@@ -153,5 +153,34 @@
         };
     </script>
     <script src="script.js"></script>
+
+    <script>
+        const gameSounds = {
+            click: new Audio('../../assets/sounds/click.mp3'),
+            success: new Audio('../../assets/sounds/success.mp3'),
+            wrong: new Audio('../../assets/sounds/wrong.mp3'),
+            reveal: new Audio('../../assets/sounds/reveal.mp3')
+        };
+        
+        gameSounds.click.volume = 0.4;
+        gameSounds.success.volume = 0.6;
+        gameSounds.wrong.volume = 0.5;
+        gameSounds.reveal.volume = 0.3;
+        
+        window.playSound = function(soundName) {
+            if (gameSounds[soundName]) {
+                gameSounds[soundName].currentTime = 0;
+                gameSounds[soundName].play().catch(e => console.warn("Ses hatası:", e));
+            }
+        };
+
+        // Ekrondaki butonlara (Ana menüye dön, zorluk seçimi, onaylama) click sesi ekler
+        document.addEventListener('click', function(e) {
+            if (e.target.closest('button, a')) {
+                playSound('click');
+            }
+        });
+    </script>
+
 </body>
 </html>

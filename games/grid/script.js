@@ -219,9 +219,9 @@ window.fetchLobbyRooms = function() {
             roomItem.innerHTML = `
                 <div>
                     <p class="text-white font-bold text-sm">Oda: #${roomId}</p>
-                    <p class="text-xs text-purple-400">Bahis: ${data.bet} Puan</p>
+                    <p class="text-xs text-fuchsia-400">Bahis: ${data.bet} Puan</p>
                 </div>
-                <button onclick="joinRoomByButton('${roomId}')" class="bg-purple-600 hover:bg-purple-500 text-white text-xs font-bold px-4 py-2 rounded transition shadow-lg">KATIL</button>
+                <button onclick="joinRoomByButton('${roomId}')" class="bg-fuchsia-600 hover:bg-fuchsia-500 text-white text-xs font-bold px-4 py-2 rounded transition shadow-lg">KATIL</button>
             `;
             roomList.appendChild(roomItem);
         });
@@ -416,15 +416,15 @@ window.copyInviteLink = function() {
     navigator.clipboard.writeText(linkInput.value).then(() => {
         copyIcon.classList.replace('fa-copy', 'fa-check');
         copyIcon.classList.add('text-white');
-        copyBtn.classList.replace('bg-gray-800', 'bg-purple-900/50');
-        copyBtn.classList.add('border', 'border-purple-500');
+        copyBtn.classList.replace('bg-gray-800', 'bg-fuchsia-900/50');
+        copyBtn.classList.add('border', 'border-fuchsia-500');
         copyTooltip.classList.remove('opacity-0', 'translate-y-2');
         copyTooltip.classList.add('opacity-100', 'translate-y-0');
 
         setTimeout(() => {
             copyIcon.classList.replace('fa-check', 'fa-copy');
-            copyBtn.classList.replace('bg-purple-900/50', 'bg-gray-800');
-            copyBtn.classList.remove('border', 'border-purple-500');
+            copyBtn.classList.replace('bg-fuchsia-900/50', 'bg-gray-800');
+            copyBtn.classList.remove('border', 'border-fuchsia-500');
             copyTooltip.classList.remove('opacity-100', 'translate-y-0');
             copyTooltip.classList.add('opacity-0', 'translate-y-2');
         }, 2000);
@@ -561,9 +561,11 @@ function showIntermissionScreen(lastRoundWinner) {
     } else if (lastRoundWinner === playerNum) {
         title.innerText = "TURU KAZANDIN!";
         title.className = "text-5xl md:text-7xl font-black mb-4 text-green-500 drop-shadow-lg";
+        if(window.playSound) window.playSound('success'); // TUR KAZANMA SESİ
     } else {
         title.innerText = "TURU KAYBETTİN!";
         title.className = "text-5xl md:text-7xl font-black mb-4 text-red-500 drop-shadow-lg";
+        if(window.playSound) window.playSound('wrong'); // TUR KAYBETME SESİ
     }
 
     let t = 10;
@@ -593,6 +595,7 @@ function startTimer(turn) {
             
             if (turn === playerNum) {
                 showToast("Süre doldu! Sıra rakibe geçti.", "error");
+                if(window.playSound) window.playSound('wrong'); // ZAMAN AŞIMI SESİ EKLENDİ
 
                 const docSnap = await window.getDoc(window.doc(window.db, "grid_rooms", currentRoomId));
                 let hist = docSnap.data().moveHistory || [];
@@ -753,12 +756,15 @@ window.selectPlayer = async function(player) {
     let idx = currentSelectedCell.i; 
     let isCorrect = false;
     
+    // TAHMİN KONTROLÜ VE SESLER
     if(player.takim === data.cols[c] && player.uyruk === data.rows[r]) {
         data.gridState[idx] = playerNum;
         data.gridDetails[idx] = player.isim;
         isCorrect = true;
+        if(window.playSound) window.playSound('success'); // BİLDİĞİNDE WIN SESİ ÇALAR
         showToast("DOĞRU TAHMİN!", "success");
     } else {
+        if(window.playSound) window.playSound('wrong'); // BİLEMEDİĞİNDE LOSE SESİ ÇALAR
         showToast("YANLIŞ TAHMİN! Sıra rakibe geçti.", "error");
     }
 
@@ -774,6 +780,7 @@ window.selectPlayer = async function(player) {
 
     if (timerInterval) clearInterval(timerInterval);
 
+    // KAZANMA DURUMLARINI KONTROL ET
     let roundWinner = 0;
     let winLines = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
     for(let line of winLines) {
@@ -834,6 +841,7 @@ async function handleGameEnd(winnerNum, bet, isAbandoned = false) {
     const docSnap = await window.getDoc(window.doc(window.db, "grid_rooms", currentRoomId));
     
     if (isAbandoned) {
+        if(window.playSound) window.playSound('success'); // HÜKMEN GALİBİYET SESİ EKLENDİ
         title.innerText = "HÜKMEN KAZANDIN!";
         title.className = "text-4xl font-black mb-2 text-green-400";
         emoji.innerText = "🏃‍♂️💨";
@@ -851,6 +859,7 @@ async function handleGameEnd(winnerNum, bet, isAbandoned = false) {
         await window.updateDoc(window.doc(window.db, "scores", userFirebaseDocId), { score: window.increment(bet) });
     } 
     else if(winnerNum === playerNum) {
+        if(window.playSound) window.playSound('success'); // MAÇI KAZANMA SESİ EKLENDİ
         title.innerText = "KAZANDIN!";
         title.className = "text-4xl font-black mb-2 text-green-400";
         emoji.innerText = "🏆";
@@ -859,6 +868,7 @@ async function handleGameEnd(winnerNum, bet, isAbandoned = false) {
         await window.updateDoc(window.doc(window.db, "scores", winnerDocId), { score: window.increment(bet * 2) });
     } 
     else {
+        if(window.playSound) window.playSound('wrong'); // MAÇI KAYBETME SESİ EKLENDİ
         title.innerText = "KAYBETTİN!";
         title.className = "text-4xl font-black mb-2 text-red-500";
         emoji.innerText = "💀";

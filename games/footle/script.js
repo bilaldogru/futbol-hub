@@ -28,7 +28,7 @@ const autocompleteList = document.getElementById('autocomplete-list');
 const submitBtn = document.getElementById('submitBtn');
 const hakGosterge = document.getElementById('hakGosterge');
 
-// --- BİLDİRİM SİSTEMİ (TOAST) EKLENDİ ---
+// --- BİLDİRİM SİSTEMİ (TOAST) ---
 window.showToast = function(msg, type = 'error') {
     let toast = document.getElementById('customToast');
     if(!toast) {
@@ -65,10 +65,6 @@ function checkDailyLock() {
     const btn = document.getElementById('btnDailyMode');
     const icon = document.getElementById('dailyModeIcon');
     const text = document.getElementById('dailyModeText');
-
-    // 🛠️ TEST MODU: Her sayfa yenilendiğinde bugünün oynanma kaydını siler.
-    // Oyunu gerçek oyunculara açacağın zaman bu satırı SİLMEYİ UNUTMA!
-    //localStorage.removeItem('footle_daily_last_played')
     
     if(!btn) return;
     
@@ -78,11 +74,9 @@ function checkDailyLock() {
     if(lastPlayed === today) {
         btn.disabled = true; 
         
-        // Tailwind ile soluk kilitli görünüm
         btn.classList.add('opacity-50', 'cursor-not-allowed', 'bg-black');
         btn.classList.remove('hover:bg-gray-700', 'hover:border-white');
         
-        // Yazı ve ikonu kilitli formata çevir
         if(icon) icon.className = "fa-solid fa-lock text-red-500 mr-2";
         if(text) text.innerText = "GÜNLÜK OYNANDI (YARIN GEL)";
     }
@@ -90,7 +84,7 @@ function checkDailyLock() {
 
 // --- 2. BAŞLANGIÇ ---
 document.addEventListener('DOMContentLoaded', () => {
-    checkDailyLock(); // Sayfa açılırken kilidi kontrol et
+    checkDailyLock(); 
     
     fetch('../../oyuncular.json')
         .then(response => response.json())
@@ -197,9 +191,9 @@ window.fetchLobbyRooms = function() {
             roomItem.innerHTML = `
                 <div>
                     <p class="text-white font-bold text-sm">Oda: #${roomId}</p>
-                    <p class="text-xs text-green-400">${data.rounds} Tur</p>
+                    <p class="text-xs text-blue-400">${data.rounds} Tur</p>
                 </div>
-                <button onclick="joinRoom('${roomId}')" class="bg-green-600 hover:bg-green-500 text-white text-xs font-bold px-4 py-2 rounded transition shadow-lg shadow-green-500/20">KATIL</button>
+                <button onclick="joinRoom('${roomId}')" class="bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold px-4 py-2 rounded transition shadow-lg shadow-blue-500/20">KATIL</button>
             `;
             roomList.appendChild(roomItem);
         });
@@ -214,12 +208,12 @@ window.fetchLobbyRooms = function() {
 window.selectRounds = function(rounds) {
     selectedRoundsToCreate = rounds;
     
-    document.getElementById('btnRound3').className = "flex-1 bg-gray-800 text-white font-bold py-3 rounded-xl border border-gray-600 hover:bg-gray-700 hover:border-green-500 transition";
-    document.getElementById('btnRound5').className = "flex-1 bg-gray-800 text-white font-bold py-3 rounded-xl border border-gray-600 hover:bg-gray-700 hover:border-green-500 transition";
-    document.getElementById('btnRound10').className = "flex-1 bg-gray-800 text-white font-bold py-3 rounded-xl border border-gray-600 hover:bg-gray-700 hover:border-green-500 transition";
+    document.getElementById('btnRound3').className = "flex-1 bg-gray-800 text-white font-bold py-3 rounded-xl border border-gray-600 hover:bg-gray-700 hover:border-blue-500 transition";
+    document.getElementById('btnRound5').className = "flex-1 bg-gray-800 text-white font-bold py-3 rounded-xl border border-gray-600 hover:bg-gray-700 hover:border-blue-500 transition";
+    document.getElementById('btnRound10').className = "flex-1 bg-gray-800 text-white font-bold py-3 rounded-xl border border-gray-600 hover:bg-gray-700 hover:border-blue-500 transition";
     
     const activeBtn = document.getElementById('btnRound' + rounds);
-    activeBtn.className = "flex-1 bg-green-900/30 text-white font-bold py-3 rounded-xl border border-green-500 hover:bg-gray-700 transition";
+    activeBtn.className = "flex-1 bg-blue-900/30 text-white font-bold py-3 rounded-xl border border-blue-500 hover:bg-gray-700 transition";
 };
 
 window.confirmAndCreateRoom = async function() {
@@ -284,17 +278,17 @@ window.copyInviteLink = function() {
     
     navigator.clipboard.writeText(linkInput.value).then(() => {
         copyIcon.classList.remove('fa-copy');
-        copyIcon.classList.add('fa-check', 'text-green-500');
-        copyBtn.classList.replace('bg-gray-800', 'bg-green-900/30');
-        copyBtn.classList.add('border', 'border-green-500');
+        copyIcon.classList.add('fa-check', 'text-blue-500');
+        copyBtn.classList.replace('bg-gray-800', 'bg-blue-900/30');
+        copyBtn.classList.add('border', 'border-blue-500');
         copyTooltip.classList.remove('opacity-0', 'translate-y-2');
         copyTooltip.classList.add('opacity-100', 'translate-y-0');
 
         setTimeout(() => {
             copyIcon.classList.add('fa-copy');
-            copyIcon.classList.remove('fa-check', 'text-green-500');
-            copyBtn.classList.replace('bg-green-900/30', 'bg-gray-800');
-            copyBtn.classList.remove('border', 'border-green-500');
+            copyIcon.classList.remove('fa-check', 'text-blue-500');
+            copyBtn.classList.replace('bg-blue-900/30', 'bg-gray-800');
+            copyBtn.classList.remove('border', 'border-blue-500');
             copyTooltip.classList.remove('opacity-100', 'translate-y-0');
             copyTooltip.classList.add('opacity-0', 'translate-y-2');
         }, 2000);
@@ -383,7 +377,6 @@ function listenToRoom() {
     });
 }
 
-// --- RAKİP DURUMUNU GÜNCELLEME (SADECE SON TAHMİN) ---
 function renderOpponentBoard(guesses) {
     const oppBoard = document.getElementById('opponentBoard');
     if(!oppBoard) return;
@@ -432,7 +425,7 @@ function showWaitingOverlay(msg) {
         el.className = 'fixed inset-0 z-[150] flex flex-col items-center justify-center bg-black/90 backdrop-blur-md text-white font-black text-2xl text-center px-4';
         document.body.appendChild(el);
     }
-    el.innerHTML = `<i class="fa-solid fa-futbol animate-bounce text-6xl text-green-500 mb-6 shadow-[0_0_20px_rgba(34,197,94,0.5)] rounded-full"></i><p>${msg}</p>`;
+    el.innerHTML = `<i class="fa-solid fa-futbol animate-bounce text-6xl text-blue-500 mb-6 shadow-[0_0_20px_rgba(59,130,246,0.5)] rounded-full"></i><p>${msg}</p>`;
     el.style.display = 'flex';
 }
 
@@ -451,9 +444,20 @@ function showMultiplayerResult(data) {
     const oppFinalScore = playerRole === 'player1' ? data.p2Score : data.p1Score;
 
     let titleStr, colorClass;
-    if (myFinalScore > oppFinalScore) { titleStr = "🏆 KAZANDIN!"; colorClass = "text-green-500"; } 
-    else if (myFinalScore < oppFinalScore) { titleStr = "❌ KAYBETTİN!"; colorClass = "text-red-500"; } 
-    else { titleStr = "🤝 BERABERE!"; colorClass = "text-yellow-500"; }
+    if (myFinalScore > oppFinalScore) { 
+        titleStr = "🏆 KAZANDIN!"; 
+        colorClass = "text-green-500"; 
+        if(window.playSound) window.playSound('success'); 
+    } 
+    else if (myFinalScore < oppFinalScore) { 
+        titleStr = "❌ KAYBETTİN!"; 
+        colorClass = "text-red-500"; 
+        if(window.playSound) window.playSound('wrong'); 
+    } 
+    else { 
+        titleStr = "🤝 BERABERE!"; 
+        colorClass = "text-yellow-500"; 
+    }
 
     const modal = document.getElementById('endModal');
     const content = document.getElementById('modalContent');
@@ -490,7 +494,6 @@ function resetBoard() {
     autocompleteList.innerHTML = '';
     autocompleteList.classList.add('hidden');
     
-    // Her tur başladığında bonus haklarını sıfırla
     bonusKazanilanlar = { uyruk: false, lig: false, takim: false, pozisyon: false, yas: false };
     buTurKazanilanPuan = 0;
 }
@@ -543,7 +546,7 @@ input.addEventListener('input', function() {
         autocompleteList.classList.remove('hidden');
         matches.forEach(m => {
             const item = document.createElement('div');
-            item.className = "p-3 hover:bg-green-900/50 cursor-pointer border-b border-gray-700 last:border-0 text-white font-semibold";
+            item.className = "p-3 hover:bg-blue-900/50 cursor-pointer border-b border-gray-700 last:border-0 text-white font-semibold";
             item.innerText = m.isim;
             item.onclick = () => {
                 input.value = m.isim;
@@ -553,6 +556,11 @@ input.addEventListener('input', function() {
             autocompleteList.appendChild(item);
         });
     } else { autocompleteList.classList.add('hidden'); }
+});
+
+document.getElementById('submitBtn').addEventListener('click', tahminYap);
+input.addEventListener('keypress', function(e) {
+    if(e.key === 'Enter') tahminYap();
 });
 
 function tahminYap() {
@@ -627,19 +635,30 @@ function satirEkle(tahmin) {
             </div>`;
         row.appendChild(card);
 
+        // KART DÖNME ANİMASYONU VE SES TETİKLEYİCİSİ
         setTimeout(() => { 
             card.classList.add('flipped'); 
             card.style.opacity = "1"; 
+            
+            // YENİ SES MANTIĞI: Eğer doğruysa (yeşil) success, değilse flip çal!
+            if(window.playSound) {
+                if (renk === 'correct') {
+                    window.playSound('success');
+                } else {
+                    window.playSound('flip');
+                }
+            }
 
             const kazanilan = eklenecekPuanlar[i];
             if (kazanilan > 0) {
                 myScore += kazanilan;
                 buTurKazanilanPuan += kazanilan;
                 const scoreEl = document.getElementById('myScore');
-                scoreEl.innerText = myScore;
-                
-                scoreEl.classList.add('text-green-400', 'scale-150', 'drop-shadow-[0_0_10px_rgba(34,197,94,1)]', 'inline-block', 'transition-all', 'duration-300');
-                setTimeout(() => scoreEl.classList.remove('text-green-400', 'scale-150', 'drop-shadow-[0_0_10px_rgba(34,197,94,1)]'), 400);
+                if(scoreEl) {
+                    scoreEl.innerText = myScore;
+                    scoreEl.classList.add('text-green-400', 'scale-150', 'drop-shadow-[0_0_10px_rgba(34,197,94,1)]', 'inline-block', 'transition-all', 'duration-300');
+                    setTimeout(() => scoreEl.classList.remove('text-green-400', 'scale-150', 'drop-shadow-[0_0_10px_rgba(34,197,94,1)]'), 400);
+                }
 
                 const floatingText = document.createElement('div');
                 floatingText.innerText = `+${kazanilan}`;
@@ -675,18 +694,16 @@ function satirEkle(tahmin) {
     }
 }
 
-// --- 8. OYUN BİTİŞ MANTIĞI (GÜVENLİ VERSİYON) ---
+// --- 8. OYUN BİTİŞ MANTIĞI ---
 function bitir(kazandi) {
     oyunBitti = true;
     input.disabled = true;
     submitBtn.disabled = true;
 
-    // Tek Oyuncuysa bugünü "oynandı" olarak kaydet
     if (!isMultiplayer) {
         localStorage.setItem('footle_daily_last_played', new Date().toDateString());
     }
 
-    // MULTIPLAYER MODU İÇİN OYUN BİTİŞİ
     if (isMultiplayer) {
         const temelPuan = kazandi ? (8 - denemeSayisi) * 100 : 0;
         myScore += temelPuan; 
@@ -706,6 +723,7 @@ function bitir(kazandi) {
         let waitMsg = `RAKİBİN BİTİRMESİ BEKLENİYOR...<br><span class='text-sm text-green-400 font-normal mt-2 block'>Bu turdan toplam +${buTurKazanilanPuan} Puan aldın.</span>`;
         
         if (!kazandi) {
+            if(window.playSound) window.playSound('wrong'); 
             waitMsg += `
             <div class="mt-8 bg-red-900/40 border-2 border-red-500/50 p-4 rounded-xl inline-block min-w-[250px] shadow-[0_0_20px_rgba(239,68,68,0.3)]">
                 <p class="text-xs text-red-400 font-black mb-1 tracking-widest">BULAMADIN! DOĞRU CEVAP:</p>
@@ -713,6 +731,7 @@ function bitir(kazandi) {
                 <p class="text-xs text-gray-400 mt-2">${hedefOyuncu.takim} • ${hedefOyuncu.uyruk}</p>
             </div>`;
         } else {
+            if(window.playSound) window.playSound('success'); 
             waitMsg += `
             <div class="mt-8 bg-green-900/40 border border-green-500/50 p-4 rounded-xl inline-block min-w-[250px]">
                 <p class="text-xs text-green-400 font-bold mb-1 tracking-widest">TEBRİKLER, BİLDİN!</p>
@@ -735,12 +754,7 @@ function bitir(kazandi) {
     const correctPlayerContainer = document.getElementById('correctPlayerContainer');
     const correctPlayerLabel = document.getElementById('correctPlayerLabel');
     const targetPlayerDetails = document.getElementById('targetPlayerDetails');
-    
-    const resultStats = document.getElementById('resultStats');
-    const gainedScoreEl = document.getElementById('gainedScore');
-    const newTotalScoreEl = document.getElementById('newTotalScore');
 
-    // Güvenlik kontrolleri ile elementleri doldur
     if(targetName) targetName.innerText = hedefOyuncu.isim.toUpperCase();
     if(targetPlayerDetails) {
         targetPlayerDetails.innerHTML = `
@@ -751,12 +765,12 @@ function bitir(kazandi) {
     }
 
     if (kazandi) {
+        if(window.playSound) window.playSound('success'); 
         const kazanilanPuan = (8 - denemeSayisi) * 100;
-        const yeniToplamPuan = addGlobalScore(kazanilanPuan);
 
         if(content) {
-            content.classList.remove('border-red-500', 'shadow-[0_0_50px_rgba(239,68,68,0.3)]');
-            content.classList.add('border-green-500', 'shadow-[0_0_50px_rgba(34,197,94,0.3)]');
+            content.classList.remove('border-red-500');
+            content.classList.add('border-green-500');
         }
         
         if(emoji) emoji.innerText = "🏆";
@@ -772,14 +786,15 @@ function bitir(kazandi) {
             correctPlayerLabel.className = "text-xs text-green-500 font-bold tracking-widest uppercase mb-1";
         }
 
-        if(gainedScoreEl) gainedScoreEl.innerText = kazanilanPuan;
-        if(newTotalScoreEl) newTotalScoreEl.innerText = yeniToplamPuan;
-        if(resultStats) resultStats.classList.remove('hidden'); 
+        if(window.saveScoreToFirebase) {
+            setTimeout(() => window.saveScoreToFirebase(kazanilanPuan, "Footle"), 1000);
+        }
 
     } else {
+        if(window.playSound) window.playSound('wrong'); 
         if(content) {
-            content.classList.remove('border-green-500', 'shadow-[0_0_50px_rgba(34,197,94,0.3)]');
-            content.classList.add('border-red-500', 'shadow-[0_0_50px_rgba(239,68,68,0.3)]');
+            content.classList.remove('border-green-500');
+            content.classList.add('border-red-500');
         }
         
         if(emoji) emoji.innerText = "❌";
@@ -794,25 +809,7 @@ function bitir(kazandi) {
             correctPlayerLabel.innerText = "DOĞRU CEVAP NEYDİ?";
             correctPlayerLabel.className = "text-xs text-red-400 font-black tracking-widest uppercase mb-1";
         }
-
-        if(resultStats) resultStats.classList.add('hidden');
     }
 
-    if(window.saveScoreToFirebase) {
-        setTimeout(() => {
-            const puan = kazandi ? (8 - denemeSayisi) * 100 : 0; 
-            if(puan > 0) window.saveScoreToFirebase(puan, "Footle");
-        }, 1000);
-    }
-
-    // Modal'ı göster
     if(modal) modal.classList.remove('hidden');
-}
-
-// --- PUAN HESAPLAMA FONKSİYONU ---
-function addGlobalScore(points) {
-    let currentScore = parseInt(localStorage.getItem('futbolHub_totalScore')) || 0;
-    currentScore += points;
-    localStorage.setItem('futbolHub_totalScore', currentScore);
-    return currentScore;
 }

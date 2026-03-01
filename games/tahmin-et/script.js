@@ -399,7 +399,10 @@ function gameLoop() {
 
 function revealClueCard(index) {
     const card = document.getElementById(`clue-${index}`);
-    if (card) card.classList.add('active');
+    if (card && !card.classList.contains('active')) { // Zaten açık değilse
+        card.classList.add('active');
+        playSound('reveal'); // YENİ: Kutu açılma sesi
+    }
 }
 
 function revealRandomLetter() {
@@ -441,6 +444,7 @@ function makeGuess() {
     if (cleanGuess === correctFullName || cleanGuess === firstName || cleanGuess === lastName) {
         endGame(true);
     } else {
+        playSound('wrong'); // YENİ: Yanlış tahmin sesi
         input.style.borderBottomColor = "var(--matte-red)";
         input.animate([
             { transform: 'translateX(0px)' },
@@ -464,6 +468,7 @@ function endGame(isWin) {
 
     if (isWin) {
         // KAZANMA DURUMU
+        playSound('success');
         msgArea.innerHTML = `<span class="text-green-400">DOĞRU!</span> <strong>${targetPlayer.isim}</strong> <br><span class="text-sm text-gray-400">Bu sorudan +${currentScore} Puan aldın.</span>`;
         msgArea.className = "text-center font-black text-xl mb-4 p-4 bg-green-900/20 border border-green-500 rounded-xl shadow-[0_0_20px_rgba(34,197,94,0.3)] block";
         
@@ -479,6 +484,7 @@ function endGame(isWin) {
 
     } else {
         // KAYBETME DURUMU
+        playSound('wrong');
         msgArea.innerHTML = `<span class="text-red-500">SÜRE BİTTİ!</span> <br><span class="text-sm text-gray-400">Doğru Cevap: <span class="text-white">${targetPlayer.isim}</span></span>`;
         msgArea.className = "text-center font-black text-xl mb-4 p-4 bg-red-900/20 border border-red-500 rounded-xl shadow-[0_0_20px_rgba(239,68,68,0.3)] block";
         

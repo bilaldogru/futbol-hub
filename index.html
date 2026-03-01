@@ -270,6 +270,30 @@
         <p>&copy; 2026 FutbolHub </p>
     </footer>
 
+    <script>
+        const soundEffects = {
+            click: new Audio('assets/sounds/click.mp3')
+        };
+        soundEffects.click.volume = 0.4; // Tıklama sesini hafif tuttuk
+
+        window.playSound = function(soundName) {
+            if (soundEffects[soundName]) {
+                soundEffects[soundName].currentTime = 0;
+                soundEffects[soundName].play().catch(e => console.warn("Ses için etkileşim gerekiyor:", e));
+            }
+        };
+
+        // Sayfa yüklendiğinde tıklanabilir her şeye otomatik sesi ekle
+        document.addEventListener('DOMContentLoaded', () => {
+            const clickables = document.querySelectorAll('a, button, .game-card, .ball-card, #login-btn, #logout-btn, .close-btn');
+            clickables.forEach(el => {
+                el.addEventListener('click', () => {
+                    playSound('click');
+                });
+            });
+        });
+    </script>
+
     <script type="module">
       import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
       import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
@@ -300,7 +324,6 @@
       window.playGame = async (gameId, url) => {
           const statRef = doc(db, "game_stats", "play_counts");
           try {
-              // Yönlendirmeden önce veritabanına kaydetmeyi BEKLE (await)
               await updateDoc(statRef, { [gameId]: increment(1) });
               window.location.href = url;
           } catch (e) {
@@ -405,7 +428,6 @@
         }
       });
 
-      // Level hesaplaması silindi
       async function fetchUserScore(email) {
         try {
             const q = query(collection(db, "scores"), where("email", "==", email));
