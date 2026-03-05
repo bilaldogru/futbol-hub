@@ -331,23 +331,6 @@ function listenToRoom() {
     
     roomUnsubscribe = window.onSnapshot(roomRef, (docSnap) => {
         if(!docSnap.exists()) return;
-        // YENİ: RAKİP OYUNDAN ÇIKARSA
-        if (data.status === 'opponent_left') {
-            alert("⚠️ RAKİP OYUNDAN AYRILDI!\nHükmen kazandın.");
-            
-            // Oyun alanını gizle ve lobiyi göster
-            document.getElementById('multiplayerScoreBoard').classList.add('hidden');
-            const oppBoardContainer = document.getElementById('opponentBoardContainer');
-            if(oppBoardContainer) oppBoardContainer.classList.add('hidden');
-            
-            // Lobiye dönme fonksiyonunu çağır (Senin kodunda adı neyse: backToLobby() vb.)
-            if(typeof window.backToLobby === 'function') {
-                window.backToLobby();
-            } else {
-                location.reload(); // Fonksiyon yoksa sayfayı yenileyerek lobiye at
-            }
-            return; // Fonksiyonun geri kalanını çalıştırma
-        }
         const data = docSnap.data();
 
         myScore = playerRole === 'player1' ? data.p1Score : data.p2Score;
