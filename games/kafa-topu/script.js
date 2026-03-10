@@ -27,15 +27,15 @@ window.showToast = function(msg, type = 'error') {
 // --- SES YÖNETİCİSİ (HTML VE PHASER DIŞI İÇİN) ---
 const arenaSounds = {
     click: new Audio('../../assets/sounds/click.mp3'),
-    win: new Audio('../../assets/sounds/win.mp3'),       // YENİ: Kazanma sesi
-    lose: new Audio('../../assets/sounds/lose.mp3'),     // YENİ: Kaybetme sesi
+    win: new Audio('../../assets/sounds/win.mp3'),       
+    lose: new Audio('../../assets/sounds/lose.mp3'),     
     whistleStart: new Audio('../../assets/sounds/whistle.mp3'),
     whistleEnd: new Audio('../../assets/sounds/whistle-end.mp3'),
     goal: new Audio('../../assets/sounds/goal.mp3')
 };
 arenaSounds.click.volume = 0.4;
-arenaSounds.win.volume = 0.6;   // YENİ: Kazanma ses düzeyi
-arenaSounds.lose.volume = 0.5;  // YENİ: Kaybetme ses düzeyi
+arenaSounds.win.volume = 0.6;   
+arenaSounds.lose.volume = 0.5;  
 arenaSounds.whistleStart.volume = 0.5;
 arenaSounds.whistleEnd.volume = 0.6;
 arenaSounds.goal.volume = 0.7;
@@ -495,7 +495,7 @@ function setupClientConnection() {
 
 function handleDisconnect() {
     gameActive = false;
-    playArenaSound('lose'); // YENİ: Rakip kaçınca kaybetme/uyarı sesi
+    playArenaSound('lose'); 
     showToast("Rakip bağlantıyı kopardı!", "error");
     setTimeout(() => window.location.href = "../../index.html", 3000);
 }
@@ -521,7 +521,10 @@ function startPhaserGame() {
 }
 
 function preload() {
-    this.load.image('proBall', 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Soccer_ball.svg/240px-Soccer_ball.svg.png');
+    // 🔥 WIKIPEDIA GÖRSELİ İÇİN GÜVENLİK (PROXY) ÇÖZÜMÜ
+    // Resim görünmediği için resmi Firebase'in engellemeyeceği bir aracı URL üzerinden çağırıyoruz.
+    this.load.image('proBall', '../../assets/images/ball.png');
+    
     let gfx = this.add.graphics();
     
     gfx.fillStyle(0x0a0a0c, 0.9); gfx.fillRect(0, 0, 1400, 80);
@@ -610,6 +613,7 @@ function create() {
     p1Leg = this.add.sprite(p1.x, p1.y, 'p1_shoe').setDepth(1).setOrigin(0.3, 0.5); p1Leg.isKicking = false;
     p2Leg = this.add.sprite(p2.x, p2.y, 'p2_shoe').setDepth(1).setOrigin(0.7, 0.5).setFlipX(true); p2Leg.isKicking = false;
 
+    // BAŞLANGIÇ BOYUTU: 0.22
     ball = this.physics.add.sprite(700, 200, 'proBall').setDepth(3).setScale(0.22);
     ball.setCircle(115); 
     ball.setBounce(0.85); 
@@ -774,6 +778,7 @@ function applyPowerUp(type, takerId) {
     }
     else if (type.id === 'small_ball') {
         ball.setScale(0.12); ball.setMass(2.5); ball.setTint(0xf1c40f);
+        // 🔥 GÜÇ BİTİNCE ESKİ BOYUTA (0.22) DÖNÜŞ (SABİTLENDİ)
         powerObj.timer = setTimeout(() => { if(ball.active) { ball.setScale(0.22); ball.setMass(1); ball.clearTint(); } }, 7000);
     }
 
@@ -787,6 +792,7 @@ function clearAllPowerUps() {
     if(p1 && p1.active) { p1.setScale(1); p1Leg.setScale(1); p1.setMass(500); p1.clearTint(); p1.body.moves = true; p1Leg.setVisible(true); p1CanShoot = true; }
     if(p2 && p2.active) { p2.setScale(1); p2Leg.setScale(1); p2.setMass(500); p2.clearTint(); p2.body.moves = true; p2Leg.setVisible(true); p2CanShoot = true; }
     
+    // 🔥 GOL OLUNCA ESKİ BOYUTA (0.22) DÖNÜŞ (SABİTLENDİ)
     if(ball && ball.active) { ball.setScale(0.22); ball.setBounce(0.85); ball.setMass(1); ball.setDragX(100); ball.clearTint(); }
     
     if(leftGoalVisual) { 
