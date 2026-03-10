@@ -521,8 +521,7 @@ function startPhaserGame() {
 }
 
 function preload() {
-    // 🔥 WIKIPEDIA GÖRSELİ İÇİN GÜVENLİK (PROXY) ÇÖZÜMÜ
-    // Resim görünmediği için resmi Firebase'in engellemeyeceği bir aracı URL üzerinden çağırıyoruz.
+    // 🔥 YEREL GÖRSEL YÜKLEMESİ
     this.load.image('proBall', '../../assets/images/ball.png');
     
     let gfx = this.add.graphics();
@@ -613,9 +612,13 @@ function create() {
     p1Leg = this.add.sprite(p1.x, p1.y, 'p1_shoe').setDepth(1).setOrigin(0.3, 0.5); p1Leg.isKicking = false;
     p2Leg = this.add.sprite(p2.x, p2.y, 'p2_shoe').setDepth(1).setOrigin(0.7, 0.5).setFlipX(true); p2Leg.isKicking = false;
 
-    // BAŞLANGIÇ BOYUTU: 0.22
-    ball = this.physics.add.sprite(700, 200, 'proBall').setDepth(3).setScale(0.22);
-    ball.setCircle(115); 
+    // 🔥 BAŞLANGIÇ BOYUTU DEĞİŞTİRİLDİ: 0.03
+    ball = this.physics.add.sprite(700, 200, 'proBall').setDepth(3).setScale(0.03);
+    
+    // 🔥 EN ÖNEMLİ DÜZELTME: Fiziksel daireyi resmin tam boyutuna göre dinamik hesapla.
+    // Bu sayede resim büyük olsa da fizik dairesi dışına taşmaz veya küçük kalmaz.
+    ball.setCircle(ball.width / 2); 
+    
     ball.setBounce(0.85); 
     ball.setMass(1);      
     ball.setDragX(100); 
@@ -777,9 +780,10 @@ function applyPowerUp(type, takerId) {
         powerObj.timer = setTimeout(() => { if(ball.active) { ball.setBounce(0.85); ball.setDragX(100); ball.clearTint(); } }, 7000);
     }
     else if (type.id === 'small_ball') {
-        ball.setScale(0.12); ball.setMass(2.5); ball.setTint(0xf1c40f);
-        // 🔥 GÜÇ BİTİNCE ESKİ BOYUTA (0.22) DÖNÜŞ (SABİTLENDİ)
-        powerObj.timer = setTimeout(() => { if(ball.active) { ball.setScale(0.22); ball.setMass(1); ball.clearTint(); } }, 7000);
+        // 🔥 MİNİ TOP GÜCÜ ALINDIĞINDA BOYUT ORANSAL OLARAK (0.015) KÜÇÜLTÜLDÜ
+        ball.setScale(0.015); ball.setMass(2.5); ball.setTint(0xf1c40f);
+        // 🔥 GÜÇ BİTİNCE ESKİ BOYUTA (0.03) DÖNÜŞ (SABİTLENDİ)
+        powerObj.timer = setTimeout(() => { if(ball.active) { ball.setScale(0.03); ball.setMass(1); ball.clearTint(); } }, 7000);
     }
 
     activePowerUps.push(powerObj);
@@ -792,8 +796,8 @@ function clearAllPowerUps() {
     if(p1 && p1.active) { p1.setScale(1); p1Leg.setScale(1); p1.setMass(500); p1.clearTint(); p1.body.moves = true; p1Leg.setVisible(true); p1CanShoot = true; }
     if(p2 && p2.active) { p2.setScale(1); p2Leg.setScale(1); p2.setMass(500); p2.clearTint(); p2.body.moves = true; p2Leg.setVisible(true); p2CanShoot = true; }
     
-    // 🔥 GOL OLUNCA ESKİ BOYUTA (0.22) DÖNÜŞ (SABİTLENDİ)
-    if(ball && ball.active) { ball.setScale(0.22); ball.setBounce(0.85); ball.setMass(1); ball.setDragX(100); ball.clearTint(); }
+    // 🔥 GOL OLUNCA ESKİ BOYUTA (0.03) DÖNÜŞ (SABİTLENDİ)
+    if(ball && ball.active) { ball.setScale(0.03); ball.setBounce(0.85); ball.setMass(1); ball.setDragX(100); ball.clearTint(); }
     
     if(leftGoalVisual) { 
         leftGoalVisual.setScale(1,1); leftGoalVisual.y = 410; 
