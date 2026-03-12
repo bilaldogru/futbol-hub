@@ -498,6 +498,7 @@ function resetBoard() {
     buTurKazanilanPuan = 0;
 }
 
+// --- 7. OYUN MOTORU (GÜNCELLENMİŞ BAŞLATMA MANTIĞI) ---
 async function oyunuBaslat() {
     resetBoard(); 
 
@@ -515,24 +516,37 @@ async function oyunuBaslat() {
     const day = String(today.getDate()).padStart(2, '0');
     const dateString = `${year}-${month}-${day}`; 
 
+    // YENİ: Sadece "kolay" zorluktaki oyuncuları filtrele
+    let kolayOyuncular = oyuncular.filter(p => p.zorluk === "kolay");
+    
+    // Güvenlik: Eğer JSON dosyasında hiç "kolay" oyuncu yoksa sistem çökmesin diye tümünü al
+    if (kolayOyuncular.length === 0) {
+        console.warn("Dikkat: JSON'da 'kolay' zorluğunda oyuncu bulunamadı! Tüm liste kullanılıyor.");
+        kolayOyuncular = oyuncular;
+    }
+
     try {
         const docRef = window.doc(window.db, "daily_footle", dateString);
         const docSnap = await window.getDoc(docRef);
 
         if (docSnap.exists()) {
+            // Bugünün oyuncusu zaten seçilmişse onu getir
             const targetName = docSnap.data().player;
-            hedefOyuncu = oyuncular.find(p => p.isim === targetName) || oyuncular[0];
+            hedefOyuncu = oyuncular.find(p => p.isim === targetName) || kolayOyuncular[0];
         } else {
+            // Bugünün oyuncusu henüz seçilmemişse "KOLAY" listesinden rastgele seç ve kaydet
             const seed = year * 10000 + (today.getMonth() + 1) * 100 + today.getDate() + 99;
-            let m = oyuncular.length;
+            let m = kolayOyuncular.length;
             const random = () => { var x = Math.sin(seed) * 10000; return x - Math.floor(x); };
             const randomIndex = Math.floor(random() * m);
-            hedefOyuncu = oyuncular[randomIndex];
+            
+            hedefOyuncu = kolayOyuncular[randomIndex];
 
             await window.setDoc(docRef, { player: hedefOyuncu.isim, createdAt: new Date() });
         }
     } catch (error) {
-        hedefOyuncu = oyuncular[Math.floor(Math.random() * oyuncular.length)];
+        // Çevrimdışı/Hata durumu: Yine sadece kolaylardan seç
+        hedefOyuncu = kolayOyuncular[Math.floor(Math.random() * kolayOyuncular.length)];
     }
 }
 
