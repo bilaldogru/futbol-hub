@@ -4,15 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FUTBOL HUB - Oyun Merkezi</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body>
+<body class="bg-black text-white overflow-x-hidden"> <div class="bg-overlay"></div>
 
-    <div class="bg-overlay"></div>
-
-    <nav class="navbar">
-        <div class="logo">⚽ FUTBOL<span>HUB</span></div>
+    <nav class="navbar relative z-50"> <div class="logo">⚽ FUTBOL<span>HUB</span></div>
         
         <div class="nav-links">
             <a href="#games-grid" class="active">Oyunlar</a>
@@ -25,8 +23,7 @@
                 <i class="fa-solid fa-user-circle"></i> Giriş Yap
             </div>
             
-            <div id="user-info">
-                <span id="user-total-score" class="score-badge">0 P</span>
+            <div id="user-info" style="display: none;"> <span id="user-total-score" class="score-badge">0 P</span>
                 <button id="shop-btn" onclick="openShop()">
                     <i class="fa-solid fa-cart-shopping"></i> MAĞAZA
                 </button>
@@ -37,7 +34,7 @@
         </div>
     </nav>
 
-    <header class="hero">
+    <header class="hero relative z-40">
         <div class="hero-content">
             <h1>FUTBOL BİLGİNİ KONUŞTUR</h1>
             <h2>En zorlu futbol bulmacaları, tahmin oyunları ve taktik savaşları tek adreste.</h2>
@@ -52,13 +49,14 @@
         </div>
     </header>
 
-    <div class="news-ticker">
-        <div class="ticker-content" id="dynamic-ticker">
-            <span>Yükleniyor...</span>
+    <div class="news-ticker w-full relative z-40">
+        <div class="marquee-wrapper">
+            <div class="marquee-content flex items-center px-4" id="dynamic-ticker">
+                <span class="text-green-400 font-black text-lg tracking-widest uppercase">🔥 Yükleniyor...</span>
+            </div>
         </div>
     </div>
-
-    <section id="games-grid">
+    <section id="games-grid" class="relative z-40 pt-10">
         <div class="container">
             <h2 class="section-title">
                 <i class="fa-solid fa-fire fire-icon"></i> 
@@ -69,7 +67,7 @@
                 
                 <div class="game-card card-green reveal" onclick="playGame('gizli_efsane', 'games/tahmin-et/index.html')">
                     <div class="card-image">
-                        <div class="bg-img" style="background: linear-gradient(135deg, rgba(34, 197, 94, 0.4) 0%, rgba(0, 0, 0, 0.8) 100%), url('https://images.unsplash.com/photo-1574629810360-7efbbe195018?q=80&w=1000');"></div>
+                        <div class="bg-img" style="background: linear-gradient(135deg, rgba(34, 197, 94, 0.4) 0%, rgba(0, 0, 0, 0.8) 100%), url('https://images.unsplash.com/photo-1574629810360-7efbbe195018?q=80&w=1000'); background-size: cover;"></div>
                         <span class="badge">GÜNLÜK</span>
                     </div>
                     <div class="card-info">
@@ -85,7 +83,7 @@
 
                 <div class="game-card card-blue reveal" onclick="playGame('footle', 'games/footle/index.html')">
                     <div class="card-image">
-                        <div class="bg-img" style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.4) 0%, rgba(0, 0, 0, 0.8) 100%), url('https://images.unsplash.com/photo-1551958219-acbc608c6377?q=80&w=600&h=400');"></div>
+                        <div class="bg-img" style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.4) 0%, rgba(0, 0, 0, 0.8) 100%), url('https://images.unsplash.com/photo-1551958219-acbc608c6377?q=80&w=600&h=400'); background-size: cover;"></div>
                         <span class="badge" style="background: var(--accent-blue); color: #fff; border: 1px solid #7cb3ff;">GÜNLÜK / MÜCADELE</span>
                     </div>
                     <div class="card-info">
@@ -103,7 +101,7 @@
                     <div class="card-image">
                         <div class="bg-img" style="background: linear-gradient(135deg, #e91e63, #4a148c);"></div>
                         <span class="badge live" style="background: linear-gradient(135deg, #e91e63, #4a148c); color: #fff; border: 1px solid #ff6699;">YENİ / 1v1</span>
-                        <h2 class="grid-emoji">❌⭕</h2>
+                        <h2 class="grid-emoji text-6xl absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-50 drop-shadow-2xl">❌⭕</h2>
                     </div>
                     <div class="card-info">
                         <h3>Grid Savaşları</h3>
@@ -118,7 +116,7 @@
 
                 <div class="game-card card-orange reveal" onclick="playGame('arena', 'games/kafa-topu/index.html')">
                     <div class="card-image">
-                        <div class="bg-img" style="background: linear-gradient(135deg, rgba(230, 126, 34, 0.4) 0%, rgba(0, 0, 0, 0.8) 100%), url('https://images.unsplash.com/photo-1579952363873-27f3bade9f55?q=80&w=600&h=400');"></div>
+                        <div class="bg-img" style="background: linear-gradient(135deg, rgba(230, 126, 34, 0.4) 0%, rgba(0, 0, 0, 0.8) 100%), url('https://images.unsplash.com/photo-1579952363873-27f3bade9f55?q=80&w=600&h=400'); background-size: cover;"></div>
                         <span class="badge" style="background: var(--primary-orange); color: #fff; border: 1px solid #ffb077;">YEREL 1v1</span>
                     </div>
                     <div class="card-info">
@@ -134,7 +132,7 @@
                 
                 <div class="game-card locked reveal">
                     <div class="card-image">
-                        <div class="bg-img" style="background: linear-gradient(135deg, rgba(33, 150, 243, 0.4) 0%, rgba(0, 0, 0, 0.8) 100%), url('https://images.unsplash.com/photo-1508098682722-e99c43a406b2?q=80&w=1000');"></div>
+                        <div class="bg-img" style="background: linear-gradient(135deg, rgba(33, 150, 243, 0.4) 0%, rgba(0, 0, 0, 0.8) 100%), url('https://images.unsplash.com/photo-1508098682722-e99c43a406b2?q=80&w=1000'); background-size: cover;"></div>
                         <span class="badge coming-soon">YAKINDA</span>
                     </div>
                     <div class="card-info">
@@ -166,7 +164,7 @@
         </div>
     </section>
     
-    <section id="leaderboard">
+    <section id="leaderboard" class="relative z-40">
         <div class="container">
             <h2 class="section-title">
                 <i class="fa-solid fa-trophy gold-icon"></i> 
@@ -222,7 +220,18 @@
         </div>
     </div>
 
-    <section id="about">
+    <div id="pack-overlay" class="fixed inset-0 z-[9999] bg-black/90 backdrop-blur-sm hidden flex-col items-center justify-center">
+        <div id="pack-container" class="relative flex flex-col items-center">
+            <div id="pack-animated-ball" class="w-32 h-32 rounded-full mb-8 shadow-2xl"></div>
+            <div id="pack-reward" class="hidden flex-col items-center text-center opacity-0 transition-opacity duration-500">
+                <h2 id="reward-title" class="text-4xl font-black text-yellow-400 mb-2 drop-shadow-lg"></h2>
+                <p id="reward-desc" class="text-white text-xl font-bold mb-8"></p>
+                <button onclick="closePack()" class="bg-white text-black font-black py-3 px-8 rounded-xl hover:bg-gray-200 transition">DEVAM ET</button>
+            </div>
+        </div>
+    </div>
+
+    <section id="about" class="relative z-40">
         <div class="container about-container">
             <div class="about-text">
                 <h2 class="section-title">HAKKIMIZDA</h2>
@@ -266,15 +275,15 @@
         </div>
     </section>
     
-    <footer>
-        <p>&copy; 2026 FutbolHub </p>
+    <footer class="relative z-40 bg-black py-6 text-center text-gray-500 text-sm">
+        <p>&copy; 2026 FutbolHub</p>
     </footer>
 
     <script>
         const soundEffects = {
             click: new Audio('assets/sounds/click.mp3')
         };
-        soundEffects.click.volume = 0.4; // Tıklama sesini hafif tuttuk
+        soundEffects.click.volume = 0.4; 
 
         window.playSound = function(soundName) {
             if (soundEffects[soundName]) {
@@ -283,7 +292,6 @@
             }
         };
 
-        // Sayfa yüklendiğinde tıklanabilir her şeye otomatik sesi ekle
         document.addEventListener('DOMContentLoaded', () => {
             const clickables = document.querySelectorAll('a, button, .game-card, .ball-card, #login-btn, #logout-btn, .close-btn');
             clickables.forEach(el => {
@@ -373,31 +381,34 @@
         const rewardTitle = document.getElementById('reward-title');
         const rewardDesc = document.getElementById('reward-desc');
 
-        ballEl.className = `ball`;
-        setTimeout(() => { ballEl.classList.add(`ball-${type}`, 'scale-in', 'spin'); }, 50);
+        overlay.classList.remove('hidden');
+        overlay.classList.add('flex');
         
-        overlay.classList.add('active');
-        rewardEl.classList.remove('show');
+        ballEl.className = `w-32 h-32 rounded-full mb-8 shadow-2xl ball-${type}`;
         
-        setTimeout(() => { container.classList.add('pack-shake'); }, 1500);
+        setTimeout(() => { container.classList.add('animate-bounce'); }, 100);
 
         setTimeout(() => {
-            container.classList.remove('pack-shake');
-            ballEl.classList.remove('scale-in'); ballEl.classList.add('scale-out');
+            container.classList.remove('animate-bounce');
+            ballEl.classList.add('hidden');
             
-            if(type === 'gold') { rewardTitle.innerText = "İKONİK KART!"; rewardDesc.innerText = "Altın Krampon Kilidi Açıldı!"; }
-            else if(type === 'silver') { rewardTitle.innerText = "NADİR GÜÇ!"; rewardDesc.innerText = "+10 Enerji Başlangıcı!"; }
-            else { rewardTitle.innerText = "STANDART"; rewardDesc.innerText = "Sıradan Forma Paketi"; }
+            if(type === 'gold') { rewardTitle.innerText = "İKONİK KART!"; rewardDesc.innerText = "Altın Krampon Kilidi Açıldı!"; rewardTitle.className = "text-5xl font-black text-yellow-400 mb-2 drop-shadow-[0_0_15px_rgba(250,204,21,0.8)]"; }
+            else if(type === 'silver') { rewardTitle.innerText = "NADİR GÜÇ!"; rewardDesc.innerText = "+10 Enerji Başlangıcı!"; rewardTitle.className = "text-5xl font-black text-gray-300 mb-2 drop-shadow-[0_0_15px_rgba(209,213,219,0.8)]"; }
+            else { rewardTitle.innerText = "STANDART"; rewardDesc.innerText = "Sıradan Forma Paketi"; rewardTitle.className = "text-5xl font-black text-amber-700 mb-2 drop-shadow-[0_0_15px_rgba(180,83,9,0.8)]"; }
 
-            rewardEl.style.display = "flex"; 
-            setTimeout(() => rewardEl.classList.add('show'), 50); 
-        }, 2500);
+            rewardEl.classList.remove('hidden'); 
+            rewardEl.classList.add('flex');
+            setTimeout(() => rewardEl.classList.remove('opacity-0'), 50); 
+        }, 2000);
       };
 
       window.closePack = () => {
-          document.getElementById('pack-overlay').classList.remove('active');
-          document.getElementById('pack-animated-ball').classList.remove('scale-out', 'spin');
-          document.getElementById('pack-reward').style.display = "none";
+          const overlay = document.getElementById('pack-overlay');
+          overlay.classList.add('hidden');
+          overlay.classList.remove('flex');
+          document.getElementById('pack-animated-ball').classList.remove('hidden');
+          document.getElementById('pack-reward').classList.add('opacity-0', 'hidden');
+          document.getElementById('pack-reward').classList.remove('flex');
       };
 
       loginBtn.addEventListener('click', () => {
@@ -536,6 +547,9 @@
       setInterval(updateWeeklyCountdown, 60000);
       updateWeeklyCountdown();
 
+      // ==========================================
+      // KESİNTİSİZ KAYAN YAZI - BÜYÜK FONT GÜNCELLEMESİ
+      // ==========================================
       function loadDynamicTicker() {
           const tickerContainer = document.getElementById('dynamic-ticker');
           
@@ -543,13 +557,22 @@
               let messagesHTML = "";
               
               if (snapshot.empty) {
+                  // text-sm yerine text-lg yapıldı. uppercase (Büyük harf) ve tracking-widest (Aralıklı) eklendi.
                   messagesHTML = `
-                      <span>🔥 <strong>SİSTEM:</strong> Veritabanından mesaj bekleniyor...</span>
-                      <span>🏆 <strong>BİLGİ:</strong> Firebase panelinden 'ticker_messages' koleksiyonu oluşturun.</span>
+                      <span class="text-green-400 font-black text-lg tracking-widest uppercase"><i class="fa-solid fa-fire mr-2"></i> Yeni Oyun 'Grid Savaşları' Aktif!</span>
+                      <i class="fa-solid fa-circle text-[8px] text-gray-500 mx-6"></i>
+                      <span class="text-white font-black text-lg tracking-widest uppercase">🏆 Liderlik Tablosu Pazartesi Günü Sıfırlanır.</span>
+                      <i class="fa-solid fa-circle text-[8px] text-gray-500 mx-6"></i>
+                      <span class="text-yellow-400 font-black text-lg tracking-widest uppercase">⚽ Footle'da Günün Sorusu Yenilendi!</span>
+                      <i class="fa-solid fa-circle text-[8px] text-gray-500 mx-6"></i>
                   `;
               } else {
                   snapshot.forEach((doc) => {
-                      messagesHTML += `<span>${doc.data().text}</span>`;
+                      const msgText = doc.data().text;
+                      messagesHTML += `
+                      <span class="text-white font-black text-lg tracking-widest uppercase hover:text-green-400 transition-colors">${msgText}</span>
+                      <i class="fa-solid fa-circle text-[8px] text-gray-600 mx-6"></i>
+                      `;
                   });
               }
 
@@ -574,28 +597,23 @@
         window.addEventListener("scroll", function() {
             sessionStorage.setItem("futbolHub_scroll", window.scrollY);
         });
-    </script>
 
-    <script>
-    function reveal() {
-        var reveals = document.querySelectorAll(".reveal");
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
 
-        for (var i = 0; i < reveals.length; i++) {
-            var windowHeight = window.innerHeight;
-            var elementTop = reveals[i].getBoundingClientRect().top;
-            var elementVisible = 100; 
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 100; 
 
-            if (elementTop < windowHeight - elementVisible) {
-                reveals[i].classList.add("active");
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
             }
         }
-    }
 
-    window.addEventListener("scroll", reveal);
-    window.addEventListener("load", reveal);
+        window.addEventListener("scroll", reveal);
+        window.addEventListener("load", reveal);
     </script>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
-
 </body>
 </html>

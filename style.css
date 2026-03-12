@@ -117,33 +117,61 @@ body {
 
 .wave-divider { display: none !important; }
 
+/* ==========================================================================
+   KAYAN YAZI (HEM ESKİ ARKA PLAN EFEKTLERİ HEM KESİNTİSİZ KAYMA)
+   ========================================================================== */
 .news-ticker {
     background: #0a0a0c; 
     border-top: 1px solid rgba(34, 197, 94, 0.3); 
     border-bottom: 1px solid rgba(34, 197, 94, 0.3);
     box-shadow: inset 0 0 20px rgba(0,0,0,0.8), 0 0 15px rgba(34, 197, 94, 0.05); 
-    padding: 12px 0; overflow: hidden; position: relative; z-index: 20;
+    padding: 15px 0; 
+    overflow: hidden; 
+    position: relative; 
+    z-index: 20;
 }
+
+/* Çapraz Çizgi Efekti */
 .news-ticker::before {
     content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
     background: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255,255,255,0.02) 10px, rgba(255,255,255,0.02) 20px);
     pointer-events: none;
+    z-index: 1;
 }
+
+/* Kayan Işık Efekti */
 .news-ticker::after {
     content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
     background: linear-gradient(to right, transparent, rgba(34, 197, 94, 0.15), transparent);
     transform: skewX(-20deg); animation: scan-effect 6s infinite linear; pointer-events: none;
+    z-index: 1;
 }
+
 @keyframes scan-effect { 0% { left: -100%; } 100% { left: 200%; } }
 
-.ticker-content {
-    display: flex; gap: 50px; white-space: nowrap; animation: scroll-ticker 25s linear infinite; 
-    font-weight: 600; font-size: 1.1rem; letter-spacing: 1px; text-transform: uppercase;
+/* Kesintisiz Animasyon Ayarları */
+.marquee-wrapper {
+    display: flex;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 100%;
+    position: relative;
+    z-index: 2; /* Yazı, arka plan efektlerinin üstünde kalsın */
 }
-.ticker-content span { padding-right: 50px; display: flex; align-items: center; gap: 8px; color: #cccccc; }
-.ticker-content span strong { color: var(--primary-green); font-weight: 900; text-shadow: 0 0 10px rgba(34, 197, 94, 0.4); }
 
-@keyframes scroll-ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+.marquee-content {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    animation: scroll-left 35s linear infinite; 
+}
+
+@keyframes scroll-left {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); } 
+}
+/* ========================================================================== */
+
 
 .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; position: relative; z-index: 5; }
 
