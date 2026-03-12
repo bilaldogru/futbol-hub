@@ -168,6 +168,9 @@
         gameSounds.reveal.volume = 0.3;
         
         window.playSound = function(soundName) {
+            let isMuted = localStorage.getItem('futbolHub_muted') === 'true';
+            if (isMuted) return;
+
             if (gameSounds[soundName]) {
                 gameSounds[soundName].currentTime = 0;
                 gameSounds[soundName].play().catch(e => console.warn("Ses hatası:", e));

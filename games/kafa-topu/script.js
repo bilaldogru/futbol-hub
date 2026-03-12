@@ -41,6 +41,9 @@ arenaSounds.whistleEnd.volume = 0.6;
 arenaSounds.goal.volume = 0.7;
 
 window.playArenaSound = function(soundName) {
+    let isMuted = localStorage.getItem('futbolHub_muted') === 'true';
+    if (isMuted) return;
+
     if (arenaSounds[soundName]) {
         arenaSounds[soundName].currentTime = 0;
         arenaSounds[soundName].play().catch(e => console.warn("Ses hatası:", e));
@@ -1027,8 +1030,22 @@ async function showGameOver(win) {
     
     if (isHost && win !== 0) {
         const docSnap = await window.getDoc(window.doc(window.db, "arena_rooms", currentRoomId));
-        const winnerDocId = win === 1 ? docSnap.data().p1DocId : docSnap.data().p2DocId;
-        await window.updateDoc(window.doc(window.db, "scores", winnerDocId), { score: window.increment(betAmountGlobal * 2) });
+        const data = docSnap.data();
+        
+        const winnerDocId = win === 1 ? data.p1DocId : data.p2DocId;
+        const loserDocId = win === 1 ? data.p2DocId : data.p1DocId;
+        
+        // Puan ekleme ve Kazanma/Kaybetme istatistikleri (++wins, ++losses)
+        await window.updateDoc(window.doc(window.db, "scores", winnerDocId), { 
+            score: window.increment(betAmountGlobal * 2),
+            wins: window.increment(1) 
+        });
+        
+        if (loserDocId) {
+            await window.updateDoc(window.doc(window.db, "scores", loserDocId), { 
+                losses: window.increment(1) 
+            });
+        }
     }
     
     let isWin = false;

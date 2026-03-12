@@ -140,9 +140,16 @@ window.showMultiplayerSetup = function() {
 window.backToLobby = async function() {
     if (roomExpireTimer) clearTimeout(roomExpireTimer); 
 
-    if (playerRole === 'player1' && roomId) {
+    if (roomId && playerRole) {
         try {
-            await window.deleteDoc(window.doc(window.db, "footle_rooms", roomId));
+            // Eğer oyun aktifse ve terk ediyorsam
+            if (document.getElementById('multiplayerScoreBoard').classList.contains('hidden') === false) {
+                await window.updateDoc(window.doc(window.db, "footle_rooms", roomId), {
+                    abandonedBy: playerRole
+                });
+            } else if (playerRole === 'player1') {
+                await window.deleteDoc(window.doc(window.db, "footle_rooms", roomId));
+            }
         } catch(e) {}
     }
     
@@ -157,8 +164,14 @@ window.backToLobby = async function() {
 };
 
 window.addEventListener('beforeunload', (e) => {
-    if (playerRole === 'player1' && roomId) {
-        window.deleteDoc(window.doc(window.db, "footle_rooms", roomId));
+    if (roomId && playerRole) {
+        if (document.getElementById('multiplayerScoreBoard').classList.contains('hidden') === false) {
+             window.updateDoc(window.doc(window.db, "footle_rooms", roomId), {
+                 abandonedBy: playerRole
+             });
+        } else if (playerRole === 'player1') {
+             window.deleteDoc(window.doc(window.db, "footle_rooms", roomId));
+        }
     }
 });
 
@@ -227,7 +240,8 @@ window.confirmAndCreateRoom = async function() {
     
     const isPrivate = document.getElementById('privateRoomCheck').checked;
 
-    let shuffled = [...oyuncular].sort(() => 0.5 - Math.random());
+    const kolayOyuncular = oyuncular.filter(p => p.zorluk === 'kolay');
+    let shuffled = [...kolayOyuncular].sort(() => 0.5 - Math.random());
     multiTargets = shuffled.slice(0, rounds).map(p => p.isim);
 
     const nowMs = new Date().getTime(); 
@@ -241,6 +255,8 @@ window.confirmAndCreateRoom = async function() {
         p2Score: 0,
         p1Status: 'playing',
         p2Status: 'waiting',
+        p1DocId: window.userFirebaseDocId || null,
+        p2DocId: null,
         p1Guesses: [], 
         p2Guesses: [], 
         currentRound: 1,
@@ -321,7 +337,10 @@ async function joinRoom(id) {
     multiRounds = data.rounds;
     multiTargets = data.targets;
 
-    await window.updateDoc(roomRef, { p2Status: 'playing' });
+    await window.updateDoc(roomRef, { 
+        p2Status: 'playing',
+        p2DocId: window.userFirebaseDocId || null
+    });
     listenToRoom();
 }
 
@@ -329,9 +348,41 @@ async function joinRoom(id) {
 function listenToRoom() {
     const roomRef = window.doc(window.db, "footle_rooms", roomId);
     
-    roomUnsubscribe = window.onSnapshot(roomRef, (docSnap) => {
+    roomUnsubscribe = window.onSnapshot(roomRef, async (docSnap) => {
         if(!docSnap.exists()) return;
         const data = docSnap.data();
+
+        // RAKİP OYUNU TERK ETTİYSE:
+        if (data.abandonedBy && data.status !== 'game_over') {
+            if (data.abandonedBy !== playerRole) {
+                if (roomUnsubscribe) roomUnsubscribe(); // Dinlemeyi bırak
+                
+                // ODADA KALAN KİŞİYİM (BEN TERK ETMEDİM). PUAN ÖNDEYSEM GALİP SAYILACAK.
+                const myFinalScore = playerRole === 'player1' ? data.p1Score : data.p2Score;
+                const oppFinalScore = playerRole === 'player1' ? data.p2Score : data.p1Score;
+                
+                if (myFinalScore > oppFinalScore) {
+                    // Hükmen Galibiyet
+                    const myDocId = playerRole === 'player1' ? data.p1DocId : data.p2DocId;
+                    if (myDocId) {
+                        try {
+                           await window.updateDoc(window.doc(window.db, "scores", myDocId), { wins: window.increment(1) });
+                        } catch(e) { console.error("Win ekleme hatası:", e); }
+                    }
+                    if(window.playSound) window.playSound('success');
+                    showCustomEndModal("🏆", "HÜKMEN KAZANDIN!", "Rakip oyundan çıktığı için ve sen puanda önde olduğun için hükmen galip geldin.", "success");
+                } else {
+                    // Puanlar eşitse veya gerideyken rakip çıkarsa berabere / iptal sayılır
+                    showCustomEndModal("⚠️", "MAÇ İPTAL EDİLDİ", "Sen gerideyken (veya berabereyken) rakip çıktığı için puanlaman etkilenmedi.", "error");
+                }
+                
+                // Odayı kapat
+                if (playerRole === 'player1') {
+                    window.deleteDoc(roomRef).catch(e=>console.log(e));
+                }
+            }
+            return;
+        }
 
         myScore = playerRole === 'player1' ? data.p1Score : data.p2Score;
         oppScore = playerRole === 'player1' ? data.p2Score : data.p1Score;
@@ -369,6 +420,22 @@ function listenToRoom() {
                     p1Guesses: [], p2Guesses: []
                 });
             } else {
+                
+                // MULTIPLAYER MAÇ BİTİŞ KONTROLÜ - KAZANMA/KAYBETME YAZDIRMA İŞLEMİ (SADECE P1 YAPIYOR)
+                let p1Wins = false;
+                let p2Wins = false;
+                
+                if (data.p1Score > data.p2Score) p1Wins = true;
+                else if (data.p2Score > data.p1Score) p2Wins = true;
+
+                if (p1Wins && data.p1DocId) {
+                    window.updateDoc(window.doc(window.db, "scores", data.p1DocId), { wins: window.increment(1) });
+                    if (data.p2DocId) window.updateDoc(window.doc(window.db, "scores", data.p2DocId), { losses: window.increment(1) });
+                } else if (p2Wins && data.p2DocId) {
+                    window.updateDoc(window.doc(window.db, "scores", data.p2DocId), { wins: window.increment(1) });
+                    if (data.p1DocId) window.updateDoc(window.doc(window.db, "scores", data.p1DocId), { losses: window.increment(1) });
+                }
+                
                 window.updateDoc(roomRef, { status: 'game_over' });
             }
         }
@@ -826,4 +893,38 @@ function bitir(kazandi) {
     }
 
     if(modal) modal.classList.remove('hidden');
+}
+
+// --- HÜKMEN GALİBİYET / İPTAL İÇİN ÖZEL EKRAN ---
+function showCustomEndModal(emojiIcon, titleText, descText, type) {
+    const modal = document.getElementById('endModal');
+    const content = document.getElementById('modalContent');
+    const emoji = document.getElementById('modalEmoji');
+    const title = document.getElementById('modalTitle');
+    const desc = document.getElementById('modalDescription');
+    const correctPlayerContainer = document.getElementById('correctPlayerContainer');
+    const footerBtn = document.querySelector('#endModal button');
+
+    if(content) {
+        content.classList.remove('border-red-500', 'border-green-500');
+        content.classList.add(type === 'success' ? 'border-green-500' : 'border-red-500');
+    }
+    
+    if(emoji) emoji.innerText = emojiIcon;
+    if(title) {
+        title.innerText = titleText;
+        title.className = `text-3xl font-black mb-2 tracking-tighter ${type === 'success' ? 'text-green-400' : 'text-yellow-400'}`;
+    }
+    if(desc) desc.innerText = descText;
+    
+    // Futbolcu bilgisini gizle (Hükmen durumda gerek yok)
+    if(correctPlayerContainer) correctPlayerContainer.style.display = 'none';
+
+    if(modal) modal.classList.remove('hidden');
+    
+    // Sonraki Oyna butonunu Lobiye Dön yapsın
+    if(footerBtn) {
+        footerBtn.innerText = "LOBİYE DÖN";
+        footerBtn.onclick = () => window.location.href = "index.html";
+    }
 }

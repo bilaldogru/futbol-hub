@@ -53,7 +53,7 @@ body {
 .nav-links a { color: var(--text-gray); text-decoration: none; font-size: 1.1rem; font-weight: 700; transition: color 0.3s; }
 .nav-links a:hover, .nav-links a.active { color: var(--text-white); }
 
-.user-profile { flex: 1; display: flex; justify-content: flex-end; cursor: pointer; color: var(--accent-blue); }
+.user-profile { flex: 1; display: flex; justify-content: flex-end; color: var(--accent-blue); }
 #user-info { display: none; align-items: center; gap: 15px; }
 #user-info img { width: 35px; height: 35px; border-radius: 50%; border: 2px solid var(--primary-green); object-fit: cover; }
 #login-btn { cursor: pointer; background: var(--primary-green); color: black; padding: 8px 20px; border-radius: 50px; font-weight: 900; transition: 0.3s; }
@@ -234,6 +234,7 @@ body {
 #leaderboard .section-title { border-left-color: #ffd700; }
 
 .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+#games-grid .grid { grid-template-columns: repeat(3, 1fr); max-width: 1200px; margin: 0 auto; gap: 40px; }
 
 .game-card {
     background: var(--card-bg); border-radius: 15px; overflow: hidden; cursor: pointer;
@@ -327,7 +328,8 @@ body {
 .list-item { display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.03); padding: 15px 25px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); transition: 0.3s; }
 .list-item:hover { background: rgba(255,255,255,0.07); transform: scale(1.02); border-color: rgba(255,255,255,0.1); }
 .list-item .rank { font-weight: 900; color: var(--text-gray); width: 30px; font-size: 1.1rem; }
-.list-item .name { flex-grow: 1; text-align: left; padding-left: 10px; font-weight: 700; display: flex; align-items: center;}
+.list-item .name { flex-grow: 1; text-align: left; padding-left: 10px; font-weight: 700; display: flex; align-items: center; gap: 10px; }
+.list-item .name img { object-fit: cover; }
 .list-item .points { color: var(--primary-green); font-weight: 900; font-size: 1.1rem;}
 
 .modal { display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.85); backdrop-filter: blur(5px); justify-content: center; align-items: center; }
@@ -344,6 +346,49 @@ body {
 .ball-silver { background: radial-gradient(circle at 30% 30%, #e0e0e0, #7d7d7d); border: 2px solid #555; }
 .ball-gold { background: radial-gradient(circle at 30% 30%, #ffd700, #b8860b); border: 2px solid #8a6408; box-shadow: 0 0 30px rgba(255, 215, 0, 0.4), inset -10px -10px 20px rgba(0,0,0,0.6); }
 .price-tag { background: var(--primary-green); color: black; padding: 6px 15px; border-radius: 50px; font-weight: 900; display: inline-block; margin-top: 15px; font-size: 1rem; font-family: 'Rajdhani'; }
+
+/* PROFIL MODALI EKLENTILERI */
+.profile-content { 
+    background: linear-gradient(180deg, #1e1e2d, #0f0f13); 
+    border: 1px solid rgba(59, 130, 246, 0.3); 
+    box-shadow: 0 0 40px rgba(59, 130, 246, 0.2); 
+    max-width: 450px !important; 
+    padding: 30px 40px !important; 
+}
+.profile-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    padding-bottom: 20px;
+}
+.profile-avatar {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    border: 3px solid var(--accent-blue);
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
+    margin-bottom: 15px;
+    object-fit: cover;
+}
+.profile-name { font-size: 1.8rem; font-weight: 900; color: white; margin-bottom: 5px; }
+.profile-stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+.stat-card {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+.stat-card.col-span-2 { grid-column: span 2; padding: 15px; }
 
 #pack-overlay {
     display: none; 
@@ -430,6 +475,7 @@ body {
     .rank-badge { position: relative; top: 0; margin-top: -40px; margin-bottom: 10px; }
     .about-container { grid-template-columns: 1fr; text-align: center; }
     .contact-box { flex-direction: column; align-items: center; }
+    #games-grid .grid { grid-template-columns: 1fr; }
 }
 
 ::-webkit-scrollbar { width: 10px; }

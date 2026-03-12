@@ -18,18 +18,21 @@
             <a href="#about">Hakkımızda</a>
         </div>
         
-        <div class="user-profile">
+        <div class="user-profile" style="align-items: center;">
+            <button id="mute-btn" style="background:none; border:none; font-size:1.2rem; cursor:pointer; transition:0.3s; margin-right:15px; display:flex; align-items:center; justify-content:center;" title="Sesi Aç/Kapat">
+                <i id="mute-icon" class="fa-solid fa-volume-high" style="color: var(--text-gray); transition: color 0.3s;"></i>
+            </button>
             <div id="login-btn">
                 <i class="fa-solid fa-user-circle"></i> Giriş Yap
             </div>
             
-            <div id="user-info" style="display: none;"> <span id="user-total-score" class="score-badge">0 P</span>
-                <button id="shop-btn" onclick="openShop()">
+            <div id="user-info" style="display: none; cursor: pointer;" onclick="openProfileModal()"> 
+                <span id="user-total-score" class="score-badge">0 P</span>
+                <button id="shop-btn" onclick="openShop(event)"> 
                     <i class="fa-solid fa-cart-shopping"></i> MAĞAZA
                 </button>
                 <img id="user-pic" src="" alt="Avatar">
                 <span id="user-name"></span>
-                <span id="logout-btn"><i class="fa-solid fa-right-from-bracket"></i></span>
             </div>
         </div>
     </nav>
@@ -231,6 +234,41 @@
         </div>
     </div>
 
+    <!-- PROFIL MODALI -->
+    <div id="profile-modal" class="modal">
+        <div class="modal-content profile-content">
+            <span class="close-btn" onclick="closeProfileModal()">&times;</span>
+            
+            <div class="profile-header">
+                <img id="modal-user-pic" src="" alt="Avatar" class="profile-avatar">
+                <h2 id="modal-user-name" class="profile-name">Kullanıcı Adı</h2>
+                <div class="profile-total-score text-yellow-500 font-black text-2xl drop-shadow-md"><span id="modal-score">0</span> P Puan</div>
+            </div>
+
+            <div class="profile-stats-grid mt-6">
+                <div class="stat-card">
+                    <i class="fa-solid fa-chart-line text-green-400 text-3xl mb-2"></i>
+                    <h3 class="text-gray-400 text-xs font-bold tracking-widest uppercase">Kazanma Oranı</h3>
+                    <p class="text-white text-xl font-black mt-1">% <span id="stat-win-rate">...</span></p>
+                </div>
+                 <div class="stat-card">
+                    <i class="fa-solid fa-gamepad text-blue-400 text-3xl mb-2"></i>
+                    <h3 class="text-gray-400 text-xs font-bold tracking-widest uppercase">Favori Oyun</h3>
+                    <p class="text-white text-xl font-black mt-1" id="stat-fav-game">...</p>
+                </div>
+                 <div class="stat-card col-span-2">
+                    <i class="fa-solid fa-trophy text-yellow-400 text-3xl mb-2"></i>
+                    <h3 class="text-gray-400 text-xs font-bold tracking-widest uppercase">Haftalık Sıralama</h3>
+                    <p class="text-white text-xl font-black mt-1" id="stat-weekly-rank">...</p>
+                </div>
+            </div>
+
+            <button id="modal-logout-btn" class="mt-8 w-full bg-red-600 hover:bg-red-500 text-white font-black py-3 rounded-xl transition shadow-[0_0_15px_rgba(220,38,38,0.4)]">
+                <i class="fa-solid fa-right-from-bracket mr-2"></i> ÇIKIŞ YAP
+            </button>
+        </div>
+    </div>
+
     <section id="about" class="relative z-40">
         <div class="container about-container">
             <div class="about-text">
@@ -285,7 +323,10 @@
         };
         soundEffects.click.volume = 0.4; 
 
+        let isMuted = localStorage.getItem('futbolHub_muted') === 'true';
+
         window.playSound = function(soundName) {
+            if (isMuted) return;
             if (soundEffects[soundName]) {
                 soundEffects[soundName].currentTime = 0;
                 soundEffects[soundName].play().catch(e => console.warn("Ses için etkileşim gerekiyor:", e));
@@ -294,11 +335,38 @@
 
         document.addEventListener('DOMContentLoaded', () => {
             const clickables = document.querySelectorAll('a, button, .game-card, .ball-card, #login-btn, #logout-btn, .close-btn');
+            
             clickables.forEach(el => {
+                if (el.id === 'mute-btn') return;
                 el.addEventListener('click', () => {
                     playSound('click');
                 });
             });
+
+            // Mute Button Logic
+            const muteBtn = document.getElementById('mute-btn');
+            const muteIcon = document.getElementById('mute-icon');
+
+            function updateMuteUI() {
+                if (isMuted) {
+                    muteIcon.className = 'fa-solid fa-volume-xmark';
+                    muteIcon.style.color = '#ff4444'; // Kırmızı (kapalı)
+                } else {
+                    muteIcon.className = 'fa-solid fa-volume-high';
+                    muteIcon.style.color = 'var(--text-gray)'; // Normal renk
+                }
+            }
+
+            if (muteBtn) {
+                updateMuteUI();
+                muteBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    isMuted = !isMuted;
+                    localStorage.setItem('futbolHub_muted', isMuted);
+                    updateMuteUI();
+                    if (!isMuted) playSound('click');
+                });
+            }
         });
     </script>
 
@@ -364,12 +432,30 @@
           }
       });
       
-      window.openShop = () => { document.getElementById('shop-modal').style.display = 'flex'; };
+      window.openShop = (e) => { 
+          if(e) e.stopPropagation(); // Event bubbling'i engelle, profil modalı açılmasın
+          document.getElementById('shop-modal').style.display = 'flex'; 
+      };
       window.closeShop = () => { document.getElementById('shop-modal').style.display = 'none'; };
 
+      window.openProfileModal = () => {
+          const userStr = localStorage.getItem('firebaseUser');
+          if (!userStr) return; // Giriş yapılmamışsa açma
+          const user = JSON.parse(userStr);
+          
+          document.getElementById('modal-user-name').innerText = user.name;
+          document.getElementById('modal-user-pic').src = user.photo;
+
+          document.getElementById('profile-modal').style.display = 'flex';
+      };
+
+      window.closeProfileModal = () => { document.getElementById('profile-modal').style.display = 'none'; };
+
       window.onclick = function(event) {
-          const modal = document.getElementById('shop-modal');
-          if (event.target == modal) { modal.style.display = "none"; }
+          const shopModal = document.getElementById('shop-modal');
+          const profileModal = document.getElementById('profile-modal');
+          if (event.target == shopModal) { shopModal.style.display = "none"; }
+          if (event.target == profileModal) { profileModal.style.display = "none"; }
       }
 
       window.buyPack = (type) => {
@@ -415,9 +501,12 @@
         signInWithPopup(auth, provider).catch((error) => console.error("Hata:", error));
       });
 
-      logoutBtn.addEventListener('click', () => {
-        signOut(auth).then(() => location.reload());
-      });
+      const modalLogoutBtn = document.getElementById('modal-logout-btn');
+      if(modalLogoutBtn){
+        modalLogoutBtn.addEventListener('click', () => {
+          signOut(auth).then(() => location.reload());
+        });
+      }
 
       onAuthStateChanged(auth, async (user) => {
         if (user) {
@@ -446,11 +535,41 @@
 
             let score = 0;
             if (!querySnapshot.empty) {
-                score = querySnapshot.docs[0].data().score;
+                const docData = querySnapshot.docs[0].data();
+                score = docData.score || 0;
+                
+                // Favori oyun verisini al (Eğer oyun tarafında kaydedilmişse)
+                let lastGame = docData.lastGame || "Henüz Yok";
+                let formattedGameName = lastGame;
+                if(lastGame === "footle") formattedGameName = "Footle";
+                else if(lastGame === "grid") formattedGameName = "Grid Savaşları";
+                else if(lastGame === "arena") formattedGameName = "Arena 1v1";
+                else if(lastGame === "tahmin-et") formattedGameName = "Gizli Efsane";
+                
+                document.getElementById('stat-fav-game').innerText = formattedGameName;
+                
+                // Kazanma Oranı (Win Rate) Hesaplama
+                const wins = docData.wins || 0;
+                const losses = docData.losses || 0;
+                const totalGames = wins + losses;
+                let winRate = 0;
+                
+                if (totalGames > 0) {
+                    winRate = Math.round((wins / totalGames) * 100);
+                }
+                
+                document.getElementById('stat-win-rate').innerText = winRate;
+                
+            } else {
+                 document.getElementById('stat-fav-game').innerText = "Henüz Yok";
+                 document.getElementById('stat-win-rate').innerText = "0";
             }
             
             scoreBadge.innerText = `${score} P`;
             scoreBadge.style.display = 'inline-block';
+            
+            // Modal içindeki puanı da eşitle
+            document.getElementById('modal-score').innerText = score;
 
         } catch (e) { console.error("Puan çekilemedi:", e); }
       }
@@ -502,13 +621,22 @@
             let rank = 1;
             const medals = ['gold', 'silver', 'bronze'];
 
+            const userStr = localStorage.getItem('firebaseUser');
+            let myEmail = null;
+            if (userStr) { myEmail = JSON.parse(userStr).email; }
+            let myRank = "İlk 5'te değilsin";
+
             querySnapshot.forEach((doc) => {
               const data = doc.data();
+              if(myEmail && data.email === myEmail) {
+                  myRank = `${rank}. Sıradasın`;
+              }
+
               if (rank <= 3) {
                 wrapper.innerHTML += `
                 <div class="podium-card ${medals[rank-1]}">
                     <div class="rank-badge">${rank}</div>
-                    <div class="avatar"><img src="${data.photo}" style="width:50px; border-radius:50%"></div>
+                    <div class="avatar flex justify-center"><img src="${data.photo}" style="width:50px; height:50px; border-radius:50%; object-fit:cover;"></div>
                     <h3>${data.name.split(' ')[0]}</h3>
                     <p class="score">${data.score} P</p>
                 </div>`;
@@ -522,6 +650,9 @@
               }
               rank++;
             });
+            
+            document.getElementById('stat-weekly-rank').innerText = myRank;
+
         } catch(e) { console.log("Tablo hatası:", e); }
       }
       
