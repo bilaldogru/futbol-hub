@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // --- YENİLENMİŞ KİLİT KONTROL SİSTEMİ ---
 function checkPlayedDifficulties() {
     // (Eğer hala test etmek istersen bu satırın başındaki // işaretlerini silersin)
-    localStorage.removeItem('playedBilmece'); 
+    // localStorage.removeItem('playedBilmece'); 
 
     const today = new Date().toLocaleDateString('tr-TR');
     const played = JSON.parse(localStorage.getItem('playedBilmece')) || {};
@@ -111,7 +111,7 @@ window.startGame = function(difficulty) {
         pool = allPlayers.filter(p => p.zorluk && p.zorluk.toLowerCase() === "orta");
     } else {
         baseScore = 250;
-        pool = allPlayers.filter(p => p.zorluk && p.zorluk.toLowerCase() === "zor");
+        pool = allPlayers.filter(p => p.zorluk === "zor");
     }
 
     if(pool.length < maxQuestions) {
