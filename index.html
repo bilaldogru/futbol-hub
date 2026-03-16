@@ -192,34 +192,22 @@
         </div>
     </section>
 
-    <div id="shop-modal" class="modal">
-        <div class="modal-content shop-content">
-            <span class="close-btn" onclick="closeShop()">&times;</span>
-            <h2 style="font-size: 2.2rem; margin-bottom: 5px; color: white;">PAKET AÇILIMI</h2>
-            <p style="color: #aaa; margin-bottom: 20px;">Şansına güveniyor musun?</p>
+    <div id="shop-modal" onclick="if(event.target === this) closeShop()" class="fixed inset-0 z-[9999] bg-black/95 backdrop-blur-md hidden flex-col items-center justify-center px-4 transition-opacity duration-300">
+        <div class="bg-gray-900 border-2 border-yellow-500 p-8 rounded-3xl max-w-sm w-full text-center shadow-[0_0_40px_rgba(234,179,8,0.2)] relative modal-animate">
+            <span class="absolute top-4 right-4 text-gray-500 hover:text-white cursor-pointer text-2xl transition" onclick="closeShop()">&times;</span>
             
-            <div class="ball-container">
-                <div class="ball-card" onclick="buyPack('bronze')">
-                    <div class="ball ball-bronze"></div>
-                    <h3>Bronz Top</h3>
-                    <p style="font-size: 0.8rem; color:#ccc;">%10 Yıldız Şansı</p>
-                    <div class="price-tag">500 P</div>
-                </div>
-
-                <div class="ball-card" onclick="buyPack('silver')">
-                    <div class="ball ball-silver"></div>
-                    <h3>Gümüş Top</h3>
-                    <p style="font-size: 0.8rem; color:#ccc;">%35 Yıldız Şansı</p>
-                    <div class="price-tag">1000 P</div>
-                </div>
-
-                <div class="ball-card" onclick="buyPack('gold')">
-                    <div class="ball ball-gold"></div>
-                    <h3>Altın Top</h3>
-                    <p style="font-size: 0.8rem; color:#ccc;">%80 Yıldız Şansı</p>
-                    <div class="price-tag">2500 P</div>
-                </div>
+            <div class="text-6xl mb-4 text-yellow-500 drop-shadow-[0_0_15px_rgba(234,179,8,0.5)]">
+                <i class="fa-solid fa-person-digging animate-bounce"></i>
             </div>
+            
+            <h2 class="text-3xl font-black mb-2 text-white tracking-tight">YAPIM AŞAMASINDA</h2>
+            <p class="text-gray-400 font-bold mb-6 text-sm">
+                Mağazamız şu an tadilatta. Çok yakında yeni paketler ve özelliklerle karşınızda olacağız!
+            </p>
+            
+            <button onclick="closeShop()" class="w-full bg-yellow-500 text-black font-black py-4 rounded-xl hover:bg-yellow-400 transition active:scale-95 shadow-lg shadow-yellow-500/20">
+                ANLADIM
+            </button>
         </div>
     </div>
 
@@ -503,11 +491,19 @@
       });
       
       window.openShop = (e) => { 
-          if(e) e.stopPropagation(); // Event bubbling'i engelle, profil modalı açılmasın
-          document.getElementById('shop-modal').style.display = 'flex'; 
+          if(e) e.stopPropagation(); 
+          
+          // Tailwind sınıflarını kullanarak görünür yap
+          const shopModal = document.getElementById('shop-modal');
+          shopModal.classList.remove('hidden'); 
+          shopModal.classList.add('flex'); 
       };
-      window.closeShop = () => { document.getElementById('shop-modal').style.display = 'none'; };
-
+      
+      window.closeShop = () => { 
+          const shopModal = document.getElementById('shop-modal');
+          shopModal.classList.add('hidden'); 
+          shopModal.classList.remove('flex'); 
+      };
       window.openProfileModal = () => {
           const userStr = localStorage.getItem('firebaseUser');
           if (!userStr) return; // Giriş yapılmamışsa açma
