@@ -19,22 +19,24 @@
     </a>
 
     <div id="difficulty-modal" onclick="if(event.target === this) window.location.href='../../index.html';" class="fixed inset-0 z-[120] flex items-center justify-center bg-black/95 backdrop-blur-lg px-4 transition-opacity duration-300">
-        <div class="bg-gray-900 border-2 border-[#39ff14] p-8 rounded-3xl max-w-md w-full text-center shadow-[0_0_30px_rgba(57,255,20,0.2)] modal-animate">
-            <h2 class="text-4xl font-black mb-2 tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-yellow-300">ZORLUK SEÇİMİ</h2>
-            <p class="text-gray-400 mb-8 text-sm font-bold tracking-wide">Her seviyeyi günde sadece 1 kez oynayabilirsin!</p>
+        <div class="bg-gray-900 border-2 border-[#39ff14] p-8 rounded-3xl max-w-md w-full text-center shadow-[0_0_50px_rgba(57,255,20,0.2)] modal-animate">
+            <h2 class="text-3xl font-black mb-2 tracking-tighter text-white">ZORLUK SEÇİMİ</h2>
+            <p class="text-gray-400 mb-6 text-sm font-bold tracking-wide">Her seviyeyi günde sadece 1 kez oynayabilirsin!</p>
             
-            <div class="flex flex-col gap-4">
-                <button id="btn-kolay" onclick="startGame('kolay')" class="w-full bg-green-900/30 border border-green-500 text-green-400 font-black py-4 rounded-xl transition-all hover:bg-green-500 hover:text-black shadow-lg shadow-green-500/10">
-                    <span class="text-xl block mb-1">KOLAY</span>
-                    <span class="text-xs font-bold opacity-80">1 SORU = 100 PUAN</span>
+            <div class="flex flex-col">
+                <button id="btn-kolay" onclick="startGame('kolay')" class="w-full bg-gray-800 border-2 border-[#39ff14] text-[#39ff14] font-black py-4 rounded-xl mb-3 transition-all hover:bg-[#39ff14]/10 active:scale-95 shadow-[0_0_10px_rgba(57,255,20,0.1)] hover:shadow-[0_0_20px_rgba(57,255,20,0.4)]">
+                    <div class="text-xl tracking-widest">KOLAY</div>
+                    <div class="text-xs opacity-80 mt-1 font-bold">1 SORU = 100 PUAN</div>
                 </button>
-                <button id="btn-orta" onclick="startGame('orta')" class="w-full bg-yellow-900/30 border border-yellow-500 text-yellow-400 font-black py-4 rounded-xl transition-all hover:bg-yellow-500 hover:text-black shadow-lg shadow-yellow-500/10">
-                    <span class="text-xl block mb-1">ORTA</span>
-                    <span class="text-xs font-bold opacity-80">1 SORU = 150 PUAN</span>
+                
+                <button id="btn-orta" onclick="startGame('orta')" class="w-full bg-gray-800 border-2 border-yellow-400 text-yellow-400 font-black py-4 rounded-xl mb-3 transition-all hover:bg-yellow-400/10 active:scale-95 shadow-[0_0_10px_rgba(250,204,21,0.1)] hover:shadow-[0_0_20px_rgba(250,204,21,0.4)]">
+                    <div class="text-xl tracking-widest">ORTA</div>
+                    <div class="text-xs opacity-80 mt-1 font-bold">1 SORU = 150 PUAN</div>
                 </button>
-                <button id="btn-zor" onclick="startGame('zor')" class="w-full bg-red-900/30 border border-red-500 text-red-400 font-black py-4 rounded-xl transition-all hover:bg-red-500 hover:text-black shadow-lg shadow-red-500/10">
-                    <span class="text-xl block mb-1">ZOR</span>
-                    <span class="text-xs font-bold opacity-80">1 SORU = 250 PUAN</span>
+                
+                <button id="btn-zor" onclick="startGame('zor')" class="w-full bg-gray-800 border-2 border-red-500 text-red-500 font-black py-4 rounded-xl transition-all hover:bg-red-500/10 active:scale-95 shadow-[0_0_10px_rgba(239,68,68,0.1)] hover:shadow-[0_0_20px_rgba(239,68,68,0.4)]">
+                    <div class="text-xl tracking-widest">ZOR</div>
+                    <div class="text-xs opacity-80 mt-1 font-bold">1 SORU = 250 PUAN</div>
                 </button>
             </div>
         </div>
