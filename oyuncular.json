@@ -51,7 +51,7 @@
     "pozisyon": "Stoper",
     "uyruk": "İngiltere",
     "yas": "25",
-    "zorluk": "zor"
+    "zorluk": "Orta"
   },
   {
     "isim": "Abdukodir Khusanov",
@@ -60,7 +60,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Özbekistan",
     "yas": "21",
-    "zorluk": "Zor"
+    "zorluk": "Orta"
   },
   {
     "isim": "John Stones",
@@ -69,7 +69,7 @@
     "pozisyon": "Stoper",
     "uyruk": "İngiltere",
     "yas": "31",
-    "zorluk": "Orta"
+    "zorluk": "Kolay"
   },
   {
     "isim": "Nathan Aké",
@@ -78,7 +78,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Hollanda",
     "yas": "31",
-    "zorluk": "kolay"
+    "zorluk": "Kolay"
   },
   {
     "isim": "Max Alleyne",
@@ -96,7 +96,7 @@
     "pozisyon": "Sol Bek",
     "uyruk": "Cezayir",
     "yas": "24",
-    "zorluk": "zor"
+    "zorluk": "Orta"
   },
   {
     "isim": "Nico O'Reilly",
@@ -105,7 +105,7 @@
     "pozisyon": "Sol Bek",
     "uyruk": "İngiltere",
     "yas": "20",
-    "zorluk": "Zor"
+    "zorluk": "Orta"
   },
   {
     "isim": "Matheus Nunes",
@@ -141,7 +141,7 @@
     "pozisyon": "Ön Libero",
     "uyruk": "İspanya",
     "yas": "24",
-    "zorluk": "orta"
+    "zorluk": ""
   },
   {
     "isim": "Tijjani Reijnders",
@@ -150,7 +150,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "Hollanda",
     "yas": "27",
-    "zorluk": "zor"
+    "zorluk": "Kolay"
   },
   {
     "isim": "Mateo Kovacic",
@@ -186,7 +186,7 @@
     "pozisyon": "On Numara",
     "uyruk": "Fransa",
     "yas": "22",
-    "zorluk": "Orta"
+    "zorluk": "Kolay"
   },
   {
     "isim": "Bernardo Silva",
@@ -276,7 +276,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Brezilya",
     "yas": "28",
-    "zorluk": "orta"
+    "zorluk": ""
   },
   {
     "isim": "Piero Hincapié",
@@ -285,7 +285,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Ekvador",
     "yas": "24",
-    "zorluk": "zor"
+    "zorluk": ""
   },
   {
     "isim": "Cristhian Mosquera",
@@ -294,7 +294,7 @@
     "pozisyon": "Stoper",
     "uyruk": "İspanya",
     "yas": "21",
-    "zorluk": "zor"
+    "zorluk": ""
   },
   {
     "isim": "Riccardo Calafiori",
@@ -303,7 +303,7 @@
     "pozisyon": "Sol Bek",
     "uyruk": "İtalya",
     "yas": "23",
-    "zorluk": "Kolay"
+    "zorluk": "Orta"
   },
   {
     "isim": "Myles Lewis-Skelly",
@@ -312,7 +312,7 @@
     "pozisyon": "Sol Bek",
     "uyruk": "İngiltere",
     "yas": "19",
-    "zorluk": "zor"
+    "zorluk": ""
   },
   {
     "isim": "Jurriën Timber",
@@ -321,7 +321,7 @@
     "pozisyon": "Sağ Bek",
     "uyruk": "Hollanda",
     "yas": "24",
-    "zorluk": "Kolay"
+    "zorluk": ""
   },
   {
     "isim": "Ben White",
@@ -330,7 +330,7 @@
     "pozisyon": "Sağ Bek",
     "uyruk": "İngiltere",
     "yas": "28",
-    "zorluk": "orta"
+    "zorluk": "Kolay"
   },
   {
     "isim": "Martín Zubimendi",
@@ -348,7 +348,7 @@
     "pozisyon": "Ön Libero",
     "uyruk": "Danimarka",
     "yas": "31",
-    "zorluk": "orta"
+    "zorluk": ""
   },
   {
     "isim": "Declan Rice",
@@ -429,7 +429,7 @@
     "pozisyon": "Sağ Kanat",
     "uyruk": "İngiltere",
     "yas": "16",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Viktor Gyökeres",
@@ -474,7 +474,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "Danimarka",
     "yas": "23",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Gabriel Slonina",
@@ -501,7 +501,7 @@
     "pozisyon": "Stoper",
     "uyruk": "İngiltere",
     "yas": "23",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Trevoh Chalobah",
@@ -537,7 +537,7 @@
     "pozisyon": "Stoper",
     "uyruk": "İngiltere",
     "yas": "28",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Benoît Badiashile",
@@ -564,7 +564,7 @@
     "pozisyon": "Sol Bek",
     "uyruk": "Hollanda",
     "yas": "19",
-    "zorluk": ""
+    "zorluk": "Zor"
   },
   {
     "isim": "Caleb Wiley",
@@ -582,7 +582,7 @@
     "pozisyon": "Sağ Bek",
     "uyruk": "İngiltere",
     "yas": "26",
-    "zorluk": "Orta"
+    "zorluk": "Kolay"
   },
   {
     "isim": "Malo Gusto",
@@ -609,7 +609,7 @@
     "pozisyon": "Ön Libero",
     "uyruk": "Ekvador",
     "yas": "24",
-    "zorluk": "Zor"
+    "zorluk": "Kolay"
   },
   {
     "isim": "Roméo Lavia",
@@ -690,7 +690,7 @@
     "pozisyon": "Sağ Kanat",
     "uyruk": "Brezilya",
     "yas": "18",
-    "zorluk": "Zor"
+    "zorluk": "Orta"
   },
   {
     "isim": "Pedro Neto",
@@ -717,7 +717,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "İngiltere",
     "yas": "23",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Marc Guiu",
@@ -726,7 +726,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "İspanya",
     "yas": "20",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Alisson",
@@ -744,7 +744,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "Gürcistan",
     "yas": "25",
-    "zorluk": "orta"
+    "zorluk": "Kolay"
   },
   {
     "isim": "Caoimhin Kelleher",
@@ -753,7 +753,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "İrlanda",
     "yas": "27",
-    "zorluk": "zor"
+    "zorluk": ""
   },
   {
     "isim": "Vítězslav Jaroš",
@@ -762,7 +762,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "Çekya",
     "yas": "24",
-    "zorluk": "zor"
+    "zorluk": ""
   },
   {
     "isim": "Virgil van Dijk",
@@ -789,7 +789,7 @@
     "pozisyon": "Stoper",
     "uyruk": "İngiltere",
     "yas": "22",
-    "zorluk": "zor"
+    "zorluk": ""
   },
   {
     "isim": "Joe Gomez",
@@ -798,7 +798,7 @@
     "pozisyon": "Stoper",
     "uyruk": "İngiltere",
     "yas": "28",
-    "zorluk": "orta"
+    "zorluk": "Kolay"
   },
   {
     "isim": "Andrew Robertson",
@@ -816,15 +816,6 @@
     "pozisyon": "Sol Bek",
     "uyruk": "Yunanistan",
     "yas": "29",
-    "zorluk": "orta"
-  },
-  {
-    "isim": "Trent Alexander-Arnold",
-    "takim": "Liverpool",
-    "lig": "Premier League",
-    "pozisyon": "Sağ Bek",
-    "uyruk": "İngiltere",
-    "yas": "27",
     "zorluk": "Kolay"
   },
   {
@@ -834,7 +825,7 @@
     "pozisyon": "Sağ Bek",
     "uyruk": "Kuzey İrlanda",
     "yas": "22",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Alexis Mac Allister",
@@ -879,7 +870,7 @@
     "pozisyon": "Ön Libero",
     "uyruk": "Japonya",
     "yas": "32",
-    "zorluk": "orta"
+    "zorluk": "Orta"
   },
   {
     "isim": "Harvey Elliott",
@@ -909,15 +900,6 @@
     "zorluk": "Kolay"
   },
   {
-    "isim": "Luis Díaz",
-    "takim": "Liverpool",
-    "lig": "Premier League",
-    "pozisyon": "Sol Kanat",
-    "uyruk": "Kolombiya",
-    "yas": "29",
-    "zorluk": "Kolay"
-  },
-  {
     "isim": "Cody Gakpo",
     "takim": "Liverpool",
     "lig": "Premier League",
@@ -936,13 +918,22 @@
     "zorluk": "Kolay"
   },
   {
+    "isim": "Diogo Jota",
+    "takim": "Liverpool",
+    "lig": "Premier League",
+    "pozisyon": "Santrafor",
+    "uyruk": "Portekiz",
+    "yas": "29",
+    "zorluk": "Kolay"
+  },
+  {
     "isim": "Guglielmo Vicario",
     "takim": "Tottenham Hotspur",
     "lig": "Premier League",
     "pozisyon": "Kaleci",
     "uyruk": "İtalya",
     "yas": "29",
-    "zorluk": "zor"
+    "zorluk": "Orta"
   },
   {
     "isim": "Fraser Forster",
@@ -951,7 +942,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "İngiltere",
     "yas": "37",
-    "zorluk": "zor"
+    "zorluk": "Orta"
   },
   {
     "isim": "Cristian Romero",
@@ -969,7 +960,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Hollanda",
     "yas": "24",
-    "zorluk": "Orta"
+    "zorluk": "Kolay"
   },
   {
     "isim": "Radu Drăgușin",
@@ -996,7 +987,7 @@
     "pozisyon": "Sol Bek",
     "uyruk": "İtalya",
     "yas": "23",
-    "zorluk": ""
+    "zorluk": "Orta"
   },
   {
     "isim": "Pedro Porro",
@@ -1014,7 +1005,7 @@
     "pozisyon": "Sağ Bek",
     "uyruk": "İngiltere",
     "yas": "25",
-    "zorluk": "zor"
+    "zorluk": ""
   },
   {
     "isim": "Archie Gray",
@@ -1032,7 +1023,7 @@
     "pozisyon": "Ön Libero",
     "uyruk": "Mali",
     "yas": "29",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Rodrigo Bentancur",
@@ -1050,7 +1041,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "Senegal",
     "yas": "23",
-    "zorluk": "zor"
+    "zorluk": "Orta"
   },
   {
     "isim": "James Maddison",
@@ -1086,16 +1077,7 @@
     "pozisyon": "Sağ Kanat",
     "uyruk": "Galler",
     "yas": "24",
-    "zorluk": "zor"
-  },
-  {
-    "isim": "Heung-min Son",
-    "takim": "Tottenham Hotspur",
-    "lig": "Premier League",
-    "pozisyon": "Sol Kanat",
-    "uyruk": "Güney Kore",
-    "yas": "33",
-    "zorluk": "Kolay"
+    "zorluk": "Orta"
   },
   {
     "isim": "Timo Werner",
@@ -1149,7 +1131,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "Türkiye",
     "yas": "27",
-    "zorluk": "kolay"
+    "zorluk": "Kolay"
   },
   {
     "isim": "Tom Heaton",
@@ -1158,7 +1140,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "İngiltere",
     "yas": "39",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Leny Yoro",
@@ -1176,7 +1158,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Hollanda",
     "yas": "26",
-    "zorluk": "Orta"
+    "zorluk": "Kolay"
   },
   {
     "isim": "Lisandro Martínez",
@@ -1185,7 +1167,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Arjantin",
     "yas": "28",
-    "zorluk": "Orta"
+    "zorluk": "Kolay"
   },
   {
     "isim": "Harry Maguire",
@@ -1194,7 +1176,7 @@
     "pozisyon": "Stoper",
     "uyruk": "İngiltere",
     "yas": "32",
-    "zorluk": "kolay"
+    "zorluk": "Kolay"
   },
   {
     "isim": "Victor Lindelöf",
@@ -1230,7 +1212,7 @@
     "pozisyon": "Sol Bek",
     "uyruk": "Hollanda",
     "yas": "26",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Diogo Dalot",
@@ -1323,15 +1305,6 @@
     "zorluk": "Orta"
   },
   {
-    "isim": "Antony",
-    "takim": "Manchester United",
-    "lig": "Premier League",
-    "pozisyon": "Sağ Kanat",
-    "uyruk": "Brezilya",
-    "yas": "25",
-    "zorluk": "Orta"
-  },
-  {
     "isim": "Amad Diallo",
     "takim": "Manchester United",
     "lig": "Premier League",
@@ -1374,7 +1347,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "Avustralya",
     "yas": "25",
-    "zorluk": "zor"
+    "zorluk": ""
   },
   {
     "isim": "Robin Olsen",
@@ -1383,7 +1356,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "İsveç",
     "yas": "36",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Pau Torres",
@@ -1392,7 +1365,7 @@
     "pozisyon": "Stoper",
     "uyruk": "İspanya",
     "yas": "29",
-    "zorluk": "zor"
+    "zorluk": "Orta"
   },
   {
     "isim": "Ezri Konsa",
@@ -1401,7 +1374,7 @@
     "pozisyon": "Stoper",
     "uyruk": "İngiltere",
     "yas": "28",
-    "zorluk": ""
+    "zorluk": "Orta"
   },
   {
     "isim": "Diego Carlos",
@@ -1410,7 +1383,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Brezilya",
     "yas": "32",
-    "zorluk": "zor"
+    "zorluk": "Orta"
   },
   {
     "isim": "Tyrone Mings",
@@ -1437,7 +1410,7 @@
     "pozisyon": "Sol Bek",
     "uyruk": "Fransa",
     "yas": "32",
-    "zorluk": ""
+    "zorluk": "Orta"
   },
   {
     "isim": "Matty Cash",
@@ -1446,7 +1419,7 @@
     "pozisyon": "Sağ Bek",
     "uyruk": "Polonya",
     "yas": "28",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Kosta Nedeljkovic",
@@ -1464,7 +1437,7 @@
     "pozisyon": "Ön Libero",
     "uyruk": "Belçika",
     "yas": "24",
-    "zorluk": "zor"
+    "zorluk": ""
   },
   {
     "isim": "Boubacar Kamara",
@@ -1473,7 +1446,7 @@
     "pozisyon": "Ön Libero",
     "uyruk": "Fransa",
     "yas": "26",
-    "zorluk": "zor"
+    "zorluk": ""
   },
   {
     "isim": "Enzo Barrenechea",
@@ -1491,7 +1464,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "İskoçya",
     "yas": "31",
-    "zorluk": "zor"
+    "zorluk": "Orta"
   },
   {
     "isim": "Youri Tielemans",
@@ -1509,7 +1482,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "İngiltere",
     "yas": "32",
-    "zorluk": "zor"
+    "zorluk": ""
   },
   {
     "isim": "Jacob Ramsey",
@@ -1518,7 +1491,7 @@
     "pozisyon": "Sol Kanat",
     "uyruk": "İngiltere",
     "yas": "24",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Morgan Rogers",
@@ -1527,7 +1500,7 @@
     "pozisyon": "Sol Kanat",
     "uyruk": "İngiltere",
     "yas": "23",
-    "zorluk": "zor"
+    "zorluk": ""
   },
   {
     "isim": "Leon Bailey",
@@ -1536,7 +1509,7 @@
     "pozisyon": "Sağ Kanat",
     "uyruk": "Jamaika",
     "yas": "28",
-    "zorluk": ""
+    "zorluk": "Orta"
   },
   {
     "isim": "Jaden Philogene",
@@ -1545,7 +1518,7 @@
     "pozisyon": "Sağ Kanat",
     "uyruk": "İngiltere",
     "yas": "24",
-    "zorluk": "zor"
+    "zorluk": ""
   },
   {
     "isim": "Emiliano Buendía",
@@ -1563,7 +1536,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "İngiltere",
     "yas": "30",
-    "zorluk": "zor"
+    "zorluk": "Kolay"
   },
   {
     "isim": "Bart Verbruggen",
@@ -1572,7 +1545,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "Hollanda",
     "yas": "23",
-    "zorluk": "zor"
+    "zorluk": ""
   },
   {
     "isim": "Jason Steele",
@@ -1581,7 +1554,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "İngiltere",
     "yas": "35",
-    "zorluk": "zor"
+    "zorluk": ""
   },
   {
     "isim": "Lewis Dunk",
@@ -1590,7 +1563,7 @@
     "pozisyon": "Stoper",
     "uyruk": "İngiltere",
     "yas": "34",
-    "zorluk": "zor"
+    "zorluk": ""
   },
   {
     "isim": "Jan Paul van Hecke",
@@ -1608,7 +1581,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Brezilya",
     "yas": "27",
-    "zorluk": "zor"
+    "zorluk": ""
   },
   {
     "isim": "Adam Webster",
@@ -1617,7 +1590,7 @@
     "pozisyon": "Stoper",
     "uyruk": "İngiltere",
     "yas": "31",
-    "zorluk": "zor"
+    "zorluk": ""
   },
   {
     "isim": "Pervis Estupiñán",
@@ -1626,7 +1599,7 @@
     "pozisyon": "Sol Bek",
     "uyruk": "Ekvador",
     "yas": "28",
-    "zorluk": "zor"
+    "zorluk": "Orta"
   },
   {
     "isim": "Ferdi Kadıoğlu",
@@ -1635,7 +1608,7 @@
     "pozisyon": "Sol Bek",
     "uyruk": "Türkiye",
     "yas": "26",
-    "zorluk": "kolay"
+    "zorluk": "Kolay"
   },
   {
     "isim": "Joël Veltman",
@@ -1644,7 +1617,7 @@
     "pozisyon": "Sağ Bek",
     "uyruk": "Hollanda",
     "yas": "34",
-    "zorluk": "zor"
+    "zorluk": ""
   },
   {
     "isim": "Tariq Lamptey",
@@ -1653,7 +1626,7 @@
     "pozisyon": "Sağ Bek",
     "uyruk": "Gana",
     "yas": "25",
-    "zorluk": "zor"
+    "zorluk": ""
   },
   {
     "isim": "Mats Wieffer",
@@ -1671,7 +1644,7 @@
     "pozisyon": "Ön Libero",
     "uyruk": "Kamerun",
     "yas": "22",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Yasin Ayari",
@@ -1689,7 +1662,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "Danimarka",
     "yas": "25",
-    "zorluk": ""
+    "zorluk": "Orta"
   },
   {
     "isim": "Jack Hinshelwood",
@@ -1707,7 +1680,7 @@
     "pozisyon": "Sol Kanat",
     "uyruk": "Japonya",
     "yas": "28",
-    "zorluk": ""
+    "zorluk": "Orta"
   },
   {
     "isim": "Simon Adingra",
@@ -1752,7 +1725,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "Fransa",
     "yas": "23",
-    "zorluk": ""
+    "zorluk": "Orta"
   },
   {
     "isim": "Evan Ferguson",
@@ -1779,7 +1752,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "Paraguay",
     "yas": "22",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Mark Travers",
@@ -1788,7 +1761,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "İrlanda",
     "yas": "26",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Will Dennis",
@@ -1797,7 +1770,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "İngiltere",
     "yas": "25",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Illia Zabarnyi",
@@ -1959,7 +1932,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "Türkiye",
     "yas": "28",
-    "zorluk": "Zor"
+    "zorluk": "Orta"
   },
   {
     "isim": "Alphonse Areola",
@@ -1968,7 +1941,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "Fransa",
     "yas": "33",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Lukasz Fabianski",
@@ -1977,7 +1950,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "Polonya",
     "yas": "40",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Max Kilman",
@@ -1986,7 +1959,7 @@
     "pozisyon": "Stoper",
     "uyruk": "İngiltere",
     "yas": "28",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Jean-Clair Todibo",
@@ -1995,7 +1968,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Fransa",
     "yas": "26",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Konstantinos Mavropanos",
@@ -2004,7 +1977,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Yunanistan",
     "yas": "28",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Emerson",
@@ -2013,7 +1986,7 @@
     "pozisyon": "Sol Bek",
     "uyruk": "İtalya",
     "yas": "31",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Aaron Wan-Bissaka",
@@ -2025,22 +1998,13 @@
     "zorluk": "Orta"
   },
   {
-    "isim": "Edson Álvarez",
-    "takim": "West Ham United",
-    "lig": "Premier League",
-    "pozisyon": "Ön Libero",
-    "uyruk": "Meksika",
-    "yas": "28",
-    "zorluk": "Orta"
-  },
-  {
     "isim": "Guido Rodríguez",
     "takim": "West Ham United",
     "lig": "Premier League",
     "pozisyon": "Ön Libero",
     "uyruk": "Arjantin",
     "yas": "31",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Tomas Soucek",
@@ -2058,7 +2022,7 @@
     "pozisyon": "On Numara",
     "uyruk": "Brezilya",
     "yas": "28",
-    "zorluk": "Orta"
+    "zorluk": "Kolay"
   },
   {
     "isim": "Mohammed Kudus",
@@ -2085,7 +2049,7 @@
     "pozisyon": "Sağ Kanat",
     "uyruk": "Brezilya",
     "yas": "20",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Crysencio Summerville",
@@ -2094,7 +2058,7 @@
     "pozisyon": "Sol Kanat",
     "uyruk": "Hollanda",
     "yas": "24",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Niclas Füllkrug",
@@ -2103,7 +2067,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "Almanya",
     "yas": "33",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Michail Antonio",
@@ -2112,7 +2076,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "Jamaika",
     "yas": "35",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Anthony Patterson",
@@ -2121,7 +2085,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "İngiltere",
     "yas": "25",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Dan Ballard",
@@ -2130,7 +2094,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Kuzey İrlanda",
     "yas": "26",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Luke O'Nien",
@@ -2139,7 +2103,7 @@
     "pozisyon": "Stoper",
     "uyruk": "İngiltere",
     "yas": "31",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Dennis Cirkin",
@@ -2166,7 +2130,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "İngiltere",
     "yas": "24",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Chris Rigg",
@@ -2193,7 +2157,7 @@
     "pozisyon": "Sağ Kanat",
     "uyruk": "İngiltere",
     "yas": "29",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Romaine Mundle",
@@ -2220,7 +2184,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "Fransa",
     "yas": "25",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Illan Meslier",
@@ -2229,7 +2193,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "Fransa",
     "yas": "26",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Pascal Struijk",
@@ -2238,7 +2202,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Hollanda",
     "yas": "26",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Joe Rodon",
@@ -2247,7 +2211,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Galler",
     "yas": "28",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Ethan Ampadu",
@@ -2256,7 +2220,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Galler",
     "yas": "25",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Junior Firpo",
@@ -2265,7 +2229,7 @@
     "pozisyon": "Sol Bek",
     "uyruk": "Dominik Cumhuriyeti",
     "yas": "29",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Jayden Bogle",
@@ -2274,7 +2238,7 @@
     "pozisyon": "Sağ Bek",
     "uyruk": "İngiltere",
     "yas": "25",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Ilia Gruev",
@@ -2283,7 +2247,7 @@
     "pozisyon": "Ön Libero",
     "uyruk": "Bulgaristan",
     "yas": "25",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Ao Tanaka",
@@ -2292,7 +2256,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "Japonya",
     "yas": "27",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Wilfried Gnonto",
@@ -2310,7 +2274,7 @@
     "pozisyon": "Sağ Kanat",
     "uyruk": "Galler",
     "yas": "28",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Largie Ramazani",
@@ -2319,7 +2283,7 @@
     "pozisyon": "Sol Kanat",
     "uyruk": "Belçika",
     "yas": "25",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Manor Solomon",
@@ -2328,7 +2292,7 @@
     "pozisyon": "Sol Kanat",
     "uyruk": "İsrail",
     "yas": "26",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Joël Piroe",
@@ -2337,7 +2301,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "Hollanda",
     "yas": "26",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Mateo Joseph",
@@ -2355,7 +2319,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "Portekiz",
     "yas": "33",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Sam Johnstone",
@@ -2364,7 +2328,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "İngiltere",
     "yas": "32",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Daniel Bentley",
@@ -2373,7 +2337,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "İngiltere",
     "yas": "32",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Santiago Bueno",
@@ -2382,7 +2346,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Uruguay",
     "yas": "27",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Toti Gomes",
@@ -2391,7 +2355,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Portekiz",
     "yas": "27",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Yerson Mosquera",
@@ -2400,7 +2364,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Kolombiya",
     "yas": "24",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Bastien Meupiyou",
@@ -2410,33 +2374,6 @@
     "uyruk": "Fransa",
     "yas": "19",
     "zorluk": ""
-  },
-  {
-    "isim": "Craig Dawson",
-    "takim": "Wolverhampton Wanderers",
-    "lig": "Premier League",
-    "pozisyon": "Stoper",
-    "uyruk": "İngiltere",
-    "yas": "35",
-    "zorluk": "Zor"
-  },
-  {
-    "isim": "Rayan Aït-Nouri",
-    "takim": "Wolverhampton Wanderers",
-    "lig": "Premier League",
-    "pozisyon": "Sol Bek",
-    "uyruk": "Cezayir",
-    "yas": "24",
-    "zorluk": "Orta"
-  },
-  {
-    "isim": "Nélson Semedo",
-    "takim": "Wolverhampton Wanderers",
-    "lig": "Premier League",
-    "pozisyon": "Sağ Bek",
-    "uyruk": "Portekiz",
-    "yas": "32",
-    "zorluk": "Zor"
   },
   {
     "isim": "Pedro Lima",
@@ -2454,7 +2391,7 @@
     "pozisyon": "Sağ Bek",
     "uyruk": "İrlanda",
     "yas": "34",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "André",
@@ -2463,16 +2400,7 @@
     "pozisyon": "Ön Libero",
     "uyruk": "Brezilya",
     "yas": "24",
-    "zorluk": "Zor"
-  },
-  {
-    "isim": "Mario Lemina",
-    "takim": "Wolverhampton Wanderers",
-    "lig": "Premier League",
-    "pozisyon": "Ön Libero",
-    "uyruk": "Gabon",
-    "yas": "32",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "João Gomes",
@@ -2481,7 +2409,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "Brezilya",
     "yas": "25",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Boubacar Traoré",
@@ -2490,7 +2418,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "Mali",
     "yas": "24",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Tommy Doyle",
@@ -2499,7 +2427,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "İngiltere",
     "yas": "24",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Matheus Cunha",
@@ -2508,7 +2436,7 @@
     "pozisyon": "On Numara",
     "uyruk": "Brezilya",
     "yas": "26",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Jean-Ricner Bellegarde",
@@ -2517,7 +2445,7 @@
     "pozisyon": "On Numara",
     "uyruk": "Fransa",
     "yas": "27",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Rodrigo Gomes",
@@ -2544,7 +2472,7 @@
     "pozisyon": "Sol Kanat",
     "uyruk": "Güney Kore",
     "yas": "30",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Pablo Sarabia",
@@ -2553,7 +2481,7 @@
     "pozisyon": "Sağ Kanat",
     "uyruk": "İspanya",
     "yas": "33",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Jørgen Strand Larsen",
@@ -2562,7 +2490,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "Norveç",
     "yas": "26",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Gonçalo Guedes",
@@ -2571,7 +2499,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "Portekiz",
     "yas": "29",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Sasa Kalajdzic",
@@ -2580,7 +2508,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "Avusturya",
     "yas": "28",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Vaclav Hladky",
@@ -2589,7 +2517,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "Çekya",
     "yas": "35",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Maxime Estève",
@@ -2607,7 +2535,7 @@
     "pozisyon": "Stoper",
     "uyruk": "İngiltere",
     "yas": "29",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Jordan Beyer",
@@ -2616,7 +2544,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Almanya",
     "yas": "25",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Hannes Delcroix",
@@ -2625,7 +2553,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Belçika",
     "yas": "27",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Lucas Pires",
@@ -2634,7 +2562,7 @@
     "pozisyon": "Sol Bek",
     "uyruk": "Brezilya",
     "yas": "24",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Connor Roberts",
@@ -2643,7 +2571,7 @@
     "pozisyon": "Sağ Bek",
     "uyruk": "Galler",
     "yas": "30",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Shurandy Sambo",
@@ -2652,7 +2580,7 @@
     "pozisyon": "Sağ Bek",
     "uyruk": "Hollanda",
     "yas": "24",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Josh Cullen",
@@ -2661,7 +2589,7 @@
     "pozisyon": "Ön Libero",
     "uyruk": "İrlanda",
     "yas": "29",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Josh Brownhill",
@@ -2670,7 +2598,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "İngiltere",
     "yas": "30",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Hannibal",
@@ -2688,7 +2616,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "Fransa",
     "yas": "24",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Zian Flemming",
@@ -2697,7 +2625,7 @@
     "pozisyon": "On Numara",
     "uyruk": "Hollanda",
     "yas": "27",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Aaron Ramsey",
@@ -2706,7 +2634,7 @@
     "pozisyon": "On Numara",
     "uyruk": "İngiltere",
     "yas": "23",
-    "zorluk": ""
+    "zorluk": "Orta"
   },
   {
     "isim": "Luca Koleosho",
@@ -2724,7 +2652,7 @@
     "pozisyon": "Sol Kanat",
     "uyruk": "İngiltere",
     "yas": "26",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Mike Trésor",
@@ -2733,7 +2661,7 @@
     "pozisyon": "Sol Kanat",
     "uyruk": "Belçika",
     "yas": "26",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Nathan Redmond",
@@ -2742,7 +2670,7 @@
     "pozisyon": "Sol Kanat",
     "uyruk": "İngiltere",
     "yas": "31",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Manuel Benson",
@@ -2751,7 +2679,7 @@
     "pozisyon": "Sağ Kanat",
     "uyruk": "Belçika",
     "yas": "28",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Lyle Foster",
@@ -2760,7 +2688,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "Güney Afrika",
     "yas": "25",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Jay Rodríguez",
@@ -2769,7 +2697,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "İngiltere",
     "yas": "36",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Mark Flekken",
@@ -2778,7 +2706,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "Hollanda",
     "yas": "32",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Håkon Valdimarsson",
@@ -2787,7 +2715,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "İzlanda",
     "yas": "24",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Nathan Collins",
@@ -2796,7 +2724,7 @@
     "pozisyon": "Stoper",
     "uyruk": "İrlanda",
     "yas": "24",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Sepp van den Berg",
@@ -2805,7 +2733,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Hollanda",
     "yas": "24",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Ethan Pinnock",
@@ -2814,7 +2742,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Jamaika",
     "yas": "32",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Kristoffer Ajer",
@@ -2823,7 +2751,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Norveç",
     "yas": "27",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Ben Mee",
@@ -2832,7 +2760,7 @@
     "pozisyon": "Stoper",
     "uyruk": "İngiltere",
     "yas": "36",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Rico Henry",
@@ -2841,7 +2769,7 @@
     "pozisyon": "Sol Bek",
     "uyruk": "İngiltere",
     "yas": "28",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Jayden Meghoma",
@@ -2868,7 +2796,7 @@
     "pozisyon": "Sağ Bek",
     "uyruk": "Danimarka",
     "yas": "26",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Vitaly Janelt",
@@ -2877,7 +2805,7 @@
     "pozisyon": "Ön Libero",
     "uyruk": "Almanya",
     "yas": "27",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Mathias Jensen",
@@ -2886,7 +2814,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "Danimarka",
     "yas": "30",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Yehor Yarmoliuk",
@@ -2913,7 +2841,7 @@
     "pozisyon": "On Numara",
     "uyruk": "İngiltere",
     "yas": "27",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Kevin Schade",
@@ -2922,7 +2850,7 @@
     "pozisyon": "Sol Kanat",
     "uyruk": "Almanya",
     "yas": "24",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Keane Lewis-Potter",
@@ -2931,16 +2859,7 @@
     "pozisyon": "Sol Kanat",
     "uyruk": "İngiltere",
     "yas": "25",
-    "zorluk": "Zor"
-  },
-  {
-    "isim": "Bryan Mbeumo",
-    "takim": "Brentford",
-    "lig": "Premier League",
-    "pozisyon": "Sağ Kanat",
-    "uyruk": "Kamerun",
-    "yas": "26",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Yoane Wissa",
@@ -2949,7 +2868,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "Kongo DC",
     "yas": "29",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Gustavo Nunes",
@@ -2967,7 +2886,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "Brezilya",
     "yas": "25",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Jordan Pickford",
@@ -2976,7 +2895,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "İngiltere",
     "yas": "32",
-    "zorluk": "Zor"
+    "zorluk": "Orta"
   },
   {
     "isim": "João Virgínia",
@@ -2985,7 +2904,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "Portekiz",
     "yas": "26",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Jarrad Branthwaite",
@@ -3003,7 +2922,7 @@
     "pozisyon": "Stoper",
     "uyruk": "İngiltere",
     "yas": "33",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Jake O'Brien",
@@ -3012,7 +2931,7 @@
     "pozisyon": "Stoper",
     "uyruk": "İrlanda",
     "yas": "24",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Michael Keane",
@@ -3021,7 +2940,7 @@
     "pozisyon": "Stoper",
     "uyruk": "İngiltere",
     "yas": "33",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Vitaliy Mykolenko",
@@ -3030,7 +2949,7 @@
     "pozisyon": "Sol Bek",
     "uyruk": "Ukrayna",
     "yas": "26",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Nathan Patterson",
@@ -3039,7 +2958,7 @@
     "pozisyon": "Sağ Bek",
     "uyruk": "İskoçya",
     "yas": "24",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Seamus Coleman",
@@ -3048,7 +2967,7 @@
     "pozisyon": "Sağ Bek",
     "uyruk": "İrlanda",
     "yas": "37",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "James Garner",
@@ -3057,7 +2976,7 @@
     "pozisyon": "Ön Libero",
     "uyruk": "İngiltere",
     "yas": "24",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Tim Iroegbunam",
@@ -3075,7 +2994,7 @@
     "pozisyon": "Ön Libero",
     "uyruk": "Senegal",
     "yas": "36",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Abdoulaye Doucouré",
@@ -3084,7 +3003,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "Mali",
     "yas": "33",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Iliman Ndiaye",
@@ -3093,7 +3012,7 @@
     "pozisyon": "On Numara",
     "uyruk": "Senegal",
     "yas": "26",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Jack Grealish",
@@ -3102,7 +3021,7 @@
     "pozisyon": "Sol Kanat",
     "uyruk": "İngiltere",
     "yas": "30",
-    "zorluk": "Zor"
+    "zorluk": "Orta"
   },
   {
     "isim": "Dwight McNeil",
@@ -3111,7 +3030,7 @@
     "pozisyon": "Sol Kanat",
     "uyruk": "İngiltere",
     "yas": "26",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Jesper Lindstrøm",
@@ -3120,7 +3039,7 @@
     "pozisyon": "On Numara",
     "uyruk": "Danimarka",
     "yas": "26",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Jack Harrison",
@@ -3129,7 +3048,7 @@
     "pozisyon": "Sağ Kanat",
     "uyruk": "İngiltere",
     "yas": "29",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Dominic Calvert-Lewin",
@@ -3147,7 +3066,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "Portekiz",
     "yas": "28",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Youssef Chermiti",
@@ -3165,7 +3084,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "Almanya",
     "yas": "34",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Steven Benda",
@@ -3174,7 +3093,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "Almanya",
     "yas": "27",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Joachim Andersen",
@@ -3183,7 +3102,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Danimarka",
     "yas": "29",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Calvin Bassey",
@@ -3192,7 +3111,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Nijerya",
     "yas": "26",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Issa Diop",
@@ -3201,7 +3120,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Fransa",
     "yas": "29",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Jorge Cuenca",
@@ -3210,7 +3129,7 @@
     "pozisyon": "Stoper",
     "uyruk": "İspanya",
     "yas": "26",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Antonee Robinson",
@@ -3219,7 +3138,7 @@
     "pozisyon": "Sol Bek",
     "uyruk": "Amerika Birleşik Devletleri",
     "yas": "28",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Ryan Sessegnon",
@@ -3228,7 +3147,7 @@
     "pozisyon": "Sol Bek",
     "uyruk": "İngiltere",
     "yas": "25",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Timothy Castagne",
@@ -3237,7 +3156,7 @@
     "pozisyon": "Sağ Bek",
     "uyruk": "Belçika",
     "yas": "30",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Kenny Tete",
@@ -3246,7 +3165,7 @@
     "pozisyon": "Sağ Bek",
     "uyruk": "Hollanda",
     "yas": "30",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Sander Berge",
@@ -3255,7 +3174,7 @@
     "pozisyon": "Ön Libero",
     "uyruk": "Norveç",
     "yas": "28",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Sasa Lukic",
@@ -3264,7 +3183,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "Sırbistan",
     "yas": "29",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Harrison Reed",
@@ -3273,7 +3192,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "İngiltere",
     "yas": "31",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Tom Cairney",
@@ -3282,7 +3201,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "İskoçya",
     "yas": "34",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Emile Smith Rowe",
@@ -3291,7 +3210,7 @@
     "pozisyon": "On Numara",
     "uyruk": "İngiltere",
     "yas": "25",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Andreas Pereira",
@@ -3300,7 +3219,7 @@
     "pozisyon": "On Numara",
     "uyruk": "Brezilya",
     "yas": "30",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Alex Iwobi",
@@ -3309,7 +3228,7 @@
     "pozisyon": "Sol Kanat",
     "uyruk": "Nijerya",
     "yas": "29",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Harry Wilson",
@@ -3318,7 +3237,7 @@
     "pozisyon": "Sağ Kanat",
     "uyruk": "Galler",
     "yas": "28",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Adama Traoré",
@@ -3327,7 +3246,7 @@
     "pozisyon": "Sağ Kanat",
     "uyruk": "İspanya",
     "yas": "30",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Rodrigo Muniz",
@@ -3336,7 +3255,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "Brezilya",
     "yas": "24",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Raúl Jiménez",
@@ -3345,7 +3264,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "Meksika",
     "yas": "34",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Nick Pope",
@@ -3372,7 +3291,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "Yunanistan",
     "yas": "31",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Sven Botman",
@@ -3381,16 +3300,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Hollanda",
     "yas": "26",
-    "zorluk": "Orta"
-  },
-  {
-    "isim": "Marc Guéhi",
-    "takim": "Newcastle United",
-    "lig": "Premier League",
-    "pozisyon": "Stoper",
-    "uyruk": "İngiltere",
-    "yas": "25",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Fabian Schär",
@@ -3417,7 +3327,7 @@
     "pozisyon": "Stoper",
     "uyruk": "İngiltere",
     "yas": "33",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Lewis Hall",
@@ -3426,7 +3336,7 @@
     "pozisyon": "Sol Bek",
     "uyruk": "İngiltere",
     "yas": "21",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Tino Livramento",
@@ -3435,7 +3345,7 @@
     "pozisyon": "Sağ Bek",
     "uyruk": "İngiltere",
     "yas": "23",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Kieran Trippier",
@@ -3480,7 +3390,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "İngiltere",
     "yas": "26",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Sean Longstaff",
@@ -3489,7 +3399,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "İngiltere",
     "yas": "28",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Lewis Miley",
@@ -3498,7 +3408,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "İngiltere",
     "yas": "19",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Anthony Gordon",
@@ -3534,7 +3444,7 @@
     "pozisyon": "Sağ Kanat",
     "uyruk": "İngiltere",
     "yas": "31",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Alexander Isak",
@@ -3561,7 +3471,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "Danimarka",
     "yas": "22",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "John Victor",
@@ -3570,7 +3480,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "Brezilya",
     "yas": "30",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Matz Sels",
@@ -3579,7 +3489,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "Belçika",
     "yas": "34",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Stefan Ortega",
@@ -3588,7 +3498,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "Almanya",
     "yas": "33",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Angus Gunn",
@@ -3597,7 +3507,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "İskoçya",
     "yas": "30",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Murillo",
@@ -3615,7 +3525,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Sırbistan",
     "yas": "28",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Morato",
@@ -3624,7 +3534,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Brezilya",
     "yas": "24",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Jair Cunha",
@@ -3642,7 +3552,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Fildişi Sahili",
     "yas": "35",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Zach Abbott",
@@ -3660,7 +3570,7 @@
     "pozisyon": "Sol Bek",
     "uyruk": "Galler",
     "yas": "24",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Luca Netz",
@@ -3678,7 +3588,7 @@
     "pozisyon": "Sağ Bek",
     "uyruk": "Nijerya",
     "yas": "29",
-    "zorluk": "Zor"
+    "zorluk": "Orta"
   },
   {
     "isim": "Nicolò Savona",
@@ -3705,7 +3615,7 @@
     "pozisyon": "Ön Libero",
     "uyruk": "Fildişi Sahili",
     "yas": "28",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Elliot Anderson",
@@ -3723,7 +3633,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "Arjantin",
     "yas": "27",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Ryan Yates",
@@ -3732,7 +3642,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "İngiltere",
     "yas": "28",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Morgan Gibbs-White",
@@ -3741,7 +3651,7 @@
     "pozisyon": "On Numara",
     "uyruk": "İngiltere",
     "yas": "26",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Omari Hutchinson",
@@ -3768,7 +3678,7 @@
     "pozisyon": "Sol Kanat",
     "uyruk": "İngiltere",
     "yas": "25",
-    "zorluk": "Zor"
+    "zorluk": "Orta"
   },
   {
     "isim": "Dan Ndoye",
@@ -3777,7 +3687,7 @@
     "pozisyon": "Sağ Kanat",
     "uyruk": "İsviçre",
     "yas": "25",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Dilane Bakwa",
@@ -3795,7 +3705,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "İtalya",
     "yas": "25",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Igor Jesus",
@@ -3804,7 +3714,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "Brezilya",
     "yas": "25",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Taiwo Awoniyi",
@@ -3813,7 +3723,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "Nijerya",
     "yas": "28",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Chris Wood",
@@ -3822,7 +3732,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "Yeni Zelanda",
     "yas": "34",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Dean Henderson",
@@ -3831,7 +3741,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "İngiltere",
     "yas": "28",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Walter Benítez",
@@ -3840,7 +3750,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "Arjantin",
     "yas": "33",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Remi Matthews",
@@ -3849,7 +3759,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "İngiltere",
     "yas": "32",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Maxence Lacroix",
@@ -3858,7 +3768,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Fransa",
     "yas": "25",
-    "zorluk": "Zor"
+    "zorluk": "Orta"
   },
   {
     "isim": "Chris Richards",
@@ -3867,7 +3777,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Amerika Birleşik Devletleri",
     "yas": "25",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Jaydee Canvot",
@@ -3894,7 +3804,7 @@
     "pozisyon": "Sol Bek",
     "uyruk": "İngiltere",
     "yas": "26",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Borna Sosa",
@@ -3903,7 +3813,7 @@
     "pozisyon": "Sol Bek",
     "uyruk": "Hırvatistan",
     "yas": "28",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Rio Cardines",
@@ -3921,7 +3831,7 @@
     "pozisyon": "Sağ Bek",
     "uyruk": "Kolombiya",
     "yas": "29",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Caleb Kporha",
@@ -3939,7 +3849,7 @@
     "pozisyon": "Sağ Bek",
     "uyruk": "İngiltere",
     "yas": "34",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Adam Wharton",
@@ -3957,7 +3867,7 @@
     "pozisyon": "Ön Libero",
     "uyruk": "Mali",
     "yas": "26",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Jefferson Lerma",
@@ -3966,7 +3876,7 @@
     "pozisyon": "Ön Libero",
     "uyruk": "Kolombiya",
     "yas": "31",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Kaden Rodney",
@@ -3984,7 +3894,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "İngiltere",
     "yas": "30",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Daichi Kamada",
@@ -3993,7 +3903,7 @@
     "pozisyon": "On Numara",
     "uyruk": "Japonya",
     "yas": "29",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Justin Devenny",
@@ -4011,7 +3921,7 @@
     "pozisyon": "Sağ Kanat",
     "uyruk": "Senegal",
     "yas": "28",
-    "zorluk": "Zor"
+    "zorluk": "Orta"
   },
   {
     "isim": "Yéremy Pino",
@@ -4029,7 +3939,7 @@
     "pozisyon": "Sağ Kanat",
     "uyruk": "Galler",
     "yas": "24",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Evann Guessand",
@@ -4038,7 +3948,7 @@
     "pozisyon": "Sağ Kanat",
     "uyruk": "Fildişi Sahili",
     "yas": "24",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Jean-Philippe Mateta",
@@ -4047,7 +3957,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "Fransa",
     "yas": "28",
-    "zorluk": "Zor"
+    "zorluk": "Orta"
   },
   {
     "isim": "Jørgen Strand Larsen",
@@ -4056,7 +3966,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "Norveç",
     "yas": "26",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Eddie Nketiah",
@@ -4065,7 +3975,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "İngiltere",
     "yas": "26",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Christantus Uche",
@@ -4083,7 +3993,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "İspanya",
     "yas": "27",
-    "zorluk": "Kolay"
+    "zorluk": ""
   },
   {
     "isim": "Yann Sommer",
@@ -4101,7 +4011,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "İtalya",
     "yas": "32",
-    "zorluk": "Kolay"
+    "zorluk": ""
   },
   {
     "isim": "Alessandro Bastoni",
@@ -4164,7 +4074,7 @@
     "pozisyon": "Sol Bek",
     "uyruk": "Brezilya",
     "yas": "27",
-    "zorluk": "Kolay"
+    "zorluk": ""
   },
   {
     "isim": "Denzel Dumfries",
@@ -4209,7 +4119,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "Hırvatistan",
     "yas": "22",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Davide Frattesi",
@@ -4218,7 +4128,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "İtalya",
     "yas": "26",
-    "zorluk": "Kolay"
+    "zorluk": ""
   },
   {
     "isim": "Andy Diouf",
@@ -4227,7 +4137,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "Fransa",
     "yas": "22",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Piotr Zieliński",
@@ -4236,7 +4146,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "Polonya",
     "yas": "31",
-    "zorluk": "Kolay"
+    "zorluk": "Orta"
   },
   {
     "isim": "Henrikh Mkhitaryan",
@@ -4254,7 +4164,7 @@
     "pozisyon": "Orta Saha Sağ",
     "uyruk": "Brezilya",
     "yas": "24",
-    "zorluk": "Kolay"
+    "zorluk": ""
   },
   {
     "isim": "Lautaro Martínez",
@@ -4281,7 +4191,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "Fransa",
     "yas": "22",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Pio Esposito",
@@ -4290,7 +4200,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "İtalya",
     "yas": "20",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Michele Di Gregorio",
@@ -4299,7 +4209,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "İtalya",
     "yas": "28",
-    "zorluk": "Kolay"
+    "zorluk": ""
   },
   {
     "isim": "Mattia Perin",
@@ -4308,7 +4218,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "İtalya",
     "yas": "33",
-    "zorluk": "Kolay"
+    "zorluk": ""
   },
   {
     "isim": "Carlo Pinsoglio",
@@ -4317,7 +4227,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "İtalya",
     "yas": "35",
-    "zorluk": "Kolay"
+    "zorluk": ""
   },
   {
     "isim": "Bremer",
@@ -4344,7 +4254,7 @@
     "pozisyon": "Stoper",
     "uyruk": "İtalya",
     "yas": "27",
-    "zorluk": "Kolay"
+    "zorluk": ""
   },
   {
     "isim": "Lloyd Kelly",
@@ -4353,7 +4263,7 @@
     "pozisyon": "Stoper",
     "uyruk": "İngiltere",
     "yas": "27",
-    "zorluk": "Kolay"
+    "zorluk": ""
   },
   {
     "isim": "Juan Cabal",
@@ -4362,7 +4272,7 @@
     "pozisyon": "Sol Bek",
     "uyruk": "Kolombiya",
     "yas": "25",
-    "zorluk": "Kolay"
+    "zorluk": ""
   },
   {
     "isim": "Emil Holm",
@@ -4371,7 +4281,7 @@
     "pozisyon": "Sağ Bek",
     "uyruk": "İsveç",
     "yas": "25",
-    "zorluk": "Kolay"
+    "zorluk": ""
   },
   {
     "isim": "Manuel Locatelli",
@@ -4398,7 +4308,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "Amerika Birleşik Devletleri",
     "yas": "27",
-    "zorluk": "Kolay"
+    "zorluk": "Orta"
   },
   {
     "isim": "Fabio Miretti",
@@ -4407,7 +4317,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "İtalya",
     "yas": "22",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Andrea Cambiaso",
@@ -4434,7 +4344,7 @@
     "pozisyon": "On Numara",
     "uyruk": "Hollanda",
     "yas": "28",
-    "zorluk": "Kolay"
+    "zorluk": "Orta"
   },
   {
     "isim": "Vasilije Adžić",
@@ -4443,7 +4353,7 @@
     "pozisyon": "On Numara",
     "uyruk": "Karadağ",
     "yas": "19",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Kenan Yıldız",
@@ -4461,7 +4371,7 @@
     "pozisyon": "Sol Kanat",
     "uyruk": "Fildişi Sahili",
     "yas": "29",
-    "zorluk": "Kolay"
+    "zorluk": "Orta"
   },
   {
     "isim": "Francisco Conceição",
@@ -4470,7 +4380,7 @@
     "pozisyon": "Sağ Kanat",
     "uyruk": "Portekiz",
     "yas": "23",
-    "zorluk": "Kolay"
+    "zorluk": "Orta"
   },
   {
     "isim": "Edon Zhegrova",
@@ -4479,7 +4389,7 @@
     "pozisyon": "Sağ Kanat",
     "uyruk": "Kosova",
     "yas": "26",
-    "zorluk": "Kolay"
+    "zorluk": ""
   },
   {
     "isim": "Loïs Openda",
@@ -4488,7 +4398,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "Belçika",
     "yas": "26",
-    "zorluk": "Kolay"
+    "zorluk": "Orta"
   },
   {
     "isim": "Dušan Vlahović",
@@ -4506,7 +4416,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "Kanada",
     "yas": "26",
-    "zorluk": "Kolay"
+    "zorluk": "Orta"
   },
   {
     "isim": "Arkadiusz Milik",
@@ -4515,7 +4425,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "Polonya",
     "yas": "32",
-    "zorluk": "Kolay"
+    "zorluk": "Orta"
   },
   {
     "isim": "Mike Maignan",
@@ -4533,7 +4443,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "İtalya",
     "yas": "35",
-    "zorluk": "Kolay"
+    "zorluk": ""
   },
   {
     "isim": "Lorenzo Torriani",
@@ -4542,7 +4452,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "İtalya",
     "yas": "21",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Strahinja Pavlović",
@@ -4551,7 +4461,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Sırbistan",
     "yas": "24",
-    "zorluk": "Kolay"
+    "zorluk": ""
   },
   {
     "isim": "Koni De Winter",
@@ -4560,7 +4470,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Belçika",
     "yas": "23",
-    "zorluk": "Kolay"
+    "zorluk": ""
   },
   {
     "isim": "Fikayo Tomori",
@@ -4578,7 +4488,7 @@
     "pozisyon": "Stoper",
     "uyruk": "İtalya",
     "yas": "26",
-    "zorluk": "Kolay"
+    "zorluk": ""
   },
   {
     "isim": "David Odogu",
@@ -4587,7 +4497,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Almanya",
     "yas": "19",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Davide Bartesaghi",
@@ -4596,7 +4506,7 @@
     "pozisyon": "Sol Bek",
     "uyruk": "İtalya",
     "yas": "20",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Pervis Estupiñán",
@@ -4605,7 +4515,7 @@
     "pozisyon": "Sol Bek",
     "uyruk": "Ekvador",
     "yas": "28",
-    "zorluk": "Kolay"
+    "zorluk": ""
   },
   {
     "isim": "Zachary Athekame",
@@ -4614,7 +4524,7 @@
     "pozisyon": "Sağ Bek",
     "uyruk": "İsviçre",
     "yas": "21",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Ardon Jashari",
@@ -4623,7 +4533,7 @@
     "pozisyon": "Ön Libero",
     "uyruk": "İsviçre",
     "yas": "23",
-    "zorluk": "Kolay"
+    "zorluk": ""
   },
   {
     "isim": "Youssouf Fofana",
@@ -4632,7 +4542,7 @@
     "pozisyon": "Ön Libero",
     "uyruk": "Fransa",
     "yas": "27",
-    "zorluk": "Kolay"
+    "zorluk": "Orta"
   },
   {
     "isim": "Samuele Ricci",
@@ -4641,7 +4551,7 @@
     "pozisyon": "Ön Libero",
     "uyruk": "İtalya",
     "yas": "24",
-    "zorluk": "Kolay"
+    "zorluk": ""
   },
   {
     "isim": "Adrien Rabiot",
@@ -4650,7 +4560,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "Fransa",
     "yas": "30",
-    "zorluk": "Kolay"
+    "zorluk": "Orta"
   },
   {
     "isim": "Ruben Loftus-Cheek",
@@ -4659,7 +4569,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "İngiltere",
     "yas": "30",
-    "zorluk": "Kolay"
+    "zorluk": "Orta"
   },
   {
     "isim": "Luka Modrić",
@@ -4677,7 +4587,7 @@
     "pozisyon": "Orta Saha Sağ",
     "uyruk": "Belçika",
     "yas": "26",
-    "zorluk": "Kolay"
+    "zorluk": "Orta"
   },
   {
     "isim": "Rafael Leão",
@@ -4713,7 +4623,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "Meksika",
     "yas": "24",
-    "zorluk": "Kolay"
+    "zorluk": ""
   },
   {
     "isim": "Niclas Füllkrug",
@@ -4722,7 +4632,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "Almanya",
     "yas": "33",
-    "zorluk": "Kolay"
+    "zorluk": "Orta"
   },
   {
     "isim": "Vanja Milinković-Savić",
@@ -4749,7 +4659,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "İtalya",
     "yas": "29",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Mathias Ferrante",
@@ -4758,7 +4668,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "İtalya",
     "yas": "19",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Alessandro Buongiorno",
@@ -4767,7 +4677,7 @@
     "pozisyon": "Stoper",
     "uyruk": "İtalya",
     "yas": "26",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Sam Beukema",
@@ -4776,7 +4686,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Hollanda",
     "yas": "27",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Amir Rrahmani",
@@ -4785,7 +4695,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Kosova",
     "yas": "32",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Juan Jesus",
@@ -4803,7 +4713,7 @@
     "pozisyon": "Sol Bek",
     "uyruk": "Uruguay",
     "yas": "28",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Miguel Gutiérrez",
@@ -4812,7 +4722,7 @@
     "pozisyon": "Sol Bek",
     "uyruk": "İspanya",
     "yas": "24",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Leonardo Spinazzola",
@@ -4839,7 +4749,7 @@
     "pozisyon": "Sağ Bek",
     "uyruk": "İtalya",
     "yas": "30",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Billy Gilmour",
@@ -4848,7 +4758,7 @@
     "pozisyon": "Ön Libero",
     "uyruk": "İskoçya",
     "yas": "24",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Stanislav Lobotka",
@@ -4866,7 +4776,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "İskoçya",
     "yas": "29",
-    "zorluk": "Orta"
+    "zorluk": "Kolay"
   },
   {
     "isim": "Frank Anguissa",
@@ -4902,7 +4812,7 @@
     "pozisyon": "On Numara",
     "uyruk": "İtalya",
     "yas": "23",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Alisson Santos",
@@ -4911,7 +4821,7 @@
     "pozisyon": "Sol Kanat",
     "uyruk": "Brezilya",
     "yas": "23",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "David Neres",
@@ -4929,7 +4839,7 @@
     "pozisyon": "Sağ Kanat",
     "uyruk": "İtalya",
     "yas": "32",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Rasmus Højlund",
@@ -4947,7 +4857,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "Belçika",
     "yas": "32",
-    "zorluk": "Orta"
+    "zorluk": "Kolay"
   },
   {
     "isim": "Giovane",
@@ -4956,7 +4866,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "Brezilya",
     "yas": "22",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Mile Svilar",
@@ -4965,7 +4875,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "Sırbistan",
     "yas": "26",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Pierluigi Gollini",
@@ -4974,7 +4884,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "İtalya",
     "yas": "30",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Radoslaw Zelezny",
@@ -4983,7 +4893,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "Polonya",
     "yas": "19",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Evan Ndicka",
@@ -4992,7 +4902,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Fildişi Sahili",
     "yas": "26",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Gianluca Mancini",
@@ -5001,7 +4911,7 @@
     "pozisyon": "Stoper",
     "uyruk": "İtalya",
     "yas": "29",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Daniele Ghilardi",
@@ -5010,7 +4920,7 @@
     "pozisyon": "Stoper",
     "uyruk": "İtalya",
     "yas": "23",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Jan Ziolkowski",
@@ -5019,7 +4929,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Polonya",
     "yas": "20",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Mario Hermoso",
@@ -5028,7 +4938,7 @@
     "pozisyon": "Stoper",
     "uyruk": "İspanya",
     "yas": "30",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Angeliño",
@@ -5055,7 +4965,7 @@
     "pozisyon": "Sağ Bek",
     "uyruk": "Brezilya",
     "yas": "22",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Zeki Çelik",
@@ -5073,7 +4983,7 @@
     "pozisyon": "Sağ Bek",
     "uyruk": "Hollanda",
     "yas": "23",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Bryan Cristante",
@@ -5082,7 +4992,7 @@
     "pozisyon": "Ön Libero",
     "uyruk": "İtalya",
     "yas": "31",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Manu Koné",
@@ -5091,7 +5001,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "Fransa",
     "yas": "24",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Neil El Aynaoui",
@@ -5100,7 +5010,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "Fas",
     "yas": "24",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Niccolò Pisilli",
@@ -5109,7 +5019,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "İtalya",
     "yas": "21",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Lorenzo Pellegrini",
@@ -5127,7 +5037,7 @@
     "pozisyon": "Sol Kanat",
     "uyruk": "İspanya",
     "yas": "24",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Stephan El Shaarawy",
@@ -5145,7 +5055,7 @@
     "pozisyon": "Sağ Kanat",
     "uyruk": "Arjantin",
     "yas": "22",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Lorenzo Venturino",
@@ -5154,7 +5064,7 @@
     "pozisyon": "Sağ Kanat",
     "uyruk": "İtalya",
     "yas": "19",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Paulo Dybala",
@@ -5172,7 +5082,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "İrlanda",
     "yas": "21",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Donyell Malen",
@@ -5199,7 +5109,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "Fransa",
     "yas": "19",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Marco Carnesecchi",
@@ -5208,7 +5118,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "İtalya",
     "yas": "25",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Marco Sportiello",
@@ -5217,7 +5127,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "İtalya",
     "yas": "33",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Francesco Rossi",
@@ -5226,7 +5136,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "İtalya",
     "yas": "34",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Isak Hien",
@@ -5235,7 +5145,7 @@
     "pozisyon": "Stoper",
     "uyruk": "İsveç",
     "yas": "27",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Giorgio Scalvini",
@@ -5244,7 +5154,7 @@
     "pozisyon": "Stoper",
     "uyruk": "İtalya",
     "yas": "22",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Honest Ahanor",
@@ -5253,7 +5163,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Nijerya",
     "yas": "18",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Odilon Kossounou",
@@ -5262,7 +5172,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Fildişi Sahili",
     "yas": "25",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Sead Kolasinac",
@@ -5271,7 +5181,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Bosna-Hersek",
     "yas": "32",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Berat Djimsiti",
@@ -5280,7 +5190,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Arnavutluk",
     "yas": "33",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Marten de Roon",
@@ -5289,7 +5199,7 @@
     "pozisyon": "Ön Libero",
     "uyruk": "Hollanda",
     "yas": "34",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Éderson",
@@ -5298,7 +5208,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "Brezilya",
     "yas": "26",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Yunus Musah",
@@ -5307,7 +5217,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "Amerika Birleşik Devletleri",
     "yas": "23",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Mario Pašalić",
@@ -5325,7 +5235,7 @@
     "pozisyon": "Orta Saha Sağ",
     "uyruk": "İtalya",
     "yas": "25",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Davide Zappacosta",
@@ -5343,7 +5253,7 @@
     "pozisyon": "Orta Saha Sol",
     "uyruk": "Polonya",
     "yas": "24",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Mitchel Bakker",
@@ -5352,7 +5262,7 @@
     "pozisyon": "Orta Saha Sol",
     "uyruk": "Hollanda",
     "yas": "25",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Lorenzo Bernasconi",
@@ -5361,7 +5271,7 @@
     "pozisyon": "Orta Saha Sol",
     "uyruk": "İtalya",
     "yas": "22",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Charles De Ketelaere",
@@ -5370,7 +5280,7 @@
     "pozisyon": "On Numara",
     "uyruk": "Belçika",
     "yas": "24",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Lazar Samardžić",
@@ -5379,7 +5289,7 @@
     "pozisyon": "On Numara",
     "uyruk": "Sırbistan",
     "yas": "24",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Kamaldeen Sulemana",
@@ -5388,7 +5298,7 @@
     "pozisyon": "Sol Kanat",
     "uyruk": "Gana",
     "yas": "24",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Giacomo Raspadori",
@@ -5406,7 +5316,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "İtalya",
     "yas": "27",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Nikola Krstović",
@@ -5415,7 +5325,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "Karadağ",
     "yas": "25",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Jean Butez",
@@ -5424,7 +5334,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "Fransa",
     "yas": "30",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Noel Törnqvist",
@@ -5433,7 +5343,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "İsveç",
     "yas": "24",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Nikola Cavlina",
@@ -5460,7 +5370,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "İtalya",
     "yas": "35",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Jacobo Ramón",
@@ -5478,7 +5388,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Brezilya",
     "yas": "32",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Marc Oliver Kempf",
@@ -5487,7 +5397,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Almanya",
     "yas": "31",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Edoardo Goldaniga",
@@ -5496,7 +5406,7 @@
     "pozisyon": "Stoper",
     "uyruk": "İtalya",
     "yas": "32",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Álex Valle",
@@ -5514,7 +5424,7 @@
     "pozisyon": "Sol Bek",
     "uyruk": "İspanya",
     "yas": "33",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Ignace Van der Brempt",
@@ -5532,7 +5442,7 @@
     "pozisyon": "Sağ Bek",
     "uyruk": "Kosova",
     "yas": "31",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Ivan Smolcic",
@@ -5541,7 +5451,7 @@
     "pozisyon": "Sağ Bek",
     "uyruk": "Hırvatistan",
     "yas": "25",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Máximo Perrone",
@@ -5559,7 +5469,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "Fransa",
     "yas": "26",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Lucas Da Cunha",
@@ -5568,7 +5478,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "Fransa",
     "yas": "24",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Sergi Roberto",
@@ -5577,7 +5487,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "İspanya",
     "yas": "34",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Adrian Lahdo",
@@ -5640,7 +5550,7 @@
     "pozisyon": "Sağ Kanat",
     "uyruk": "Almanya",
     "yas": "26",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Anastasios Douvikas",
@@ -5649,7 +5559,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "Yunanistan",
     "yas": "26",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Álvaro Morata",
@@ -5658,7 +5568,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "İspanya",
     "yas": "33",
-    "zorluk": "Zor"
+    "zorluk": "Orta"
   },
   {
     "isim": "Lukasz Skorupski",
@@ -5667,7 +5577,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "Polonya",
     "yas": "34",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Federico Ravaglia",
@@ -5676,7 +5586,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "İtalya",
     "yas": "26",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Massimo Pessina",
@@ -5694,7 +5604,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Kolombiya",
     "yas": "27",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Torbjørn Heggem",
@@ -5703,7 +5613,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Norveç",
     "yas": "27",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Martin Vitík",
@@ -5730,7 +5640,7 @@
     "pozisyon": "Stoper",
     "uyruk": "İtalya",
     "yas": "28",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Kevin Bonifazi",
@@ -5739,7 +5649,7 @@
     "pozisyon": "Stoper",
     "uyruk": "İtalya",
     "yas": "29",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Juan Miranda",
@@ -5748,7 +5658,7 @@
     "pozisyon": "Sol Bek",
     "uyruk": "İspanya",
     "yas": "26",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Charalampos Lykogiannis",
@@ -5757,7 +5667,7 @@
     "pozisyon": "Sol Bek",
     "uyruk": "Yunanistan",
     "yas": "32",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Nadir Zortea",
@@ -5766,7 +5676,7 @@
     "pozisyon": "Sağ Bek",
     "uyruk": "İtalya",
     "yas": "26",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Lorenzo De Silvestri",
@@ -5775,7 +5685,7 @@
     "pozisyon": "Sağ Bek",
     "uyruk": "İtalya",
     "yas": "37",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Nikola Moro",
@@ -5784,7 +5694,7 @@
     "pozisyon": "Ön Libero",
     "uyruk": "Hırvatistan",
     "yas": "27",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Lewis Ferguson",
@@ -5793,7 +5703,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "İskoçya",
     "yas": "26",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Tommaso Pobega",
@@ -5802,7 +5712,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "İtalya",
     "yas": "26",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Simon Sohm",
@@ -5811,7 +5721,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "İsviçre",
     "yas": "24",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Remo Freuler",
@@ -5820,7 +5730,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "İsviçre",
     "yas": "33",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "João Mário",
@@ -5829,7 +5739,7 @@
     "pozisyon": "Orta Saha Sağ",
     "uyruk": "Portekiz",
     "yas": "26",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Jens Odgaard",
@@ -5838,7 +5748,7 @@
     "pozisyon": "On Numara",
     "uyruk": "Danimarka",
     "yas": "26",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Nicolò Cambiaghi",
@@ -5847,7 +5757,7 @@
     "pozisyon": "Sol Kanat",
     "uyruk": "İtalya",
     "yas": "25",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Jonathan Rowe",
@@ -5874,7 +5784,7 @@
     "pozisyon": "Sağ Kanat",
     "uyruk": "İtalya",
     "yas": "29",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Federico Bernardeschi",
@@ -5883,7 +5793,7 @@
     "pozisyon": "Sağ Kanat",
     "uyruk": "İtalya",
     "yas": "32",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Santiago Castro",
@@ -5901,7 +5811,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "Hollanda",
     "yas": "25",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "David de Gea",
@@ -5919,7 +5829,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "Danimarka",
     "yas": "26",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Luca Lezzerini",
@@ -5928,7 +5838,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "İtalya",
     "yas": "30",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Pietro Comuzzo",
@@ -5937,7 +5847,7 @@
     "pozisyon": "Stoper",
     "uyruk": "İtalya",
     "yas": "21",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Marin Pongracic",
@@ -5946,7 +5856,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Hırvatistan",
     "yas": "28",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Luca Ranieri",
@@ -5955,7 +5865,7 @@
     "pozisyon": "Stoper",
     "uyruk": "İtalya",
     "yas": "26",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Eddy Kouadio",
@@ -5964,7 +5874,7 @@
     "pozisyon": "Stoper",
     "uyruk": "İtalya",
     "yas": "19",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Daniele Rugani",
@@ -5973,7 +5883,7 @@
     "pozisyon": "Stoper",
     "uyruk": "İtalya",
     "yas": "31",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Eman Košpo",
@@ -5982,7 +5892,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Bosna-Hersek",
     "yas": "18",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Niccolò Fortini",
@@ -5991,7 +5901,7 @@
     "pozisyon": "Sol Bek",
     "uyruk": "İtalya",
     "yas": "20",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Robin Gosens",
@@ -6000,7 +5910,7 @@
     "pozisyon": "Sol Bek",
     "uyruk": "Almanya",
     "yas": "31",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Fabiano Parisi",
@@ -6009,7 +5919,7 @@
     "pozisyon": "Sol Bek",
     "uyruk": "İtalya",
     "yas": "25",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Luis Balbo",
@@ -6018,7 +5928,7 @@
     "pozisyon": "Sol Bek",
     "uyruk": "Venezuela",
     "yas": "19",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Dodô",
@@ -6036,7 +5946,7 @@
     "pozisyon": "Sağ Bek",
     "uyruk": "Gana",
     "yas": "25",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Rolando Mandragora",
@@ -6045,7 +5955,7 @@
     "pozisyon": "Ön Libero",
     "uyruk": "İtalya",
     "yas": "28",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Nicolò Fagioli",
@@ -6054,7 +5964,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "İtalya",
     "yas": "25",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Jacopo Fazzini",
@@ -6063,7 +5973,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "İtalya",
     "yas": "22",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Marco Brescianini",
@@ -6072,7 +5982,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "İtalya",
     "yas": "26",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Cher Ndour",
@@ -6081,7 +5991,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "İtalya",
     "yas": "21",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Giovanni Fabbian",
@@ -6090,7 +6000,7 @@
     "pozisyon": "On Numara",
     "uyruk": "İtalya",
     "yas": "23",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Abdelhamid Sabiri",
@@ -6099,7 +6009,7 @@
     "pozisyon": "On Numara",
     "uyruk": "Fas",
     "yas": "29",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Jack Harrison",
@@ -6108,7 +6018,7 @@
     "pozisyon": "Sol Kanat",
     "uyruk": "İngiltere",
     "yas": "29",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Manor Solomon",
@@ -6117,7 +6027,7 @@
     "pozisyon": "Sol Kanat",
     "uyruk": "İsrail",
     "yas": "26",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Albert Gudmundsson",
@@ -6126,7 +6036,7 @@
     "pozisyon": "Forvet Arkası",
     "uyruk": "İzlanda",
     "yas": "28",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Moise Kean",
@@ -6144,7 +6054,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "İtalya",
     "yas": "25",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Ivan Provedel",
@@ -6153,7 +6063,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "İtalya",
     "yas": "31",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Edoardo Motta",
@@ -6162,7 +6072,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "İtalya",
     "yas": "21",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Alessio Furlanetto",
@@ -6171,7 +6081,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "İtalya",
     "yas": "24",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Mario Gila",
@@ -6180,7 +6090,7 @@
     "pozisyon": "Stoper",
     "uyruk": "İspanya",
     "yas": "25",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Alessio Romagnoli",
@@ -6189,7 +6099,7 @@
     "pozisyon": "Stoper",
     "uyruk": "İtalya",
     "yas": "31",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Oliver Provstgaard",
@@ -6198,7 +6108,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Danimarka",
     "yas": "22",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Samuel Gigot",
@@ -6207,7 +6117,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Fransa",
     "yas": "32",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Patric",
@@ -6216,7 +6126,7 @@
     "pozisyon": "Stoper",
     "uyruk": "İspanya",
     "yas": "32",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Nuno Tavares",
@@ -6234,7 +6144,7 @@
     "pozisyon": "Sol Bek",
     "uyruk": "İtalya",
     "yas": "26",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Adam Marusic",
@@ -6243,7 +6153,7 @@
     "pozisyon": "Sağ Bek",
     "uyruk": "Karadağ",
     "yas": "33",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Manuel Lazzari",
@@ -6261,7 +6171,7 @@
     "pozisyon": "Sağ Bek",
     "uyruk": "Arnavutluk",
     "yas": "32",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Nicolò Rovella",
@@ -6270,7 +6180,7 @@
     "pozisyon": "Ön Libero",
     "uyruk": "İtalya",
     "yas": "24",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Reda Belahyane",
@@ -6279,7 +6189,7 @@
     "pozisyon": "Ön Libero",
     "uyruk": "Fas",
     "yas": "21",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Danilo Cataldi",
@@ -6288,7 +6198,7 @@
     "pozisyon": "Ön Libero",
     "uyruk": "İtalya",
     "yas": "31",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Kenneth Taylor",
@@ -6297,7 +6207,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "Hollanda",
     "yas": "23",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Toma Bašić",
@@ -6306,7 +6216,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "Hırvatistan",
     "yas": "29",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Daniel Maldini",
@@ -6315,7 +6225,7 @@
     "pozisyon": "On Numara",
     "uyruk": "İtalya",
     "yas": "24",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Adrian Przyborek",
@@ -6324,7 +6234,7 @@
     "pozisyon": "On Numara",
     "uyruk": "Polonya",
     "yas": "19",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Fisayo Dele-Bashiru",
@@ -6333,7 +6243,7 @@
     "pozisyon": "On Numara",
     "uyruk": "Nijerya",
     "yas": "25",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Mattia Zaccagni",
@@ -6342,7 +6252,7 @@
     "pozisyon": "Sol Kanat",
     "uyruk": "İtalya",
     "yas": "30",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Gustav Isaksen",
@@ -6351,7 +6261,7 @@
     "pozisyon": "Sağ Kanat",
     "uyruk": "Danimarka",
     "yas": "24",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Tijjani Noslin",
@@ -6360,7 +6270,7 @@
     "pozisyon": "Sağ Kanat",
     "uyruk": "Hollanda",
     "yas": "26",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Matteo Cancellieri",
@@ -6369,7 +6279,7 @@
     "pozisyon": "Sağ Kanat",
     "uyruk": "İtalya",
     "yas": "24",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Pedro",
@@ -6378,7 +6288,7 @@
     "pozisyon": "Sağ Kanat",
     "uyruk": "İspanya",
     "yas": "38",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Boulaye Dia",
@@ -6387,7 +6297,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "Senegal",
     "yas": "29",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Petar Ratkov",
@@ -6396,7 +6306,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "Sırbistan",
     "yas": "22",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Arijanet Murić",
@@ -6405,7 +6315,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "Kosova",
     "yas": "27",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Stefano Turati",
@@ -6414,7 +6324,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "İtalya",
     "yas": "24",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Gioele Zacchi",
@@ -6432,7 +6342,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "İtalya",
     "yas": "26",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Tarik Muharemović",
@@ -6450,7 +6360,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Endonezya",
     "yas": "25",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Fali Candé",
@@ -6459,7 +6369,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Gine-Bissau",
     "yas": "28",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Filippo Romagna",
@@ -6468,7 +6378,7 @@
     "pozisyon": "Stoper",
     "uyruk": "İtalya",
     "yas": "28",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Pedro Felipe",
@@ -6495,7 +6405,7 @@
     "pozisyon": "Sol Bek",
     "uyruk": "İsviçre",
     "yas": "30",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Edoardo Pieragnolo",
@@ -6513,7 +6423,7 @@
     "pozisyon": "Sağ Bek",
     "uyruk": "Polonya",
     "yas": "25",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Woyo Coulibaly",
@@ -6522,7 +6432,7 @@
     "pozisyon": "Sağ Bek",
     "uyruk": "Mali",
     "yas": "26",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Daniel Boloca",
@@ -6531,7 +6441,7 @@
     "pozisyon": "Ön Libero",
     "uyruk": "İtalya",
     "yas": "27",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Luca Lipani",
@@ -6549,7 +6459,7 @@
     "pozisyon": "Ön Libero",
     "uyruk": "Sırbistan",
     "yas": "37",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Ismaël Koné",
@@ -6567,7 +6477,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "Norveç",
     "yas": "26",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Aster Vranckx",
@@ -6585,7 +6495,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "İtalya",
     "yas": "24",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Cristian Volpato",
@@ -6612,7 +6522,7 @@
     "pozisyon": "Sol Kanat",
     "uyruk": "Fransa",
     "yas": "27",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Alieu Fadera",
@@ -6621,7 +6531,7 @@
     "pozisyon": "Sol Kanat",
     "uyruk": "Gambiya",
     "yas": "24",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Domenico Berardi",
@@ -6630,7 +6540,7 @@
     "pozisyon": "Sağ Kanat",
     "uyruk": "İtalya",
     "yas": "31",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Andrea Pinamonti",
@@ -6639,7 +6549,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "İtalya",
     "yas": "26",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "M'Bala Nzola",
@@ -6648,7 +6558,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "Angola",
     "yas": "29",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Luca Moro",
@@ -6657,7 +6567,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "İtalya",
     "yas": "25",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Zion Suzuki",
@@ -6675,7 +6585,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "İtalya",
     "yas": "24",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Filippo Rinaldi",
@@ -6720,7 +6630,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Arjantin",
     "yas": "27",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Emanuele Valeri",
@@ -6729,7 +6639,7 @@
     "pozisyon": "Sol Bek",
     "uyruk": "İtalya",
     "yas": "27",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Franco Carboni",
@@ -6756,7 +6666,7 @@
     "pozisyon": "Sağ Bek",
     "uyruk": "İtalya",
     "yas": "26",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Mandela Keita",
@@ -6774,7 +6684,7 @@
     "pozisyon": "Ön Libero",
     "uyruk": "Arjantin",
     "yas": "30",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Adrián Bernabé",
@@ -6783,7 +6693,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "İspanya",
     "yas": "24",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Oliver Sørensen",
@@ -6801,7 +6711,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "İtalya",
     "yas": "25",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Christian Ordóñez",
@@ -6846,7 +6756,7 @@
     "pozisyon": "Sağ Kanat",
     "uyruk": "Brezilya",
     "yas": "28",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Pontus Almqvist",
@@ -6855,7 +6765,7 @@
     "pozisyon": "Sağ Kanat",
     "uyruk": "İsveç",
     "yas": "26",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Mateo Pellegrino",
@@ -6864,7 +6774,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "Arjantin",
     "yas": "24",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Matija Frigan",
@@ -6882,7 +6792,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "Fransa",
     "yas": "25",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Maduka Okoye",
@@ -6891,7 +6801,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "Nijerya",
     "yas": "26",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Răzvan Sava",
@@ -6918,7 +6828,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "İtalya",
     "yas": "40",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Oumar Solet",
@@ -6927,7 +6837,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Fransa",
     "yas": "26",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Thomas Kristensen",
@@ -6936,7 +6846,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Danimarka",
     "yas": "24",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Nicolò Bertola",
@@ -6963,7 +6873,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Belçika",
     "yas": "35",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Jordan Zemura",
@@ -6972,7 +6882,7 @@
     "pozisyon": "Sol Bek",
     "uyruk": "Zimbabve",
     "yas": "26",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Hassane Kamara",
@@ -6981,7 +6891,7 @@
     "pozisyon": "Sol Bek",
     "uyruk": "Fildişi Sahili",
     "yas": "31",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Alessandro Zanoli",
@@ -6990,7 +6900,7 @@
     "pozisyon": "Sağ Bek",
     "uyruk": "İtalya",
     "yas": "25",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Kingsley Ehizibue",
@@ -6999,7 +6909,7 @@
     "pozisyon": "Sağ Bek",
     "uyruk": "Hollanda",
     "yas": "30",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Jesper Karlström",
@@ -7008,7 +6918,7 @@
     "pozisyon": "Ön Libero",
     "uyruk": "İsveç",
     "yas": "30",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Abdoulaye Camara",
@@ -7044,7 +6954,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "Hollanda",
     "yas": "25",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Jakub Piotrowski",
@@ -7053,7 +6963,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "Polonya",
     "yas": "28",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Oier Zarraga",
@@ -7062,7 +6972,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "İspanya",
     "yas": "27",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Juan Arizala",
@@ -7080,7 +6990,7 @@
     "pozisyon": "On Numara",
     "uyruk": "İtalya",
     "yas": "26",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Idrissa Gueye",
@@ -7098,7 +7008,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "İngiltere",
     "yas": "28",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Adam Buksa",
@@ -7107,7 +7017,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "Polonya",
     "yas": "29",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Vakoun Bayo",
@@ -7116,7 +7026,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "Fildişi Sahili",
     "yas": "29",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Franco Israel",
@@ -7125,7 +7035,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "Uruguay",
     "yas": "25",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Alberto Paleari",
@@ -7134,7 +7044,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "İtalya",
     "yas": "33",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Lapo Siviero",
@@ -7152,7 +7062,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Ekvator Ginesi",
     "yas": "27",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Luca Marianucci",
@@ -7170,7 +7080,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Arnavutluk",
     "yas": "29",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Guillermo Maripán",
@@ -7179,7 +7089,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Şili",
     "yas": "31",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Enzo Ebosse",
@@ -7188,7 +7098,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Kamerun",
     "yas": "26",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Saba Sazonov",
@@ -7197,7 +7107,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Gürcistan",
     "yas": "24",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Niels Nkounkou",
@@ -7206,7 +7116,7 @@
     "pozisyon": "Sol Bek",
     "uyruk": "Fransa",
     "yas": "25",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Rafa Obrador",
@@ -7224,7 +7134,7 @@
     "pozisyon": "Sol Bek",
     "uyruk": "İtalya",
     "yas": "33",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Marcus Pedersen",
@@ -7233,7 +7143,7 @@
     "pozisyon": "Sağ Bek",
     "uyruk": "Norveç",
     "yas": "25",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Matteo Prati",
@@ -7251,7 +7161,7 @@
     "pozisyon": "Ön Libero",
     "uyruk": "Fransa",
     "yas": "32",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Cesare Casadei",
@@ -7269,7 +7179,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "Sırbistan",
     "yas": "24",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Gvidas Gineitis",
@@ -7296,7 +7206,7 @@
     "pozisyon": "Orta Saha Sağ",
     "uyruk": "Avusturya",
     "yas": "29",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Nikola Vlašić",
@@ -7305,7 +7215,7 @@
     "pozisyon": "On Numara",
     "uyruk": "Hırvatistan",
     "yas": "28",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Tino Anjorin",
@@ -7314,7 +7224,7 @@
     "pozisyon": "On Numara",
     "uyruk": "İngiltere",
     "yas": "24",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Sergiu Perciun",
@@ -7341,7 +7251,7 @@
     "pozisyon": "Sağ Kanat",
     "uyruk": "Fas",
     "yas": "26",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Zanos Savva",
@@ -7359,7 +7269,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "İskoçya",
     "yas": "29",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Giovanni Simeone",
@@ -7368,7 +7278,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "Arjantin",
     "yas": "30",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Sandro Kulenović",
@@ -7377,7 +7287,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "Hırvatistan",
     "yas": "26",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Duván Zapata",
@@ -7395,7 +7305,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "Hollanda",
     "yas": "28",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Nicola Leali",
@@ -7404,7 +7314,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "İtalya",
     "yas": "33",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Benjamin Siegrist",
@@ -7413,7 +7323,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "İsviçre",
     "yas": "34",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Ernestas Lysionok",
@@ -7431,7 +7341,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "İtalya",
     "yas": "28",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Johan Vásquez",
@@ -7440,7 +7350,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Meksika",
     "yas": "27",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Leo Østigård",
@@ -7449,7 +7359,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Norveç",
     "yas": "26",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Nils Zätterström",
@@ -7485,7 +7395,7 @@
     "pozisyon": "Sol Bek",
     "uyruk": "İspanya",
     "yas": "28",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Brooke Norton-Cuffy",
@@ -7503,7 +7413,7 @@
     "pozisyon": "Sağ Bek",
     "uyruk": "İtalya",
     "yas": "33",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Morten Frendrup",
@@ -7512,7 +7422,7 @@
     "pozisyon": "Ön Libero",
     "uyruk": "Danimarka",
     "yas": "24",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Jean Onana",
@@ -7521,7 +7431,7 @@
     "pozisyon": "Ön Libero",
     "uyruk": "Kamerun",
     "yas": "26",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Patrizio Masini",
@@ -7530,7 +7440,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "İtalya",
     "yas": "25",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Mikael Egill Ellertsson",
@@ -7566,7 +7476,7 @@
     "pozisyon": "On Numara",
     "uyruk": "Ukrayna",
     "yas": "32",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Maxwel Cornet",
@@ -7575,7 +7485,7 @@
     "pozisyon": "Sol Kanat",
     "uyruk": "Fildişi Sahili",
     "yas": "29",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Junior Messias",
@@ -7584,7 +7494,7 @@
     "pozisyon": "Sağ Kanat",
     "uyruk": "Brezilya",
     "yas": "34",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Vitinha",
@@ -7593,7 +7503,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "Portekiz",
     "yas": "25",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Jeff Ekhator",
@@ -7620,7 +7530,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "Gana",
     "yas": "31",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Elia Caprile",
@@ -7629,7 +7539,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "İtalya",
     "yas": "24",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Alen Sherri",
@@ -7638,7 +7548,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "Arnavutluk",
     "yas": "28",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Giuseppe Ciocci",
@@ -7647,7 +7557,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "İtalya",
     "yas": "24",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Alberto Dossena",
@@ -7656,7 +7566,7 @@
     "pozisyon": "Stoper",
     "uyruk": "İtalya",
     "yas": "27",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Juan Rodríguez",
@@ -7683,7 +7593,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Kolombiya",
     "yas": "31",
-    "zorluk": "Zor"
+    "zorluk": "Orta"
   },
   {
     "isim": "Zé Pedro",
@@ -7692,7 +7602,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Portekiz",
     "yas": "28",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Riyad Idrissi",
@@ -7710,7 +7620,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "Hırvatistan",
     "yas": "28",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Simone Scuffet",
@@ -7719,7 +7629,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "İtalya",
     "yas": "29",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Nícolas",
@@ -7728,7 +7638,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "Brezilya",
     "yas": "37",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Simone Canestrelli",
@@ -7737,7 +7647,7 @@
     "pozisyon": "Stoper",
     "uyruk": "İtalya",
     "yas": "25",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Rosen Bozhinov",
@@ -7764,7 +7674,7 @@
     "pozisyon": "Stoper",
     "uyruk": "İspanya",
     "yas": "40",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Arturo Calabresi",
@@ -7773,7 +7683,7 @@
     "pozisyon": "Stoper",
     "uyruk": "İtalya",
     "yas": "29",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Antonio Caracciolo",
@@ -7782,7 +7692,7 @@
     "pozisyon": "Stoper",
     "uyruk": "İtalya",
     "yas": "35",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Daniel Denoon",
@@ -7800,7 +7710,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "İtalya",
     "yas": "30",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Christian Früchtl",
@@ -7809,7 +7719,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "Almanya",
     "yas": "26",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Jasper Samooja",
@@ -7845,7 +7755,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Angola",
     "yas": "28",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Gaby Jean",
@@ -7854,7 +7764,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Fransa",
     "yas": "26",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Matías Pérez",
@@ -7872,7 +7782,7 @@
     "pozisyon": "Sol Bek",
     "uyruk": "İtalya",
     "yas": "26",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Corrie Ndaba",
@@ -7881,7 +7791,7 @@
     "pozisyon": "Sol Bek",
     "uyruk": "İrlanda",
     "yas": "26",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Danilo Veiga",
@@ -7899,7 +7809,7 @@
     "pozisyon": "Ön Libero",
     "uyruk": "Arnavutluk",
     "yas": "29",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Sadik Fofana",
@@ -7935,7 +7845,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "Mali",
     "yas": "29",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Thórir Jóhann Helgason",
@@ -7944,7 +7854,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "İzlanda",
     "yas": "25",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Álex Sala",
@@ -7953,7 +7863,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "İspanya",
     "yas": "24",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Omri Gandelman",
@@ -7962,7 +7872,7 @@
     "pozisyon": "On Numara",
     "uyruk": "İsrail",
     "yas": "25",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Filip Marchwinski",
@@ -7971,7 +7881,7 @@
     "pozisyon": "On Numara",
     "uyruk": "Polonya",
     "yas": "24",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Riccardo Sottil",
@@ -7980,7 +7890,7 @@
     "pozisyon": "Sol Kanat",
     "uyruk": "İtalya",
     "yas": "26",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Lameck Banda",
@@ -7989,7 +7899,7 @@
     "pozisyon": "Sol Kanat",
     "uyruk": "Zambiya",
     "yas": "25",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Santiago Pierotti",
@@ -7998,7 +7908,7 @@
     "pozisyon": "Sağ Kanat",
     "uyruk": "Arjantin",
     "yas": "24",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Konan N'Dri",
@@ -8007,7 +7917,7 @@
     "pozisyon": "Sağ Kanat",
     "uyruk": "Fildişi Sahili",
     "yas": "25",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Francesco Camarda",
@@ -8025,7 +7935,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "Sırbistan",
     "yas": "24",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Walid Cheddira",
@@ -8034,7 +7944,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "Fas",
     "yas": "28",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Lorenzo Montipò",
@@ -8043,7 +7953,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "İtalya",
     "yas": "30",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Simone Perilli",
@@ -8052,7 +7962,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "İtalya",
     "yas": "31",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Giacomo Toniolo",
@@ -8079,7 +7989,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Danimarka",
     "yas": "27",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Armel Bella-Kotchap",
@@ -8088,7 +7998,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Almanya",
     "yas": "24",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Nicolás Valentini",
@@ -8097,7 +8007,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Arjantin",
     "yas": "24",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Tobias Slotsager",
@@ -8115,7 +8025,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Faroe Adaları",
     "yas": "25",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Martin Frese",
@@ -8124,7 +8034,7 @@
     "pozisyon": "Sol Bek",
     "uyruk": "Danimarka",
     "yas": "28",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Domagoj Bradarić",
@@ -8133,7 +8043,7 @@
     "pozisyon": "Sol Bek",
     "uyruk": "Hırvatistan",
     "yas": "26",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Rafik Belghali",
@@ -8151,7 +8061,7 @@
     "pozisyon": "Sağ Bek",
     "uyruk": "İspanya",
     "yas": "28",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Fallou Cham",
@@ -8178,7 +8088,7 @@
     "pozisyon": "Ön Libero",
     "uyruk": "Libya",
     "yas": "29",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Cheikh Niasse",
@@ -8187,7 +8097,7 @@
     "pozisyon": "Ön Libero",
     "uyruk": "Senegal",
     "yas": "26",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Sandi Lovrić",
@@ -8196,7 +8106,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "Slovenya",
     "yas": "27",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Suat Serdar",
@@ -8205,7 +8115,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "Almanya",
     "yas": "28",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Antoine Bernede",
@@ -8214,7 +8124,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "Fransa",
     "yas": "26",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Abdou Harroui",
@@ -8223,7 +8133,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "Fas",
     "yas": "28",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Roberto Gagliardini",
@@ -8232,7 +8142,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "İtalya",
     "yas": "31",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Jean-Daniel Akpa Akpro",
@@ -8241,7 +8151,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "Fildişi Sahili",
     "yas": "33",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Tomas Suslov",
@@ -8268,7 +8178,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "İsveç",
     "yas": "24",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Kieron Bowie",
@@ -8286,7 +8196,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "Kolombiya",
     "yas": "26",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Isaac",
@@ -8313,7 +8223,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "Endonezya",
     "yas": "29",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Marco Silvestri",
@@ -8322,7 +8232,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "İtalya",
     "yas": "34",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Lapo Nava",
@@ -8358,7 +8268,7 @@
     "pozisyon": "Stoper",
     "uyruk": "İtalya",
     "yas": "29",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Federico Baschirotto",
@@ -8367,7 +8277,7 @@
     "pozisyon": "Stoper",
     "uyruk": "İtalya",
     "yas": "29",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Matteo Bianchetti",
@@ -8376,7 +8286,7 @@
     "pozisyon": "Stoper",
     "uyruk": "İtalya",
     "yas": "32",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Francesco Folino",
@@ -8385,7 +8295,7 @@
     "pozisyon": "Stoper",
     "uyruk": "İtalya",
     "yas": "24",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Federico Ceccherini",
@@ -8394,7 +8304,7 @@
     "pozisyon": "Stoper",
     "uyruk": "İtalya",
     "yas": "33",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Giuseppe Pezzella",
@@ -8403,7 +8313,7 @@
     "pozisyon": "Sol Bek",
     "uyruk": "İtalya",
     "yas": "28",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Tommaso Barbieri",
@@ -8430,7 +8340,7 @@
     "pozisyon": "Ön Libero",
     "uyruk": "İtalya",
     "yas": "30",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Warren Bondo",
@@ -8448,7 +8358,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "Arjantin",
     "yas": "27",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Jari Vandeputte",
@@ -8457,7 +8367,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "Belçika",
     "yas": "30",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Morten Thorsby",
@@ -8466,7 +8376,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "Norveç",
     "yas": "29",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Michele Collocolo",
@@ -8475,7 +8385,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "İtalya",
     "yas": "26",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Youssef Maleh",
@@ -8484,7 +8394,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "Fas",
     "yas": "27",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Alessio Zerbin",
@@ -8493,7 +8403,7 @@
     "pozisyon": "Orta Saha Sağ",
     "uyruk": "İtalya",
     "yas": "26",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Faris Moumbagna",
@@ -8502,7 +8412,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "Kamerun",
     "yas": "25",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Antonio Sanabria",
@@ -8511,7 +8421,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "Paraguay",
     "yas": "29",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Federico Bonazzoli",
@@ -8520,7 +8430,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "İtalya",
     "yas": "28",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "David Okereke",
@@ -8529,7 +8439,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "Nijerya",
     "yas": "28",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Milan Djuric",
@@ -8538,7 +8448,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "Bosna-Hersek",
     "yas": "35",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Jamie Vardy",
@@ -8547,7 +8457,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "İngiltere",
     "yas": "39",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Thibaut Courtois",
@@ -8601,7 +8511,7 @@
     "pozisyon": "Stoper",
     "uyruk": "İspanya",
     "yas": "23",
-    "zorluk": "Kolay"
+    "zorluk": "Orta"
   },
   {
     "isim": "Antonio Rüdiger",
@@ -8700,7 +8610,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "İspanya",
     "yas": "29",
-    "zorluk": "Kolay"
+    "zorluk": "Orta"
   },
   {
     "isim": "Jorge Cestero",
@@ -8754,7 +8664,7 @@
     "pozisyon": "Sağ Kanat",
     "uyruk": "Arjantin",
     "yas": "18",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Brahim Díaz",
@@ -8781,7 +8691,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "İspanya",
     "yas": "21",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Joan García",
@@ -8790,7 +8700,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "İspanya",
     "yas": "24",
-    "zorluk": "Kolay"
+    "zorluk": ""
   },
   {
     "isim": "Wojciech Szczęsny",
@@ -8808,7 +8718,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "Amerika Birleşik Devletleri",
     "yas": "19",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Pau Cubarsí",
@@ -8979,7 +8889,7 @@
     "pozisyon": "Sağ Kanat",
     "uyruk": "İsveç",
     "yas": "20",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Ferran Torres",
@@ -9015,7 +8925,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "Arjantin",
     "yas": "31",
-    "zorluk": "Kolay"
+    "zorluk": ""
   },
   {
     "isim": "Dávid Hancko",
@@ -9024,7 +8934,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Slovakya",
     "yas": "28",
-    "zorluk": "Kolay"
+    "zorluk": ""
   },
   {
     "isim": "Robin Le Normand",
@@ -9042,7 +8952,7 @@
     "pozisyon": "Stoper",
     "uyruk": "İspanya",
     "yas": "22",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "José María Giménez",
@@ -9069,7 +8979,7 @@
     "pozisyon": "Sol Bek",
     "uyruk": "İtalya",
     "yas": "23",
-    "zorluk": "Kolay"
+    "zorluk": "Orta"
   },
   {
     "isim": "Marcos Llorente",
@@ -9096,7 +9006,7 @@
     "pozisyon": "Ön Libero",
     "uyruk": "Amerika Birleşik Devletleri",
     "yas": "24",
-    "zorluk": "Kolay"
+    "zorluk": ""
   },
   {
     "isim": "Pablo Barrios",
@@ -9105,7 +9015,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "İspanya",
     "yas": "22",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Rodrigo Mendoza",
@@ -9114,7 +9024,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "İspanya",
     "yas": "20",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Obed Vargas",
@@ -9123,7 +9033,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "Meksika",
     "yas": "20",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Koke",
@@ -9168,7 +9078,7 @@
     "pozisyon": "Sağ Kanat",
     "uyruk": "Arjantin",
     "yas": "23",
-    "zorluk": "Kolay"
+    "zorluk": "Orta"
   },
   {
     "isim": "Ademola Lookman",
@@ -9474,7 +9384,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "Brezilya",
     "yas": "25",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Diego Conde",
@@ -9483,7 +9393,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "İspanya",
     "yas": "27",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Arnau Tenas",
@@ -9492,7 +9402,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "İspanya",
     "yas": "24",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Renato Veiga",
@@ -9501,7 +9411,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Portekiz",
     "yas": "22",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Logan Costa",
@@ -9510,7 +9420,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Yeşil Burun Adaları",
     "yas": "24",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Juan Foyth",
@@ -9519,7 +9429,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Arjantin",
     "yas": "28",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Rafa Marín",
@@ -9537,7 +9447,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Fransa",
     "yas": "21",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Sergi Cardona",
@@ -9546,7 +9456,7 @@
     "pozisyon": "Sol Bek",
     "uyruk": "İspanya",
     "yas": "26",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Alfonso Pedraza",
@@ -9555,7 +9465,7 @@
     "pozisyon": "Sol Bek",
     "uyruk": "İspanya",
     "yas": "29",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Santiago Mouriño",
@@ -9564,7 +9474,7 @@
     "pozisyon": "Sağ Bek",
     "uyruk": "Uruguay",
     "yas": "24",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Pau Navarro",
@@ -9573,7 +9483,7 @@
     "pozisyon": "Sağ Bek",
     "uyruk": "İspanya",
     "yas": "20",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Alex Freeman",
@@ -9582,7 +9492,7 @@
     "pozisyon": "Sağ Bek",
     "uyruk": "Amerika Birleşik Devletleri",
     "yas": "21",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Thomas Partey",
@@ -9609,7 +9519,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "İspanya",
     "yas": "29",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Dani Parejo",
@@ -9627,7 +9537,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "İspanya",
     "yas": "17",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Alberto Moleiro",
@@ -9636,7 +9546,7 @@
     "pozisyon": "Sol Kanat",
     "uyruk": "İspanya",
     "yas": "22",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Alfon González",
@@ -9645,7 +9555,7 @@
     "pozisyon": "Sol Kanat",
     "uyruk": "İspanya",
     "yas": "26",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Hugo López",
@@ -9654,7 +9564,7 @@
     "pozisyon": "Sol Kanat",
     "uyruk": "İspanya",
     "yas": "18",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Tajon Buchanan",
@@ -9663,7 +9573,7 @@
     "pozisyon": "Sağ Kanat",
     "uyruk": "Kanada",
     "yas": "27",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Nicolas Pépé",
@@ -9690,7 +9600,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "Kanada",
     "yas": "25",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Ayoze Pérez",
@@ -9699,7 +9609,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "İspanya",
     "yas": "32",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Gerard Moreno",
@@ -9717,7 +9627,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "İspanya",
     "yas": "21",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Álex Remiro",
@@ -9726,7 +9636,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "İspanya",
     "yas": "30",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Unai Marrero",
@@ -9735,7 +9645,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "İspanya",
     "yas": "24",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Jon Martín",
@@ -9744,7 +9654,7 @@
     "pozisyon": "Stoper",
     "uyruk": "İspanya",
     "yas": "19",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Igor Zubeldia",
@@ -9753,7 +9663,7 @@
     "pozisyon": "Stoper",
     "uyruk": "İspanya",
     "yas": "28",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Duje Caleta-Car",
@@ -9771,7 +9681,7 @@
     "pozisyon": "Stoper",
     "uyruk": "İspanya",
     "yas": "31",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Sergio Gómez",
@@ -9780,7 +9690,7 @@
     "pozisyon": "Sol Bek",
     "uyruk": "İspanya",
     "yas": "25",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Aihen Muñoz",
@@ -9789,7 +9699,7 @@
     "pozisyon": "Sol Bek",
     "uyruk": "İspanya",
     "yas": "28",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Jon Aramburu",
@@ -9798,7 +9708,7 @@
     "pozisyon": "Sağ Bek",
     "uyruk": "Venezuela",
     "yas": "23",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Álvaro Odriozola",
@@ -9807,7 +9717,7 @@
     "pozisyon": "Sağ Bek",
     "uyruk": "İspanya",
     "yas": "30",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Jon Gorrotxategi",
@@ -9816,7 +9726,7 @@
     "pozisyon": "Ön Libero",
     "uyruk": "İspanya",
     "yas": "24",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Luka Sucic",
@@ -9825,7 +9735,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "Hırvatistan",
     "yas": "23",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Yangel Herrera",
@@ -9834,7 +9744,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "Venezuela",
     "yas": "28",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Beñat Turrientes",
@@ -9843,7 +9753,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "İspanya",
     "yas": "24",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Carlos Soler",
@@ -9852,7 +9762,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "İspanya",
     "yas": "29",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Brais Méndez",
@@ -9861,7 +9771,7 @@
     "pozisyon": "On Numara",
     "uyruk": "İspanya",
     "yas": "29",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Pablo Marín",
@@ -9870,7 +9780,7 @@
     "pozisyon": "On Numara",
     "uyruk": "İspanya",
     "yas": "22",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Arsen Zakharyan",
@@ -9879,7 +9789,7 @@
     "pozisyon": "On Numara",
     "uyruk": "Rusya",
     "yas": "22",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Ander Barrenetxea",
@@ -9888,7 +9798,7 @@
     "pozisyon": "Sol Kanat",
     "uyruk": "İspanya",
     "yas": "24",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Gonçalo Guedes",
@@ -9906,7 +9816,7 @@
     "pozisyon": "Sol Kanat",
     "uyruk": "Brezilya",
     "yas": "20",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Takefusa Kubo",
@@ -9933,7 +9843,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "İzlanda",
     "yas": "21",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Jon Karrikaburu",
@@ -9942,7 +9852,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "İspanya",
     "yas": "23",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Álvaro Valles",
@@ -10734,7 +10644,7 @@
     "pozisyon": "Stoper",
     "uyruk": "İspanya",
     "yas": "35",
-    "zorluk": ""
+    "zorluk": "Orta"
   },
   {
     "isim": "Junior Firpo",
@@ -10770,7 +10680,7 @@
     "pozisyon": "Sağ Bek",
     "uyruk": "İspanya",
     "yas": "30",
-    "zorluk": ""
+    "zorluk": "Orta"
   },
   {
     "isim": "Sofyan Amrabat",
@@ -10932,7 +10842,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "Norveç",
     "yas": "35",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Kike Salas",
@@ -10941,7 +10851,7 @@
     "pozisyon": "Stoper",
     "uyruk": "İspanya",
     "yas": "23",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Fábio Cardoso",
@@ -10950,7 +10860,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Portekiz",
     "yas": "31",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Marcão",
@@ -10968,7 +10878,7 @@
     "pozisyon": "Stoper",
     "uyruk": "İspanya",
     "yas": "22",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Tanguy Nianzou",
@@ -10977,7 +10887,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Fransa",
     "yas": "23",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "César Azpilicueta",
@@ -10995,7 +10905,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Arjantin",
     "yas": "27",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Gabriel Suazo",
@@ -11004,7 +10914,7 @@
     "pozisyon": "Sol Bek",
     "uyruk": "Şili",
     "yas": "28",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Oso",
@@ -11013,7 +10923,7 @@
     "pozisyon": "Sol Bek",
     "uyruk": "İspanya",
     "yas": "22",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Juanlu Sánchez",
@@ -11022,7 +10932,7 @@
     "pozisyon": "Sağ Bek",
     "uyruk": "İspanya",
     "yas": "22",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "José Ángel Carmona",
@@ -11031,7 +10941,7 @@
     "pozisyon": "Sağ Bek",
     "uyruk": "İspanya",
     "yas": "24",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Lucien Agoumé",
@@ -11040,7 +10950,7 @@
     "pozisyon": "Ön Libero",
     "uyruk": "Fransa",
     "yas": "24",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Batista Mendy",
@@ -11067,7 +10977,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "İsviçre",
     "yas": "29",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Joan Jordán",
@@ -11076,7 +10986,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "İspanya",
     "yas": "31",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Manu Bueno",
@@ -11085,7 +10995,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "İspanya",
     "yas": "21",
-    "zorluk": "Zor"
+    "zorluk": "Orta"
   },
   {
     "isim": "Rubén Vargas",
@@ -11103,7 +11013,7 @@
     "pozisyon": "Sol Kanat",
     "uyruk": "Nijerya",
     "yas": "28",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Adnan Januzaj",
@@ -11112,7 +11022,7 @@
     "pozisyon": "Sağ Kanat",
     "uyruk": "Belçika",
     "yas": "31",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Miguel Ángel Sierra",
@@ -11121,7 +11031,7 @@
     "pozisyon": "Sağ Kanat",
     "uyruk": "İspanya",
     "yas": "21",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Peque Fernández",
@@ -11130,7 +11040,7 @@
     "pozisyon": "Forvet Arkası",
     "uyruk": "İspanya",
     "yas": "23",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Akor Adams",
@@ -11139,7 +11049,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "Nijerya",
     "yas": "26",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Isaac Romero",
@@ -11148,7 +11058,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "İspanya",
     "yas": "25",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Neal Maupay",
@@ -11157,7 +11067,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "Fransa",
     "yas": "29",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Alexis Sánchez",
@@ -13200,7 +13110,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "Almanya",
     "yas": "22",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Manuel Neuer",
@@ -13218,7 +13128,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "Almanya",
     "yas": "37",
-    "zorluk": "Kolay"
+    "zorluk": "Orta"
   },
   {
     "isim": "Leon Klanac",
@@ -13227,7 +13137,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "Almanya",
     "yas": "19",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Dayot Upamecano",
@@ -13263,7 +13173,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Japonya",
     "yas": "26",
-    "zorluk": "Kolay"
+    "zorluk": ""
   },
   {
     "isim": "Alphonso Davies",
@@ -13290,7 +13200,7 @@
     "pozisyon": "Sağ Bek",
     "uyruk": "Avusturya",
     "yas": "28",
-    "zorluk": "Kolay"
+    "zorluk": "Orta"
   },
   {
     "isim": "Josip Stanisic",
@@ -13299,7 +13209,7 @@
     "pozisyon": "Sağ Bek",
     "uyruk": "Hırvatistan",
     "yas": "25",
-    "zorluk": "Kolay"
+    "zorluk": ""
   },
   {
     "isim": "Aleksandar Pavlovic",
@@ -13308,7 +13218,7 @@
     "pozisyon": "Ön Libero",
     "uyruk": "Almanya",
     "yas": "21",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Joshua Kimmich",
@@ -13326,7 +13236,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "Almanya",
     "yas": "20",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Leon Goretzka",
@@ -13344,7 +13254,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "Senegal",
     "yas": "18",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Jamal Musiala",
@@ -13362,7 +13272,7 @@
     "pozisyon": "On Numara",
     "uyruk": "Almanya",
     "yas": "18",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Luis Díaz",
@@ -13407,7 +13317,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "Senegal",
     "yas": "24",
-    "zorluk": "Kolay"
+    "zorluk": "Orta"
   },
   {
     "isim": "Gregor Kobel",
@@ -13434,7 +13344,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "Almanya",
     "yas": "33",
-    "zorluk": "Kolay"
+    "zorluk": ""
   },
   {
     "isim": "Silas Ostrzinski",
@@ -13443,7 +13353,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "Almanya",
     "yas": "22",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Nico Schlotterbeck",
@@ -13452,7 +13362,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Almanya",
     "yas": "26",
-    "zorluk": "Kolay"
+    "zorluk": "Orta"
   },
   {
     "isim": "Waldemar Anton",
@@ -13461,7 +13371,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Almanya",
     "yas": "29",
-    "zorluk": "Kolay"
+    "zorluk": ""
   },
   {
     "isim": "Ramy Bensebaini",
@@ -13470,7 +13380,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Cezayir",
     "yas": "30",
-    "zorluk": "Kolay"
+    "zorluk": ""
   },
   {
     "isim": "Emre Can",
@@ -13479,7 +13389,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Almanya",
     "yas": "32",
-    "zorluk": "Kolay"
+    "zorluk": "Orta"
   },
   {
     "isim": "Niklas Süle",
@@ -13497,7 +13407,7 @@
     "pozisyon": "Stoper",
     "uyruk": "İtalya",
     "yas": "20",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Luca Reggiani",
@@ -13506,7 +13416,7 @@
     "pozisyon": "Stoper",
     "uyruk": "İtalya",
     "yas": "18",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Daniel Svensson",
@@ -13515,7 +13425,7 @@
     "pozisyon": "Sol Bek",
     "uyruk": "İsveç",
     "yas": "24",
-    "zorluk": "Kolay"
+    "zorluk": ""
   },
   {
     "isim": "Almugera Kabar",
@@ -13524,7 +13434,7 @@
     "pozisyon": "Sol Bek",
     "uyruk": "Almanya",
     "yas": "19",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Julian Ryerson",
@@ -13533,7 +13443,7 @@
     "pozisyon": "Sağ Bek",
     "uyruk": "Norveç",
     "yas": "28",
-    "zorluk": "Kolay"
+    "zorluk": ""
   },
   {
     "isim": "Salih Özcan",
@@ -13551,7 +13461,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "Almanya",
     "yas": "25",
-    "zorluk": "Kolay"
+    "zorluk": ""
   },
   {
     "isim": "Jobe Bellingham",
@@ -13569,7 +13479,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "İngiltere",
     "yas": "22",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Marcel Sabitzer",
@@ -13587,7 +13497,7 @@
     "pozisyon": "Orta Saha Sağ",
     "uyruk": "Brezilya",
     "yas": "23",
-    "zorluk": "Kolay"
+    "zorluk": ""
   },
   {
     "isim": "Julian Brandt",
@@ -13614,7 +13524,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "Gine",
     "yas": "29",
-    "zorluk": "Kolay"
+    "zorluk": "Orta"
   },
   {
     "isim": "Maximilian Beier",
@@ -13623,7 +13533,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "Almanya",
     "yas": "23",
-    "zorluk": "Kolay"
+    "zorluk": "Orta"
   },
   {
     "isim": "Fábio Silva",
@@ -13632,7 +13542,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "Portekiz",
     "yas": "23",
-    "zorluk": "Kolay"
+    "zorluk": ""
   },
   {
     "isim": "Maarten Vandevoordt",
@@ -13641,7 +13551,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "Belçika",
     "yas": "24",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Péter Gulácsi",
@@ -13659,7 +13569,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "Almanya",
     "yas": "31",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Castello Lukeba",
@@ -13668,7 +13578,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Fransa",
     "yas": "23",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "El Chadaille Bitshiabu",
@@ -13713,7 +13623,7 @@
     "pozisyon": "Sol Bek",
     "uyruk": "Almanya",
     "yas": "27",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Max Finkgräfe",
@@ -13731,7 +13641,7 @@
     "pozisyon": "Sağ Bek",
     "uyruk": "Almanya",
     "yas": "27",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Benjamin Henrichs",
@@ -13740,7 +13650,7 @@
     "pozisyon": "Sağ Bek",
     "uyruk": "Almanya",
     "yas": "29",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Kosta Nedeljkovic",
@@ -13758,7 +13668,7 @@
     "pozisyon": "Ön Libero",
     "uyruk": "Avusturya",
     "yas": "24",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Benno Kaltefleiter",
@@ -13794,7 +13704,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "Avusturya",
     "yas": "28",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Brajan Gruda",
@@ -13812,7 +13722,7 @@
     "pozisyon": "On Numara",
     "uyruk": "Avusturya",
     "yas": "26",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Andrija Maksimovic",
@@ -13893,7 +13803,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "Brezilya",
     "yas": "24",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Conrad Harder",
@@ -13920,7 +13830,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "Hollanda",
     "yas": "32",
-    "zorluk": "Kolay"
+    "zorluk": ""
   },
   {
     "isim": "Jonas Omlin",
@@ -13929,7 +13839,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "İsviçre",
     "yas": "32",
-    "zorluk": "Kolay"
+    "zorluk": ""
   },
   {
     "isim": "Janis Blaswich",
@@ -13938,7 +13848,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "Almanya",
     "yas": "34",
-    "zorluk": "Kolay"
+    "zorluk": ""
   },
   {
     "isim": "Niklas Lomb",
@@ -13947,7 +13857,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "Almanya",
     "yas": "32",
-    "zorluk": "Kolay"
+    "zorluk": ""
   },
   {
     "isim": "Jarell Quansah",
@@ -13956,7 +13866,7 @@
     "pozisyon": "Stoper",
     "uyruk": "İngiltere",
     "yas": "23",
-    "zorluk": "Kolay"
+    "zorluk": ""
   },
   {
     "isim": "Edmond Tapsoba",
@@ -13965,7 +13875,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Burkina Faso",
     "yas": "27",
-    "zorluk": "Kolay"
+    "zorluk": ""
   },
   {
     "isim": "Loïc Badé",
@@ -13974,7 +13884,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Fransa",
     "yas": "25",
-    "zorluk": "Kolay"
+    "zorluk": ""
   },
   {
     "isim": "Axel Tape",
@@ -13983,7 +13893,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Fransa",
     "yas": "18",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Tim Oermann",
@@ -13992,7 +13902,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Almanya",
     "yas": "22",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Issa Traoré",
@@ -14001,7 +13911,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Mali",
     "yas": "18",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Alejandro Grimaldo",
@@ -14019,7 +13929,7 @@
     "pozisyon": "Sağ Bek",
     "uyruk": "Brezilya",
     "yas": "22",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Lucas Vázquez",
@@ -14028,7 +13938,7 @@
     "pozisyon": "Sağ Bek",
     "uyruk": "İspanya",
     "yas": "34",
-    "zorluk": "Kolay"
+    "zorluk": ""
   },
   {
     "isim": "Equi Fernández",
@@ -14037,7 +13947,7 @@
     "pozisyon": "Ön Libero",
     "uyruk": "Arjantin",
     "yas": "23",
-    "zorluk": "Kolay"
+    "zorluk": ""
   },
   {
     "isim": "Robert Andrich",
@@ -14046,7 +13956,7 @@
     "pozisyon": "Ön Libero",
     "uyruk": "Almanya",
     "yas": "31",
-    "zorluk": "Kolay"
+    "zorluk": ""
   },
   {
     "isim": "Exequiel Palacios",
@@ -14055,7 +13965,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "Arjantin",
     "yas": "27",
-    "zorluk": "Kolay"
+    "zorluk": "Orta"
   },
   {
     "isim": "Aleix García",
@@ -14064,7 +13974,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "İspanya",
     "yas": "28",
-    "zorluk": "Kolay"
+    "zorluk": ""
   },
   {
     "isim": "Malik Tillman",
@@ -14073,7 +13983,7 @@
     "pozisyon": "On Numara",
     "uyruk": "Amerika Birleşik Devletleri",
     "yas": "23",
-    "zorluk": "Kolay"
+    "zorluk": ""
   },
   {
     "isim": "Ibrahim Maza",
@@ -14082,7 +13992,7 @@
     "pozisyon": "On Numara",
     "uyruk": "Cezayir",
     "yas": "20",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Jonas Hofmann",
@@ -14091,7 +14001,7 @@
     "pozisyon": "On Numara",
     "uyruk": "Almanya",
     "yas": "33",
-    "zorluk": "Kolay"
+    "zorluk": ""
   },
   {
     "isim": "Eliesse Ben Seghir",
@@ -14100,7 +14010,7 @@
     "pozisyon": "Sol Kanat",
     "uyruk": "Fas",
     "yas": "21",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Martin Terrier",
@@ -14109,7 +14019,7 @@
     "pozisyon": "Sol Kanat",
     "uyruk": "Fransa",
     "yas": "29",
-    "zorluk": "Kolay"
+    "zorluk": ""
   },
   {
     "isim": "Ernest Poku",
@@ -14118,7 +14028,7 @@
     "pozisyon": "Sağ Kanat",
     "uyruk": "Hollanda",
     "yas": "22",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Nathan Tella",
@@ -14127,7 +14037,7 @@
     "pozisyon": "Sağ Kanat",
     "uyruk": "Nijerya",
     "yas": "26",
-    "zorluk": "Kolay"
+    "zorluk": ""
   },
   {
     "isim": "Patrik Schick",
@@ -14136,7 +14046,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "Çek Cumhuriyeti",
     "yas": "30",
-    "zorluk": "Kolay"
+    "zorluk": "Orta"
   },
   {
     "isim": "Christian Kofane",
@@ -14145,7 +14055,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "Kamerun",
     "yas": "19",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Kauã Santos",
@@ -14163,7 +14073,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "Almanya",
     "yas": "30",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Jens Grahl",
@@ -14172,7 +14082,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "Almanya",
     "yas": "37",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Amil Siljevic",
@@ -14190,7 +14100,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Belçika",
     "yas": "25",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Robin Koch",
@@ -14199,7 +14109,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Almanya",
     "yas": "29",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Nnamdi Collins",
@@ -14244,7 +14154,7 @@
     "pozisyon": "Sağ Bek",
     "uyruk": "Danimarka",
     "yas": "28",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Elias Baum",
@@ -14262,7 +14172,7 @@
     "pozisyon": "Sağ Bek",
     "uyruk": "Amerika Birleşik Devletleri",
     "yas": "35",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Ellyes Skhiri",
@@ -14271,7 +14181,7 @@
     "pozisyon": "Ön Libero",
     "uyruk": "Tunus",
     "yas": "30",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Hugo Larsson",
@@ -14298,7 +14208,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "Suriye",
     "yas": "30",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Can Uzun",
@@ -14316,7 +14226,7 @@
     "pozisyon": "On Numara",
     "uyruk": "Cezayir",
     "yas": "23",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Love Arrhov",
@@ -14352,7 +14262,7 @@
     "pozisyon": "Sağ Kanat",
     "uyruk": "Japonya",
     "yas": "27",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Ansgar Knauff",
@@ -14361,7 +14271,7 @@
     "pozisyon": "Sağ Kanat",
     "uyruk": "Almanya",
     "yas": "24",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Ayoube Amaimouni-Echghouyab",
@@ -14379,7 +14289,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "Almanya",
     "yas": "25",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Arnaud Kalimuendo",
@@ -14388,7 +14298,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "Fransa",
     "yas": "24",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Younes Ebnoutalib",
@@ -14415,7 +14325,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "Almanya",
     "yas": "29",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Florian Hellstern",
@@ -14433,7 +14343,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "Almanya",
     "yas": "31",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Stefan Drljaca",
@@ -14442,7 +14352,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "Almanya",
     "yas": "26",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Finn Jeltsch",
@@ -14460,7 +14370,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Almanya",
     "yas": "28",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Luca Jaquez",
@@ -14478,7 +14388,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Hollanda",
     "yas": "24",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Ameen Al-Dakhil",
@@ -14487,7 +14397,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Belçika",
     "yas": "23",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Dan-Axel Zagadou",
@@ -14496,7 +14406,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Fransa",
     "yas": "26",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Maximilian Mittelstädt",
@@ -14505,7 +14415,7 @@
     "pozisyon": "Sol Bek",
     "uyruk": "Almanya",
     "yas": "28",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Lorenz Assignon",
@@ -14514,7 +14424,7 @@
     "pozisyon": "Sağ Bek",
     "uyruk": "Fransa",
     "yas": "25",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Josha Vagnoman",
@@ -14523,7 +14433,7 @@
     "pozisyon": "Sağ Bek",
     "uyruk": "Almanya",
     "yas": "25",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Pascal Stenzel",
@@ -14532,7 +14442,7 @@
     "pozisyon": "Sağ Bek",
     "uyruk": "Almanya",
     "yas": "29",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Angelo Stiller",
@@ -14541,7 +14451,7 @@
     "pozisyon": "Ön Libero",
     "uyruk": "Almanya",
     "yas": "24",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Chema Andrés",
@@ -14559,7 +14469,7 @@
     "pozisyon": "Ön Libero",
     "uyruk": "Türkiye",
     "yas": "29",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Mirza Catovic",
@@ -14577,7 +14487,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "Danimarka",
     "yas": "26",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Bilal El Khannouss",
@@ -14595,7 +14505,7 @@
     "pozisyon": "Sol Kanat",
     "uyruk": "Almanya",
     "yas": "28",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Justin Diehl",
@@ -14613,7 +14523,7 @@
     "pozisyon": "Sağ Kanat",
     "uyruk": "Almanya",
     "yas": "25",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Badredine Bouanani",
@@ -14649,7 +14559,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "Bosna-Hersek",
     "yas": "27",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Deniz Undav",
@@ -14658,7 +14568,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "Almanya",
     "yas": "29",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Tiago Tomás",
@@ -14667,7 +14577,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "Portekiz",
     "yas": "23",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Jeremy Arévalo",
@@ -17817,7 +17727,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "Gürcistan",
     "yas": "31",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Stefan Schimmer",
@@ -17826,7 +17736,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "Almanya",
     "yas": "31",
-    "zorluk": "Zor"
+    "zorluk": ""
   },
   {
     "isim": "Lucas Chevalier",
@@ -17835,7 +17745,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "Fransa",
     "yas": "24",
-    "zorluk": "Kolay"
+    "zorluk": ""
   },
   {
     "isim": "Matvey Safonov",
@@ -17844,7 +17754,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "Rusya",
     "yas": "27",
-    "zorluk": "Kolay"
+    "zorluk": "Orta"
   },
   {
     "isim": "Renato Marin",
@@ -17853,7 +17763,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "Brezilya",
     "yas": "19",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Willian Pacho",
@@ -17862,7 +17772,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Ekvador",
     "yas": "24",
-    "zorluk": "Kolay"
+    "zorluk": ""
   },
   {
     "isim": "Ilya Zabarnyi",
@@ -17871,7 +17781,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Ukrayna",
     "yas": "23",
-    "zorluk": "Kolay"
+    "zorluk": ""
   },
   {
     "isim": "Marquinhos",
@@ -17898,7 +17808,7 @@
     "pozisyon": "Sol Bek",
     "uyruk": "Portekiz",
     "yas": "23",
-    "zorluk": "Kolay"
+    "zorluk": "Orta"
   },
   {
     "isim": "Lucas Hernández",
@@ -17970,7 +17880,7 @@
     "pozisyon": "On Numara",
     "uyruk": "Güney Kore",
     "yas": "25",
-    "zorluk": "Kolay"
+    "zorluk": ""
   },
   {
     "isim": "Dro Fernández",
@@ -18006,7 +17916,7 @@
     "pozisyon": "Sol Kanat",
     "uyruk": "Fransa",
     "yas": "18",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Désiré Doué",
@@ -18042,7 +17952,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "Portekiz",
     "yas": "24",
-    "zorluk": "Kolay"
+    "zorluk": ""
   },
   {
     "isim": "Gerónimo Rulli",
@@ -18051,7 +17961,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "Arjantin",
     "yas": "33",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Jeffrey de Lange",
@@ -18060,7 +17970,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "Hollanda",
     "yas": "27",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Jelle Van Neck",
@@ -18078,7 +17988,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "Fransa",
     "yas": "29",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Nayef Aguerd",
@@ -18087,7 +17997,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Fas",
     "yas": "29",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Leonardo Balerdi",
@@ -18096,7 +18006,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Arjantin",
     "yas": "27",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Benjamin Pavard",
@@ -18105,7 +18015,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Fransa",
     "yas": "29",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Facundo Medina",
@@ -18114,7 +18024,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Arjantin",
     "yas": "26",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "CJ Egan-Riley",
@@ -18123,7 +18033,7 @@
     "pozisyon": "Stoper",
     "uyruk": "İngiltere",
     "yas": "23",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Emerson",
@@ -18132,7 +18042,7 @@
     "pozisyon": "Sol Bek",
     "uyruk": "İtalya",
     "yas": "31",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Arthur Vermeeren",
@@ -18150,7 +18060,7 @@
     "pozisyon": "Ön Libero",
     "uyruk": "Danimarka",
     "yas": "30",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Geoffrey Kondogbia",
@@ -18159,7 +18069,7 @@
     "pozisyon": "Ön Libero",
     "uyruk": "Orta Afrika Cumhuriyeti",
     "yas": "33",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Tochukwu Nnadi",
@@ -18177,7 +18087,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "Hollanda",
     "yas": "24",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Bilal Nadir",
@@ -18195,7 +18105,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "Amerika Birleşik Devletleri",
     "yas": "27",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Timothy Weah",
@@ -18204,7 +18114,7 @@
     "pozisyon": "Orta Saha Sağ",
     "uyruk": "Amerika Birleşik Devletleri",
     "yas": "26",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Ethan Nwaneri",
@@ -18222,7 +18132,7 @@
     "pozisyon": "On Numara",
     "uyruk": "Cezayir",
     "yas": "26",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Igor Paixão",
@@ -18231,7 +18141,7 @@
     "pozisyon": "Sol Kanat",
     "uyruk": "Brezilya",
     "yas": "25",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Hamed Traoré",
@@ -18240,7 +18150,7 @@
     "pozisyon": "Sol Kanat",
     "uyruk": "Fildişi Sahili",
     "yas": "26",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Mason Greenwood",
@@ -18249,7 +18159,7 @@
     "pozisyon": "Sağ Kanat",
     "uyruk": "İngiltere",
     "yas": "24",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Amine Gouiri",
@@ -18258,7 +18168,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "Cezayir",
     "yas": "26",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Pierre-Emerick Aubameyang",
@@ -18276,7 +18186,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "İsviçre",
     "yas": "27",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Lukas Hradecky",
@@ -18285,7 +18195,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "Finlandiya",
     "yas": "36",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Jules Stawiecki",
@@ -18312,7 +18222,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Almanya",
     "yas": "29",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Christian Mawissa",
@@ -18330,7 +18240,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Belçika",
     "yas": "27",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Mohammed Salisu",
@@ -18339,7 +18249,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Gana",
     "yas": "26",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Eric Dier",
@@ -18348,7 +18258,7 @@
     "pozisyon": "Stoper",
     "uyruk": "İngiltere",
     "yas": "32",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Caio Henrique",
@@ -18357,7 +18267,7 @@
     "pozisyon": "Sol Bek",
     "uyruk": "Brezilya",
     "yas": "28",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Kassoum Ouattara",
@@ -18375,7 +18285,7 @@
     "pozisyon": "Sağ Bek",
     "uyruk": "Brezilya",
     "yas": "24",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Jordan Teze",
@@ -18384,7 +18294,7 @@
     "pozisyon": "Sağ Bek",
     "uyruk": "Hollanda",
     "yas": "26",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Denis Zakaria",
@@ -18393,7 +18303,7 @@
     "pozisyon": "Ön Libero",
     "uyruk": "İsviçre",
     "yas": "29",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Aladji Bamba",
@@ -18438,7 +18348,7 @@
     "pozisyon": "Orta Saha Sağ",
     "uyruk": "Senegal",
     "yas": "27",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Aleksandr Golovin",
@@ -18447,7 +18357,7 @@
     "pozisyon": "On Numara",
     "uyruk": "Rusya",
     "yas": "29",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Stanis Idumbo",
@@ -18465,7 +18375,7 @@
     "pozisyon": "Sol Kanat",
     "uyruk": "Fildişi Sahili",
     "yas": "24",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Takumi Minamino",
@@ -18474,7 +18384,7 @@
     "pozisyon": "Sol Kanat",
     "uyruk": "Japonya",
     "yas": "31",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Ansu Fati",
@@ -18483,7 +18393,7 @@
     "pozisyon": "Sol Kanat",
     "uyruk": "İspanya",
     "yas": "23",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Maghnes Akliouche",
@@ -18492,7 +18402,7 @@
     "pozisyon": "Sağ Kanat",
     "uyruk": "Fransa",
     "yas": "24",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Folarin Balogun",
@@ -18501,7 +18411,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "Amerika Birleşik Devletleri",
     "yas": "24",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Mika Biereth",
@@ -18510,7 +18420,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "Danimarka",
     "yas": "23",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Paris Brunner",
@@ -18762,7 +18672,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "Belçika",
     "yas": "27",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Marc-Aurèle Caillard",
@@ -18771,7 +18681,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "Fransa",
     "yas": "31",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Alexsandro",
@@ -18780,7 +18690,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Brezilya",
     "yas": "26",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Nathan Ngoy",
@@ -18798,7 +18708,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Kongo DC",
     "yas": "31",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Aïssa Mandi",
@@ -18807,7 +18717,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Cezayir",
     "yas": "34",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Rafael Fernandes",
@@ -18816,7 +18726,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Portekiz",
     "yas": "23",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Ousmane Touré",
@@ -18834,7 +18744,7 @@
     "pozisyon": "Sol Bek",
     "uyruk": "Fransa",
     "yas": "28",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Calvin Verdonk",
@@ -18843,7 +18753,7 @@
     "pozisyon": "Sol Bek",
     "uyruk": "Endonezya",
     "yas": "28",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Tiago Santos",
@@ -18852,7 +18762,7 @@
     "pozisyon": "Sağ Bek",
     "uyruk": "Portekiz",
     "yas": "23",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Thomas Meunier",
@@ -18861,7 +18771,7 @@
     "pozisyon": "Sağ Bek",
     "uyruk": "Belçika",
     "yas": "34",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Ngal'ayel Mukau",
@@ -18879,7 +18789,7 @@
     "pozisyon": "Ön Libero",
     "uyruk": "Cezayir",
     "yas": "31",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Benjamin André",
@@ -18888,7 +18798,7 @@
     "pozisyon": "Ön Libero",
     "uyruk": "Fransa",
     "yas": "35",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Ayyoub Bouaddi",
@@ -18924,7 +18834,7 @@
     "pozisyon": "Sol Kanat",
     "uyruk": "Fas",
     "yas": "24",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Félix Correia",
@@ -18933,7 +18843,7 @@
     "pozisyon": "Sol Kanat",
     "uyruk": "Portekiz",
     "yas": "25",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Ethan Mbappé",
@@ -18960,7 +18870,7 @@
     "pozisyon": "Sağ Kanat",
     "uyruk": "Fransa",
     "yas": "29",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Noah Edjouma",
@@ -18978,7 +18888,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "Fas",
     "yas": "23",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Olivier Giroud",
@@ -18987,7 +18897,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "Fransa",
     "yas": "39",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Dominik Greif",
@@ -18996,7 +18906,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "Slovakya",
     "yas": "28",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Rémy Descamps",
@@ -19005,7 +18915,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "Fransa",
     "yas": "29",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Lassine Diarra",
@@ -19014,7 +18924,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "Mali",
     "yas": "23",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Moussa Niakhaté",
@@ -19023,7 +18933,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Senegal",
     "yas": "29",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Clinton Mata",
@@ -19032,7 +18942,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Angola",
     "yas": "33",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Ruben Kluivert",
@@ -19041,7 +18951,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Hollanda",
     "yas": "24",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Noham Kamara",
@@ -19059,7 +18969,7 @@
     "pozisyon": "Sol Bek",
     "uyruk": "Brezilya",
     "yas": "25",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Nicolás Tagliafico",
@@ -19068,7 +18978,7 @@
     "pozisyon": "Sol Bek",
     "uyruk": "Arjantin",
     "yas": "33",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Achraf Laâziri",
@@ -19086,7 +18996,7 @@
     "pozisyon": "Sağ Bek",
     "uyruk": "İngiltere",
     "yas": "28",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Hans Hateboer",
@@ -19095,7 +19005,7 @@
     "pozisyon": "Sağ Bek",
     "uyruk": "Hollanda",
     "yas": "32",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Tyler Morton",
@@ -19104,7 +19014,7 @@
     "pozisyon": "Ön Libero",
     "uyruk": "İngiltere",
     "yas": "23",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Tanner Tessmann",
@@ -19113,7 +19023,7 @@
     "pozisyon": "Ön Libero",
     "uyruk": "Amerika Birleşik Devletleri",
     "yas": "24",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Orel Mangala",
@@ -19122,7 +19032,7 @@
     "pozisyon": "Ön Libero",
     "uyruk": "Belçika",
     "yas": "27",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Mathys De Carvalho",
@@ -19140,7 +19050,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "Fransa",
     "yas": "31",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Khalis Merah",
@@ -19158,7 +19068,7 @@
     "pozisyon": "On Numara",
     "uyruk": "Çekya",
     "yas": "25",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Adam Karabec",
@@ -19221,7 +19131,7 @@
     "pozisyon": "Sağ Kanat",
     "uyruk": "Cezayir",
     "yas": "33",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Endrick",
@@ -19239,7 +19149,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "Ukrayna",
     "yas": "30",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Brice Samba",
@@ -19248,7 +19158,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "Fransa",
     "yas": "31",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Mathys Silistrie",
@@ -19275,7 +19185,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Fransa",
     "yas": "26",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Abdelhamid Ait Boudlal",
@@ -19293,7 +19203,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Fransa",
     "yas": "24",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Alidu Seidu",
@@ -19302,7 +19212,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Gana",
     "yas": "25",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Quentin Merlin",
@@ -19311,7 +19221,7 @@
     "pozisyon": "Sol Bek",
     "uyruk": "Fransa",
     "yas": "23",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Mahamadou Nagida",
@@ -19329,7 +19239,7 @@
     "pozisyon": "Sağ Bek",
     "uyruk": "Polonya",
     "yas": "30",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Djaoui Cissé",
@@ -19347,7 +19257,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "Fransa",
     "yas": "27",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Valentin Rongier",
@@ -19356,7 +19266,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "Fransa",
     "yas": "31",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Glen Kamara",
@@ -19365,7 +19275,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "Finlandiya",
     "yas": "30",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Ludovic Blas",
@@ -19374,7 +19284,7 @@
     "pozisyon": "Orta Saha Sağ",
     "uyruk": "Fransa",
     "yas": "28",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Sebastian Szymanski",
@@ -19383,7 +19293,7 @@
     "pozisyon": "On Numara",
     "uyruk": "Polonya",
     "yas": "26",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Mousa Tamari",
@@ -19392,7 +19302,7 @@
     "pozisyon": "Sağ Kanat",
     "uyruk": "Ürdün",
     "yas": "28",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Arnaud Nordin",
@@ -19401,7 +19311,7 @@
     "pozisyon": "Sağ Kanat",
     "uyruk": "Fransa",
     "yas": "27",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Nordan Mukiele",
@@ -19428,7 +19338,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "Fransa",
     "yas": "25",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Breel Embolo",
@@ -19437,7 +19347,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "İsviçre",
     "yas": "29",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Yassir Zabiri",
@@ -19959,7 +19869,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "İtalya",
     "yas": "36",
-    "zorluk": "Kolay"
+    "zorluk": "Orta"
   },
   {
     "isim": "Pierre-Yves Hamel",
@@ -21894,7 +21804,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "Türkiye",
     "yas": "27",
-    "zorluk": "Kolay"
+    "zorluk": ""
   },
   {
     "isim": "Enes Emre Büyük",
@@ -21903,7 +21813,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "Türkiye",
     "yas": "19",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Wilfried Singo",
@@ -21939,7 +21849,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Türkiye",
     "yas": "19",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Metehan Baltacı",
@@ -22047,7 +21957,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "Türkiye",
     "yas": "20",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Yunus Akgün",
@@ -22101,7 +22011,7 @@
     "pozisyon": "Sağ Kanat",
     "uyruk": "Kolombiya",
     "yas": "22",
-    "zorluk": "Kolay"
+    "zorluk": "Orta"
   },
   {
     "isim": "Armando Güner",
@@ -22110,7 +22020,7 @@
     "pozisyon": "Sağ Kanat",
     "uyruk": "Arjantin",
     "yas": "18",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Victor Osimhen",
@@ -22146,7 +22056,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "Türkiye",
     "yas": "29",
-    "zorluk": "Kolay"
+    "zorluk": "Orta"
   },
   {
     "isim": "Mert Günok",
@@ -22164,7 +22074,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "Türkiye",
     "yas": "19",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Jayden Oosterwolde",
@@ -22200,7 +22110,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Türkiye",
     "yas": "21",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Archie Brown",
@@ -22290,7 +22200,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "Senegal",
     "yas": "19",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Marco Asensio",
@@ -22371,7 +22281,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "Fransa",
     "yas": "19",
-    "zorluk": "Orta"
+    "zorluk": "Kolay"
   },
   {
     "isim": "Ersin Destanoğlu",
@@ -22389,7 +22299,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "Kolombiya",
     "yas": "27",
-    "zorluk": "Kolay"
+    "zorluk": ""
   },
   {
     "isim": "Emre Bilgin",
@@ -22398,7 +22308,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "Türkiye",
     "yas": "22",
-    "zorluk": "Kolay"
+    "zorluk": ""
   },
   {
     "isim": "Emir Yaşar",
@@ -22407,7 +22317,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "Türkiye",
     "yas": "20",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Emmanuel Agbadou",
@@ -22416,7 +22326,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Fildişi Sahili",
     "yas": "28",
-    "zorluk": "Kolay"
+    "zorluk": ""
   },
   {
     "isim": "Tiago Djaló",
@@ -22425,7 +22335,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Portekiz",
     "yas": "25",
-    "zorluk": "Kolay"
+    "zorluk": "Orta"
   },
   {
     "isim": "Felix Uduokhai",
@@ -22434,7 +22344,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Almanya",
     "yas": "28",
-    "zorluk": "Kolay"
+    "zorluk": "Orta"
   },
   {
     "isim": "Emirhan Topçu",
@@ -22443,7 +22353,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Türkiye",
     "yas": "25",
-    "zorluk": "Kolay"
+    "zorluk": ""
   },
   {
     "isim": "Yasin Özcan",
@@ -22452,7 +22362,7 @@
     "pozisyon": "Sol Bek",
     "uyruk": "Türkiye",
     "yas": "19",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Rıdvan Yılmaz",
@@ -22470,7 +22380,7 @@
     "pozisyon": "Sağ Bek",
     "uyruk": "Panama",
     "yas": "30",
-    "zorluk": "Kolay"
+    "zorluk": ""
   },
   {
     "isim": "Taylan Bulut",
@@ -22479,7 +22389,7 @@
     "pozisyon": "Sağ Bek",
     "uyruk": "Almanya",
     "yas": "20",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Gökhan Sazdağı",
@@ -22488,7 +22398,7 @@
     "pozisyon": "Sağ Bek",
     "uyruk": "Türkiye",
     "yas": "31",
-    "zorluk": "Kolay"
+    "zorluk": ""
   },
   {
     "isim": "Kristjan Asllani",
@@ -22497,7 +22407,7 @@
     "pozisyon": "Ön Libero",
     "uyruk": "Arnavutluk",
     "yas": "23",
-    "zorluk": "Kolay"
+    "zorluk": ""
   },
   {
     "isim": "Wilfred Ndidi",
@@ -22515,7 +22425,7 @@
     "pozisyon": "Ön Libero",
     "uyruk": "Türkiye",
     "yas": "25",
-    "zorluk": "Kolay"
+    "zorluk": ""
   },
   {
     "isim": "Necip Uysal",
@@ -22551,7 +22461,7 @@
     "pozisyon": "On Numara",
     "uyruk": "Benin",
     "yas": "23",
-    "zorluk": "Kolay"
+    "zorluk": ""
   },
   {
     "isim": "El Bilal Touré",
@@ -22560,7 +22470,7 @@
     "pozisyon": "Sol Kanat",
     "uyruk": "Mali",
     "yas": "24",
-    "zorluk": "Kolay"
+    "zorluk": ""
   },
   {
     "isim": "Jota Silva",
@@ -22569,7 +22479,7 @@
     "pozisyon": "Sol Kanat",
     "uyruk": "Portekiz",
     "yas": "26",
-    "zorluk": "Kolay"
+    "zorluk": ""
   },
   {
     "isim": "Devrim Şahin",
@@ -22578,7 +22488,7 @@
     "pozisyon": "Sol Kanat",
     "uyruk": "Türkiye",
     "yas": "18",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Vaclav Cerny",
@@ -22587,7 +22497,7 @@
     "pozisyon": "Sağ Kanat",
     "uyruk": "Çek Cumhuriyeti",
     "yas": "28",
-    "zorluk": "Kolay"
+    "zorluk": "Orta"
   },
   {
     "isim": "Cengiz Ünder",
@@ -22632,7 +22542,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "Kamerun",
     "yas": "29",
-    "zorluk": "Orta"
+    "zorluk": "Kolay"
   },
   {
     "isim": "Onuralp Çevikkan",
@@ -22641,7 +22551,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "Türkiye",
     "yas": "20",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Ahmet Yıldırım",
@@ -22650,7 +22560,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "Türkiye",
     "yas": "19",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Erol Can Çolak",
@@ -22659,7 +22569,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "Türkiye",
     "yas": "20",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Arseniy Batagov",
@@ -22668,7 +22578,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Ukrayna",
     "yas": "23",
-    "zorluk": "Kolay"
+    "zorluk": ""
   },
   {
     "isim": "Chibuike Nwaiwu",
@@ -22677,7 +22587,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Nijerya",
     "yas": "22",
-    "zorluk": "Kolay"
+    "zorluk": ""
   },
   {
     "isim": "Stefan Savic",
@@ -22686,7 +22596,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Karadağ",
     "yas": "35",
-    "zorluk": "Kolay"
+    "zorluk": ""
   },
   {
     "isim": "Arda Öztürk",
@@ -22695,7 +22605,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Türkiye",
     "yas": "18",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Taha Emre İnce",
@@ -22704,7 +22614,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Türkiye",
     "yas": "18",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Mathias Løvik",
@@ -22713,7 +22623,7 @@
     "pozisyon": "Sol Bek",
     "uyruk": "Norveç",
     "yas": "22",
-    "zorluk": "Kolay"
+    "zorluk": ""
   },
   {
     "isim": "Mustafa Eskihellaç",
@@ -22722,7 +22632,7 @@
     "pozisyon": "Sol Bek",
     "uyruk": "Türkiye",
     "yas": "28",
-    "zorluk": "Kolay"
+    "zorluk": ""
   },
   {
     "isim": "Wagner Pina",
@@ -22731,7 +22641,7 @@
     "pozisyon": "Sağ Bek",
     "uyruk": "Yeşil Burun Adaları",
     "yas": "23",
-    "zorluk": "Kolay"
+    "zorluk": ""
   },
   {
     "isim": "Okay Yokuşlu",
@@ -22749,7 +22659,7 @@
     "pozisyon": "Ön Libero",
     "uyruk": "Türkiye",
     "yas": "21",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Christ Inao Oulaï",
@@ -22767,7 +22677,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "Fas",
     "yas": "24",
-    "zorluk": "Kolay"
+    "zorluk": ""
   },
   {
     "isim": "Tim Jabol-Folcarelli",
@@ -22776,7 +22686,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "Fransa",
     "yas": "26",
-    "zorluk": "Kolay"
+    "zorluk": ""
   },
   {
     "isim": "Ozan Tufan",
@@ -22794,7 +22704,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "Türkiye",
     "yas": "19",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Ernest Muci",
@@ -22803,7 +22713,7 @@
     "pozisyon": "On Numara",
     "uyruk": "Arnavutluk",
     "yas": "24",
-    "zorluk": "Kolay"
+    "zorluk": "Orta"
   },
   {
     "isim": "Anthony Nwakaeme",
@@ -22821,7 +22731,7 @@
     "pozisyon": "Sağ Kanat",
     "uyruk": "Ukrayna",
     "yas": "29",
-    "zorluk": "Kolay"
+    "zorluk": ""
   },
   {
     "isim": "Edin Visca",
@@ -22848,7 +22758,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "Brezilya",
     "yas": "22",
-    "zorluk": "Kolay"
+    "zorluk": "Orta"
   },
   {
     "isim": "Umut Nayir",
@@ -22866,7 +22776,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "Türkiye",
     "yas": "29",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Doğan Alemdar",
@@ -22884,7 +22794,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "Türkiye",
     "yas": "37",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Luca Stancic",
@@ -22902,7 +22812,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Gana",
     "yas": "27",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Léo Duarte",
@@ -22911,7 +22821,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Brezilya",
     "yas": "29",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Hamza Güreler",
@@ -22929,7 +22839,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Senegal",
     "yas": "30",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Christopher Operi",
@@ -22938,7 +22848,7 @@
     "pozisyon": "Sol Bek",
     "uyruk": "Fildişi Sahili",
     "yas": "28",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Kazımcan Karataş",
@@ -22965,7 +22875,7 @@
     "pozisyon": "Sağ Bek",
     "uyruk": "Türkiye",
     "yas": "31",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Ömer Ali Şahiner",
@@ -22974,7 +22884,7 @@
     "pozisyon": "Sağ Bek",
     "uyruk": "Türkiye",
     "yas": "34",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Jakub Kaluzinski",
@@ -22992,7 +22902,7 @@
     "pozisyon": "Ön Libero",
     "uyruk": "Türkiye",
     "yas": "27",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Onur Ergün",
@@ -23001,7 +22911,7 @@
     "pozisyon": "Ön Libero",
     "uyruk": "Türkiye",
     "yas": "33",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Miguel Crespo",
@@ -23010,7 +22920,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "Portekiz",
     "yas": "29",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Olivier Kemen",
@@ -23019,7 +22929,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "Kamerun",
     "yas": "29",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Umut Güneş",
@@ -23037,7 +22947,7 @@
     "pozisyon": "Sol Kanat",
     "uyruk": "Fas",
     "yas": "28",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Ivan Brnic",
@@ -23073,7 +22983,7 @@
     "pozisyon": "Sağ Kanat",
     "uyruk": "Türkiye",
     "yas": "27",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Eldor Shomurodov",
@@ -23091,7 +23001,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "Almanya",
     "yas": "31",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Bertuğ Yıldırım",
@@ -23109,7 +23019,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "Yeşil Burun Adaları",
     "yas": "35",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Okan Kocuk",
@@ -23127,7 +23037,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "Türkiye",
     "yas": "27",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Efe Yiğit Üstün",
@@ -23154,7 +23064,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Hollanda",
     "yas": "27",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Toni Borevković",
@@ -23163,7 +23073,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Hırvatistan",
     "yas": "28",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Lubomir Satka",
@@ -23172,7 +23082,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Slovakya",
     "yas": "30",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Bedirhan Çetin",
@@ -23208,7 +23118,7 @@
     "pozisyon": "Sol Bek",
     "uyruk": "Türkiye",
     "yas": "28",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Enes Albak",
@@ -23235,7 +23145,7 @@
     "pozisyon": "Sağ Bek",
     "uyruk": "Türkiye",
     "yas": "34",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Antoine Makoumbou",
@@ -23244,7 +23154,7 @@
     "pozisyon": "Ön Libero",
     "uyruk": "Kongo",
     "yas": "27",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Yunus Emre Çift",
@@ -23280,7 +23190,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "Kamerun",
     "yas": "30",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Celil Yüksel",
@@ -23289,7 +23199,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "Türkiye",
     "yas": "28",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Yalçın Kayan",
@@ -23298,7 +23208,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "Türkiye",
     "yas": "27",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Muhammet Özbaskıcı",
@@ -23325,7 +23235,7 @@
     "pozisyon": "On Numara",
     "uyruk": "Danimarka",
     "yas": "26",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Afonso Sousa",
@@ -23433,7 +23343,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "Türkiye",
     "yas": "30",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Egemen Aydın",
@@ -23460,7 +23370,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Curacao",
     "yas": "29",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Adil Demirbağ",
@@ -23469,7 +23379,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Türkiye",
     "yas": "28",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Rayyan Baniya",
@@ -23478,7 +23388,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Türkiye",
     "yas": "27",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Uğurcan Yazğılı",
@@ -23487,7 +23397,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Türkiye",
     "yas": "26",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Josip Calusic",
@@ -23496,7 +23406,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Hırvatistan",
     "yas": "32",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Arif Boşluk",
@@ -23523,7 +23433,7 @@
     "pozisyon": "Sol Bek",
     "uyruk": "Türkiye",
     "yas": "30",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Yhoan Andzouana",
@@ -23532,7 +23442,7 @@
     "pozisyon": "Sağ Bek",
     "uyruk": "Kongo",
     "yas": "29",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Jin-ho Jo",
@@ -23550,7 +23460,7 @@
     "pozisyon": "Ön Libero",
     "uyruk": "Sırbistan",
     "yas": "32",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Ufuk Akyol",
@@ -23559,7 +23469,7 @@
     "pozisyon": "Ön Libero",
     "uyruk": "Türkiye",
     "yas": "28",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Berkan Kutlu",
@@ -23586,7 +23496,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "Norveç",
     "yas": "30",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Esat Buğa",
@@ -23604,7 +23514,7 @@
     "pozisyon": "On Numara",
     "uyruk": "Kuzey Makedonya",
     "yas": "30",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Kazeem Olaigbe",
@@ -23622,7 +23532,7 @@
     "pozisyon": "Sol Kanat",
     "uyruk": "Portekiz",
     "yas": "29",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Pedrinho",
@@ -23631,7 +23541,7 @@
     "pozisyon": "Sol Kanat",
     "uyruk": "Brezilya",
     "yas": "29",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Sander Svendsen",
@@ -23640,7 +23550,7 @@
     "pozisyon": "Sol Kanat",
     "uyruk": "Norveç",
     "yas": "28",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Tunahan Taşçı",
@@ -23658,7 +23568,7 @@
     "pozisyon": "Sağ Kanat",
     "uyruk": "Romanya",
     "yas": "27",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Deniz Türüç",
@@ -23676,7 +23586,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "Kongo DC",
     "yas": "26",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Blaz Kramer",
@@ -23685,7 +23595,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "Slovenya",
     "yas": "29",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Mateusz Lis",
@@ -23694,7 +23604,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "Polonya",
     "yas": "29",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Ekrem Kılıçarslan",
@@ -23703,7 +23613,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "Türkiye",
     "yas": "28",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Şamil Öztürk",
@@ -23739,7 +23649,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Kamerun",
     "yas": "26",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Furkan Bayır",
@@ -23748,7 +23658,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Türkiye",
     "yas": "26",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Héliton",
@@ -23757,7 +23667,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Brezilya",
     "yas": "30",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Allan Godói",
@@ -23766,7 +23676,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Brezilya",
     "yas": "32",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Ege Yıldırım",
@@ -23829,7 +23739,7 @@
     "pozisyon": "Orta Saha Sağ",
     "uyruk": "Türkiye",
     "yas": "27",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Uğur Kaan Yıldız",
@@ -23883,7 +23793,7 @@
     "pozisyon": "On Numara",
     "uyruk": "Türkiye",
     "yas": "30",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Juan",
@@ -23901,7 +23811,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "Brezilya",
     "yas": "26",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Jeh",
@@ -23910,7 +23820,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "Brezilya",
     "yas": "26",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Guilherme Luiz",
@@ -23964,7 +23874,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Mali",
     "yas": "26",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Khusniddin Alikulov",
@@ -23973,7 +23883,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Özbekistan",
     "yas": "26",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Samet Akaydin",
@@ -24009,7 +23919,7 @@
     "pozisyon": "Sol Bek",
     "uyruk": "Danimarka",
     "yas": "31",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Taha Şahin",
@@ -24036,7 +23946,7 @@
     "pozisyon": "Ön Libero",
     "uyruk": "Yunanistan",
     "yas": "27",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Qazim Laci",
@@ -24045,7 +23955,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "Arnavutluk",
     "yas": "30",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Ibrahim Olawoyin",
@@ -24054,7 +23964,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "Nijerya",
     "yas": "28",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Muhamed Buljubasic",
@@ -24081,7 +23991,7 @@
     "pozisyon": "Sol Kanat",
     "uyruk": "Romanya",
     "yas": "26",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Altin Zeqiri",
@@ -24108,7 +24018,7 @@
     "pozisyon": "Sağ Kanat",
     "uyruk": "Angola",
     "yas": "26",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Adedire Mebude",
@@ -24126,7 +24036,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "Haiti",
     "yas": "30",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Ali Sowe",
@@ -24135,7 +24045,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "Gambiya",
     "yas": "31",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Halil Dervişoğlu",
@@ -24378,7 +24288,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "Yunanistan",
     "yas": "33",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Ali Emre Yanar",
@@ -24387,7 +24297,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "Türkiye",
     "yas": "27",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Ege Albayrak",
@@ -24459,7 +24369,7 @@
     "pozisyon": "Sol Bek",
     "uyruk": "Hollanda",
     "yas": "26",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Emre Taşdemir",
@@ -24477,7 +24387,7 @@
     "pozisyon": "Sağ Bek",
     "uyruk": "Brezilya",
     "yas": "31",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Kamil Ahmet Çörekçi",
@@ -24486,7 +24396,7 @@
     "pozisyon": "Sağ Bek",
     "uyruk": "Türkiye",
     "yas": "34",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Berkay Muratoğlu",
@@ -24540,7 +24450,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "Portekiz",
     "yas": "33",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Haris Hajradinovic",
@@ -24549,7 +24459,7 @@
     "pozisyon": "On Numara",
     "uyruk": "Bosna-Hersek",
     "yas": "32",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Adrian Benedyczak",
@@ -24567,7 +24477,7 @@
     "pozisyon": "Sol Kanat",
     "uyruk": "Tunus",
     "yas": "31",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Ali Yavuz Kol",
@@ -24603,7 +24513,7 @@
     "pozisyon": "Sağ Kanat",
     "uyruk": "Gabon",
     "yas": "31",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Fousseni Diabaté",
@@ -24612,7 +24522,7 @@
     "pozisyon": "Sağ Kanat",
     "uyruk": "Mali",
     "yas": "30",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Pape Habib Guèye",
@@ -24621,7 +24531,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "Senegal",
     "yas": "26",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Yusuf Barası",
@@ -24639,7 +24549,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "Türkiye",
     "yas": "28",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Cenk Tosun",
@@ -25440,7 +25350,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "Türkiye",
     "yas": "36",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Paulo Victor",
@@ -25449,7 +25359,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "Brezilya",
     "yas": "39",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Nuno Lima",
@@ -25476,7 +25386,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Türkiye",
     "yas": "28",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Fidan Aliti",
@@ -25485,7 +25395,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Kosova",
     "yas": "32",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Bruno Viana",
@@ -25494,7 +25404,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Brezilya",
     "yas": "31",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Batuhan Yavuz",
@@ -25521,7 +25431,7 @@
     "pozisyon": "Ön Libero",
     "uyruk": "Kongo",
     "yas": "28",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Nicolas Janvier",
@@ -25530,7 +25440,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "Fransa",
     "yas": "27",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "İzzet Çelik",
@@ -25557,7 +25467,7 @@
     "pozisyon": "Orta Saha Sağ",
     "uyruk": "Kosova",
     "yas": "31",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Enes Keskin",
@@ -25602,7 +25512,7 @@
     "pozisyon": "On Numara",
     "uyruk": "Kongo DC",
     "yas": "28",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Ianis Hagi",
@@ -25611,7 +25521,7 @@
     "pozisyon": "On Numara",
     "uyruk": "Romanya",
     "yas": "27",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "İbrahim Kaya",
@@ -25629,7 +25539,7 @@
     "pozisyon": "On Numara",
     "uyruk": "Güney Kore",
     "yas": "33",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Efecan Karaca",
@@ -25656,7 +25566,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "Benin",
     "yas": "31",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Güven Yalçın",
@@ -25665,7 +25575,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "Türkiye",
     "yas": "27",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Abdullah Yiğiter",
@@ -25674,7 +25584,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "Türkiye",
     "yas": "26",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Julián Cuesta",
@@ -25683,7 +25593,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "İspanya",
     "yas": "34",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Kağan Arıcan",
@@ -25701,7 +25611,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Rusya",
     "yas": "32",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Lautaro Giannetti",
@@ -25710,7 +25620,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Arjantin",
     "yas": "32",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Hüseyin Türkmen",
@@ -25719,7 +25629,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Türkiye",
     "yas": "28",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Bahadır Öztürk",
@@ -25728,7 +25638,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Türkiye",
     "yas": "30",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Veysel Sarı",
@@ -25764,7 +25674,7 @@
     "pozisyon": "Sol Bek",
     "uyruk": "Surinam",
     "yas": "28",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Samet Karakoç",
@@ -25791,7 +25701,7 @@
     "pozisyon": "Sağ Bek",
     "uyruk": "Türkiye",
     "yas": "32",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Jesper Ceesay",
@@ -25809,7 +25719,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "Türkiye",
     "yas": "32",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Dario Saric",
@@ -25818,7 +25728,7 @@
     "pozisyon": "Merkez Orta Saha",
     "uyruk": "Bosna-Hersek",
     "yas": "28",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Yakub İlçin",
@@ -25845,7 +25755,7 @@
     "pozisyon": "On Numara",
     "uyruk": "İsrail",
     "yas": "30",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Sander van de Streek",
@@ -25854,7 +25764,7 @@
     "pozisyon": "On Numara",
     "uyruk": "Hollanda",
     "yas": "32",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Nikola Storm",
@@ -25863,7 +25773,7 @@
     "pozisyon": "Sol Kanat",
     "uyruk": "Belçika",
     "yas": "31",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Doğukan Sinik",
@@ -25872,7 +25782,7 @@
     "pozisyon": "Sol Kanat",
     "uyruk": "Türkiye",
     "yas": "27",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Berkay Topdemir",
@@ -25899,7 +25809,7 @@
     "pozisyon": "Santrafor",
     "uyruk": "Fildişi Sahili",
     "yas": "32",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Bachir Gueye",
@@ -26196,7 +26106,7 @@
     "pozisyon": "Kaleci",
     "uyruk": "Brezilya",
     "yas": "29",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Jankat Yılmaz",
@@ -26232,7 +26142,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Brezilya",
     "yas": "34",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Bedirhan Özyurt",
@@ -26250,7 +26160,7 @@
     "pozisyon": "Stoper",
     "uyruk": "Kamerun",
     "yas": "28",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Gilbert Mendy",
@@ -26331,7 +26241,7 @@
     "pozisyon": "Ön Libero",
     "uyruk": "Türkiye",
     "yas": "31",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Charles-André Raux-Yao",
@@ -26394,7 +26304,7 @@
     "pozisyon": "Sağ Kanat",
     "uyruk": "Romanya",
     "yas": "30",
-    "zorluk": "Orta"
+    "zorluk": ""
   },
   {
     "isim": "Christ Sadia",
