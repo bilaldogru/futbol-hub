@@ -105,13 +105,14 @@ window.startGame = function(difficulty) {
     let pool = [];
     if(difficulty === 'kolay') {
         baseScore = 100;
-        pool = allPlayers.filter(p => p.zorluk && p.zorluk.toLowerCase() === "kolay");
+        pool = allPlayers.filter(p => p.zorluk === "kolay");
     } else if (difficulty === 'orta') {
         baseScore = 150;
-        pool = allPlayers.filter(p => p.zorluk && p.zorluk.toLowerCase() === "orta");
+        pool = allPlayers.filter(p => p.zorluk === "orta");
     } else {
         baseScore = 250;
-        pool = allPlayers.filter(p => p.zorluk === "zor");
+        // ZOR modu da artık "orta" zorluktaki oyuncuları çekiyor
+        pool = allPlayers.filter(p => p.zorluk === "orta"); 
     }
 
     if(pool.length < maxQuestions) {
@@ -259,14 +260,12 @@ function finishDailyChallenge() {
     if (currentDifficulty === 'kolay' && !played[today].includes('orta')) {
         nextDiff = 'orta';
         nextDiffText = 'ORTA SEVİYEYE GEÇ';
-        // text-black yerine text-white yapıldı
         nextDiffColor = 'bg-yellow-500 text-white hover:bg-yellow-400 shadow-[0_0_20px_rgba(234,179,8,0.2)]';
     } 
     // Eğer ortadaysa ve zoru henüz oynamadıysa
     else if (currentDifficulty === 'orta' && !played[today].includes('zor')) {
         nextDiff = 'zor';
         nextDiffText = 'ZOR SEVİYEYE GEÇ';
-        // text-black yerine text-white yapıldı
         nextDiffColor = 'bg-red-500 text-white hover:bg-red-400 shadow-[0_0_20px_rgba(239,68,68,0.2)]';
     }
 
@@ -384,14 +383,22 @@ function gameLoop() {
     if (isGameOver) return;
     seconds++;
     
-    if (seconds <= 15 && seconds % 3 === 0) {
-        revealClueCard((seconds / 3) - 1);
+    // YENİ: İpuçları 15 sn yerine ilk 10 saniyede hızla açılır (2, 4, 6, 8, 10. saniyeler)
+    if (seconds <= 10 && seconds % 2 === 0) {
+        revealClueCard((seconds / 2) - 1);
         decreaseScore(Math.floor(baseScore * 0.05)); 
     }
     
-    if (seconds > 15 && seconds % 2 === 0) {
+    // YENİ: 10. Saniyeden sonra harfler açılmaya başlar
+    if (seconds > 10 && seconds % 2 === 0) {
         revealRandomLetter();
         decreaseScore(Math.floor(baseScore * 0.08)); 
+    }
+    
+    // YENİ: Oyuncu bilemeden tüm harfler açılırsa anında bitir ve kaybettir!
+    if (globalLetterIndexMap.length > 0 && revealedIndices.length >= globalLetterIndexMap.length) {
+        endGame(false);
+        return;
     }
     
     if (currentScore <= 0) endGame(false);
@@ -401,7 +408,7 @@ function revealClueCard(index) {
     const card = document.getElementById(`clue-${index}`);
     if (card && !card.classList.contains('active')) { // Zaten açık değilse
         card.classList.add('active');
-        playSound('reveal'); // YENİ: Kutu açılma sesi
+        playSound('reveal'); 
     }
 }
 
