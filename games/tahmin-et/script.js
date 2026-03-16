@@ -105,13 +105,13 @@ window.startGame = function(difficulty) {
     let pool = [];
     if(difficulty === 'kolay') {
         baseScore = 100;
-        pool = allPlayers.filter(p => p.zorluk === "kolay");
+        pool = allPlayers.filter(p => p.zorluk && p.zorluk.toLowerCase() === "kolay");
     } else if (difficulty === 'orta') {
         baseScore = 150;
-        pool = allPlayers.filter(p => p.zorluk === "orta");
+        pool = allPlayers.filter(p => p.zorluk && p.zorluk.toLowerCase() === "orta");
     } else {
         baseScore = 250;
-        pool = allPlayers.filter(p => p.zorluk === "zor");
+        pool = allPlayers.filter(p => p.zorluk && p.zorluk.toLowerCase() === "zor");
     }
 
     if(pool.length < maxQuestions) {

@@ -808,8 +808,8 @@ async function oyunuBaslat() {
     const day = String(today.getDate()).padStart(2, '0');
     const dateString = `${year}-${month}-${day}`; 
 
-    // YENİ: Sadece "kolay" zorluktaki oyuncuları filtrele
-    let kolayOyuncular = oyuncular.filter(p => p.zorluk === "kolay");
+    // YENİ: Sadece "kolay" zorluktaki oyuncuları filtrele (büyük/küçük harf duyarsız)
+    let kolayOyuncular = oyuncular.filter(p => p.zorluk && p.zorluk.toLowerCase() === "kolay");
     
     // Güvenlik: Eğer JSON dosyasında hiç "kolay" oyuncu yoksa sistem çökmesin diye tümünü al
     if (kolayOyuncular.length === 0) {
@@ -837,6 +837,7 @@ async function oyunuBaslat() {
             await window.setDoc(docRef, { player: hedefOyuncu.isim, createdAt: new Date() });
         }
     } catch (error) {
+        console.error("Firebase'e erişilirken veya yazılırken hata oluştu:", error);
         // Çevrimdışı/Hata durumu: Yine sadece kolaylardan seç
         hedefOyuncu = kolayOyuncular[Math.floor(Math.random() * kolayOyuncular.length)];
     }
