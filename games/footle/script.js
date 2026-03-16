@@ -22,6 +22,13 @@ let selectedRoundsToCreate = 3;
 let roomExpireTimer = null;
 let buTurKazanilanPuan = 0;
 
+// --- BOT DEĞİŞKENLERİ ---
+let botJoinTimer = null;
+let botLobbyTimer = null;
+let botPlayInterval = null;
+let isBotMatch = false;
+let botGuesses = 0;
+
 // DOM Elementleri
 const input = document.getElementById('playerInput');
 const autocompleteList = document.getElementById('autocomplete-list');
@@ -139,6 +146,8 @@ window.showMultiplayerSetup = function() {
 
 window.backToLobby = async function() {
     if (roomExpireTimer) clearTimeout(roomExpireTimer); 
+    if (botJoinTimer) clearTimeout(botJoinTimer);
+    if (botPlayInterval) clearInterval(botPlayInterval);
 
     if (roomId && playerRole) {
         try {
@@ -156,6 +165,7 @@ window.backToLobby = async function() {
     roomId = null;
     playerRole = null;
     isMultiplayer = false;
+    isBotMatch = false;
     if(roomUnsubscribe) roomUnsubscribe();
 
     document.getElementById('multiplayerSetupModal').classList.add('hidden');
@@ -214,8 +224,60 @@ window.fetchLobbyRooms = function() {
         if(validRoomCount === 0) {
             roomList.innerHTML = '<p class="text-gray-500 text-sm text-center mt-4">Şu an açık oda yok. Yeni bir tane kur!</p>';
         }
+        
+        // BOT LOBİ KURMA SİMÜLASYONU
+        if (document.getElementById('lobbyModal').classList.contains('hidden') === false) {
+            if (!botLobbyTimer) {
+                const randomDelay = Math.floor(Math.random() * (45000 - 15000 + 1)) + 15000; // 15-45 saniye
+                botLobbyTimer = setTimeout(() => {
+                    createBotLobbyForPlayer();
+                }, randomDelay);
+            }
+        } else {
+            if (botLobbyTimer) { clearTimeout(botLobbyTimer); botLobbyTimer = null; }
+        }
     });
 };
+
+function createBotLobbyForPlayer() {
+    if (!window.db || isMultiplayer) return;
+    botLobbyTimer = null; // Reset for next
+    
+    const rounds = [3, 5, 10][Math.floor(Math.random() * 3)];
+    const tempRoomId = Math.random().toString(36).substring(2, 7).toUpperCase();
+    
+    const kolayOyuncular = oyuncular.filter(p => p.zorluk === 'kolay');
+    let shuffled = [...kolayOyuncular].sort(() => 0.5 - Math.random());
+    const tempTargets = shuffled.slice(0, rounds).map(p => p.isim);
+
+    const roomRef = window.doc(window.db, "footle_rooms", tempRoomId);
+    window.setDoc(roomRef, {
+        rounds: rounds,
+        targets: tempTargets,
+        isPrivate: false, 
+        p1Score: 0,
+        p2Score: 0,
+        p1Status: 'playing',
+        p2Status: 'waiting',
+        p1DocId: 'BOT_PLAYER',
+        p2DocId: null,
+        p1Guesses: [], 
+        p2Guesses: [], 
+        currentRound: 1,
+        status: 'waiting_for_p2',
+        createdAtMs: new Date().getTime(),
+        isBotLobby: true // Custom flag for bot
+    }).then(() => {
+        // Auto remove bot lobby after 60 seconds if nobody joins
+        setTimeout(() => {
+            window.getDoc(roomRef).then((snap) => {
+                if (snap.exists() && snap.data().status === 'waiting_for_p2') {
+                    window.deleteDoc(roomRef).catch(e=>console.log(e));
+                }
+            });
+        }, 60000);
+    }).catch(e=>console.log(e));
+}
 
 // --- 5. ODA OLUŞTURMA VE KATILMA ---
 window.selectRounds = function(rounds) {
@@ -273,6 +335,14 @@ window.confirmAndCreateRoom = async function() {
             } catch(e) {}
         }
     }, 300000);
+    
+    // BOT KATILMA SİMÜLASYONU 
+    if (!isPrivate) {
+        const joinDelay = Math.floor(Math.random() * (30000 - 20000 + 1)) + 20000; // 20-30 saniye
+        botJoinTimer = setTimeout(() => {
+            simulateBotJoining(roomId);
+        }, joinDelay);
+    }
 
     document.getElementById('setupControls').classList.add('hidden');
     
@@ -282,6 +352,131 @@ window.confirmAndCreateRoom = async function() {
 
     listenToRoom(); 
 };
+
+// --- BOT SİMÜLASYON FONKSİYONLARI ---
+async function simulateBotJoining(targetRoomId) {
+    if (!window.db) return;
+    const roomRef = window.doc(window.db, "footle_rooms", targetRoomId);
+    try {
+        const snap = await window.getDoc(roomRef);
+        if (snap.exists() && snap.data().status === 'waiting_for_p2') {
+            isBotMatch = true;
+            await window.updateDoc(roomRef, {
+                p2Status: 'playing',
+                p2DocId: 'BOT_PLAYER'
+            });
+            window.showToast("Biri odaya katıldı!", "success");
+        }
+    } catch(e) { console.warn("Bot join error", e); }
+}
+
+// Bot'un mantığı için state değişkenleri (botGuesses zaten var)
+let botPossiblePlayers = [];
+
+function simulateBotTurn(roomRef, rolePrefix, currentRoundData, currentRoundIndex) {
+    if (!isMultiplayer || oyunBitti || !roomId) return;
+    
+    const targetName = multiTargets[currentRoundIndex - 1];
+    const targetPlayer = oyuncular.find(p => p.isim === targetName);
+    if (!targetPlayer) return;
+    
+    // Eğer ilk tahminsi (botGuesses 0), tüm oyunculardan başla (sadece kolay zorluk veya tümü)
+    if (botGuesses === 0) {
+        botPossiblePlayers = oyuncular.filter(p => p.zorluk === 'kolay'); 
+        if (botPossiblePlayers.length === 0) botPossiblePlayers = [...oyuncular];
+        
+        // İlk tahminde doğru bilmesini %100 engellemek için hedefi havuzdan geçici çıkar
+        botPossiblePlayers = botPossiblePlayers.filter(p => p.isim !== targetPlayer.isim);
+    }
+    
+    const maxBotGuesses = 7;
+    botGuesses++;
+
+    // Tahmin yapacak oyuncuyu seç
+    let guessPlayer;
+    if (botPossiblePlayers.length > 0) {
+        const randomIndex = Math.floor(Math.random() * botPossiblePlayers.length);
+        guessPlayer = botPossiblePlayers[randomIndex];
+    } else {
+        // Havuz boşaldıysa fallback olarak rastgele herhangi biri (nadir durum)
+        guessPlayer = oyuncular[Math.floor(Math.random() * oyuncular.length)];
+    }
+
+    // Seçilen tahmin ile hedefi karşılaştır
+    const kriterler = [
+        { id: 'uyruk', val: guessPlayer.uyruk, target: targetPlayer.uyruk, type: 'text' },
+        { id: 'lig', val: guessPlayer.lig, target: targetPlayer.lig, type: 'text' },
+        { id: 'takim', val: guessPlayer.takim, target: targetPlayer.takim, type: 'text' },
+        { id: 'pozisyon', val: guessPlayer.pozisyon, target: targetPlayer.pozisyon, type: 'text' },
+        { id: 'yas', val: guessPlayer.yas, target: targetPlayer.yas, type: 'number' }
+    ];
+
+    let simColors = [];
+    let corrects = []; 
+    let kazanilanEkstraPuan = 0;
+
+    kriterler.forEach(k => {
+        let renk = 'wrong';
+        if (k.val === k.target) {
+            renk = 'correct';
+            corrects.push(k.id);
+            kazanilanEkstraPuan += (k.id === 'lig' || k.id === 'pozisyon' || k.id === 'yas') ? 25 : 50;
+        } else if (k.type === 'number') {
+            renk = 'partial'; 
+        }
+        simColors.push(renk);
+    });
+
+    const isBotWin = (guessPlayer.isim === targetPlayer.isim);
+    
+    const updateData = {};
+    const guessesArray = currentRoundData[rolePrefix + 'Guesses'] || [];
+    guessesArray.push(simColors.join('-'));
+    updateData[rolePrefix + 'Guesses'] = guessesArray;
+    
+    if (isBotWin) {
+        // Bot kazandı
+        const temelPuan = (8 - botGuesses) * 100;
+        updateData[rolePrefix + 'Score'] = currentRoundData[rolePrefix + 'Score'] + temelPuan + kazanilanEkstraPuan;
+        updateData[rolePrefix + 'Status'] = 'finished';
+        window.updateDoc(roomRef, updateData).catch(e => console.log(e));
+        if (botPlayInterval) clearInterval(botPlayInterval);
+    } else if (botGuesses >= maxBotGuesses) {
+        // Bot hakkını doldurdu ve kaybetti
+        updateData[rolePrefix + 'Score'] = currentRoundData[rolePrefix + 'Score'] + kazanilanEkstraPuan;
+        updateData[rolePrefix + 'Status'] = 'finished';
+        window.updateDoc(roomRef, updateData).catch(e => console.log(e));
+        if (botPlayInterval) clearInterval(botPlayInterval);
+    } else {
+        // Bot devam ediyor. Havuzu daralt (Ama insan gibi hata yapması için %50 ihtimalle bir bilgiyi unutabilir)
+        updateData[rolePrefix + 'Score'] = currentRoundData[rolePrefix + 'Score'] + kazanilanEkstraPuan;
+        window.updateDoc(roomRef, updateData).catch(e => console.log(e));
+        
+        botPossiblePlayers = botPossiblePlayers.filter(p => {
+            let passes = true;
+            
+            // Botun o özelliği doğru bilmesine rağmen, dikkatsizlikten (%50 ihtimalle o özelliği) filtrelemeyi unutması
+            const rememberUyruk = Math.random() > 0.50;
+            const rememberLig = Math.random() > 0.50;
+            const rememberTakim = Math.random() > 0.50;
+            const rememberPozisyon = Math.random() > 0.50;
+            const rememberYas = Math.random() > 0.50;
+
+            if (corrects.includes('uyruk') && rememberUyruk && p.uyruk !== guessPlayer.uyruk) passes = false;
+            if (corrects.includes('lig') && rememberLig && p.lig !== guessPlayer.lig) passes = false;
+            if (corrects.includes('takim') && rememberTakim && p.takim !== guessPlayer.takim) passes = false;
+            if (corrects.includes('pozisyon') && rememberPozisyon && p.pozisyon !== guessPlayer.pozisyon) passes = false;
+            if (corrects.includes('yas') && rememberYas && p.yas !== guessPlayer.yas) passes = false;
+            
+            return passes;
+        });
+        
+        // Eğer havuz yanlışlıkla tamamen boşalırsa (çok fazla hata yaparsa), havuzu tekrar doldur
+        if (botPossiblePlayers.length === 0) {
+            botPossiblePlayers = oyuncular.filter(p => p.zorluk === 'kolay');
+        }
+    }
+}
 
 window.copyInviteLink = function() {
     const linkInput = document.getElementById('inviteLink');
@@ -337,9 +532,12 @@ async function joinRoom(id) {
     multiRounds = data.rounds;
     multiTargets = data.targets;
 
+    if (data.isBotLobby) { isBotMatch = true; }
+
     await window.updateDoc(roomRef, { 
         p2Status: 'playing',
-        p2DocId: window.userFirebaseDocId || null
+        p2DocId: window.userFirebaseDocId || null,
+        status: 'active' // Ensure game starts immediately for bot lobbies
     });
     listenToRoom();
 }
@@ -408,8 +606,32 @@ function listenToRoom() {
             oppBoardContainer.classList.remove('hidden');
             oppBoardContainer.classList.add('flex');
             
+            if (botJoinTimer) clearTimeout(botJoinTimer);
             hideWaitingOverlay();
             oyunuBaslat();
+            
+            // Eğer Bot oyunuysa, botun hamlelerini başlat
+            if (isBotMatch || data.p2DocId === 'BOT_PLAYER' || data.p1DocId === 'BOT_PLAYER') {
+                isBotMatch = true;
+                botGuesses = 0;
+                if (botPlayInterval) clearInterval(botPlayInterval);
+                
+                // Bot playerRole'a göre karşı taraf
+                const botRolePrefix = playerRole === 'player1' ? 'p2' : 'p1';
+                
+                botPlayInterval = setInterval(() => {
+                    window.getDoc(roomRef).then((snap) => {
+                        if(snap.exists() && snap.data().status === 'active' && snap.data().currentRound === currentMultiRound) {
+                            // Kontrol et bot bitirmiş mi?
+                            if (snap.data()[botRolePrefix + 'Status'] !== 'finished') {
+                                simulateBotTurn(roomRef, botRolePrefix, snap.data(), currentMultiRound);
+                            } else {
+                                clearInterval(botPlayInterval);
+                            }
+                        }
+                    });
+                }, Math.floor(Math.random() * 4000) + 6000); // 6-10 saniye arası
+            }
         }
 
         if (playerRole === 'player1' && data.status === 'active' && data.p1Status === 'finished' && data.p2Status === 'finished') {
@@ -440,7 +662,10 @@ function listenToRoom() {
             }
         }
 
-        if (data.status === 'game_over') { showMultiplayerResult(data); }
+        if (data.status === 'game_over') { 
+            if (botPlayInterval) clearInterval(botPlayInterval);
+            showMultiplayerResult(data); 
+        }
     });
 }
 
@@ -847,7 +1072,14 @@ function bitir(kazandi) {
 
     if (kazandi) {
         if(window.playSound) window.playSound('success'); 
-        const kazanilanPuan = (8 - denemeSayisi) * 100;
+        
+        // YENİ PUANLAMA MANTIĞI: Kalan Hakka Göre Puan
+        // denemeSayisi = kaçıncı tahminde bildiği.
+        // Toplam 7 hak var.
+        // Örn: 1. tahminde bilirse (7 - 1 + 1) * 100 = 700 Puan
+        // Örn: 7. tahminde bilirse (7 - 7 + 1) * 100 = 100 Puan
+        const kalanHak = 7 - denemeSayisi + 1;
+        const kazanilanPuan = kalanHak * 100;
 
         if(content) {
             content.classList.remove('border-red-500');
@@ -859,7 +1091,7 @@ function bitir(kazandi) {
             title.innerText = "TEBRİKLER!";
             title.className = "text-3xl font-black mb-2 tracking-tighter text-green-400";
         }
-        if(desc) desc.innerText = `${denemeSayisi}. denemede doğru bildin.`;
+        if(desc) desc.innerText = `${denemeSayisi}. denemede doğru bildin. Kalan Hak: ${kalanHak} (+${kazanilanPuan} P)`;
 
         if(correctPlayerContainer) correctPlayerContainer.className = "bg-green-900/20 p-4 rounded-2xl mb-6 border border-green-500/30";
         if(correctPlayerLabel) {

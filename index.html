@@ -71,7 +71,7 @@
                 <div class="game-card card-green reveal" onclick="playGame('gizli_efsane', 'games/tahmin-et/index.html')">
                     <div class="card-image">
                         <div class="bg-img" style="background: linear-gradient(135deg, rgba(34, 197, 94, 0.4) 0%, rgba(0, 0, 0, 0.8) 100%), url('https://images.unsplash.com/photo-1574629810360-7efbbe195018?q=80&w=1000'); background-size: cover;"></div>
-                        <span class="badge">GÜNLÜK</span>
+                        <span class="badge" style="background: var(--primary-green); color: #fff; border: 1px solid #81c784;">GÜNLÜK</span>
                     </div>
                     <div class="card-info">
                         <h3>Gizli Efsane</h3>
@@ -234,8 +234,59 @@
         </div>
     </div>
 
+    <!-- BAŞARIMLAR (ACHIEVEMENTS) MODALI -->
+    <div id="achievements-modal" class="modal z-[9500]">
+        <div class="modal-content profile-content">
+            <span class="close-btn" onclick="closeAchievementsModal()">&times;</span>
+            <div class="profile-header mb-6">
+                <h2 class="text-3xl font-black text-white flex items-center justify-center">
+                    <i class="fa-solid fa-medal text-yellow-500 mr-3"></i> BAŞARIMLAR
+                </h2>
+                <p class="text-gray-400 font-bold mt-2" id="modal-badge-count-text">0/4 Açıldı</p>
+            </div>
+            
+            <div class="achievements-grid">
+                <!-- Rozet: Acemi (1000+ Puan) -->
+                <div class="badge-item locked" id="badge-acemi">
+                    <div class="badge-icon bg-gray-600"><i class="fa-solid fa-seedling text-white"></i></div>
+                    <div class="badge-info">
+                        <h4 class="text-gray-300 font-bold">Acemi</h4>
+                        <p class="text-gray-500 text-xs">İlk 1000 Puanını Topla</p>
+                    </div>
+                </div>
+                
+                <!-- Rozet: Usta (15000+ Puan) -->
+                <div class="badge-item locked" id="badge-usta">
+                    <div class="badge-icon bg-gray-600"><i class="fa-solid fa-crown text-white"></i></div>
+                    <div class="badge-info">
+                        <h4 class="text-gray-300 font-bold">Usta</h4>
+                        <p class="text-gray-500 text-xs">15.000 Puana Ulaş</p>
+                    </div>
+                </div>
+
+                <!-- Rozet: Müptela (50+ Oynanış) -->
+                <div class="badge-item locked" id="badge-muptela">
+                    <div class="badge-icon bg-gray-600"><i class="fa-solid fa-fire text-white"></i></div>
+                    <div class="badge-info">
+                        <h4 class="text-gray-300 font-bold">Müptela</h4>
+                        <p class="text-gray-500 text-xs">Toplam 50 Maç Oyna</p>
+                    </div>
+                </div>
+
+                <!-- Rozet: Yenilmez (%80 Win Rate) -->
+                <div class="badge-item locked" id="badge-yenilmez">
+                    <div class="badge-icon bg-gray-600"><i class="fa-solid fa-shield-halved text-white"></i></div>
+                    <div class="badge-info">
+                        <h4 class="text-gray-300 font-bold">Yenilmez</h4>
+                        <p class="text-gray-500 text-xs">%80 Kazanma Oranı (Min 10 Maç)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- PROFIL MODALI -->
-    <div id="profile-modal" class="modal">
+    <div id="profile-modal" class="modal z-[9000]">
         <div class="modal-content profile-content">
             <span class="close-btn" onclick="closeProfileModal()">&times;</span>
             
@@ -246,21 +297,40 @@
             </div>
 
             <div class="profile-stats-grid mt-6">
+                <!-- Stat: Kazanma Oranı -->
                 <div class="stat-card">
                     <i class="fa-solid fa-chart-line text-green-400 text-3xl mb-2"></i>
                     <h3 class="text-gray-400 text-xs font-bold tracking-widest uppercase">Kazanma Oranı</h3>
                     <p class="text-white text-xl font-black mt-1">% <span id="stat-win-rate">...</span></p>
                 </div>
-                 <div class="stat-card">
-                    <i class="fa-solid fa-gamepad text-blue-400 text-3xl mb-2"></i>
+                <!-- Stat: Toplam Maç -->
+                <div class="stat-card">
+                    <i class="fa-solid fa-futbol text-blue-400 text-3xl mb-2"></i>
+                    <h3 class="text-gray-400 text-xs font-bold tracking-widest uppercase">Toplam Maç</h3>
+                    <p class="text-white text-xl font-black mt-1"><span id="stat-total-games">...</span></p>
+                </div>
+                <!-- Stat: Favori Oyun & Haftalık Sıra -->
+                <div class="stat-card">
+                    <i class="fa-solid fa-gamepad text-purple-400 text-3xl mb-2"></i>
                     <h3 class="text-gray-400 text-xs font-bold tracking-widest uppercase">Favori Oyun</h3>
                     <p class="text-white text-xl font-black mt-1" id="stat-fav-game">...</p>
                 </div>
-                 <div class="stat-card col-span-2">
+                 <div class="stat-card">
                     <i class="fa-solid fa-trophy text-yellow-400 text-3xl mb-2"></i>
-                    <h3 class="text-gray-400 text-xs font-bold tracking-widest uppercase">Haftalık Sıralama</h3>
+                    <h3 class="text-gray-400 text-xs font-bold tracking-widest uppercase">Sıralama</h3>
                     <p class="text-white text-xl font-black mt-1" id="stat-weekly-rank">...</p>
                 </div>
+            </div>
+
+            <!-- BAŞARIMLAR (ROZETLER) BÖLÜMÜ YÖNLENDİRMESİ -->
+            <div class="mt-8 border-t border-gray-700/50 pt-6 flex flex-col items-center">
+                <button onclick="openAchievementsModal()" class="w-full bg-gradient-to-r from-yellow-600 to-yellow-500 hover:from-yellow-500 hover:to-yellow-400 text-white font-black py-3 px-4 rounded-xl transition shadow-[0_0_15px_rgba(234,179,8,0.4)] flex items-center justify-between">
+                    <div class="flex items-center">
+                        <i class="fa-solid fa-medal mr-3 text-xl"></i> 
+                        <span>KİLİTLİ BAŞARIMLAR</span>
+                    </div>
+                    <span class="bg-black/30 px-3 py-1 rounded-full text-sm" id="badge-count-text">0/4</span>
+                </button>
             </div>
 
             <button id="modal-logout-btn" class="mt-8 w-full bg-red-600 hover:bg-red-500 text-white font-black py-3 rounded-xl transition shadow-[0_0_15px_rgba(220,38,38,0.4)]">
@@ -450,12 +520,23 @@
       };
 
       window.closeProfileModal = () => { document.getElementById('profile-modal').style.display = 'none'; };
+      
+      window.openAchievementsModal = () => {
+          document.getElementById('achievements-modal').style.display = 'flex';
+      };
+      
+      window.closeAchievementsModal = () => {
+          document.getElementById('achievements-modal').style.display = 'none';
+      };
 
       window.onclick = function(event) {
           const shopModal = document.getElementById('shop-modal');
           const profileModal = document.getElementById('profile-modal');
+          const achievementsModal = document.getElementById('achievements-modal');
+          
           if (event.target == shopModal) { shopModal.style.display = "none"; }
           if (event.target == profileModal) { profileModal.style.display = "none"; }
+          if (event.target == achievementsModal) { achievementsModal.style.display = "none"; }
       }
 
       window.buyPack = (type) => {
@@ -560,9 +641,40 @@
                 
                 document.getElementById('stat-win-rate').innerText = winRate;
                 
+                // Yeni Yorumlanmış Veriler (Toplam Maç ve Rozetler)
+                const domTotalGames = document.getElementById('stat-total-games');
+                if(domTotalGames) domTotalGames.innerText = totalGames;
+
+                // ---- ROZET (BADGE) MANTIĞI ----
+                let unlockedBadgesCount = 0;
+                
+                // Acemi Rozeti: 1000 Puan
+                const badgeAcemi = document.getElementById('badge-acemi');
+                if (badgeAcemi && score >= 1000) { badgeAcemi.classList.remove('locked'); unlockedBadgesCount++; }
+                
+                // Usta Rozeti: 15000 Puan
+                const badgeUsta = document.getElementById('badge-usta');
+                if (badgeUsta && score >= 15000) { badgeUsta.classList.remove('locked'); unlockedBadgesCount++; }
+                
+                // Müptela Rozeti: Toplam 50 Maç
+                const badgeMuptela = document.getElementById('badge-muptela');
+                if (badgeMuptela && totalGames >= 50) { badgeMuptela.classList.remove('locked'); unlockedBadgesCount++; }
+                
+                // Yenilmez Rozeti: %80 Win Rate ve Min 10 Maç
+                const badgeYenilmez = document.getElementById('badge-yenilmez');
+                if (badgeYenilmez && winRate >= 80 && totalGames >= 10) { badgeYenilmez.classList.remove('locked'); unlockedBadgesCount++; }
+
+                const badgeTitleText = document.getElementById('badge-count-text');
+                if(badgeTitleText) badgeTitleText.innerText = `${unlockedBadgesCount}/4`;
+                
+                const mbTitleText = document.getElementById('modal-badge-count-text');
+                if(mbTitleText) mbTitleText.innerText = `${unlockedBadgesCount}/4 Açıldı`;
+                
             } else {
                  document.getElementById('stat-fav-game').innerText = "Henüz Yok";
                  document.getElementById('stat-win-rate').innerText = "0";
+                 const domTotalGames = document.getElementById('stat-total-games');
+                 if(domTotalGames) domTotalGames.innerText = "0";
             }
             
             scoreBadge.innerText = `${score} P`;
@@ -594,15 +706,12 @@
               }
 
               if (needReset) {
-                  await setDoc(sysRef, { lastResetTime: new Date().getTime() });
-                  const usersSnap = await getDocs(collection(db, "scores"));
-                  const resetPromises = [];
-                  usersSnap.forEach((uDoc) => {
-                      resetPromises.push(updateDoc(doc(db, "scores", uDoc.id), { score: 0 }));
-                  });
-                  await Promise.all(resetPromises);
+                  // Güvenlik Nedeniyle: İstemci (Kullanıcı) artık herkesin puanını sıfırlayamaz.
+                  // Firebase Güvenlik Kuralları da bunu engelliyor.
+                  // Bu sıfırlama işlemi ileride Firebase Cloud Functions (veya admin paneli) ile yapılmalıdır.
+                  console.warn("Liderlik tablosu bu hafta sıfırlanmamış. Sistem yöneticisinin sıfırlaması bekleniyor.");
               }
-          } catch(e) { console.error("Sıfırlama hatası:", e); }
+          } catch(e) { console.error("Tablo kontrol hatası:", e); }
           
           fetchLeaderboardData();
       }
@@ -631,21 +740,42 @@
               if(myEmail && data.email === myEmail) {
                   myRank = `${rank}. Sıradasın`;
               }
+              
+              let safeName = data.name ? encodeURIComponent(data.name.split(' ')[0]) : 'U';
+              let userPhoto = data.photo || `https://ui-avatars.com/api/?name=${safeName}&background=random&color=fff`;
+
+              // Mini İkon (En İyi Rozet) Hesaplaması
+              let topBadgeHtml = "";
+              let pScore = data.score || 0;
+              let pWins = data.wins || 0;
+              let pLosses = data.losses || 0;
+              let pTotal = pWins + pLosses;
+              let pWinRate = pTotal > 0 ? Math.round((pWins / pTotal) * 100) : 0;
+
+              // En yüksek öncelikten (zorluktan) en düşüğe doğru
+              if (pWinRate >= 80 && pTotal >= 10) {
+                  topBadgeHtml = `<i class="fa-solid fa-shield-halved text-blue-400 ml-2 text-sm" title="Yenilmez"></i>`;
+              } else if (pTotal >= 50) {
+                  topBadgeHtml = `<i class="fa-solid fa-fire text-red-500 ml-2 text-sm" title="Müptela"></i>`;
+              } else if (pScore >= 15000) {
+                  topBadgeHtml = `<i class="fa-solid fa-crown text-yellow-400 ml-2 text-sm" title="Usta"></i>`;
+              } else if (pScore >= 1000) {
+                  topBadgeHtml = `<i class="fa-solid fa-seedling text-green-400 ml-2 text-sm" title="Acemi"></i>`;
+              }
 
               if (rank <= 3) {
                 wrapper.innerHTML += `
                 <div class="podium-card ${medals[rank-1]}">
                     <div class="rank-badge">${rank}</div>
-                    <div class="avatar flex justify-center"><img src="${data.photo}" style="width:50px; height:50px; border-radius:50%; object-fit:cover;"></div>
-                    <h3>${data.name.split(' ')[0]}</h3>
+                    <div class="avatar flex justify-center"><img src="${userPhoto}" onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=${safeName}&background=random&color=fff';" style="width:50px; height:50px; border-radius:50%; object-fit:cover;"></div>
+                    <h3 class="flex items-center justify-center">${data.name.split(' ')[0]} ${topBadgeHtml}</h3>
                     <p class="score">${data.score} P</p>
                 </div>`;
               } else {
                 list.innerHTML += `
                 <div class="list-item">
-                    <span class="rank">${rank}</span>
-                    <span class="name"><img src="${data.photo}" style="width:20px; border-radius:50%; margin-right:10px"> ${data.name}</span>
-                    <span class="points">${data.score} P</span>
+                    <span class="name flex items-center"><img src="${userPhoto}" onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=${safeName}&background=random&color=fff';" style="width:32px; height:32px; border-radius:50%; object-fit:cover; margin-right:12px;"> ${data.name} ${topBadgeHtml}</span>
+                    <span class="points"><span class="points-text">${data.score} P</span></span>
                 </div>`;
               }
               rank++;

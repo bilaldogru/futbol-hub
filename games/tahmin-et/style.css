@@ -1,14 +1,14 @@
 /* --- MATTE & TEXT-ONLY THEME --- */
 
 :root {
-    --bg-dark: #121212;
-    --bg-panel: rgba(25, 25, 30, 0.95);
+    --bg-dark: #0a0a0c;
+    --bg-panel: rgba(15, 23, 42, 0.95);
     
-    /* RENKLER */
+    /* RENKLER - FOOTLE STYLE LAKİN YEŞİL TEMA */
     --matte-green: #66bb6a; /* Başlıklar için yumuşak yeşil */
     --matte-red: #ef5350;  
     --matte-blue: #42a5f5; 
-    --text-color: #eeeeee;
+    --text-color: #f3f4f6;
     --neon-green: #39ff14; /* Parlak neon yeşil */
     
     --font-stack: 'Montserrat', sans-serif;
@@ -16,11 +16,18 @@
 
 body {
     background-color: var(--bg-dark);
-    /* 1. Noktalar büyütüldü (2px) ve aralıkları genişletildi (25px) */
-    background-image: radial-gradient(rgba(255, 255, 255, 0.08) 2px, transparent 2px);
-    background-size: 25px 25px; 
+    /* Nokta Dokusu index.html içindeki pitch-gradient-texture-green sınıfından geliyor */
     color: var(--text-color);
     font-family: var(--font-stack);
+}
+
+.pitch-gradient-texture-green { 
+    background: 
+        /* Nokta dokusu */
+        radial-gradient(rgba(255, 255, 255, 0.15) 1px, transparent 1px),
+        /* Yeşil -> Siyah Degrade */
+        radial-gradient(circle at center, #002200 0%, #0a0a0c 100%);
+    background-size: 25px 25px, 100% 100%;
 }
 
 /* Eski arkaplan katmanını gizliyoruz, artık body'nin kendisinde */
@@ -30,13 +37,13 @@ body {
 .letter-box {
     width: 30px; height: 40px;
     background: transparent; border: none; 
-    border-bottom: 3px solid var(--neon-green); /* Neon Yeşil Alt Çizgi */
+    border-bottom: 3px solid var(--neon-green); /* Neon Mavi Alt Çizgi */
     display: flex; justify-content: center; align-items: flex-end; 
     font-size: 28px; font-weight: 900; color: transparent; 
     transition: all 0.3s ease; padding-bottom: 5px; cursor: default; user-select: none;
 }
 .letter-box:not(.empty) { color: var(--text-color); border-bottom-color: var(--neon-green); }
-.letter-box.solved { color: var(--neon-green) !important; border-bottom-color: var(--neon-green) !important; }
+.letter-box.solved { color: var(--neon-green) !important; border-bottom-color: var(--neon-green) !important; text-shadow: 0 0 10px rgba(59,130,246,0.5); }
 
 /* --- İPUÇLARI --- */
 .clue-card {
