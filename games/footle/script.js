@@ -838,8 +838,12 @@ async function oyunuBaslat() {
         }
     } catch (error) {
         console.error("Firebase'e erişilirken veya yazılırken hata oluştu:", error);
-        // Çevrimdışı/Hata durumu: Yine sadece kolaylardan seç
-        hedefOyuncu = kolayOyuncular[Math.floor(Math.random() * kolayOyuncular.length)];
+        // Çevrimdışı/Yetki hatası: Firebase'e yazılamasa bile günün oyuncusu herkes için aynı kalsın diye seed ile seç
+        const seed = year * 10000 + (today.getMonth() + 1) * 100 + today.getDate() + 99;
+        let m = kolayOyuncular.length;
+        const random = () => { var x = Math.sin(seed) * 10000; return x - Math.floor(x); };
+        const randomIndex = Math.floor(random() * m);
+        hedefOyuncu = kolayOyuncular[randomIndex];
     }
 }
 
